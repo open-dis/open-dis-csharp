@@ -4,7 +4,7 @@
       Build file for csharp.
 -->
 
-<project name="open-dis csharp" default="generateCsharpDisSourceCode1998" basedir=".">
+<project name="open-dis csharp" default="generateCsharpDisSourceCode" basedir=".">
     <property name="lib" location="lib"/>
     <property name="version" value="1.5"/>
 
@@ -19,8 +19,9 @@
         <mkdir dir="csharp/obj"/>
     </target>
 
-     <target name="generateCsharpDisSourceCode1998" depends="init" description = "run program to generate csharp">
-        <property name="xmlSourceFile" value="DIS1998.xml"/>
+     <!-- Make sure the DIS xml file are present by loading the git submodule: git submodule init; git submodule update -->
+     <target name="generateCsharpDisSourceCode" depends="init" description = "run program to generate csharp">
+        <property name="xmlSourceFile" value="DISDescription/DIS6.xml"/>
         <property name="csharpdir" value="CSharp/DIS"/>
         <property name="product" value="csharp"/>
         <property name="using" value="System, System.Collections.Generic, System.Text, System.Diagnostics, System.Xml.Serialization, DISnet.DataStreamUtilities"/>
@@ -32,7 +33,7 @@
     </target>
 
   <target name="generateCsharpDis7SourceCode" depends="init" description = "run program to generate csharp for DIS7">
-        <property name="xmlSourceFile" value="DIS2012.xml"/>
+        <property name="xmlSourceFile" value="DISDescription/DIS7.xml"/>
         <property name="csharpdir" value="CSharpDis7"/>
         <property name="product" value="csharpDis7"/>
         <property name="using" value="System, System.Collections.Generic, System.Text, System.Diagnostics, System.Xml.Serialization, 
@@ -63,7 +64,6 @@ DISnet.DataStreamUtilities"/>
             <arg value="csharp"/>
             <sysproperty key="xmlpg.generatedSourceDir" value="${csharpdir}"/>
             <sysproperty key="xmlpg.using" value="${using}"/>
-            <!--sysproperty key="xmlpg.namespace" value="dis1998"/-->
                             
         </java>
         <!-- apply the patches, manual changes to the code captured in the patch files -->
