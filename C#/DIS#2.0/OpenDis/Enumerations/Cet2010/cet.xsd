@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (c) by the Simulation Interoperability Standards Organization, Inc.
+
+P.O. Box 781238
+Orlando, FL 32878-1238, USA
+All rights reserved.
+
+This document is an approved product of Simulation Interoperability
+Standards Organization (SISO), Inc. and therefore the copyright of this
+document belongs to SISO, Inc. Permission is hereby granted for this
+document to be used for production of both commercial and non-commercial
+products. Removal of this copyright statement and claiming rights to
+this document is prohibited. In addition, permission is hereby granted
+for this document to be distributed in its original or modified format
+(e.g. as part of a database; however, modification does not imply to the
+content of this document) provided that no charge is invoked for the
+provision. Permission is hereby granted by SISO for modification and
+extension of products produced from this document providing that SISO's
+copyright is acknowledged on the products developed.
+
+SISO EXCOM
+P.O. Box 781238
+Orlando, FL 32878-1238, USA
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+			Enumerations for Simulation Interoperability
+		</xs:documentation>
+	</xs:annotation>
+	<xs:simpleType name="uuid">
+		<xs:annotation>
+			<xs:documentation>RFC 4122 Universally Unique IDentifier (UUID)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="cr_t">
+		<xs:attribute name="value" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Change request number.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="cr_range_t">
+		<xs:attribute name="value_min" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>The minimum change request number (inclusive).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="value_max" type="xs:int" use="required">
+			<xs:annotation>
+				<xs:documentation>The maximum change request number (inclusive).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="generictable_t" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Fields common to all enumeration table nodes.</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="cr" type="cr_t" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="cr_range" type="cr_range_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+		<xs:attribute name="uid" type="xs:positiveInteger" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique numeric identifier for the enumeration table.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required">
+			<xs:annotation>
+				<xs:documentation>Name of the table.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="draft1278" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Flag to indicate the enumeration table applies to a draft revision of IEEE 1278</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="deprecated" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Flag to indicate the enumeration table has been deprecated.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="group" type="xs:int" use="optional">
+			<xs:annotation>
+				<xs:documentation>Denotes the table to be used to define the allowed groups for elements of the enumeration table</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="genericentry_t" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Attributes and elements common to all enumeration entries.</xs:documentation>
+		</xs:annotation>
+		<xs:choice minOccurs="0" maxOccurs="unbounded">
+			<xs:element name="cr" type="cr_t" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="cr_range" type="cr_range_t" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:choice>
+		<xs:attribute name="footnote" type="xs:string" use="optional">
+			<xs:annotation>
+				<xs:documentation>Any additional information pertaining to the enumeration entry.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="xref" type="xs:positiveInteger" use="optional">
+			<xs:annotation>
+				<xs:documentation>Cross-reference to another enumeration table (uid).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="deprecated" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Flag to indicate the enumeration entry has been deprecated.</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="status" use="optional">
+			<xs:annotation>
+				<xs:documentation>Flag to indicate the approval status of the entry. <xhtml:b>Pending</xhtml:b> denotes that the enty has been proposed, but not yet approved by the EWG; <xhtml:b>New</xhtml:b> means that the entry has been approved by the EWG since that last formal issue of the database.</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="pending"/>
+					<xs:enumeration value="new"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="draft1278" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Flag to indicate the enumeration entry applies to a draft revision of IEEE 1278</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="uuid" type="uuid" use="required">
+			<xs:annotation>
+				<xs:documentation>Unique numeric identifier for the enumeration entry (RFC-4122).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="baseuuid" type="xs:boolean" use="optional">
+			<xs:annotation>
+				<xs:documentation>Indicate an enumeration entry UUID that this entry was based on (RFC-4122).</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="genericentrydescription_t" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="genericentry_t">
+				<xs:attribute name="description" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Text description of the enumeration entry.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="group" type="xs:int">
+					<xs:annotation>
+						<xs:documentation>Which group, if any, the enumeration entry belongs to</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="genericentrystring_t">
+		<xs:annotation>
+			<xs:documentation>Attributes and elements common to enumeration entries concerning a single string value.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="genericentrydescription_t">
+				<xs:attribute name="value" type="xs:string" use="required">
+					<xs:annotation>
+						<xs:documentation>Enumerated value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="genericentrysingle_t" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Attributes and elements common to enumeration entries concerning a single integer value.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="genericentrydescription_t">
+				<xs:attribute name="value" type="xs:int" use="required">
+					<xs:annotation>
+						<xs:documentation>Enumerated value.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="genericentryrange_t" abstract="true">
+		<xs:annotation>
+			<xs:documentation>Attributes and elements common to enumeration entries concerning a range of integer values.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="genericentrydescription_t">
+				<xs:attribute name="value_min" type="xs:int" use="required">
+					<xs:annotation>
+						<xs:documentation>The minimum value (inclusive) of the enumerated range.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="value_max" type="xs:int" use="required">
+					<xs:annotation>
+						<xs:documentation>The maximum value (inclusive) of the enumerated range.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--=== Root Element ===-->
+  <xs:element name="cet" type="cet_t" />
+	<!--=== CET ===-->
+	<xs:complexType name="cet_t">
+		<xs:complexContent>
+			<xs:extension base="generictable_t">
+				<xs:sequence>
+					<xs:element name="entity" type="entity_t" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="entity_t">
+		<xs:complexContent>
+			<xs:extension base="genericentry_t">
+				<xs:choice maxOccurs="unbounded">
+					<xs:element name="category" type="category_t" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="category_range" type="category_range_t" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:attribute name="kind" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Kind number.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="domain" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Domain number.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="country" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Country number.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="category_t">
+		<xs:complexContent>
+			<xs:extension base="genericentrysingle_t">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="subcategory" type="subcategory_t" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="subcategory_range" type="subcategory_range_t" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="category_range_t">
+		<xs:complexContent>
+			<xs:extension base="genericentryrange_t">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="subcategory" type="subcategory_t" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="subcategory_range" type="subcategory_range_t" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="subcategory_t">
+		<xs:complexContent>
+			<xs:extension base="genericentrysingle_t">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="specific" type="specific_t" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="specific_range" type="specific_range_t" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="subcategory_range_t">
+		<xs:complexContent>
+			<xs:extension base="genericentryrange_t">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="specific" type="specific_t" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="specific_range" type="specific_range_t" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="specific_t">
+		<xs:complexContent>
+			<xs:extension base="genericentrysingle_t">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="extra" type="extra_t" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="extra_range" type="extra_range_t" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="specific_range_t">
+		<xs:complexContent>
+			<xs:extension base="genericentryrange_t">
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="extra" type="extra_t" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="extra_range" type="extra_range_t" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:choice>
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="extra_t">
+		<xs:complexContent>
+			<xs:extension base="genericentrysingle_t">
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="extra_range_t">
+		<xs:complexContent>
+			<xs:extension base="genericentryrange_t">
+				<xs:attribute name="uid" type="xs:nonNegativeInteger" use="required">
+					<xs:annotation>
+						<xs:documentation>Unique numeric identifer.</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

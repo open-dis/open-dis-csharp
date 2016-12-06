@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-1"
+ http-equiv="content-type">
+  <title>README</title>
+</head>
+<body>
+<span style="font-weight: bold;">README.html</span><br>
+<br>
+<span style="font-weight: bold;">Introduction</span><br>
+<br>
+This directory contains  the Csharp code to implement the
+Distributed
+Interactive Simulation (DIS) IEEE-1278 standard, which is often used in
+military simulations.<br>
+<br>
+The code consists of two portions. The protocol
+code itself consists of classes that represent Protocol Data Units
+(PDUs). These classes have fields, getters, and setters, and are able
+to marshal and unmarshal themselves to and from the DIS binary format.
+This code was automatically generated via XMLPG,
+a tool that generates
+code automatically from an XML description. The
+code is in the java and cpp directories.<br>
+<br>
+The second portion of the code is supporting classes that read and
+write PDUs from the network, log PDUs to a file, and more. These are
+utility and example files that demonstrate the use of the generated DIS
+code.<br>
+<br>
+<span style="font-weight: bold;">XML Description File</span><br>
+<br>
+An XML file that is an abstract description of the protocol classes is
+in DIS1998.xml. This file is used by XML Multi-Language Protocol
+Generator
+(XMLPG), which is available at the sourceforge site for download. <br>
+<br>
+The XML file is processed by XMLPG and writes the Java, CSharp, and C++
+protocol code. The idea is to use the XMLPG tool to get the final
+product "close", and then manually modify the source code in subversion
+to tweak the last bit.<br>
+<br>
+The CSharp generator has been provided by Peter Smith. It is very
+similar to the Java and C++ code.<br>
+<br>
+* CSharp implementation from Peter Smith. He wrote a new xmlpg class to
+generate CSharp code.<br>
+<br>
+</body>
+</html>

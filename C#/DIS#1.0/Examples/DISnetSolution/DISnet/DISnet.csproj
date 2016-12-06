@@ -1,0 +1,197 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A73759F2-1E80-4253-B3AC-4419744098B0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DISnet</RootNamespace>
+    <AssemblyName>DISnet</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\DISnet.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\DISnet.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AcknowledgePdu.cs" />
+    <Compile Include="AcknowledgeReliablePdu.cs" />
+    <Compile Include="AcousticBeamData.cs" />
+    <Compile Include="AcousticBeamFundamentalParameter.cs" />
+    <Compile Include="AcousticEmitter.cs" />
+    <Compile Include="AcousticEmitterSystem.cs" />
+    <Compile Include="AcousticEmitterSystemData.cs" />
+    <Compile Include="ActionRequestPdu.cs" />
+    <Compile Include="ActionRequestReliablePdu.cs" />
+    <Compile Include="ActionResponsePdu.cs" />
+    <Compile Include="ActionResponseReliablePdu.cs" />
+    <Compile Include="AggregateID.cs" />
+    <Compile Include="AggregateMarking.cs" />
+    <Compile Include="AggregateStatePdu.cs" />
+    <Compile Include="AggregateType.cs" />
+    <Compile Include="AngularVelocityVector.cs" />
+    <Compile Include="AntennaLocation.cs" />
+    <Compile Include="ApaData.cs" />
+    <Compile Include="ArealObjectStatePdu.cs" />
+    <Compile Include="ArticulationParameter.cs" />
+    <Compile Include="BeamAntennaPattern.cs" />
+    <Compile Include="BeamData.cs" />
+    <Compile Include="BurstDescriptor.cs" />
+    <Compile Include="ClockTime.cs" />
+    <Compile Include="CollisionElasticPdu.cs" />
+    <Compile Include="CollisionPdu.cs" />
+    <Compile Include="CommentPdu.cs" />
+    <Compile Include="CommentReliablePdu.cs" />
+    <Compile Include="CreateEntityPdu.cs" />
+    <Compile Include="CreateEntityReliablePdu.cs" />
+    <Compile Include="DataPdu.cs" />
+    <Compile Include="DataQueryPdu.cs" />
+    <Compile Include="DataQueryReliablePdu.cs" />
+    <Compile Include="DataReliablePdu.cs" />
+    <Compile Include="DataStreams\DataInputStream.cs" />
+    <Compile Include="DataStreams\DataOutputStream.cs" />
+    <Compile Include="DataStreams\DataStream.cs" />
+    <Compile Include="DataStreams\EndianTypes.cs" />
+    <Compile Include="DeadReckoningParameter.cs" />
+    <Compile Include="DesignatorPdu.cs" />
+    <Compile Include="DetonationPdu.cs" />
+    <Compile Include="DistributedEmissionsFamilyPdu.cs" />
+    <Compile Include="EightByteChunk.cs" />
+    <Compile Include="ElectronicEmissionBeamData.cs" />
+    <Compile Include="ElectronicEmissionsPdu.cs" />
+    <Compile Include="ElectronicEmissionSystemData.cs" />
+    <Compile Include="EmitterSystem.cs" />
+    <Compile Include="EntityID.cs" />
+    <Compile Include="EntityInformationFamilyPdu.cs" />
+    <Compile Include="EntityManagementFamilyPdu.cs" />
+    <Compile Include="EntityStatePdu.cs" />
+    <Compile Include="EntityStateUpdatePdu.cs" />
+    <Compile Include="EntityType.cs" />
+    <Compile Include="Environment.cs" />
+    <Compile Include="EnvironmentalProcessPdu.cs" />
+    <Compile Include="EventID.cs" />
+    <Compile Include="EventReportPdu.cs" />
+    <Compile Include="EventReportReliablePdu.cs" />
+    <Compile Include="FastEntityStatePdu.cs" />
+    <Compile Include="FirePdu.cs" />
+    <Compile Include="FixedDatum.cs" />
+    <Compile Include="FourByteChunk.cs" />
+    <Compile Include="FundamentalParameterData.cs" />
+    <Compile Include="FundamentalParameterDataIff.cs" />
+    <Compile Include="GridAxisRecord.cs" />
+    <Compile Include="GridAxisRecordRepresentation0.cs" />
+    <Compile Include="GridAxisRecordRepresentation1.cs" />
+    <Compile Include="GridAxisRecordRepresentation2.cs" />
+    <Compile Include="GriddedDataPdu.cs" />
+    <Compile Include="IffAtcNavAidsLayer1Pdu.cs" />
+    <Compile Include="IffAtcNavAidsLayer2Pdu.cs" />
+    <Compile Include="IffFundamentalData.cs" />
+    <Compile Include="IntercomCommunicationsParameters.cs" />
+    <Compile Include="IntercomControlPdu.cs" />
+    <Compile Include="IntercomSignalPdu.cs" />
+    <Compile Include="IsGroupOfPdu.cs" />
+    <Compile Include="IsPartOfPdu.cs" />
+    <Compile Include="LayerHeader.cs" />
+    <Compile Include="LinearObjectStatePdu.cs" />
+    <Compile Include="LinearSegmentParameter.cs" />
+    <Compile Include="LogisticsFamilyPdu.cs" />
+    <Compile Include="Marking.cs" />
+    <Compile Include="MinefieldDataPdu.cs" />
+    <Compile Include="MinefieldFamilyPdu.cs" />
+    <Compile Include="MinefieldQueryPdu.cs" />
+    <Compile Include="MinefieldResponseNackPdu.cs" />
+    <Compile Include="MinefieldStatePdu.cs" />
+    <Compile Include="ModulationType.cs" />
+    <Compile Include="NamedLocation.cs" />
+    <Compile Include="ObjectType.cs" />
+    <Compile Include="OneByteChunk.cs" />
+    <Compile Include="Orientation.cs" />
+    <Compile Include="Pdu.cs" />
+    <Compile Include="PduContainer.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="PointObjectStatePdu.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropulsionSystemData.cs" />
+    <Compile Include="RadioCommunicationsFamilyPdu.cs" />
+    <Compile Include="RadioEntityType.cs" />
+    <Compile Include="ReceiverPdu.cs" />
+    <Compile Include="RecordQueryReliablePdu.cs" />
+    <Compile Include="RecordSet.cs" />
+    <Compile Include="Relationship.cs" />
+    <Compile Include="RemoveEntityPdu.cs" />
+    <Compile Include="RemoveEntityReliablePdu.cs" />
+    <Compile Include="RepairCompletePdu.cs" />
+    <Compile Include="RepairResponsePdu.cs" />
+    <Compile Include="ResupplyCancelPdu.cs" />
+    <Compile Include="ResupplyOfferPdu.cs" />
+    <Compile Include="ResupplyReceivedPdu.cs" />
+    <Compile Include="SeesPdu.cs" />
+    <Compile Include="ServiceRequestPdu.cs" />
+    <Compile Include="SetDataPdu.cs" />
+    <Compile Include="SetDataReliablePdu.cs" />
+    <Compile Include="SetRecordReliablePdu.cs" />
+    <Compile Include="ShaftRPMs.cs" />
+    <Compile Include="SignalPdu.cs" />
+    <Compile Include="SimulationAddress.cs" />
+    <Compile Include="SimulationManagementFamilyPdu.cs" />
+    <Compile Include="SimulationManagementWithReliabilityFamilyPdu.cs" />
+    <Compile Include="SixByteChunk.cs" />
+    <Compile Include="SphericalHarmonicAntennaPattern.cs" />
+    <Compile Include="StartResumePdu.cs" />
+    <Compile Include="StartResumeReliablePdu.cs" />
+    <Compile Include="StopFreezePdu.cs" />
+    <Compile Include="StopFreezeReliablePdu.cs" />
+    <Compile Include="SupplyQuantity.cs" />
+    <Compile Include="SyntheticEnvironmentFamilyPdu.cs" />
+    <Compile Include="SystemID.cs" />
+    <Compile Include="TrackJamTarget.cs" />
+    <Compile Include="TransferControlRequestPdu.cs" />
+    <Compile Include="TransmitterPdu.cs" />
+    <Compile Include="TwoByteChunk.cs" />
+    <Compile Include="UaPdu.cs" />
+    <Compile Include="Utilities\ChunkConverters.cs" />
+    <Compile Include="Utilities\Conversion.cs" />
+    <Compile Include="Utilities\PDUBank.cs" />
+    <Compile Include="Utilities\PDUProcessorClass.cs" />
+    <Compile Include="Utilities\PDUType.cs" />
+    <Compile Include="VariableDatum.cs" />
+    <Compile Include="Vector3Double.cs" />
+    <Compile Include="Vector3Float.cs" />
+    <Compile Include="VectoringNozzleSystemData.cs" />
+    <Compile Include="WarfareFamilyPdu.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

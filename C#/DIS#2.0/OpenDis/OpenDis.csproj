@@ -1,0 +1,824 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{628EE35F-450A-49B2-BA46-04FABB66D0BF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenDis</RootNamespace>
+    <AssemblyName>OpenDis</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\x86\Release\OpenDis.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Analysis|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Analyze\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CODE_ANALYSIS</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\x86\Debug\OpenDis.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\IPdu.cs" />
+    <Compile Include="Core\PduBase.cs" />
+    <Compile Include="Core\CetBase.cs" />
+    <Compile Include="Core\PduExceptionEventArgs.cs" />
+    <Compile Include="Core\PduFactory.cs" />
+    <Compile Include="Dis1995\Generated\AcknowledgePdu.cs" />
+    <Compile Include="Dis1995\Generated\ActionRequestPdu.cs" />
+    <Compile Include="Dis1995\Generated\ActionResponsePdu.cs" />
+    <Compile Include="Dis1995\Generated\AngularVelocityVector.cs" />
+    <Compile Include="Dis1995\Generated\AntennaLocation.cs" />
+    <Compile Include="Dis1995\Generated\ArticulationParameter.cs" />
+    <Compile Include="Dis1995\Generated\BeamAntennaPattern.cs" />
+    <Compile Include="Dis1995\Generated\BurstDescriptor.cs" />
+    <Compile Include="Dis1995\Generated\ClockTime.cs" />
+    <Compile Include="Dis1995\Generated\CollisionPdu.cs" />
+    <Compile Include="Dis1995\Generated\CommentPdu.cs" />
+    <Compile Include="Dis1995\Generated\CreateEntityPdu.cs" />
+    <Compile Include="Dis1995\Generated\DataPdu.cs" />
+    <Compile Include="Dis1995\Generated\DataQueryPdu.cs" />
+    <Compile Include="Dis1995\Generated\DeadReckoningParameter.cs" />
+    <Compile Include="Dis1995\Generated\DesignatorPdu.cs" />
+    <Compile Include="Dis1995\Generated\DetonationPdu.cs" />
+    <Compile Include="Dis1995\Generated\DistributedEmissionsPdu.cs" />
+    <Compile Include="Dis1995\Generated\EightByteChunk.cs" />
+    <Compile Include="Dis1995\Generated\ElectronicEmmisionsPdu.cs" />
+    <Compile Include="Dis1995\Generated\EmitterSystem.cs" />
+    <Compile Include="Dis1995\Generated\EntityID.cs" />
+    <Compile Include="Dis1995\Generated\EntityInformationPdu.cs" />
+    <Compile Include="Dis1995\Generated\EntityStatePdu.cs" />
+    <Compile Include="Dis1995\Generated\EntityType.cs" />
+    <Compile Include="Dis1995\Generated\EventID.cs" />
+    <Compile Include="Dis1995\Generated\EventReportPdu.cs" />
+    <Compile Include="Dis1995\Generated\FirePdu.cs" />
+    <Compile Include="Dis1995\Generated\FixedDatum.cs" />
+    <Compile Include="Dis1995\Generated\FundamentalParameterData.cs" />
+    <Compile Include="Dis1995\Generated\LogisticsPdu.cs" />
+    <Compile Include="Dis1995\Generated\ModulationType.cs" />
+    <Compile Include="Dis1995\Generated\Orientation.cs" />
+    <Compile Include="Dis1995\Generated\Pdu.cs" />
+    <Compile Include="Dis1995\Generated\RadioCommunicationsPdu.cs" />
+    <Compile Include="Dis1995\Generated\RadioEntityType.cs" />
+    <Compile Include="Dis1995\Generated\ReceiverPdu.cs" />
+    <Compile Include="Dis1995\Generated\RemoveEntityPdu.cs" />
+    <Compile Include="Dis1995\Generated\RepairCompletePdu.cs" />
+    <Compile Include="Dis1995\Generated\RepairResponsePdu.cs" />
+    <Compile Include="Dis1995\Generated\ResupplyCancelPdu.cs" />
+    <Compile Include="Dis1995\Generated\ResupplyOfferPdu.cs" />
+    <Compile Include="Dis1995\Generated\ResupplyReceivedPdu.cs" />
+    <Compile Include="Dis1995\Generated\ServiceRequestPdu.cs" />
+    <Compile Include="Dis1995\Generated\SetDataPdu.cs" />
+    <Compile Include="Dis1995\Generated\SignalPdu.cs" />
+    <Compile Include="Dis1995\Generated\SimulationAddress.cs" />
+    <Compile Include="Dis1995\Generated\SimulationManagementPdu.cs" />
+    <Compile Include="Dis1995\Generated\SphericalHarmonicAntennaPattern.cs" />
+    <Compile Include="Dis1995\Generated\StartResumePdu.cs" />
+    <Compile Include="Dis1995\Generated\StopFreezePdu.cs" />
+    <Compile Include="Dis1995\Generated\SupplyQuantity.cs" />
+    <Compile Include="Dis1995\Generated\TransmitterPdu.cs" />
+    <Compile Include="Dis1995\Generated\VariableDatum.cs" />
+    <Compile Include="Dis1995\Generated\Vector3Double.cs" />
+    <Compile Include="Dis1995\Generated\Vector3Float.cs" />
+    <Compile Include="Dis1995\Generated\Warfare.cs" />
+    <Compile Include="Dis1995\PduFactory.cs" />
+    <Compile Include="Dis1998\Generated\AcknowledgePdu.cs" />
+    <Compile Include="Dis1998\Generated\AcknowledgeReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\AcousticBeamData.cs" />
+    <Compile Include="Dis1998\Generated\AcousticBeamFundamentalParameter.cs" />
+    <Compile Include="Dis1998\Generated\AcousticEmitter.cs" />
+    <Compile Include="Dis1998\Generated\AcousticEmitterSystem.cs" />
+    <Compile Include="Dis1998\Generated\AcousticEmitterSystemData.cs" />
+    <Compile Include="Dis1998\Generated\ActionRequestPdu.cs" />
+    <Compile Include="Dis1998\Generated\ActionRequestReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\ActionResponsePdu.cs" />
+    <Compile Include="Dis1998\Generated\ActionResponseReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\AggregateID.cs" />
+    <Compile Include="Dis1998\Generated\AggregateMarking.cs" />
+    <Compile Include="Dis1998\Generated\AggregateStatePdu.cs" />
+    <Compile Include="Dis1998\Generated\AggregateType.cs" />
+    <Compile Include="Dis1998\Generated\AngularVelocityVector.cs" />
+    <Compile Include="Dis1998\Generated\AntennaLocation.cs" />
+    <Compile Include="Dis1998\Generated\ApaData.cs" />
+    <Compile Include="Dis1998\Generated\ArealObjectStatePdu.cs" />
+    <Compile Include="Dis1998\Generated\ArticulationParameter.cs" />
+    <Compile Include="Dis1998\Generated\BeamAntennaPattern.cs" />
+    <Compile Include="Dis1998\Generated\BeamData.cs" />
+    <Compile Include="Dis1998\Generated\BurstDescriptor.cs" />
+    <Compile Include="Dis1998\Generated\ClockTime.cs" />
+    <Compile Include="Dis1998\Generated\CollisionElasticPdu.cs" />
+    <Compile Include="Dis1998\Generated\CollisionPdu.cs" />
+    <Compile Include="Dis1998\Generated\CommentPdu.cs" />
+    <Compile Include="Dis1998\Generated\CommentReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\CreateEntityPdu.cs" />
+    <Compile Include="Dis1998\Generated\CreateEntityReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\DataPdu.cs" />
+    <Compile Include="Dis1998\Generated\DataQueryPdu.cs" />
+    <Compile Include="Dis1998\Generated\DataQueryReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\DataReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\DeadReckoningParameter.cs" />
+    <Compile Include="Dis1998\Generated\DesignatorPdu.cs" />
+    <Compile Include="Dis1998\Generated\DetonationPdu.cs" />
+    <Compile Include="Dis1998\Generated\DistributedEmissionsFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\EightByteChunk.cs" />
+    <Compile Include="Dis1998\Generated\ElectronicEmissionBeamData.cs" />
+    <Compile Include="Dis1998\Generated\ElectronicEmissionsPdu.cs" />
+    <Compile Include="Dis1998\Generated\ElectronicEmissionSystemData.cs" />
+    <Compile Include="Dis1998\Generated\EmitterSystem.cs" />
+    <Compile Include="Dis1998\Generated\EntityID.cs" />
+    <Compile Include="Dis1998\Generated\EntityInformationFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\EntityManagementFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\EntityStatePdu.cs" />
+    <Compile Include="Dis1998\Generated\EntityStateUpdatePdu.cs" />
+    <Compile Include="Dis1998\Generated\EntityType.cs" />
+    <Compile Include="Dis1998\Generated\Environment.cs" />
+    <Compile Include="Dis1998\Generated\EnvironmentalProcessPdu.cs" />
+    <Compile Include="Dis1998\Generated\EventID.cs" />
+    <Compile Include="Dis1998\Generated\EventReportPdu.cs" />
+    <Compile Include="Dis1998\Generated\EventReportReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\FastEntityStatePdu.cs" />
+    <Compile Include="Dis1998\Generated\FirePdu.cs" />
+    <Compile Include="Dis1998\Generated\FixedDatum.cs" />
+    <Compile Include="Dis1998\Generated\FourByteChunk.cs" />
+    <Compile Include="Dis1998\Generated\FundamentalParameterData.cs" />
+    <Compile Include="Dis1998\Generated\FundamentalParameterDataIff.cs" />
+    <Compile Include="Dis1998\Generated\GridAxisRecord.cs" />
+    <Compile Include="Dis1998\Generated\GridAxisRecordRepresentation0.cs" />
+    <Compile Include="Dis1998\Generated\GridAxisRecordRepresentation1.cs" />
+    <Compile Include="Dis1998\Generated\GridAxisRecordRepresentation2.cs" />
+    <Compile Include="Dis1998\Generated\GriddedDataPdu.cs" />
+    <Compile Include="Dis1998\Generated\IffAtcNavAidsLayer1Pdu.cs" />
+    <Compile Include="Dis1998\Generated\IffAtcNavAidsLayer2Pdu.cs" />
+    <Compile Include="Dis1998\Generated\IffFundamentalData.cs" />
+    <Compile Include="Dis1998\Generated\IntercomCommunicationsParameters.cs" />
+    <Compile Include="Dis1998\Generated\IntercomControlPdu.cs" />
+    <Compile Include="Dis1998\Generated\IntercomSignalPdu.cs" />
+    <Compile Include="Dis1998\Generated\IsGroupOfPdu.cs" />
+    <Compile Include="Dis1998\Generated\IsPartOfPdu.cs" />
+    <Compile Include="Dis1998\Generated\LayerHeader.cs" />
+    <Compile Include="Dis1998\Generated\LinearObjectStatePdu.cs" />
+    <Compile Include="Dis1998\Generated\LinearSegmentParameter.cs" />
+    <Compile Include="Dis1998\Generated\LogisticsFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\Marking.cs" />
+    <Compile Include="Dis1998\Generated\MinefieldDataPdu.cs" />
+    <Compile Include="Dis1998\Generated\MinefieldFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\MinefieldQueryPdu.cs" />
+    <Compile Include="Dis1998\Generated\MinefieldResponseNackPdu.cs" />
+    <Compile Include="Dis1998\Generated\MinefieldStatePdu.cs" />
+    <Compile Include="Dis1998\Generated\ModulationType.cs" />
+    <Compile Include="Dis1998\Generated\NamedLocation.cs" />
+    <Compile Include="Dis1998\Generated\ObjectType.cs" />
+    <Compile Include="Dis1998\Generated\OneByteChunk.cs" />
+    <Compile Include="Dis1998\Generated\Orientation.cs" />
+    <Compile Include="Dis1998\Generated\Pdu.cs" />
+    <Compile Include="Dis1998\Generated\PduContainer.cs" />
+    <Compile Include="Dis1998\Generated\Point.cs" />
+    <Compile Include="Dis1998\Generated\PointObjectStatePdu.cs" />
+    <Compile Include="Dis1998\Generated\PropulsionSystemData.cs" />
+    <Compile Include="Dis1998\Generated\RadioCommunicationsFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\RadioEntityType.cs" />
+    <Compile Include="Dis1998\Generated\ReceiverPdu.cs" />
+    <Compile Include="Dis1998\Generated\RecordQueryReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\RecordSet.cs" />
+    <Compile Include="Dis1998\Generated\Relationship.cs" />
+    <Compile Include="Dis1998\Generated\RemoveEntityPdu.cs" />
+    <Compile Include="Dis1998\Generated\RemoveEntityReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\RepairCompletePdu.cs" />
+    <Compile Include="Dis1998\Generated\RepairResponsePdu.cs" />
+    <Compile Include="Dis1998\Generated\ResupplyCancelPdu.cs" />
+    <Compile Include="Dis1998\Generated\ResupplyOfferPdu.cs" />
+    <Compile Include="Dis1998\Generated\ResupplyReceivedPdu.cs" />
+    <Compile Include="Dis1998\Generated\SeesPdu.cs" />
+    <Compile Include="Dis1998\Generated\ServiceRequestPdu.cs" />
+    <Compile Include="Dis1998\Generated\SetDataPdu.cs" />
+    <Compile Include="Dis1998\Generated\SetDataReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\SetRecordReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\ShaftRPMs.cs" />
+    <Compile Include="Dis1998\Generated\SignalPdu.cs" />
+    <Compile Include="Dis1998\Generated\SimulationAddress.cs" />
+    <Compile Include="Dis1998\Generated\SimulationManagementFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\SimulationManagementWithReliabilityFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\SixByteChunk.cs" />
+    <Compile Include="Dis1998\Generated\SphericalHarmonicAntennaPattern.cs" />
+    <Compile Include="Dis1998\Generated\StartResumePdu.cs" />
+    <Compile Include="Dis1998\Generated\StartResumeReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\StopFreezePdu.cs" />
+    <Compile Include="Dis1998\Generated\StopFreezeReliablePdu.cs" />
+    <Compile Include="Dis1998\Generated\SupplyQuantity.cs" />
+    <Compile Include="Dis1998\Generated\SyntheticEnvironmentFamilyPdu.cs" />
+    <Compile Include="Dis1998\Generated\SystemID.cs" />
+    <Compile Include="Dis1998\Generated\TrackJamTarget.cs" />
+    <Compile Include="Dis1998\Generated\TransferControlRequestPdu.cs" />
+    <Compile Include="Dis1998\Generated\TransmitterPdu.cs" />
+    <Compile Include="Dis1998\Generated\TwoByteChunk.cs" />
+    <Compile Include="Dis1998\Generated\UaPdu.cs" />
+    <Compile Include="Dis1998\Generated\VariableDatum.cs" />
+    <Compile Include="Dis1998\Generated\Vector3Double.cs" />
+    <Compile Include="Dis1998\Generated\Vector3Float.cs" />
+    <Compile Include="Dis1998\Generated\VectoringNozzleSystemData.cs" />
+    <Compile Include="Dis1998\Generated\WarfareFamilyPdu.cs" />
+    <Compile Include="Dis1998\PduFactory.cs" />
+    <Compile Include="Enumerations\Cet2006\Category.cs" />
+    <Compile Include="Enumerations\Cet2006\CetFactory.cs" />
+    <Compile Include="Enumerations\Cet2006\Cet.cs" />
+    <Compile Include="Enumerations\Cet2006\CetItem.cs" />
+    <Compile Include="Enumerations\Cet2006\Entity.cs" />
+    <Compile Include="Enumerations\Cet2006\Extra.cs" />
+    <Compile Include="Enumerations\Cet2006\GenericEntry.cs" />
+    <Compile Include="Enumerations\Cet2006\GenericTable.cs" />
+    <Compile Include="Core\ICetItem.cs" />
+    <Compile Include="Enumerations\Cet2006\Specific.cs" />
+    <Compile Include="Enumerations\Cet2006\Subcategory.cs" />
+    <Compile Include="Enumerations\Cet2010\Category.cs" />
+    <Compile Include="Enumerations\Cet2010\CategoryRange.cs" />
+    <Compile Include="Enumerations\Cet2010\Cet.cs" />
+    <Compile Include="Enumerations\Cet2010\CetFactory.cs" />
+    <Compile Include="Enumerations\Cet2010\CetItem.cs" />
+    <Compile Include="Enumerations\Cet2010\IExtraOrExtraRange.cs" />
+    <Compile Include="Enumerations\Cet2010\ISpecificOrSpecificRange.cs" />
+    <Compile Include="Enumerations\Cet2010\ISubcategoryOrSubcategoryRange.cs" />
+    <Compile Include="Enumerations\Cet2010\Cr.cs" />
+    <Compile Include="Enumerations\Cet2010\CrRange.cs" />
+    <Compile Include="Enumerations\Cet2010\Entity.cs" />
+    <Compile Include="Enumerations\Cet2010\Extra.cs" />
+    <Compile Include="Enumerations\Cet2010\ExtraRange.cs" />
+    <Compile Include="Enumerations\Cet2010\GenericEntry.cs" />
+    <Compile Include="Enumerations\Cet2010\GenericEntryDescription.cs" />
+    <Compile Include="Enumerations\Cet2010\GenericEntryRange.cs" />
+    <Compile Include="Enumerations\Cet2010\GenericEntrySingle.cs" />
+    <Compile Include="Enumerations\Cet2010\GenericEntryStatus.cs" />
+    <Compile Include="Enumerations\Cet2010\GenericEntryString.cs" />
+    <Compile Include="Enumerations\Cet2010\GenericTable.cs" />
+    <Compile Include="Enumerations\Cet2010\ICategoryOrCategoryRange.cs" />
+    <Compile Include="Enumerations\Cet2010\IGenericEntry.cs" />
+    <Compile Include="Enumerations\Cet2010\IGenericEntryDescription.cs" />
+    <Compile Include="Enumerations\Cet2010\Specific.cs" />
+    <Compile Include="Enumerations\Cet2010\SpecificRange.cs" />
+    <Compile Include="Enumerations\Cet2010\Subcategory.cs" />
+    <Compile Include="Enumerations\Cet2010\SubcategoryRange.cs" />
+    <Compile Include="Enumerations\Country.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\InformationLayers.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\LayerSpecificInformation.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\SystemMode.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\SystemName.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\SystemStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\SystemType.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1AlternateParameter4.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1ChangeOptions.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1Modifier.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1OperationalParameter1.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1OperationalParameter2.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1Parameter1Mode1CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1Parameter2Mode2CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1Parameter3Mode3CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1Parameter4Mode4CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1Parameter5ModeCCodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type1Parameter6ModeSCodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2AlternateParameter4.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2ChangeOptions.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2OperationalParameter1.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2OperationalParameter2.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2Parameter1Mode1InterrogatorStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2Parameter2Mode2InterrogatorStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2Parameter3Mode3InterrogatorStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2Parameter4Mode4InterrogatorStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2Parameter5ModeCInterrogatorStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type2Parameter6ModeSCodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3ChangeOptions.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3OperationalParameter1.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3OperationalParameter2.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3Parameter1Mode1CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3Parameter2Mode2CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3Parameter3Mode3CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3Parameter4Mode4CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3Parameter5ModeCCodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type3Parameter6Mode1CodeStatus.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4ChangeOptions.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4OperationalParameter1.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4OperationalParameter2.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4Parameter1.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4Parameter2.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4Parameter3.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4Parameter4.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4Parameter5.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type4Parameter6.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type5ChangeOptions.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type5OperationalParameter1.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type5OperationalParameter2.cs" />
+    <Compile Include="Enumerations\DistributedEmission.Iff\Type5Parameter1RRBResponse.cs" />
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\ActiveEmissionParameterIndex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\AdditionalPassiveActivityParameterIndex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\EmitterFunction.cs" />
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\PassiveParameterIndex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\PropulsionPlantConfiguration.cs" />
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\ScanPattern.cs" />
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\StateChangeUpdateIndicator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission.UnderwaterAcoustic\SystemName.cs" />
+    <Compile Include="Enumerations\DistributedEmission\AircraftEnginePower.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission\DesignatorCode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission\DesignatorCodeName.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission\ElectromagneticEmitters.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission\EmissionBeamFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission\EmissionFunction.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission\HelicopterEnginePower.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\DistributedEmission\HighDensityTrackOrJam.cs" />
+    <Compile Include="Enumerations\DistributedEmission\StateUpdateIndicator.cs" />
+    <Compile Include="Enumerations\DistributedEmission\TankEnginePower.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\Appearance.cs" />
+    <Compile Include="Enumerations\Entity.Information.Minefield\DataFilter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\FlirSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\Fusing.cs" />
+    <Compile Include="Enumerations\Entity.Information.Minefield\LaserSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\MagneticSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\MultispectralSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\OpticalSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\PaintScheme.cs" />
+    <Compile Include="Enumerations\Entity.Information.Minefield\PhysicalSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\ProtocolMode.cs" />
+    <Compile Include="Enumerations\Entity.Information.Minefield\RadarSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\SensorTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information.Minefield\SonarSensor.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Information\EntityCollisionType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\AggregateFormation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\AggregateKind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\AggregateSpecific.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\AggregateState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\AggregateSubcategory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\GroupOfGroupedEntityCategory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\GroupOfRestStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\PartOfNature.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\PartOfPosition.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\PartOfStationName.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Entity.Management\TransferType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Appearance\AirPlatformAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\CulturalAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\EnvironmentalAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\LandPlatformAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\LifeFormAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\MunitionAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\SensorEmitterAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\SpacePlatformAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\SubsurfacePlatformAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Appearance\SurfacePlatformAppearance.cs" />
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingCompany.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingDivisionCorpsDesignation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingHighLevelUnitFor1stCavalry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingHighLevelUnitFor1stInfantry.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingMarkingCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingPlatoon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingPlatoonCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\ArmyMarkingVehicle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\DigitChevronMarkingCodes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Marking\EntityMarkingText.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Type\AirPlatform.cs" />
+    <Compile Include="Enumerations\EntityState.Type\CISWeaponsForLifeFormsSubcategory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Type\EntityKind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Type\EnvironmentalSubcategory.cs" />
+    <Compile Include="Enumerations\EntityState.Type\ExpendableAirCategory.cs" />
+    <Compile Include="Enumerations\EntityState.Type\ExpendableSubsurfaceCategory.cs" />
+    <Compile Include="Enumerations\EntityState.Type\ExpendableSurfaceCategory.cs" />
+    <Compile Include="Enumerations\EntityState.Type\FrenchWeaponsForLifeForms.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Type\GermanWeaponsForLifeForms.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Type\LandPlatform.cs" />
+    <Compile Include="Enumerations\EntityState.Type\Munition.cs" />
+    <Compile Include="Enumerations\EntityState.Type\MunitionCategory.cs" />
+    <Compile Include="Enumerations\EntityState.Type\Platform.cs" />
+    <Compile Include="Enumerations\EntityState.Type\RadioCategory.cs" />
+    <Compile Include="Enumerations\EntityState.Type\RadioNomenclature.cs" />
+    <Compile Include="Enumerations\EntityState.Type\RadioNomenclatureVersion.cs" />
+    <Compile Include="Enumerations\EntityState.Type\SensorEmitterCategory.cs" />
+    <Compile Include="Enumerations\EntityState.Type\SpacePlatform.cs" />
+    <Compile Include="Enumerations\EntityState.Type\SubsufracePlatform.cs" />
+    <Compile Include="Enumerations\EntityState.Type\SurfacePlatform.cs" />
+    <Compile Include="Enumerations\EntityState.Type\UKWeaponsForLifeForms.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState.Type\USWeaponsForLifeForms.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState\ArticulatedPartIndex.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState\ArticulatedPartOffset.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState\AttachedParts.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState\DeadReckoningAlgorithm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState\EntityCapabilities.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState\EntityForceId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\EntityState\ParameterTypeDesignator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Environment.Gridded\ConstantGrid.cs" />
+    <Compile Include="Enumerations\Environment.Gridded\CoordinateSystem.cs" />
+    <Compile Include="Enumerations\Environment.Gridded\DataRepresentationType.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\AirBurstAndGroundBurst.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\ArealObjectStatePDUModificationField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Environment.ObjectState\Crater.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\ExhaustSmoke.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\GeneralAppearance.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\LinearObjectStatePDUModificationField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Environment.ObjectState\LogCribAbatisVehicleDefiladeAndInfantryFightingPosition.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\Minefield.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\MinefieldLaneMarker.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\ObjectKind.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Environment.ObjectState\PointObjectStatePDUModificationField.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Environment.ObjectState\RibbonBridge.cs" />
+    <Compile Include="Enumerations\Environment.ObjectState\TankDitchAndConcertinaWire.cs" />
+    <Compile Include="Enumerations\Environment.Process\EnvironmentalProcessTypesForGeometryRecord.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Environment.Process\EnvironmentalProcessTypesForStateRecord.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Environment.Process\EnvironmentStatus.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Logistics\AuxilaryCraftRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\DriveTrainRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\ElectronicsRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\FuelSystemRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\GeneralRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\HullAirframeBodyRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\HydraulicSystemsAndActuators.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Logistics\InterfacesWithEnvironmentRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\LifeSupportRepairCode.cs" />
+    <Compile Include="Enumerations\Logistics\ResponseResultCode.cs" />
+    <Compile Include="Enumerations\Logistics\ServiceRequestType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Logistics\WeaponRepairCode.cs" />
+    <Compile Include="Enumerations\PduType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\ProtocolFamily.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\ProtocolVersion.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Intercom\Command.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Intercom\CommunicationsType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Intercom\ControlType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Intercom\DestinationLineStateCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Intercom\RecordType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Intercom\TransmitLineState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\AntennaPatternType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\ClearChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\CryptoSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\DetailedModulationForAmplitudeAndAngleModulation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\DetailedModulationForAmplitudeModulation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\DetailedModulationForAngleModulation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\DetailedModulationForCarrierPhaseShift.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\DetailedModulationForCombinationModulation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\DetailedModulationForPulseModulation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\DetailedModulationForUnmodulatedModulation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\InputSource.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\JtidsSynchronizationState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\JtidsTransmittingTerminalPrimaryMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\JtidsTransmittingTerminalSecondaryMode.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\MajorModulation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\RadioSignalEncoding.cs" />
+    <Compile Include="Enumerations\Radio.Transmitter\ReferenceSystem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\SpreadSpectrum.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\StartOfMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\TDLType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\TransmitState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\TransmitterModulationSystemType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio.Transmitter\UserProtocolIdentificationNumber.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Radio\ReceiverState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\SimulationManagement\AcknowledgeFlag.cs" />
+    <Compile Include="Enumerations\SimulationManagement\ActionId.cs" />
+    <Compile Include="Enumerations\SimulationManagement\ActionResponseRequestStatus.cs" />
+    <Compile Include="Enumerations\SimulationManagement\DatumSpecificationRecord.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\SimulationManagement\EventType.cs" />
+    <Compile Include="Enumerations\SimulationManagement\FrozenBehavior.cs" />
+    <Compile Include="Enumerations\SimulationManagement\RequiredReliabilityService.cs" />
+    <Compile Include="Enumerations\SimulationManagement\ResponseFlag.cs" />
+    <Compile Include="Enumerations\SimulationManagement\StopFreezeReason.cs" />
+    <Compile Include="Enumerations\Warfare\DetonationResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Warfare\Fuse.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Enumerations\Warfare\Warhead.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Dis1995\EntityID.cs" />
+    <Compile Include="Dis1995\Vector3Double.cs" />
+    <Compile Include="Dis1998\EntityID.cs" />
+    <Compile Include="Dis1998\Vector3Double.cs" />
+    <Compile Include="Dis1998\Vector3Float.cs" />
+    <Compile Include="Dis1995\Vector3Float.cs" />
+    <Compile Include="Properties\Version.cs" />
+    <Compile Include="Core\EnumNotFoundException.cs" />
+    <Compile Include="Core\InternetDomainCodeAttribute.cs" />
+    <Compile Include="Core\EnumHelper.cs" />
+    <Compile Include="Utilities\DataInputStream.cs" />
+    <Compile Include="Utilities\DataOutputStream.cs" />
+    <Compile Include="Utilities\DataStream.cs" />
+    <Compile Include="Core\EndianTypes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ChunkConverters.cs" />
+    <Compile Include="Utilities\Conversion.cs" />
+    <Compile Include="Utilities\PDUProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="FxCopCustomDictionary.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Enumerations\Cet2006\cet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Enumerations\Cet2010\cet.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="FxCop OpenDis Analysis.FxCop" />
+    <None Include="key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dis2009\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Enumerations\Cet2006\AggregateTypes.xml" />
+    <EmbeddedResource Include="Enumerations\Cet2006\EntityTypes.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Enumerations\Cet2010\AggregateTypes.xml" />
+    <EmbeddedResource Include="Enumerations\Cet2010\EntityTypes.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\StyleCop\v4.4\Microsoft.StyleCop.targets" Condition=" '$(Configuration)|$(Platform)' == 'Analysis|x86' " />
+</Project>

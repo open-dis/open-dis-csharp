@@ -1,0 +1,6 @@
+D:\dot_NET_DEVELOPMENT\DIS\OpenDIS\trunk\open-dis\C#Examples\DISnetSolution\DISnet\bin\Release\DISnet.dll
+D:\dot_NET_DEVELOPMENT\DIS\OpenDIS\trunk\open-dis\C#Examples\DISnetSolution\DISnet\bin\Release\DISnet.pdb
+D:\dot_NET_DEVELOPMENT\DIS\OpenDIS\trunk\open-dis\C#Examples\DISnetSolution\DISnet\obj\Release\ResolveAssemblyReference.cache
+D:\dot_NET_DEVELOPMENT\DIS\OpenDIS\trunk\open-dis\C#Examples\DISnetSolution\DISnet\obj\Release\DISnet.dll
+D:\dot_NET_DEVELOPMENT\DIS\OpenDIS\trunk\open-dis\C#Examples\DISnetSolution\DISnet\obj\Release\DISnet.pdb
+D:\dot_NET_DEVELOPMENT\DIS\OpenDIS\trunk\open-dis\C#Examples\DISnetSolution\DISnet\bin\Release\DISnet.XML

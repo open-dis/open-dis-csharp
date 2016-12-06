@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="generictable_t">
+    <xs:attribute name="id" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="cname" type="xs:string" use="required"/>
+    <xs:attribute name="length" type="xs:positiveInteger" use="required"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="source" type="xs:string" use="required"/>
+  </xs:complexType>
+  <xs:complexType name="genericentry_t">
+    <xs:attribute name="description" type="xs:string" use="optional"/>
+    <xs:attribute name="footnote" type="xs:string" use="optional"/>
+    <xs:attribute name="xref" type="xs:string" use="optional"/>
+    <xs:attribute name="deleted" type="xs:boolean" use="optional"/>
+    <xs:attribute name="unused" type="xs:boolean" use="optional"/>
+  </xs:complexType>
+  <!--=== Root Element ===-->
+  <xs:element name="cet" type="cet_t" />
+  <!--=== CET ===-->
+  <xs:complexType name="cet_t">
+    <xs:complexContent>
+      <xs:extension base="generictable_t">
+        <xs:sequence>
+          <xs:element name="entity" type="entity_t" minOccurs="1" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="entity_t">
+    <xs:sequence>
+      <xs:element name="category" type="category_t" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="kind" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="domain" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="country" type="xs:nonNegativeInteger" use="required"/>
+    <xs:attribute name="description" type="xs:string" use="optional"/>
+    <xs:attribute name="unused" type="xs:boolean" use="optional"/>
+    <xs:attribute name="footnote" type="xs:string" use="optional"/>
+    <xs:attribute name="xref" type="xs:string" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="category_t">
+    <xs:complexContent>
+      <xs:extension base="genericentry_t">
+        <xs:sequence>
+          <xs:element name="subcategory" type="subcategory_t" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="subcategory_t">
+    <xs:complexContent>
+      <xs:extension base="genericentry_t">
+        <xs:sequence>
+          <xs:element name="specific" type="specific_t" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+        <xs:attribute name="id2" type="xs:nonNegativeInteger" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="specific_t">
+    <xs:complexContent>
+      <xs:extension base="genericentry_t">
+        <xs:sequence>
+          <xs:element name="extra" type="extra_t" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+        <xs:attribute name="id2" type="xs:nonNegativeInteger" use="optional"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="extra_t">
+    <xs:complexContent>
+      <xs:extension base="genericentry_t">
+        <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+</xs:schema>

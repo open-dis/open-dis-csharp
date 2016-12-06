@@ -1,0 +1,20 @@
+8c8
+<  * Section 5.2.32. Variable Datum Record
+---
+>  * Section 5.2.32. Variable Datum Record<p>
+11a12,14
+>  *<p>
+>  * post-generation patches have been applied to this file from the patches directory. See that directory
+>  * for details.<p>
+58c61
+< { return (long)variableDatums.size();
+---
+> { return (long)variableDatums.size() * 64; // patch to fix units; bits rather than bytes
+83c86
+<        dos.writeInt( (int)variableDatums.size());
+---
+>        dos.writeInt( (int)variableDatums.size() * 64 ); // post-processing patch to fix units; bits rather than bytes
+102a106,108
+>        int over = variableDatumLength % 64 > 0 ? 1 : 0; // post-processing patch to fix units problem
+>        variableDatumLength = (variableDatumLength / 64) + over;
+>             

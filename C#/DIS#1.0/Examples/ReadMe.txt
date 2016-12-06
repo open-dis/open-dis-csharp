@@ -1,0 +1,3 @@
+DISnetSolution - This is a VS2008 solution to compile the DISnet pdus generated via Java and the xmlpg tool.  The project files contained within should be compatible with VS2005 and the Open C# IDE (import them as existing projects).  If not then just copy the the following folders (DataStreams, Utilities, and the contents of the PDU folder) to your application.  There are no external reference all files are contained within the solution.  The output (a DLL) is contained in Debug and Release version.
+
+EnumerationExample -  This is a VS2008 solution to test that the enumerations generated from the Java code can compile.  This is a very low level example in that there is no output.  It is intended to be stepped through using break points.

@@ -1,0 +1,240 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6F38984B-5EDD-4865-A752-2300F8B697E6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EnumerationExample</RootNamespace>
+    <AssemblyName>EnumerationExample</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enumerations\AcknowledgeFlag.cs" />
+    <Compile Include="Enumerations\AcousticEmitters.cs" />
+    <Compile Include="Enumerations\AcousticSystemName.cs" />
+    <Compile Include="Enumerations\ActionID.cs" />
+    <Compile Include="Enumerations\ActiveEmissionParameterIndex.cs" />
+    <Compile Include="Enumerations\AdditionalPassiveActivity.cs" />
+    <Compile Include="Enumerations\AggregateKind.cs" />
+    <Compile Include="Enumerations\AggregateState.cs" />
+    <Compile Include="Enumerations\Aircraft.cs" />
+    <Compile Include="Enumerations\AntennaPatternType.cs" />
+    <Compile Include="Enumerations\ArticulatedPartsIndexNumber.cs" />
+    <Compile Include="Enumerations\ArticulatedPartsOffsetNumber.cs" />
+    <Compile Include="Enumerations\AttachedParts.cs" />
+    <Compile Include="Enumerations\AuxiliaryCraft.cs" />
+    <Compile Include="Enumerations\BeamFunction.cs" />
+    <Compile Include="Enumerations\Byte11.cs" />
+    <Compile Include="Enumerations\Bytes8_9_10_12.cs" />
+    <Compile Include="Enumerations\CISWeaponsForLifeForms.cs" />
+    <Compile Include="Enumerations\ClearChannel.cs" />
+    <Compile Include="Enumerations\CodeName.cs" />
+    <Compile Include="Enumerations\CollisionType.cs" />
+    <Compile Include="Enumerations\Command.cs" />
+    <Compile Include="Enumerations\CommunicationType.cs" />
+    <Compile Include="Enumerations\CompanyBatteryTroop.cs" />
+    <Compile Include="Enumerations\ConstantGrid.cs" />
+    <Compile Include="Enumerations\ControlType.cs" />
+    <Compile Include="Enumerations\CoordinateSystem.cs" />
+    <Compile Include="Enumerations\CountryType.cs" />
+    <Compile Include="Enumerations\CryptoSystem.cs" />
+    <Compile Include="Enumerations\DataRepresentation.cs" />
+    <Compile Include="Enumerations\DatumSpecificationRecord.cs" />
+    <Compile Include="Enumerations\DeadReckoningAlgorithm.cs" />
+    <Compile Include="Enumerations\DesignatorCode.cs" />
+    <Compile Include="Enumerations\DestLineState.cs" />
+    <Compile Include="Enumerations\DetailedModAmpAndAngle.cs" />
+    <Compile Include="Enumerations\DetailedModAmpMod.cs" />
+    <Compile Include="Enumerations\DetailedModAngleMod.cs" />
+    <Compile Include="Enumerations\DetailedModCarrierPhaseShift.cs" />
+    <Compile Include="Enumerations\DetailedModCombinationMod.cs" />
+    <Compile Include="Enumerations\DetailedModPulseMod.cs" />
+    <Compile Include="Enumerations\DetailedModUnmodulatedMod.cs" />
+    <Compile Include="Enumerations\DetonationResult.cs" />
+    <Compile Include="Enumerations\DigitChevronCode.cs" />
+    <Compile Include="Enumerations\DivisionCorpsDesignation.cs" />
+    <Compile Include="Enumerations\DriveTrain.cs" />
+    <Compile Include="Enumerations\ElectromagneticEmitters.cs" />
+    <Compile Include="Enumerations\Electronics.cs" />
+    <Compile Include="Enumerations\EntityDomain.cs" />
+    <Compile Include="Enumerations\EntityKind.cs" />
+    <Compile Include="Enumerations\EntityMarking.cs" />
+    <Compile Include="Enumerations\EnvironmentalKind.cs" />
+    <Compile Include="Enumerations\EventType.cs" />
+    <Compile Include="Enumerations\ExpendableAirCategory.cs" />
+    <Compile Include="Enumerations\ExpendableSubsurfaceCategory.cs" />
+    <Compile Include="Enumerations\ExpendableSurfaceCategory.cs" />
+    <Compile Include="Enumerations\FieldNumber.cs" />
+    <Compile Include="Enumerations\FirstCavHighLevelUnit.cs" />
+    <Compile Include="Enumerations\FirstInfHighLevelUnit.cs" />
+    <Compile Include="Enumerations\FLIR.cs" />
+    <Compile Include="Enumerations\ForceID.cs" />
+    <Compile Include="Enumerations\Formation.cs" />
+    <Compile Include="Enumerations\FrenchWeaponsForLifeForms.cs" />
+    <Compile Include="Enumerations\FuelSystems.cs" />
+    <Compile Include="Enumerations\Function.cs" />
+    <Compile Include="Enumerations\Fuse.cs" />
+    <Compile Include="Enumerations\GeneralRepairCode.cs" />
+    <Compile Include="Enumerations\GeometryRecordTypeField.cs" />
+    <Compile Include="Enumerations\GermanWeaponsForLifeForms.cs" />
+    <Compile Include="Enumerations\GroupedEntityCategory.cs" />
+    <Compile Include="Enumerations\Helicopters.cs" />
+    <Compile Include="Enumerations\HighDensityTrackJam.cs" />
+    <Compile Include="Enumerations\HullAirframeBody.cs" />
+    <Compile Include="Enumerations\HydraulicSystemsAndActuators.cs" />
+    <Compile Include="Enumerations\InputSource.cs" />
+    <Compile Include="Enumerations\InterfacesWithEnvironment.cs" />
+    <Compile Include="Enumerations\Laser.cs" />
+    <Compile Include="Enumerations\LayerSpecificInformation.cs" />
+    <Compile Include="Enumerations\LifeSupportSystems.cs" />
+    <Compile Include="Enumerations\Magnetic.cs" />
+    <Compile Include="Enumerations\MajorModulation.cs" />
+    <Compile Include="Enumerations\MessageStart.cs" />
+    <Compile Include="Enumerations\ModelType.cs" />
+    <Compile Include="Enumerations\Multispectral.cs" />
+    <Compile Include="Enumerations\MunitionCategory.cs" />
+    <Compile Include="Enumerations\MunitionDomain.cs" />
+    <Compile Include="Enumerations\Nature.cs" />
+    <Compile Include="Enumerations\ObjectKind.cs" />
+    <Compile Include="Enumerations\Optical.cs" />
+    <Compile Include="Enumerations\OtherAcousticEmitters.cs" />
+    <Compile Include="Enumerations\ParameterTypeDesignator.cs" />
+    <Compile Include="Enumerations\PassiveParameterIndex.cs" />
+    <Compile Include="Enumerations\PduType.cs" />
+    <Compile Include="Enumerations\Physical.cs" />
+    <Compile Include="Enumerations\PlatformAir.cs" />
+    <Compile Include="Enumerations\PlatformLand.cs" />
+    <Compile Include="Enumerations\PlatformSpace.cs" />
+    <Compile Include="Enumerations\PlatformSubSurface.cs" />
+    <Compile Include="Enumerations\PlatformSurface.cs" />
+    <Compile Include="Enumerations\PlatoonSection.cs" />
+    <Compile Include="Enumerations\Position.cs" />
+    <Compile Include="Enumerations\ProtocolFamily.cs" />
+    <Compile Include="Enumerations\ProtocolVersion.cs" />
+    <Compile Include="Enumerations\RADAR.cs" />
+    <Compile Include="Enumerations\RadioCategory.cs" />
+    <Compile Include="Enumerations\RadioNomenclature.cs" />
+    <Compile Include="Enumerations\RadioNomenclatureVersion.cs" />
+    <Compile Include="Enumerations\RadioSystem.cs" />
+    <Compile Include="Enumerations\Reason.cs" />
+    <Compile Include="Enumerations\ReceiverState.cs" />
+    <Compile Include="Enumerations\RecordType.cs" />
+    <Compile Include="Enumerations\ReferenceSystem.cs" />
+    <Compile Include="Enumerations\RepairResponsePDU.cs" />
+    <Compile Include="Enumerations\RequestStatus.cs" />
+    <Compile Include="Enumerations\RequiredReliabilityService.cs" />
+    <Compile Include="Enumerations\ResponseFlag.cs" />
+    <Compile Include="Enumerations\RestStatus.cs" />
+    <Compile Include="Enumerations\SampleType.cs" />
+    <Compile Include="Enumerations\ScanPattern.cs" />
+    <Compile Include="Enumerations\SensorEmitterCategory.cs" />
+    <Compile Include="Enumerations\SensorTypes.cs" />
+    <Compile Include="Enumerations\ServiceRequestPDU.cs" />
+    <Compile Include="Enumerations\SONAR.cs" />
+    <Compile Include="Enumerations\Specific.cs" />
+    <Compile Include="Enumerations\StateChangeUpdateIndicator.cs" />
+    <Compile Include="Enumerations\StateRecordTypeField.cs" />
+    <Compile Include="Enumerations\StateUpdateIndicator.cs" />
+    <Compile Include="Enumerations\StationName.cs" />
+    <Compile Include="Enumerations\Subcategory.cs" />
+    <Compile Include="Enumerations\SynchronizationState.cs" />
+    <Compile Include="Enumerations\SystemMode.cs" />
+    <Compile Include="Enumerations\SystemName.cs" />
+    <Compile Include="Enumerations\SystemType.cs" />
+    <Compile Include="Enumerations\Tanks.cs" />
+    <Compile Include="Enumerations\TDLType.cs" />
+    <Compile Include="Enumerations\TransferType.cs" />
+    <Compile Include="Enumerations\TransmitState.cs" />
+    <Compile Include="Enumerations\Type1AltParameter4.cs" />
+    <Compile Include="Enumerations\Type1OperationalParameter1.cs" />
+    <Compile Include="Enumerations\Type1OperationalParameter2.cs" />
+    <Compile Include="Enumerations\Type2AltParameter4.cs" />
+    <Compile Include="Enumerations\Type2OperationalParameter1.cs" />
+    <Compile Include="Enumerations\Type2OperationalParameter2.cs" />
+    <Compile Include="Enumerations\Type3AltParameter4.cs" />
+    <Compile Include="Enumerations\Type3OperationalParameter1.cs" />
+    <Compile Include="Enumerations\Type3OperationalParameter2.cs" />
+    <Compile Include="Enumerations\Type4AltParameter4.cs" />
+    <Compile Include="Enumerations\Type4OperationalParameter1.cs" />
+    <Compile Include="Enumerations\Type4OperationalParameter2.cs" />
+    <Compile Include="Enumerations\Type5AltParameter4.cs" />
+    <Compile Include="Enumerations\Type5OperationalParameter1.cs" />
+    <Compile Include="Enumerations\Type5OperationalParameter2.cs" />
+    <Compile Include="Enumerations\UKWeaponsForLifeForms.cs" />
+    <Compile Include="Enumerations\UserProtocolIDNum.cs" />
+    <Compile Include="Enumerations\USWeaponsForLifeForms.cs" />
+    <Compile Include="Enumerations\Vehicle.cs" />
+    <Compile Include="Enumerations\Warhead.cs" />
+    <Compile Include="Enumerations\Weapons.cs" />
+    <Compile Include="Enumerations\XmitLineState.cs" />
+    <Compile Include="Enumerations\XmitTermPriMode.cs" />
+    <Compile Include="Enumerations\XmitTermSecMode.cs" />
+    <Compile Include="EnumUtilities\EnumNotFoundException.cs" />
+    <Compile Include="EnumUtilities\InternetDomainCodeAttribute.cs" />
+    <Compile Include="EnumUtilities\RetrieveEnumStrings.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

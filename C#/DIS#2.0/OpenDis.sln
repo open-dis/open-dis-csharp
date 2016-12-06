@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDis", "OpenDis\OpenDis.csproj", "{628EE35F-450A-49B2-BA46-04FABB66D0BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenDis.Demo", "OpenDis.Demo\OpenDis.Demo.csproj", "{0FC1409E-A9F2-4409-85A3-D989A36C3CB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Analysis|x86 = Analysis|x86
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{628EE35F-450A-49B2-BA46-04FABB66D0BF}.Analysis|x86.ActiveCfg = Analysis|x86
+		{628EE35F-450A-49B2-BA46-04FABB66D0BF}.Analysis|x86.Build.0 = Analysis|x86
+		{628EE35F-450A-49B2-BA46-04FABB66D0BF}.Debug|x86.ActiveCfg = Debug|x86
+		{628EE35F-450A-49B2-BA46-04FABB66D0BF}.Debug|x86.Build.0 = Debug|x86
+		{628EE35F-450A-49B2-BA46-04FABB66D0BF}.Release|x86.ActiveCfg = Release|x86
+		{628EE35F-450A-49B2-BA46-04FABB66D0BF}.Release|x86.Build.0 = Release|x86
+		{0FC1409E-A9F2-4409-85A3-D989A36C3CB8}.Analysis|x86.ActiveCfg = Release|x86
+		{0FC1409E-A9F2-4409-85A3-D989A36C3CB8}.Analysis|x86.Build.0 = Release|x86
+		{0FC1409E-A9F2-4409-85A3-D989A36C3CB8}.Debug|x86.ActiveCfg = Debug|x86
+		{0FC1409E-A9F2-4409-85A3-D989A36C3CB8}.Debug|x86.Build.0 = Debug|x86
+		{0FC1409E-A9F2-4409-85A3-D989A36C3CB8}.Release|x86.ActiveCfg = Release|x86
+		{0FC1409E-A9F2-4409-85A3-D989A36C3CB8}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
