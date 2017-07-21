@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cet uid="207" name="Aggregate State-Aggregate Types">
+  <entity kind="1" domain="1" country="225" uuid="1b221588-526a-11df-9faa-080069138b88" uid="22599">
+    <category value="0" description="Other" uuid="1b232428-526a-11df-9309-080069138b88" uid="22600"/>
+    <category value="1" description="Individual Vehicle" uuid="1b24328c-526a-11df-ad44-080069138b88" uid="22601"/>
+    <category value="2" description="Element" uuid="1b254550-526a-11df-9bc4-080069138b88" uid="22602"/>
+    <category value="3" description="Platoon" uuid="1b2653d2-526a-11df-8b47-080069138b88" uid="22603"/>
+    <category value="4" description="Battery" uuid="1b2763b2-526a-11df-b1be-080069138b88" uid="22604"/>
+    <category value="5" description="Company" uuid="1b286cda-526a-11df-8180-080069138b88" uid="22605"/>
+    <category value="6" description="Battalion" uuid="1b297c56-526a-11df-96b8-080069138b88" uid="22606"/>
+    <category value="7" description="Regiment" uuid="1b2a8f06-526a-11df-b0ea-080069138b88" uid="22607"/>
+    <category value="8" description="Brigade" uuid="1b2ba350-526a-11df-9193-080069138b88" uid="22608"/>
+    <category value="9" description="Division" uuid="1b2caca0-526a-11df-a9a3-080069138b88" uid="22609"/>
+    <category value="10" description="Corps" uuid="1b2dbba4-526a-11df-8d9b-080069138b88" uid="22610"/>
+  </entity>
+</cet>
