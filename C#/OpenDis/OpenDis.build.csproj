@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project=".\OpenDis.csproj" />
+  <PropertyGroup>
+    <PreBuildEvent>copy "$(ProjectDir)Properties\Version.cs" "$(ProjectDir)Properties\Version.cs_temp" /y
+cd "$(ProjectDir)"
+"C:\Program Files\TortoiseSVN\bin\SubWCRev.exe" . "Properties\Version2.cs" "Properties\Version.cs"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(ProjectDir)Properties\Version.cs_temp" "$(ProjectDir)Properties\Version.cs" /y</PostBuildEvent>
+  </PropertyGroup>
+</Project>

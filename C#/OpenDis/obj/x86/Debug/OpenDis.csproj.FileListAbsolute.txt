@@ -1,0 +1,10 @@
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\DIS#2.0\OpenDis\bin\x86\Debug\OpenDis.dll
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\DIS#2.0\OpenDis\bin\x86\Debug\OpenDis.pdb
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\DIS#2.0\OpenDis\obj\x86\Debug\OpenDis.csprojResolveAssemblyReference.cache
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\DIS#2.0\OpenDis\obj\x86\Debug\OpenDis.dll
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\DIS#2.0\OpenDis\obj\x86\Debug\OpenDis.pdb
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\OpenDis\bin\x86\Debug\OpenDis.dll
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\OpenDis\bin\x86\Debug\OpenDis.pdb
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\OpenDis\obj\x86\Debug\OpenDis.csprojResolveAssemblyReference.cache
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\OpenDis\obj\x86\Debug\OpenDis.dll
+\\wsrioffice00\user.data\matt.barnes\My Documents\DIS\Open-DIS_Repo\open-dis-csharp\C#\OpenDis\obj\x86\Debug\OpenDis.pdb
