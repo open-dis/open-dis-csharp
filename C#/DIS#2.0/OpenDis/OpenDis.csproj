@@ -99,6 +99,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\DisTime.cs" />
     <Compile Include="Core\IPdu.cs" />
     <Compile Include="Core\PduBase.cs" />
     <Compile Include="Core\CetBase.cs" />
@@ -769,6 +770,7 @@
     <Compile Include="Core\EnumNotFoundException.cs" />
     <Compile Include="Core\InternetDomainCodeAttribute.cs" />
     <Compile Include="Core\EnumHelper.cs" />
+    <Compile Include="Utilities\CoordinateConversions.cs" />
     <Compile Include="Utilities\DataInputStream.cs" />
     <Compile Include="Utilities\DataOutputStream.cs" />
     <Compile Include="Utilities\DataStream.cs" />

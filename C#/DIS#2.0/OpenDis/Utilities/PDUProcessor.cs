@@ -34,6 +34,7 @@
 //
 // Author Peter Smith (Naval Air Warfare Center - Training Systems Division) 01/23/2009
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
+// 
 
 using System;
 using System.Collections.Generic;
@@ -405,13 +406,8 @@ namespace OpenDis.Core
 
             try
             {
-                if (this.endian == Endian.Big)
-                {
-                    Array.Reverse(buffer, (int)PDU_LENGTH_POSITION, 2);
-                }
-
-                pduLength = System.BitConverter.ToUInt16(buffer, (int)PDU_LENGTH_POSITION);
-
+                pduLength = PduProcessor.pduLength(buffer, this.endian);
+                
                 // Allocate space for the whole PDU
                 byte[] pduBufferStorage = new byte[pduLength];
 
@@ -463,12 +459,7 @@ namespace OpenDis.Core
             {
                 try
                 {
-                    if (this.endian == Endian.Big)
-                    {
-                        Array.Reverse(buffer, (int)PDU_LENGTH_POSITION, 2);
-                    }
-
-                    pduLength = System.BitConverter.ToUInt16(buffer, (int)PDU_LENGTH_POSITION + countBytes);
+                    pduLength = PduProcessor.pduLength(buffer, this.endian, (uint)(PDU_LENGTH_POSITION + countBytes));                    
 
                     // Must be at end of datastream
                     if (pduLength == 0)
@@ -515,14 +506,8 @@ namespace OpenDis.Core
 
             try
             {
-                if (this.endian == Endian.Big)
-                {
-                    Array.Reverse(buffer, (int)PDU_LENGTH_POSITION, 2);
-                }
-
-                pduLength = System.BitConverter.ToUInt16(buffer, (int)PDU_LENGTH_POSITION);
-
-
+                pduLength = PduProcessor.pduLength(buffer, this.endian);
+                
                 // Allocate space for the whole PDU
                 rawData = new byte[pduLength];
 
@@ -566,13 +551,8 @@ namespace OpenDis.Core
             {
                 try
                 {
-                    if (this.endian == Endian.Big)
-                    {
-                        Array.Reverse(buffer, (int)PDU_LENGTH_POSITION + countBytes, 2);
-                    }
-
-                    pduLength = System.BitConverter.ToUInt16(buffer, (int)PDU_LENGTH_POSITION + countBytes);
-
+                    pduLength = PduProcessor.pduLength(buffer, this.endian);
+                    
                     // Must be at end of datastream
                     if (pduLength == 0)
                     {
@@ -639,6 +619,33 @@ namespace OpenDis.Core
             return pdu;
         }
 
+
+        /// <summary>
+        /// Extracts length of PDU without altering byte array/stream so that future access to this field is still valid
+        /// </summary>
+        /// <param name="buf">Byte array holding PDU data.</param>
+        /// <param name="position">Position of 'length' field.  generally at pos 8, but if this byte array holds more than one PDU</param>
+        /// <param name="endian">The Endian type used for conversion.</param>
+        /// <returns>length</returns>
+        private static UInt16 pduLength(byte[] buf, Endian endian, uint pos = PDU_LENGTH_POSITION)
+        {
+            byte[] temp = new byte[2];
+
+            if (endian == Endian.Big)  //Reverse
+            {
+                temp[0] = buf[pos + 1];
+                temp[1] = buf[pos]; 
+            }
+            else  //Leave as is
+            {
+                temp[0] = buf[pos];
+                temp[1] = buf[pos + 1];
+            }
+            
+            return System.BitConverter.ToUInt16(temp, 0);
+        }
+
+                
         /// <summary>
         /// Unmarshal all data into the pdu object.  This method calls the all the base unmarshals.
         /// Deprecated:  This method used Reflection, use <see cref="UnmarshallRawPdu"/> method instead.
@@ -651,6 +658,8 @@ namespace OpenDis.Core
             // Unmarshal is the method name found in each of the PDU classes
             pdu.GetType().InvokeMember("Unmarshal", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { dStream }, CultureInfo.InvariantCulture);
         }
+
+
 
 		#endregion Methods 
     }
