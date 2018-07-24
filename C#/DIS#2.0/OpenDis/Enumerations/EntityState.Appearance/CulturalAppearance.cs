@@ -333,47 +333,47 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask1 = 0x0018;
             byte shift1 = 3;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Damage = (CulturalAppearance.DamageValue)newValue1;
 
             uint mask2 = 0x0060;
             byte shift2 = 5;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Smoke = (CulturalAppearance.SmokeValue)newValue2;
 
             uint mask4 = 0x8000;
             byte shift4 = 15;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Flaming = (CulturalAppearance.FlamingValue)newValue4;
 
             uint mask6 = 0x200000;
             byte shift6 = 21;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.FrozenStatus = (CulturalAppearance.FrozenStatusValue)newValue6;
 
             uint mask7 = 0x400000;
             byte shift7 = 22;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.InternalHeatStatus = (CulturalAppearance.InternalHeatStatusValue)newValue7;
 
             uint mask8 = 0x800000;
             byte shift8 = 23;
-            uint newValue8 = value & mask8 >> shift8;
+            uint newValue8 = (value & mask8) >> shift8;
             ps.State = (CulturalAppearance.StateValue)newValue8;
 
             uint mask10 = 0x10000000;
             byte shift10 = 28;
-            uint newValue10 = value & mask10 >> shift10;
+            uint newValue10 = (value & mask10) >> shift10;
             ps.ExteriorLights = (CulturalAppearance.ExteriorLightsValue)newValue10;
 
             uint mask11 = 0x20000000;
             byte shift11 = 29;
-            uint newValue11 = value & mask11 >> shift11;
+            uint newValue11 = (value & mask11) >> shift11;
             ps.InteriorLights = (CulturalAppearance.InteriorLightsValue)newValue11;
 
             uint mask13 = 0x80000000;
             byte shift13 = 31;
-            uint newValue13 = value & mask13 >> shift13;
+            uint newValue13 = (value & mask13) >> shift13;
             ps.MaskedCloaked = (CulturalAppearance.MaskedCloakedValue)newValue13;
 
             return ps;

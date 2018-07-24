@@ -228,22 +228,22 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask1 = 0xf0000;
             byte shift1 = 16;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Density = (EnvironmentalAppearance.DensityValue)newValue1;
 
             uint mask3 = 0x200000;
             byte shift3 = 21;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.FrozenStatus = (EnvironmentalAppearance.FrozenStatusValue)newValue3;
 
             uint mask5 = 0x800000;
             byte shift5 = 23;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.State = (EnvironmentalAppearance.StateValue)newValue5;
 
             uint mask7 = 0x80000000;
             byte shift7 = 31;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.MaskedCloaked = (EnvironmentalAppearance.MaskedCloakedValue)newValue7;
 
             return ps;

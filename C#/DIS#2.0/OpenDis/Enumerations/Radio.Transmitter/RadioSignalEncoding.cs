@@ -194,12 +194,12 @@ namespace OpenDis.Enumerations.Radio.Transmitter
 
             uint mask0 = 0x3fff;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.EncodingType = (RadioSignalEncoding.EncodingTypeValue)newValue0;
 
             uint mask1 = 0xc000;
             byte shift1 = 14;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.EncodingClass = (RadioSignalEncoding.EncodingClassValue)newValue1;
 
             return ps;

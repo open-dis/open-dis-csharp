@@ -152,7 +152,7 @@ namespace OpenDis.Enumerations.Environment.ObjectState
 
             uint mask0 = 0x30000;
             byte shift0 = 16;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.VisibleSide = (MinefieldLaneMarker.VisibleSideValue)newValue0;
 
             return ps;

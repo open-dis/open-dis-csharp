@@ -539,87 +539,87 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PaintScheme = (AirPlatformAppearance.PaintSchemeValue)newValue0;
 
             uint mask1 = 0x0002;
             byte shift1 = 1;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Propulsion = (AirPlatformAppearance.PropulsionValue)newValue1;
 
             uint mask3 = 0x0018;
             byte shift3 = 3;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Damage = (AirPlatformAppearance.DamageValue)newValue3;
 
             uint mask4 = 0x0060;
             byte shift4 = 5;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Smoke = (AirPlatformAppearance.SmokeValue)newValue4;
 
             uint mask5 = 0x0180;
             byte shift5 = 7;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.TrailingEffects = (AirPlatformAppearance.TrailingEffectsValue)newValue5;
 
             uint mask6 = 0x0e00;
             byte shift6 = 9;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.Canopy = (AirPlatformAppearance.CanopyValue)newValue6;
 
             uint mask7 = 0x1000;
             byte shift7 = 12;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.LandingLights = (AirPlatformAppearance.LandingLightsValue)newValue7;
 
             uint mask8 = 0x2000;
             byte shift8 = 13;
-            uint newValue8 = value & mask8 >> shift8;
+            uint newValue8 = (value & mask8) >> shift8;
             ps.NavigationLights = (AirPlatformAppearance.NavigationLightsValue)newValue8;
 
             uint mask9 = 0x4000;
             byte shift9 = 14;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.AntiCollisionLights = (AirPlatformAppearance.AntiCollisionLightsValue)newValue9;
 
             uint mask10 = 0x8000;
             byte shift10 = 15;
-            uint newValue10 = value & mask10 >> shift10;
+            uint newValue10 = (value & mask10) >> shift10;
             ps.Flaming = (AirPlatformAppearance.FlamingValue)newValue10;
 
             uint mask11 = 0x10000;
             byte shift11 = 16;
-            uint newValue11 = value & mask11 >> shift11;
+            uint newValue11 = (value & mask11) >> shift11;
             ps.Afterburner = (AirPlatformAppearance.AfterburnerValue)newValue11;
 
             uint mask13 = 0x200000;
             byte shift13 = 21;
-            uint newValue13 = value & mask13 >> shift13;
+            uint newValue13 = (value & mask13) >> shift13;
             ps.FrozenStatus = (AirPlatformAppearance.FrozenStatusValue)newValue13;
 
             uint mask14 = 0x400000;
             byte shift14 = 22;
-            uint newValue14 = value & mask14 >> shift14;
+            uint newValue14 = (value & mask14) >> shift14;
             ps.PowerPlantStatus = (AirPlatformAppearance.PowerPlantStatusValue)newValue14;
 
             uint mask15 = 0x800000;
             byte shift15 = 23;
-            uint newValue15 = value & mask15 >> shift15;
+            uint newValue15 = (value & mask15) >> shift15;
             ps.State = (AirPlatformAppearance.StateValue)newValue15;
 
             uint mask16 = 0x1000000;
             byte shift16 = 24;
-            uint newValue16 = value & mask16 >> shift16;
+            uint newValue16 = (value & mask16) >> shift16;
             ps.FormationLights = (AirPlatformAppearance.FormationLightsValue)newValue16;
 
             uint mask18 = 0x10000000;
             byte shift18 = 28;
-            uint newValue18 = value & mask18 >> shift18;
+            uint newValue18 = (value & mask18) >> shift18;
             ps.SpotLights = (AirPlatformAppearance.SpotLightsValue)newValue18;
 
             uint mask19 = 0x20000000;
             byte shift19 = 29;
-            uint newValue19 = value & mask19 >> shift19;
+            uint newValue19 = (value & mask19) >> shift19;
             ps.InteriorLights = (AirPlatformAppearance.InteriorLightsValue)newValue19;
 
             return ps;

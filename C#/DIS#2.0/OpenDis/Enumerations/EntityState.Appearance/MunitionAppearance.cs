@@ -348,47 +348,47 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask1 = 0x0018;
             byte shift1 = 3;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Damage = (MunitionAppearance.DamageValue)newValue1;
 
             uint mask2 = 0x0060;
             byte shift2 = 5;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Smoke = (MunitionAppearance.SmokeValue)newValue2;
 
             uint mask3 = 0x0180;
             byte shift3 = 7;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.TrailingEffects = (MunitionAppearance.TrailingEffectsValue)newValue3;
 
             uint mask5 = 0x8000;
             byte shift5 = 15;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.Flaming = (MunitionAppearance.FlamingValue)newValue5;
 
             uint mask6 = 0x10000;
             byte shift6 = 16;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.LaunchFlash = (MunitionAppearance.LaunchFlashValue)newValue6;
 
             uint mask8 = 0x200000;
             byte shift8 = 21;
-            uint newValue8 = value & mask8 >> shift8;
+            uint newValue8 = (value & mask8) >> shift8;
             ps.FrozenStatus = (MunitionAppearance.FrozenStatusValue)newValue8;
 
             uint mask9 = 0x400000;
             byte shift9 = 22;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.PowerPlantStatus = (MunitionAppearance.PowerPlantStatusValue)newValue9;
 
             uint mask10 = 0x800000;
             byte shift10 = 23;
-            uint newValue10 = value & mask10 >> shift10;
+            uint newValue10 = (value & mask10) >> shift10;
             ps.State = (MunitionAppearance.StateValue)newValue10;
 
             uint mask12 = 0x80000000;
             byte shift12 = 31;
-            uint newValue12 = value & mask12 >> shift12;
+            uint newValue12 = (value & mask12) >> shift12;
             ps.MaskedCloaked = (MunitionAppearance.MaskedCloakedValue)newValue12;
 
             return ps;

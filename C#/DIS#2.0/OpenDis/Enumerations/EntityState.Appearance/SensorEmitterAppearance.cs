@@ -534,87 +534,87 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PaintScheme = (SensorEmitterAppearance.PaintSchemeValue)newValue0;
 
             uint mask1 = 0x0002;
             byte shift1 = 1;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Mobility = (SensorEmitterAppearance.MobilityValue)newValue1;
 
             uint mask2 = 0x0004;
             byte shift2 = 2;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Mission = (SensorEmitterAppearance.MissionValue)newValue2;
 
             uint mask3 = 0x0018;
             byte shift3 = 3;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Damage = (SensorEmitterAppearance.DamageValue)newValue3;
 
             uint mask4 = 0x0060;
             byte shift4 = 5;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Smoke = (SensorEmitterAppearance.SmokeValue)newValue4;
 
             uint mask5 = 0x0180;
             byte shift5 = 7;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.TrailingEffects = (SensorEmitterAppearance.TrailingEffectsValue)newValue5;
 
             uint mask7 = 0x1000;
             byte shift7 = 12;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.Lights = (SensorEmitterAppearance.LightsValue)newValue7;
 
             uint mask9 = 0x8000;
             byte shift9 = 15;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.Flaming = (SensorEmitterAppearance.FlamingValue)newValue9;
 
             uint mask10 = 0x10000;
             byte shift10 = 16;
-            uint newValue10 = value & mask10 >> shift10;
+            uint newValue10 = (value & mask10) >> shift10;
             ps.Antenna = (SensorEmitterAppearance.AntennaValue)newValue10;
 
             uint mask11 = 0x60000;
             byte shift11 = 17;
-            uint newValue11 = value & mask11 >> shift11;
+            uint newValue11 = (value & mask11) >> shift11;
             ps.CamouflageType = (SensorEmitterAppearance.CamouflageTypeValue)newValue11;
 
             uint mask12 = 0x80000;
             byte shift12 = 19;
-            uint newValue12 = value & mask12 >> shift12;
+            uint newValue12 = (value & mask12) >> shift12;
             ps.Concealed = (SensorEmitterAppearance.ConcealedValue)newValue12;
 
             uint mask14 = 0x200000;
             byte shift14 = 21;
-            uint newValue14 = value & mask14 >> shift14;
+            uint newValue14 = (value & mask14) >> shift14;
             ps.FrozenStatus = (SensorEmitterAppearance.FrozenStatusValue)newValue14;
 
             uint mask15 = 0x400000;
             byte shift15 = 22;
-            uint newValue15 = value & mask15 >> shift15;
+            uint newValue15 = (value & mask15) >> shift15;
             ps.PowerPlantStatus = (SensorEmitterAppearance.PowerPlantStatusValue)newValue15;
 
             uint mask16 = 0x800000;
             byte shift16 = 23;
-            uint newValue16 = value & mask16 >> shift16;
+            uint newValue16 = (value & mask16) >> shift16;
             ps.State = (SensorEmitterAppearance.StateValue)newValue16;
 
             uint mask17 = 0x1000000;
             byte shift17 = 24;
-            uint newValue17 = value & mask17 >> shift17;
+            uint newValue17 = (value & mask17) >> shift17;
             ps.Tent = (SensorEmitterAppearance.TentValue)newValue17;
 
             uint mask19 = 0x4000000;
             byte shift19 = 26;
-            uint newValue19 = value & mask19 >> shift19;
+            uint newValue19 = (value & mask19) >> shift19;
             ps.BlackoutLights = (SensorEmitterAppearance.BlackoutLightsValue)newValue19;
 
             uint mask21 = 0x20000000;
             byte shift21 = 29;
-            uint newValue21 = value & mask21 >> shift21;
+            uint newValue21 = (value & mask21) >> shift21;
             ps.InteriorLights = (SensorEmitterAppearance.InteriorLightsValue)newValue21;
 
             return ps;

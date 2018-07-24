@@ -147,7 +147,7 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
 
             uint mask0 = 0x0003;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Value = (ProtocolMode.ProtocolModeValue)newValue0;
 
             return ps;

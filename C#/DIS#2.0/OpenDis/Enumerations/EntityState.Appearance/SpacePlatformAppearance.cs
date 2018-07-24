@@ -311,42 +311,42 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PaintScheme = (SpacePlatformAppearance.PaintSchemeValue)newValue0;
 
             uint mask1 = 0x0002;
             byte shift1 = 1;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Mobility = (SpacePlatformAppearance.MobilityValue)newValue1;
 
             uint mask3 = 0x0018;
             byte shift3 = 3;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Damage = (SpacePlatformAppearance.DamageValue)newValue3;
 
             uint mask4 = 0x0060;
             byte shift4 = 5;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Smoke = (SpacePlatformAppearance.SmokeValue)newValue4;
 
             uint mask6 = 0x8000;
             byte shift6 = 15;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.Flaming = (SpacePlatformAppearance.FlamingValue)newValue6;
 
             uint mask8 = 0x200000;
             byte shift8 = 21;
-            uint newValue8 = value & mask8 >> shift8;
+            uint newValue8 = (value & mask8) >> shift8;
             ps.FrozenStatus = (SpacePlatformAppearance.FrozenStatusValue)newValue8;
 
             uint mask9 = 0x400000;
             byte shift9 = 22;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.PowerPlantStatus = (SpacePlatformAppearance.PowerPlantStatusValue)newValue9;
 
             uint mask10 = 0x800000;
             byte shift10 = 23;
-            uint newValue10 = value & mask10 >> shift10;
+            uint newValue10 = (value & mask10) >> shift10;
             ps.State = (SpacePlatformAppearance.StateValue)newValue10;
 
             return ps;

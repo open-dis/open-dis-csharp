@@ -370,52 +370,52 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PaintScheme = (SubsurfacePlatformAppearance.PaintSchemeValue)newValue0;
 
             uint mask1 = 0x0002;
             byte shift1 = 1;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Mobility = (SubsurfacePlatformAppearance.MobilityValue)newValue1;
 
             uint mask3 = 0x0018;
             byte shift3 = 3;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Damage = (SubsurfacePlatformAppearance.DamageValue)newValue3;
 
             uint mask4 = 0x0060;
             byte shift4 = 5;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Smoke = (SubsurfacePlatformAppearance.SmokeValue)newValue4;
 
             uint mask6 = 0x0e00;
             byte shift6 = 9;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.Hatch = (SubsurfacePlatformAppearance.HatchValue)newValue6;
 
             uint mask7 = 0x1000;
             byte shift7 = 12;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.RunningLights = (SubsurfacePlatformAppearance.RunningLightsValue)newValue7;
 
             uint mask9 = 0x8000;
             byte shift9 = 15;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.Flaming = (SubsurfacePlatformAppearance.FlamingValue)newValue9;
 
             uint mask11 = 0x200000;
             byte shift11 = 21;
-            uint newValue11 = value & mask11 >> shift11;
+            uint newValue11 = (value & mask11) >> shift11;
             ps.FrozenStatus = (SubsurfacePlatformAppearance.FrozenStatusValue)newValue11;
 
             uint mask12 = 0x400000;
             byte shift12 = 22;
-            uint newValue12 = value & mask12 >> shift12;
+            uint newValue12 = (value & mask12) >> shift12;
             ps.PowerPlantStatus = (SubsurfacePlatformAppearance.PowerPlantStatusValue)newValue12;
 
             uint mask13 = 0x800000;
             byte shift13 = 23;
-            uint newValue13 = value & mask13 >> shift13;
+            uint newValue13 = (value & mask13) >> shift13;
             ps.State = (SubsurfacePlatformAppearance.StateValue)newValue13;
 
             return ps;
