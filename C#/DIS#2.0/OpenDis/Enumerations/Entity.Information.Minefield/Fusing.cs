@@ -236,17 +236,17 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
 
             uint mask0 = 0x007f;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Primary = (Fusing.PrimaryValue)newValue0;
 
             uint mask1 = 0x3f80;
             byte shift1 = 7;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Secondary = (Fusing.SecondaryValue)newValue1;
 
             uint mask2 = 0x0010;
             byte shift2 = 4;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.AHD = (Fusing.AHDValue)newValue2;
 
             return ps;

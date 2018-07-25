@@ -230,27 +230,27 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.NegativeAltitude = (Type1Parameter5ModeCCodeStatus.NegativeAltitudeValue)newValue0;
 
             uint mask1 = 0x0ffe;
             byte shift1 = 1;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.ModeCAltitude = (Type1Parameter5ModeCCodeStatus.ModeCAltitudeValue)newValue1;
 
             uint mask3 = 0x2000;
             byte shift3 = 13;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Status = (Type1Parameter5ModeCCodeStatus.StatusValue)newValue3;
 
             uint mask4 = 0x4000;
             byte shift4 = 14;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Damage = (Type1Parameter5ModeCCodeStatus.DamageValue)newValue4;
 
             uint mask5 = 0x8000;
             byte shift5 = 15;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.Malfunction = (Type1Parameter5ModeCCodeStatus.MalfunctionValue)newValue5;
 
             return ps;

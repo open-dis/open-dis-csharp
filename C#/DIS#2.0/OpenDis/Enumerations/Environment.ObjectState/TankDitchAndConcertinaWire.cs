@@ -175,17 +175,17 @@ namespace OpenDis.Enumerations.Environment.ObjectState
 
             uint mask0 = 0x30000;
             byte shift0 = 16;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Breach = (TankDitchAndConcertinaWire.BreachValue)newValue0;
 
             uint mask2 = 0x00ff;
             byte shift2 = 32;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.BreachLength = (byte)newValue2;
 
             uint mask3 = 0xff00;
             byte shift3 = 40;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.BreachLocation = (TankDitchAndConcertinaWire.BreachLocationValue)newValue3;
 
             return ps;

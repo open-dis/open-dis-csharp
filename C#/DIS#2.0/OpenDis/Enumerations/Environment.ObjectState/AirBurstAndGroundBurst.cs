@@ -156,27 +156,27 @@ namespace OpenDis.Enumerations.Environment.ObjectState
 
             uint mask0 = 0xff0000;
             byte shift0 = 16;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Opacity = (byte)newValue0;
 
             uint mask1 = 0xff000000;
             byte shift1 = 24;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Size = (byte)newValue1;
 
             uint mask2 = 0x00ff;
             byte shift2 = 32;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Height = (byte)newValue2;
 
             uint mask3 = 0x3f00;
             byte shift3 = 40;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.NumOfBursts = (byte)newValue3;
 
             uint mask4 = 0xc000;
             byte shift4 = 46;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Chemical = (AirBurstAndGroundBurst.ChemicalValue)newValue4;
 
             return ps;

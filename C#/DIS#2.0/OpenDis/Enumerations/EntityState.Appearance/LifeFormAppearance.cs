@@ -564,62 +564,62 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PaintScheme = (LifeFormAppearance.PaintSchemeValue)newValue0;
 
             uint mask2 = 0x0018;
             byte shift2 = 3;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Health = (LifeFormAppearance.HealthValue)newValue2;
 
             uint mask3 = 0x01e0;
             byte shift3 = 5;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Compliance = (LifeFormAppearance.ComplianceValue)newValue3;
 
             uint mask5 = 0x1000;
             byte shift5 = 12;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.FlashLights = (LifeFormAppearance.FlashLightsValue)newValue5;
 
             uint mask7 = 0xf0000;
             byte shift7 = 16;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.LifeFormState = (LifeFormAppearance.LifeFormStateValue)newValue7;
 
             uint mask9 = 0x200000;
             byte shift9 = 21;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.FrozenStatus = (LifeFormAppearance.FrozenStatusValue)newValue9;
 
             uint mask11 = 0x800000;
             byte shift11 = 23;
-            uint newValue11 = value & mask11 >> shift11;
+            uint newValue11 = (value & mask11) >> shift11;
             ps.State = (LifeFormAppearance.StateValue)newValue11;
 
             uint mask12 = 0x3000000;
             byte shift12 = 24;
-            uint newValue12 = value & mask12 >> shift12;
+            uint newValue12 = (value & mask12) >> shift12;
             ps.Weapon1 = (LifeFormAppearance.Weapon1Value)newValue12;
 
             uint mask13 = 0xc000000;
             byte shift13 = 26;
-            uint newValue13 = value & mask13 >> shift13;
+            uint newValue13 = (value & mask13) >> shift13;
             ps.Weapon2 = (LifeFormAppearance.Weapon2Value)newValue13;
 
             uint mask14 = 0x30000000;
             byte shift14 = 28;
-            uint newValue14 = value & mask14 >> shift14;
+            uint newValue14 = (value & mask14) >> shift14;
             ps.CamouflageType = (LifeFormAppearance.CamouflageTypeValue)newValue14;
 
             uint mask15 = 0x40000000;
             byte shift15 = 30;
-            uint newValue15 = value & mask15 >> shift15;
+            uint newValue15 = (value & mask15) >> shift15;
             ps.ConcealedStationary = (LifeFormAppearance.ConcealedStationaryValue)newValue15;
 
             uint mask16 = 0x80000000;
             byte shift16 = 31;
-            uint newValue16 = value & mask16 >> shift16;
+            uint newValue16 = (value & mask16) >> shift16;
             ps.ConcealedMovement = (LifeFormAppearance.ConcealedMovementValue)newValue16;
 
             return ps;

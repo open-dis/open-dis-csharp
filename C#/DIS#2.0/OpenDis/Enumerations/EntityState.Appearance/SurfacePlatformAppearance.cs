@@ -414,62 +414,62 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PaintScheme = (SurfacePlatformAppearance.PaintSchemeValue)newValue0;
 
             uint mask1 = 0x0002;
             byte shift1 = 1;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Mobility = (SurfacePlatformAppearance.MobilityValue)newValue1;
 
             uint mask3 = 0x0018;
             byte shift3 = 3;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Damage = (SurfacePlatformAppearance.DamageValue)newValue3;
 
             uint mask4 = 0x0060;
             byte shift4 = 5;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Smoke = (SurfacePlatformAppearance.SmokeValue)newValue4;
 
             uint mask5 = 0x0180;
             byte shift5 = 7;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.TrailingEffects = (SurfacePlatformAppearance.TrailingEffectsValue)newValue5;
 
             uint mask7 = 0x1000;
             byte shift7 = 12;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.RunningLights = (SurfacePlatformAppearance.RunningLightsValue)newValue7;
 
             uint mask9 = 0x8000;
             byte shift9 = 15;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.Flaming = (SurfacePlatformAppearance.FlamingValue)newValue9;
 
             uint mask11 = 0x200000;
             byte shift11 = 21;
-            uint newValue11 = value & mask11 >> shift11;
+            uint newValue11 = (value & mask11) >> shift11;
             ps.FrozenStatus = (SurfacePlatformAppearance.FrozenStatusValue)newValue11;
 
             uint mask12 = 0x400000;
             byte shift12 = 22;
-            uint newValue12 = value & mask12 >> shift12;
+            uint newValue12 = (value & mask12) >> shift12;
             ps.PowerPlantStatus = (SurfacePlatformAppearance.PowerPlantStatusValue)newValue12;
 
             uint mask13 = 0x800000;
             byte shift13 = 23;
-            uint newValue13 = value & mask13 >> shift13;
+            uint newValue13 = (value & mask13) >> shift13;
             ps.State = (SurfacePlatformAppearance.StateValue)newValue13;
 
             uint mask15 = 0x10000000;
             byte shift15 = 28;
-            uint newValue15 = value & mask15 >> shift15;
+            uint newValue15 = (value & mask15) >> shift15;
             ps.SpotLights = (SurfacePlatformAppearance.SpotLightsValue)newValue15;
 
             uint mask16 = 0x20000000;
             byte shift16 = 29;
-            uint newValue16 = value & mask16 >> shift16;
+            uint newValue16 = (value & mask16) >> shift16;
             ps.InteriorLights = (SurfacePlatformAppearance.InteriorLightsValue)newValue16;
 
             return ps;

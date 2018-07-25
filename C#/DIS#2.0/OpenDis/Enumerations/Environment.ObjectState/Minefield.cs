@@ -153,12 +153,12 @@ namespace OpenDis.Enumerations.Environment.ObjectState
 
             uint mask0 = 0x30000;
             byte shift0 = 16;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Breach = (Minefield.BreachValue)newValue0;
 
             uint mask2 = 0x80000000;
             byte shift2 = 31;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.MineCount = (int)newValue2;
 
             return ps;

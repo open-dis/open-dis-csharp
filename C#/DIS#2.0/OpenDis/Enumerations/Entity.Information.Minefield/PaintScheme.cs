@@ -259,12 +259,12 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
 
             uint mask0 = 0x0003;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Algae = (PaintScheme.AlgaeValue)newValue0;
 
             uint mask1 = 0x00fc;
             byte shift1 = 2;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Value = (PaintScheme.PaintSchemeValue)newValue1;
 
             return ps;

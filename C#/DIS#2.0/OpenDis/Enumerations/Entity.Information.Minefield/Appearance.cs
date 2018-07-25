@@ -218,22 +218,22 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
 
             uint mask0 = 0x0003;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.MinefieldType = (Appearance.MinefieldTypeValue)newValue0;
 
             uint mask1 = 0x0004;
             byte shift1 = 2;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.ActiveStatus = (Appearance.ActiveStatusValue)newValue1;
 
             uint mask2 = 0x0008;
             byte shift2 = 3;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Lane = (Appearance.LaneValue)newValue2;
 
             uint mask4 = 0x2000;
             byte shift4 = 13;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.State = (Appearance.StateValue)newValue4;
 
             return ps;

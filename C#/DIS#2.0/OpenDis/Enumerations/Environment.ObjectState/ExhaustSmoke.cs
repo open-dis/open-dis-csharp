@@ -175,17 +175,17 @@ namespace OpenDis.Enumerations.Environment.ObjectState
 
             uint mask0 = 0xff0000;
             byte shift0 = 16;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Opacity = (byte)newValue0;
 
             uint mask1 = 0x1000000;
             byte shift1 = 24;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Attached = (ExhaustSmoke.AttachedValue)newValue1;
 
             uint mask2 = 0x6000000;
             byte shift2 = 25;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Chemical = (ExhaustSmoke.ChemicalValue)newValue2;
 
             return ps;

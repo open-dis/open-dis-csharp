@@ -735,127 +735,127 @@ namespace OpenDis.Enumerations.EntityState.Appearance
 
             uint mask0 = 0x0001;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PaintScheme = (LandPlatformAppearance.PaintSchemeValue)newValue0;
 
             uint mask1 = 0x0002;
             byte shift1 = 1;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Mobility = (LandPlatformAppearance.MobilityValue)newValue1;
 
             uint mask2 = 0x0004;
             byte shift2 = 2;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.FirePower = (LandPlatformAppearance.FirePowerValue)newValue2;
 
             uint mask3 = 0x0018;
             byte shift3 = 3;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.Damage = (LandPlatformAppearance.DamageValue)newValue3;
 
             uint mask4 = 0x0060;
             byte shift4 = 5;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Smoke = (LandPlatformAppearance.SmokeValue)newValue4;
 
             uint mask5 = 0x0180;
             byte shift5 = 7;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.TrailingEffects = (LandPlatformAppearance.TrailingEffectsValue)newValue5;
 
             uint mask6 = 0x0e00;
             byte shift6 = 9;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.Hatch = (LandPlatformAppearance.HatchValue)newValue6;
 
             uint mask7 = 0x1000;
             byte shift7 = 12;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.HeadLights = (LandPlatformAppearance.HeadLightsValue)newValue7;
 
             uint mask8 = 0x2000;
             byte shift8 = 13;
-            uint newValue8 = value & mask8 >> shift8;
+            uint newValue8 = (value & mask8) >> shift8;
             ps.TailLights = (LandPlatformAppearance.TailLightsValue)newValue8;
 
             uint mask9 = 0x4000;
             byte shift9 = 14;
-            uint newValue9 = value & mask9 >> shift9;
+            uint newValue9 = (value & mask9) >> shift9;
             ps.BrakeLights = (LandPlatformAppearance.BrakeLightsValue)newValue9;
 
             uint mask10 = 0x8000;
             byte shift10 = 15;
-            uint newValue10 = value & mask10 >> shift10;
+            uint newValue10 = (value & mask10) >> shift10;
             ps.Flaming = (LandPlatformAppearance.FlamingValue)newValue10;
 
             uint mask11 = 0x10000;
             byte shift11 = 16;
-            uint newValue11 = value & mask11 >> shift11;
+            uint newValue11 = (value & mask11) >> shift11;
             ps.Launcher = (LandPlatformAppearance.LauncherValue)newValue11;
 
             uint mask12 = 0x60000;
             byte shift12 = 17;
-            uint newValue12 = value & mask12 >> shift12;
+            uint newValue12 = (value & mask12) >> shift12;
             ps.CamouflageType = (LandPlatformAppearance.CamouflageTypeValue)newValue12;
 
             uint mask13 = 0x80000;
             byte shift13 = 19;
-            uint newValue13 = value & mask13 >> shift13;
+            uint newValue13 = (value & mask13) >> shift13;
             ps.Concealed = (LandPlatformAppearance.ConcealedValue)newValue13;
 
             uint mask15 = 0x200000;
             byte shift15 = 21;
-            uint newValue15 = value & mask15 >> shift15;
+            uint newValue15 = (value & mask15) >> shift15;
             ps.FrozenStatus = (LandPlatformAppearance.FrozenStatusValue)newValue15;
 
             uint mask16 = 0x400000;
             byte shift16 = 22;
-            uint newValue16 = value & mask16 >> shift16;
+            uint newValue16 = (value & mask16) >> shift16;
             ps.PowerPlantStatus = (LandPlatformAppearance.PowerPlantStatusValue)newValue16;
 
             uint mask17 = 0x800000;
             byte shift17 = 23;
-            uint newValue17 = value & mask17 >> shift17;
+            uint newValue17 = (value & mask17) >> shift17;
             ps.State = (LandPlatformAppearance.StateValue)newValue17;
 
             uint mask18 = 0x1000000;
             byte shift18 = 24;
-            uint newValue18 = value & mask18 >> shift18;
+            uint newValue18 = (value & mask18) >> shift18;
             ps.Tent = (LandPlatformAppearance.TentValue)newValue18;
 
             uint mask19 = 0x2000000;
             byte shift19 = 25;
-            uint newValue19 = value & mask19 >> shift19;
+            uint newValue19 = (value & mask19) >> shift19;
             ps.Ramp = (LandPlatformAppearance.RampValue)newValue19;
 
             uint mask20 = 0x4000000;
             byte shift20 = 26;
-            uint newValue20 = value & mask20 >> shift20;
+            uint newValue20 = (value & mask20) >> shift20;
             ps.BlackoutLights = (LandPlatformAppearance.BlackoutLightsValue)newValue20;
 
             uint mask21 = 0x8000000;
             byte shift21 = 27;
-            uint newValue21 = value & mask21 >> shift21;
+            uint newValue21 = (value & mask21) >> shift21;
             ps.BlackoutBrakeLights = (LandPlatformAppearance.BlackoutBrakeLightsValue)newValue21;
 
             uint mask22 = 0x10000000;
             byte shift22 = 28;
-            uint newValue22 = value & mask22 >> shift22;
+            uint newValue22 = (value & mask22) >> shift22;
             ps.SpotLights = (LandPlatformAppearance.SpotLightsValue)newValue22;
 
             uint mask23 = 0x20000000;
             byte shift23 = 29;
-            uint newValue23 = value & mask23 >> shift23;
+            uint newValue23 = (value & mask23) >> shift23;
             ps.InteriorLights = (LandPlatformAppearance.InteriorLightsValue)newValue23;
 
             uint mask24 = 0x40000000;
             byte shift24 = 30;
-            uint newValue24 = value & mask24 >> shift24;
+            uint newValue24 = (value & mask24) >> shift24;
             ps.SurrenderState = (LandPlatformAppearance.SurrenderStateValue)newValue24;
 
             uint mask25 = 0x80000000;
             byte shift25 = 31;
-            uint newValue25 = value & mask25 >> shift25;
+            uint newValue25 = (value & mask25) >> shift25;
             ps.MaskedCloaked = (LandPlatformAppearance.MaskedCloakedValue)newValue25;
 
             return ps;

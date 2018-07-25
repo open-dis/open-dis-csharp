@@ -190,37 +190,37 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
 
             uint mask0 = 0x0007;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.CodeElement1 = (byte)newValue0;
 
             uint mask1 = 0x0038;
             byte shift1 = 3;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.CodeElement2 = (byte)newValue1;
 
             uint mask2 = 0x01c0;
             byte shift2 = 6;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.CodeElement3 = (byte)newValue2;
 
             uint mask3 = 0x0e00;
             byte shift3 = 9;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.CodeElement4 = (byte)newValue3;
 
             uint mask5 = 0x2000;
             byte shift5 = 13;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.Status = (Type1Parameter3Mode3CodeStatus.StatusValue)newValue5;
 
             uint mask6 = 0x4000;
             byte shift6 = 14;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.Damage = (Type1Parameter3Mode3CodeStatus.DamageValue)newValue6;
 
             uint mask7 = 0x8000;
             byte shift7 = 15;
-            uint newValue7 = value & mask7 >> shift7;
+            uint newValue7 = (value & mask7) >> shift7;
             ps.Malfunction = (Type1Parameter3Mode3CodeStatus.MalfunctionValue)newValue7;
 
             return ps;

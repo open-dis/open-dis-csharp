@@ -199,12 +199,12 @@ namespace OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic
 
             uint mask0 = 0x007f;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Configuration = (PropulsionPlantConfiguration.ConfigurationValue)newValue0;
 
             uint mask1 = 0x0080;
             byte shift1 = 7;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.HullMountedMasker = (PropulsionPlantConfiguration.HullMountedMaskerValue)newValue1;
 
             return ps;

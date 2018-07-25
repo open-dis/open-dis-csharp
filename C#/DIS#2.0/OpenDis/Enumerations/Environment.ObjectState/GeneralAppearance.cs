@@ -241,32 +241,32 @@ namespace OpenDis.Enumerations.Environment.ObjectState
 
             uint mask0 = 0x00ff;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.PercentComplete = (byte)newValue0;
 
             uint mask1 = 0x0300;
             byte shift1 = 8;
-            uint newValue1 = value & mask1 >> shift1;
+            uint newValue1 = (value & mask1) >> shift1;
             ps.Damage = (GeneralAppearance.DamageValue)newValue1;
 
             uint mask2 = 0x0400;
             byte shift2 = 10;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.Predistributed = (GeneralAppearance.PredistributedValue)newValue2;
 
             uint mask3 = 0x0800;
             byte shift3 = 11;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.State = (GeneralAppearance.StateValue)newValue3;
 
             uint mask4 = 0x1000;
             byte shift4 = 12;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Smoking = (GeneralAppearance.SmokingValue)newValue4;
 
             uint mask5 = 0x2000;
             byte shift5 = 13;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.Flaming = (GeneralAppearance.FlamingValue)newValue5;
 
             return ps;

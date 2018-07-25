@@ -231,32 +231,32 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
 
             uint mask0 = 0x001f;
             byte shift0 = 0;
-            uint newValue0 = value & mask0 >> shift0;
+            uint newValue0 = (value & mask0) >> shift0;
             ps.Code = (byte)newValue0;
 
             uint mask2 = 0x0800;
             byte shift2 = 11;
-            uint newValue2 = value & mask2 >> shift2;
+            uint newValue2 = (value & mask2) >> shift2;
             ps.PowerReduction = (Type5Parameter1RRBResponse.PowerReductionValue)newValue2;
 
             uint mask3 = 0x1000;
             byte shift3 = 12;
-            uint newValue3 = value & mask3 >> shift3;
+            uint newValue3 = (value & mask3) >> shift3;
             ps.RadarEnhancement = (Type5Parameter1RRBResponse.RadarEnhancementValue)newValue3;
 
             uint mask4 = 0x2000;
             byte shift4 = 13;
-            uint newValue4 = value & mask4 >> shift4;
+            uint newValue4 = (value & mask4) >> shift4;
             ps.Status = (Type5Parameter1RRBResponse.StatusValue)newValue4;
 
             uint mask5 = 0x4000;
             byte shift5 = 14;
-            uint newValue5 = value & mask5 >> shift5;
+            uint newValue5 = (value & mask5) >> shift5;
             ps.Damage = (Type5Parameter1RRBResponse.DamageValue)newValue5;
 
             uint mask6 = 0x8000;
             byte shift6 = 15;
-            uint newValue6 = value & mask6 >> shift6;
+            uint newValue6 = (value & mask6) >> shift6;
             ps.Malfunction = (Type5Parameter1RRBResponse.MalfunctionValue)newValue6;
 
             return ps;
