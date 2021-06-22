@@ -34,6 +34,7 @@
 //
 // Author Peter Smith (Naval Air Warfare Center - Training Systems Division) 01/23/2009
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
+// Modified by Chad Dettmering (Unity Technologies - chad.dettmering@unity3d.com) 06/22/2021
 // 
 
 using System;
@@ -210,122 +211,370 @@ namespace OpenDis.Core
             switch (pduType)
             {
                 case PduType.EntityState:
-                    EntityStatePdu entityStatePdu = new EntityStatePdu();
-                    entityStatePdu.Unmarshal(ds);
-                    pdu = (Pdu)entityStatePdu;
+                    pdu = new EntityStatePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.Fire:
-                    FirePdu firePdu = new FirePdu();
-                    firePdu.Unmarshal(ds);
-                    pdu = (Pdu)firePdu;
+                    pdu = new FirePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.Detonation:
-                    DetonationPdu detonationPdu = new DetonationPdu();
-                    detonationPdu.Unmarshal(ds);
-                    pdu = (Pdu)detonationPdu;
+                    pdu = new DetonationPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.Collision:
-                    CollisionPdu collisionPdu = new CollisionPdu();
-                    collisionPdu.Unmarshal(ds);
-                    pdu = (Pdu)collisionPdu;
+                    pdu = new CollisionPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.ServiceRequest:
-                    ServiceRequestPdu serviceRequestPdu = new ServiceRequestPdu();
-                    serviceRequestPdu.Unmarshal(ds);
-                    pdu = (Pdu)serviceRequestPdu;
+                    pdu = new ServiceRequestPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.ResupplyOffer:
-                    ResupplyOfferPdu resupplyOfferPdu = new ResupplyOfferPdu();
-                    resupplyOfferPdu.Unmarshal(ds);
-                    pdu = (Pdu)resupplyOfferPdu;
+                    pdu = new ResupplyOfferPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.ResupplyReceived:
-                    ResupplyReceivedPdu resupplyReceivedPdu = new ResupplyReceivedPdu();
-                    resupplyReceivedPdu.Unmarshal(ds);
-                    pdu = (Pdu)resupplyReceivedPdu;
+                    pdu = new ResupplyReceivedPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.ResupplyCancel:
-                    ResupplyCancelPdu resupplyCancelPdu = new ResupplyCancelPdu();
-                    resupplyCancelPdu.Unmarshal(ds);
-                    pdu = (Pdu)resupplyCancelPdu;
+                    pdu = new ResupplyCancelPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.RepairComplete:
-                    RepairCompletePdu repairCompletePdu = new RepairCompletePdu();
-                    repairCompletePdu.Unmarshal(ds);
-                    pdu = (Pdu)repairCompletePdu;
+                    pdu = new RepairCompletePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.RepairResponse:
-                    RepairResponsePdu repairResponsePdu = new RepairResponsePdu();
-                    repairResponsePdu.Unmarshal(ds);
-                    pdu = (Pdu)repairResponsePdu;
+                    pdu = new RepairResponsePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.CreateEntity:
-                    CreateEntityPdu createEntityPdu = new CreateEntityPdu();
-                    createEntityPdu.Unmarshal(ds);
-                    pdu = (Pdu)createEntityPdu;
+                    pdu = new CreateEntityPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.RemoveEntity:
-                    RemoveEntityPdu removeEntityPdu = new RemoveEntityPdu();
-                    removeEntityPdu.Unmarshal(ds);
-                    pdu = (Pdu)removeEntityPdu;
+                    pdu = new RemoveEntityPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.StartResume:
-                    StartResumePdu startResumePdu = new StartResumePdu();
-                    startResumePdu.Unmarshal(ds);
-                    pdu = (Pdu)startResumePdu;
+                    pdu = new StartResumePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.Acknowledge:
-                    AcknowledgePdu acknowledgePdu = new AcknowledgePdu();
-                    acknowledgePdu.Unmarshal(ds);
-                    pdu = (Pdu)acknowledgePdu;
+                    pdu = new AcknowledgePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.ActionRequest:
-                    ActionRequestPdu actionRequestPdu = new ActionRequestPdu();
-                    actionRequestPdu.Unmarshal(ds);
-                    pdu = (Pdu)actionRequestPdu;
+                    pdu = new ActionRequestPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.ActionResponse:
-                    ActionResponsePdu actionResponsePdu = new ActionResponsePdu();
-                    actionResponsePdu.Unmarshal(ds);
-                    pdu = (Pdu)actionResponsePdu;
+                    pdu = new ActionResponsePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.DataQuery:
-                    DataQueryPdu dataQueryPdu = new DataQueryPdu();
-                    dataQueryPdu.Unmarshal(ds);
-                    pdu = (Pdu)dataQueryPdu;
+                    pdu = new DataQueryPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.SetData:
-                    SetDataPdu setDataPdu = new SetDataPdu();
-                    setDataPdu.Unmarshal(ds);
-                    pdu = (Pdu)setDataPdu;
+                    pdu = new SetDataPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.EventReport:
-                    EventReportPdu eventReportPdu = new EventReportPdu();
-                    eventReportPdu.Unmarshal(ds);
-                    pdu = (Pdu)eventReportPdu;
+                    pdu = new EventReportPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.Comment:
-                    CommentPdu commentPdu = new CommentPdu();
-                    commentPdu.Unmarshal(ds);
-                    pdu = (Pdu)commentPdu;
+                    pdu = new CommentPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.StopFreeze:
-                    StopFreezePdu stopFreezePdu = new StopFreezePdu();
-                    stopFreezePdu.Unmarshal(ds);
-                    pdu = (Pdu)stopFreezePdu;
+                    pdu = new StopFreezePdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.Signal:
-                    SignalPdu signalPdu = new SignalPdu();
-                    signalPdu.Unmarshal(ds);
-                    pdu = (Pdu)signalPdu;
+                    pdu = new SignalPdu();
+                    pdu.Unmarshal(ds);
                     break;
                 case PduType.Transmitter:
-                    TransmitterPdu transmitterPdu = new TransmitterPdu();
-                    transmitterPdu.Unmarshal(ds);
-                    pdu = (Pdu)transmitterPdu;
+                    pdu = new TransmitterPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ElectromagneticEmission:
+                    pdu = new ElectronicEmissionsPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Designator:
+                    pdu = new DesignatorPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Receiver:
+                    pdu = new ReceiverPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.IFF_ATC_NAVAIDS:
+                    pdu = new IffAtcNavAidsLayer1Pdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.UnderwaterAcoustic:
+                    pdu = new UaPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.SupplementalEmissionEntityState:
+                    pdu = new SeesPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.IntercomSignal:
+                    pdu = new IntercomSignalPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.IntercomControl:
+                    pdu = new IntercomControlPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.AggregateState:
+                    pdu = new AggregateStatePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.IsGroupOf:
+                    pdu = new IsGroupOfPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.TransferControl:
+                    pdu = new TransferControlRequestPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.IsPartOf:
+                    pdu = new IsPartOfPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.MinefieldState:
+                    pdu = new MinefieldStatePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.MinefieldQuery:
+                    pdu = new MinefieldQueryPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.MinefieldData:
+                    pdu = new MinefieldDataPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.MinefieldResponseNAK:
+                    pdu = new MinefieldResponseNackPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.EnvironmentalProcess:
+                    pdu = new EnvironmentalProcessPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.GriddedData:
+                    pdu = new GriddedDataPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.PointObjectState:
+                    pdu = new PointObjectStatePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.LinearObjectState:
+                    pdu = new LinearObjectStatePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ArealObjectState:
+                    pdu = new ArealObjectStatePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.TSPI:
+                    throw new NotImplementedException();
+                case PduType.Appearance:
+                    throw new NotImplementedException();
+                case PduType.ArticulatedParts:
+                    throw new NotImplementedException();
+                case PduType.LEFire:
+                    throw new NotImplementedException();
+                case PduType.LEDetonation:
+                    throw new NotImplementedException();
+                case PduType.CreateEntityR:
+                    pdu = new CreateEntityReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.RemoveEntityR:
+                    pdu = new RemoveEntityReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.StartResumeR:
+                    pdu = new StartResumeReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.StopFreezeR:
+                    pdu = new StopFreezeReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.AcknowledgeR:
+                    pdu = new AcknowledgeReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ActionRequestR:
+                    pdu = new ActionRequestReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ActionResponseR:
+                    pdu = new ActionResponseReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.DataQueryR:
+                    pdu = new DataQueryReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.SetDataR:
+                    pdu = new SetDataReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.DataR:
+                    pdu = new DataReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.EventReportR:
+                    pdu = new EventReportReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.CommentR:
+                    pdu = new CommentReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.RecordR:
+                    pdu = new RecordQueryReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.SetRecordR:
+                    pdu = new SetRecordReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.RecordQueryR:
+                    pdu = new RecordQueryReliablePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.CollisionElastic:
+                    pdu = new CollisionElasticPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.EntityStateUpdate:
+                    pdu = new EntityStateUpdatePdu();
+                    pdu.Unmarshal(ds);
                     break;
             }
 
+            return pdu;
+        }
+
+        /// <summary>
+        /// Used to unmarshal data back into the correct PDU type for protocol 5.
+        /// </summary>
+        /// <param name="pduType">PDU type</param>
+        /// <param name="ds">Data stream that holds raw pdu data</param>
+        /// <returns>Base PDU object that can be cast to specific PDU if needed</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static OpenDis.Dis1995.Pdu UnmarshalRawPdu1995(PduType pduType, DataInputStream ds)
+        {
+            var pdu = new OpenDis.Dis1995.Pdu();
+            switch (pduType)
+            {
+                case PduType.EntityState:
+                    pdu = new OpenDis.Dis1995.EntityStatePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Fire:
+                    pdu = new OpenDis.Dis1995.FirePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Detonation:
+                    pdu = new OpenDis.Dis1995.DetonationPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Collision:
+                    pdu = new OpenDis.Dis1995.CollisionPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ServiceRequest:
+                    pdu = new OpenDis.Dis1995.ServiceRequestPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ResupplyOffer:
+                    pdu = new OpenDis.Dis1995.ResupplyOfferPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ResupplyReceived:
+                    pdu = new OpenDis.Dis1995.ResupplyReceivedPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ResupplyCancel:
+                    pdu = new OpenDis.Dis1995.ResupplyCancelPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.RepairComplete:
+                    pdu = new OpenDis.Dis1995.RepairCompletePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.RepairResponse:
+                    pdu = new OpenDis.Dis1995.RepairResponsePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.CreateEntity:
+                    pdu = new OpenDis.Dis1995.CreateEntityPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.RemoveEntity:
+                    pdu = new OpenDis.Dis1995.RemoveEntityPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.StartResume:
+                    pdu = new OpenDis.Dis1995.StartResumePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Acknowledge:
+                    pdu = new OpenDis.Dis1995.AcknowledgePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ActionRequest:
+                    pdu = new OpenDis.Dis1995.ActionRequestPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.ActionResponse:
+                    pdu = new OpenDis.Dis1995.ActionResponsePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.DataQuery:
+                    pdu = new OpenDis.Dis1995.DataQueryPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.SetData:
+                    pdu = new OpenDis.Dis1995.SetDataPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.EventReport:
+                    pdu = new OpenDis.Dis1995.EventReportPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Comment:
+                    pdu = new OpenDis.Dis1995.CommentPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.StopFreeze:
+                    pdu = new OpenDis.Dis1995.StopFreezePdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Signal:
+                    pdu = new OpenDis.Dis1995.SignalPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+                case PduType.Transmitter:
+                    pdu = new OpenDis.Dis1995.TransmitterPdu();
+                    pdu.Unmarshal(ds);
+                    break;
+            }
+            
             return pdu;
         }
 
@@ -600,6 +849,7 @@ namespace OpenDis.Core
             {
                 case 5:
                     // DIS 1995
+                    pdu = UnmarshalRawPdu1995((PduType)pduType, dStream);
                     break;
                 case 6:
                     // DIS 1998
