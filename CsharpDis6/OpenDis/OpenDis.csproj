@@ -28,7 +28,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\DisTime.cs" />
+    <Compile Include="Core\IHashable.cs" />
     <Compile Include="Core\IPdu.cs" />
     <Compile Include="Core\PduBase.cs" />
     <Compile Include="Core\CetBase.cs" />

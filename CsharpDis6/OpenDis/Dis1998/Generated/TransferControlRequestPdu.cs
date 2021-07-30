@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.9.3 Information initiating the dyanic allocation and control of simulation entities         between two simulation applications. Requires manual cleanup. The padding between record sets is variable. UNFINISHED
+    /// Section 5.3.9.3 Information initiating the dyanic allocation and control of simulation entities        between
+    /// two simulation applications. Requires manual cleanup. The padding between record sets is variable. UNFINISHED
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -58,51 +59,11 @@ namespace OpenDis.Dis1998
     public partial class TransferControlRequestPdu : EntityManagementFamilyPdu, IEquatable<TransferControlRequestPdu>
     {
         /// <summary>
-        /// ID of entity originating request
-        /// </summary>
-        private EntityID _orginatingEntityID = new EntityID();
-
-        /// <summary>
-        /// ID of entity receiving request
-        /// </summary>
-        private EntityID _recevingEntityID = new EntityID();
-
-        /// <summary>
-        /// ID ofrequest
-        /// </summary>
-        private uint _requestID;
-
-        /// <summary>
-        /// required level of reliabliity service.
-        /// </summary>
-        private byte _requiredReliabilityService;
-
-        /// <summary>
-        /// type of transfer desired
-        /// </summary>
-        private byte _tranferType;
-
-        /// <summary>
-        /// The entity for which control is being requested to transfer
-        /// </summary>
-        private EntityID _transferEntityID = new EntityID();
-
-        /// <summary>
-        /// number of record sets to transfer
-        /// </summary>
-        private byte _numberOfRecordSets;
-
-        /// <summary>
-        /// ^^^This is wrong--the RecordSet class needs more work
-        /// </summary>
-        private List<RecordSet> _recordSets = new List<RecordSet>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TransferControlRequestPdu"/> class.
         /// </summary>
         public TransferControlRequestPdu()
         {
-            PduType = (byte)35;
+            PduType = 35;
         }
 
         /// <summary>
@@ -111,12 +72,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(TransferControlRequestPdu left, TransferControlRequestPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(TransferControlRequestPdu left, TransferControlRequestPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -124,38 +82,24 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(TransferControlRequestPdu left, TransferControlRequestPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._orginatingEntityID.GetMarshalledSize();  // this._orginatingEntityID
-            marshalSize += this._recevingEntityID.GetMarshalledSize();  // this._recevingEntityID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += OrginatingEntityID.GetMarshalledSize();  // this._orginatingEntityID
+            marshalSize += RecevingEntityID.GetMarshalledSize();  // this._recevingEntityID
             marshalSize += 4;  // this._requestID
             marshalSize += 1;  // this._requiredReliabilityService
             marshalSize += 1;  // this._tranferType
-            marshalSize += this._transferEntityID.GetMarshalledSize();  // this._transferEntityID
+            marshalSize += TransferEntityID.GetMarshalledSize();  // this._transferEntityID
             marshalSize += 1;  // this._numberOfRecordSets
-            for (int idx = 0; idx < this._recordSets.Count; idx++)
+            for (int idx = 0; idx < RecordSets.Count; idx++)
             {
-                RecordSet listElement = (RecordSet)this._recordSets[idx];
+                var listElement = RecordSets[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -166,153 +110,65 @@ namespace OpenDis.Dis1998
         /// Gets or sets the ID of entity originating request
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "orginatingEntityID")]
-        public EntityID OrginatingEntityID
-        {
-            get
-            {
-                return this._orginatingEntityID;
-            }
-
-            set
-            {
-                this._orginatingEntityID = value;
-            }
-        }
+        public EntityID OrginatingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID of entity receiving request
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "recevingEntityID")]
-        public EntityID RecevingEntityID
-        {
-            get
-            {
-                return this._recevingEntityID;
-            }
-
-            set
-            {
-                this._recevingEntityID = value;
-            }
-        }
+        public EntityID RecevingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID ofrequest
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "requestID")]
-        public uint RequestID
-        {
-            get
-            {
-                return this._requestID;
-            }
-
-            set
-            {
-                this._requestID = value;
-            }
-        }
+        public uint RequestID { get; set; }
 
         /// <summary>
         /// Gets or sets the required level of reliabliity service.
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "requiredReliabilityService")]
-        public byte RequiredReliabilityService
-        {
-            get
-            {
-                return this._requiredReliabilityService;
-            }
-
-            set
-            {
-                this._requiredReliabilityService = value;
-            }
-        }
+        public byte RequiredReliabilityService { get; set; }
 
         /// <summary>
         /// Gets or sets the type of transfer desired
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "tranferType")]
-        public byte TranferType
-        {
-            get
-            {
-                return this._tranferType;
-            }
-
-            set
-            {
-                this._tranferType = value;
-            }
-        }
+        public byte TranferType { get; set; }
 
         /// <summary>
-        /// Gets or sets the The entity for which control is being requested to transfer
+        /// Gets or sets the entity for which control is being requested to transfer
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "transferEntityID")]
-        public EntityID TransferEntityID
-        {
-            get
-            {
-                return this._transferEntityID;
-            }
-
-            set
-            {
-                this._transferEntityID = value;
-            }
-        }
+        public EntityID TransferEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the number of record sets to transfer
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfRecordSets method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfRecordSets method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfRecordSets")]
-        public byte NumberOfRecordSets
-        {
-            get
-            {
-                return this._numberOfRecordSets;
-            }
-
-            set
-            {
-                this._numberOfRecordSets = value;
-            }
-        }
+        public byte NumberOfRecordSets { get; set; }
 
         /// <summary>
         /// Gets the ^^^This is wrong--the RecordSet class needs more work
         /// </summary>
         [XmlElement(ElementName = "recordSetsList", Type = typeof(List<RecordSet>))]
-        public List<RecordSet> RecordSets
-        {
-            get
-            {
-                return this._recordSets;
-            }
-        }
+        public List<RecordSet> RecordSets { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -321,33 +177,33 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._orginatingEntityID.Marshal(dos);
-                    this._recevingEntityID.Marshal(dos);
-                    dos.WriteUnsignedInt((uint)this._requestID);
-                    dos.WriteUnsignedByte((byte)this._requiredReliabilityService);
-                    dos.WriteUnsignedByte((byte)this._tranferType);
-                    this._transferEntityID.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._recordSets.Count);
+                    OrginatingEntityID.Marshal(dos);
+                    RecevingEntityID.Marshal(dos);
+                    dos.WriteUnsignedInt(RequestID);
+                    dos.WriteUnsignedByte(RequiredReliabilityService);
+                    dos.WriteUnsignedByte(TranferType);
+                    TransferEntityID.Marshal(dos);
+                    dos.WriteUnsignedByte((byte)RecordSets.Count);
 
-                    for (int idx = 0; idx < this._recordSets.Count; idx++)
+                    for (int idx = 0; idx < RecordSets.Count; idx++)
                     {
-                        RecordSet aRecordSet = (RecordSet)this._recordSets[idx];
+                        var aRecordSet = RecordSets[idx];
                         aRecordSet.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -362,47 +218,40 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._orginatingEntityID.Unmarshal(dis);
-                    this._recevingEntityID.Unmarshal(dis);
-                    this._requestID = dis.ReadUnsignedInt();
-                    this._requiredReliabilityService = dis.ReadUnsignedByte();
-                    this._tranferType = dis.ReadUnsignedByte();
-                    this._transferEntityID.Unmarshal(dis);
-                    this._numberOfRecordSets = dis.ReadUnsignedByte();
+                    OrginatingEntityID.Unmarshal(dis);
+                    RecevingEntityID.Unmarshal(dis);
+                    RequestID = dis.ReadUnsignedInt();
+                    RequiredReliabilityService = dis.ReadUnsignedByte();
+                    TranferType = dis.ReadUnsignedByte();
+                    TransferEntityID.Unmarshal(dis);
+                    NumberOfRecordSets = dis.ReadUnsignedByte();
 
-                    for (int idx = 0; idx < this.NumberOfRecordSets; idx++)
+                    for (int idx = 0; idx < NumberOfRecordSets; idx++)
                     {
-                        RecordSet anX = new RecordSet();
+                        var anX = new RecordSet();
                         anX.Unmarshal(dis);
-                        this._recordSets.Add(anX);
+                        RecordSets.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -411,22 +260,22 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<orginatingEntityID>");
-                this._orginatingEntityID.Reflection(sb);
+                OrginatingEntityID.Reflection(sb);
                 sb.AppendLine("</orginatingEntityID>");
                 sb.AppendLine("<recevingEntityID>");
-                this._recevingEntityID.Reflection(sb);
+                RecevingEntityID.Reflection(sb);
                 sb.AppendLine("</recevingEntityID>");
-                sb.AppendLine("<requestID type=\"uint\">" + this._requestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
-                sb.AppendLine("<requiredReliabilityService type=\"byte\">" + this._requiredReliabilityService.ToString(CultureInfo.InvariantCulture) + "</requiredReliabilityService>");
-                sb.AppendLine("<tranferType type=\"byte\">" + this._tranferType.ToString(CultureInfo.InvariantCulture) + "</tranferType>");
+                sb.AppendLine("<requestID type=\"uint\">" + RequestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
+                sb.AppendLine("<requiredReliabilityService type=\"byte\">" + RequiredReliabilityService.ToString(CultureInfo.InvariantCulture) + "</requiredReliabilityService>");
+                sb.AppendLine("<tranferType type=\"byte\">" + TranferType.ToString(CultureInfo.InvariantCulture) + "</tranferType>");
                 sb.AppendLine("<transferEntityID>");
-                this._transferEntityID.Reflection(sb);
+                TransferEntityID.Reflection(sb);
                 sb.AppendLine("</transferEntityID>");
-                sb.AppendLine("<recordSets type=\"byte\">" + this._recordSets.Count.ToString(CultureInfo.InvariantCulture) + "</recordSets>");
-                for (int idx = 0; idx < this._recordSets.Count; idx++)
+                sb.AppendLine("<recordSets type=\"byte\">" + RecordSets.Count.ToString(CultureInfo.InvariantCulture) + "</recordSets>");
+                for (int idx = 0; idx < RecordSets.Count; idx++)
                 {
                     sb.AppendLine("<recordSets" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"RecordSet\">");
-                    RecordSet aRecordSet = (RecordSet)this._recordSets[idx];
+                    var aRecordSet = RecordSets[idx];
                     aRecordSet.Reflection(sb);
                     sb.AppendLine("</recordSets" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -435,96 +284,78 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as TransferControlRequestPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as TransferControlRequestPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(TransferControlRequestPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._orginatingEntityID.Equals(obj._orginatingEntityID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!OrginatingEntityID.Equals(obj.OrginatingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._recevingEntityID.Equals(obj._recevingEntityID))
+            if (!RecevingEntityID.Equals(obj.RecevingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._requestID != obj._requestID)
+            if (RequestID != obj.RequestID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._requiredReliabilityService != obj._requiredReliabilityService)
+            if (RequiredReliabilityService != obj.RequiredReliabilityService)
             {
                 ivarsEqual = false;
             }
 
-            if (this._tranferType != obj._tranferType)
+            if (TranferType != obj.TranferType)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._transferEntityID.Equals(obj._transferEntityID))
+            if (!TransferEntityID.Equals(obj.TransferEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfRecordSets != obj._numberOfRecordSets)
+            if (NumberOfRecordSets != obj.NumberOfRecordSets)
             {
                 ivarsEqual = false;
             }
 
-            if (this._recordSets.Count != obj._recordSets.Count)
+            if (RecordSets.Count != obj.RecordSets.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._recordSets.Count; idx++)
+                for (int idx = 0; idx < RecordSets.Count; idx++)
                 {
-                    if (!this._recordSets[idx].Equals(obj._recordSets[idx]))
+                    if (!RecordSets[idx].Equals(obj.RecordSets[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -539,35 +370,28 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._orginatingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._recevingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._requestID.GetHashCode();
-            result = GenerateHash(result) ^ this._requiredReliabilityService.GetHashCode();
-            result = GenerateHash(result) ^ this._tranferType.GetHashCode();
-            result = GenerateHash(result) ^ this._transferEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfRecordSets.GetHashCode();
+            result = GenerateHash(result) ^ OrginatingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ RecevingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ RequestID.GetHashCode();
+            result = GenerateHash(result) ^ RequiredReliabilityService.GetHashCode();
+            result = GenerateHash(result) ^ TranferType.GetHashCode();
+            result = GenerateHash(result) ^ TransferEntityID.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfRecordSets.GetHashCode();
 
-            if (this._recordSets.Count > 0)
+            if (RecordSets.Count > 0)
             {
-                for (int idx = 0; idx < this._recordSets.Count; idx++)
+                for (int idx = 0; idx < RecordSets.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._recordSets[idx].GetHashCode();
+                    result = GenerateHash(result) ^ RecordSets[idx].GetHashCode();
                 }
             }
 

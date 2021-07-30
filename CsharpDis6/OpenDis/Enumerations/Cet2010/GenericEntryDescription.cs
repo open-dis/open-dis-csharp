@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
@@ -16,19 +15,19 @@ namespace OpenDis.Enumerations.Cet2010
     [XmlInclude(typeof(Subcategory))]
     [XmlInclude(typeof(Category))]
     [XmlInclude(typeof(GenericEntryString))]
-    [Serializable()]
-    [DebuggerStepThrough()]
-    public abstract class GenericEntryDescription : GenericEntry, OpenDis.Enumerations.Cet2010.IGenericEntryDescription
+    [Serializable]
+    [DebuggerStepThrough]
+    public abstract class GenericEntryDescription : GenericEntry, IGenericEntryDescription
     {
-		#region Fields (3) 
+        #region Fields (3) 
 
         private string descriptionField;
         private int groupField;
         private bool groupFieldSpecified;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Properties (3) 
+        #region Properties (3) 
 
         /// <summary>
         /// Gets or sets the text description of the enumeration entry.
@@ -36,20 +35,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "description")]
         public string Description
         {
-            get
-            {
-                return this.descriptionField;
-            }
+            get => descriptionField;
 
             set
             {
-                if (this.descriptionField == value)
+                if (descriptionField == value)
                 {
                     return;
                 }
 
-                this.descriptionField = value;
-                this.RaisePropertyChanged("Description");
+                descriptionField = value;
+                RaisePropertyChanged(nameof(Description));
             }
         }
 
@@ -59,20 +55,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "group")]
         public int Group
         {
-            get
-            {
-                return this.groupField;
-            }
+            get => groupField;
 
             set
             {
-                if (this.groupField == value)
+                if (groupField == value)
                 {
                     return;
                 }
 
-                this.groupField = value;
-                this.RaisePropertyChanged("Group");
+                groupField = value;
+                RaisePropertyChanged(nameof(Group));
             }
         }
 
@@ -80,26 +73,23 @@ namespace OpenDis.Enumerations.Cet2010
         /// Gets or sets a value indicating whether the group is specified.
         /// </summary>
         /// <value><c>true</c> if group is specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool GroupSpecified
         {
-            get
-            {
-                return this.groupFieldSpecified;
-            }
+            get => groupFieldSpecified;
 
             set
             {
-                if (this.groupFieldSpecified == value)
+                if (groupFieldSpecified == value)
                 {
                     return;
                 }
 
-                this.groupFieldSpecified = value;
-                this.RaisePropertyChanged("GroupSpecified");
+                groupFieldSpecified = value;
+                RaisePropertyChanged(nameof(GroupSpecified));
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }

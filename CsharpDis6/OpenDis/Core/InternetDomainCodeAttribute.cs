@@ -36,40 +36,29 @@
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
 
 namespace OpenDis.Core
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = true)]
     public sealed class InternetDomainCodeAttribute : Attribute
     {
-		#region Fields (1) 
+        #region Fields (1) 
 
-        private string internetDomainCode;
+        #endregion Fields 
 
-		#endregion Fields 
-
-		#region Constructors (1) 
+        #region Constructors (1) 
 
         public InternetDomainCodeAttribute(string internetDomainCode)
-        { 
-            this.internetDomainCode = internetDomainCode;
-        }
-
-		#endregion Constructors 
-
-		#region Properties (1) 
-
-        public string InternetDomainCode
         {
-            get
-            {
-                return this.internetDomainCode;
-            }
+            InternetDomainCode = internetDomainCode;
         }
 
-		#endregion Properties 
+        #endregion Constructors 
+
+        #region Properties (1) 
+
+        public string InternetDomainCode { get; }
+
+        #endregion Properties 
     }
 }

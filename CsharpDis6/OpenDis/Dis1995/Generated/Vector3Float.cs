@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -53,7 +52,7 @@ namespace OpenDis.Dis1995
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class Vector3Float
+    public partial class Vector3Float : IEquatable<Vector3Float>, IReflectable
     {
         /// <summary>
         /// X value
@@ -83,12 +82,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(Vector3Float left, Vector3Float right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Vector3Float left, Vector3Float right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -96,26 +92,14 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(Vector3Float left, Vector3Float right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 4;  // this._x
             marshalSize += 4;  // this._y
@@ -129,15 +113,9 @@ namespace OpenDis.Dis1995
         [XmlElement(Type = typeof(float), ElementName = "x")]
         public float X
         {
-            get
-            {
-                return this._x;
-            }
+            get => _x;
 
-            set
-            {
-                this._x = value;
-            }
+            set => _x = value;
         }
 
         /// <summary>
@@ -146,15 +124,9 @@ namespace OpenDis.Dis1995
         [XmlElement(Type = typeof(float), ElementName = "y")]
         public float Y
         {
-            get
-            {
-                return this._y;
-            }
+            get => _y;
 
-            set
-            {
-                this._y = value;
-            }
+            set => _y = value;
         }
 
         /// <summary>
@@ -163,15 +135,9 @@ namespace OpenDis.Dis1995
         [XmlElement(Type = typeof(float), ElementName = "z")]
         public float Z
         {
-            get
-            {
-                return this._z;
-            }
+            get => _z;
 
-            set
-            {
-                this._z = value;
-            }
+            set => _z = value;
         }
 
         /// <summary>
@@ -185,14 +151,14 @@ namespace OpenDis.Dis1995
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -202,9 +168,9 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    dos.WriteFloat((float)this._x);
-                    dos.WriteFloat((float)this._y);
-                    dos.WriteFloat((float)this._z);
+                    dos.WriteFloat(_x);
+                    dos.WriteFloat(_y);
+                    dos.WriteFloat(_z);
                 }
                 catch (Exception e)
                 {
@@ -214,11 +180,11 @@ namespace OpenDis.Dis1995
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -231,9 +197,9 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._x = dis.ReadFloat();
-                    this._y = dis.ReadFloat();
-                    this._z = dis.ReadFloat();
+                    _x = dis.ReadFloat();
+                    _y = dis.ReadFloat();
+                    _z = dis.ReadFloat();
                 }
                 catch (Exception e)
                 {
@@ -243,91 +209,69 @@ namespace OpenDis.Dis1995
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<Vector3Float>");
             try
             {
-                sb.AppendLine("<x type=\"float\">" + this._x.ToString(CultureInfo.InvariantCulture) + "</x>");
-                sb.AppendLine("<y type=\"float\">" + this._y.ToString(CultureInfo.InvariantCulture) + "</y>");
-                sb.AppendLine("<z type=\"float\">" + this._z.ToString(CultureInfo.InvariantCulture) + "</z>");
+                sb.AppendLine("<x type=\"float\">" + _x.ToString(CultureInfo.InvariantCulture) + "</x>");
+                sb.AppendLine("<y type=\"float\">" + _y.ToString(CultureInfo.InvariantCulture) + "</y>");
+                sb.AppendLine("<z type=\"float\">" + _z.ToString(CultureInfo.InvariantCulture) + "</z>");
                 sb.AppendLine("</Vector3Float>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as Vector3Float;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as Vector3Float;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(Vector3Float obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._x != obj._x)
+            if (_x != obj._x)
             {
                 ivarsEqual = false;
             }
 
-            if (this._y != obj._y)
+            if (_y != obj._y)
             {
                 ivarsEqual = false;
             }
 
-            if (this._z != obj._z)
+            if (_z != obj._z)
             {
                 ivarsEqual = false;
             }
@@ -340,23 +284,16 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._x.GetHashCode();
-            result = GenerateHash(result) ^ this._y.GetHashCode();
-            result = GenerateHash(result) ^ this._z.GetHashCode();
+            result = GenerateHash(result) ^ _x.GetHashCode();
+            result = GenerateHash(result) ^ _y.GetHashCode();
+            result = GenerateHash(result) ^ _z.GetHashCode();
 
             return result;
         }

@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -57,21 +56,11 @@ namespace OpenDis.Dis1998
     public partial class RadioCommunicationsFamilyPdu : Pdu, IEquatable<RadioCommunicationsFamilyPdu>
     {
         /// <summary>
-        /// ID of the entitythat is the source of the communication
-        /// </summary>
-        private EntityID _entityId = new EntityID();
-
-        /// <summary>
-        /// particular radio within an entity
-        /// </summary>
-        private ushort _radioId;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RadioCommunicationsFamilyPdu"/> class.
         /// </summary>
         public RadioCommunicationsFamilyPdu()
         {
-            ProtocolFamily = (byte)4;
+            ProtocolFamily = 4;
         }
 
         /// <summary>
@@ -80,12 +69,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(RadioCommunicationsFamilyPdu left, RadioCommunicationsFamilyPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(RadioCommunicationsFamilyPdu left, RadioCommunicationsFamilyPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -93,29 +79,15 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(RadioCommunicationsFamilyPdu left, RadioCommunicationsFamilyPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._entityId.GetMarshalledSize();  // this._entityId
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += EntityId.GetMarshalledSize();  // this._entityId
             marshalSize += 2;  // this._radioId
             return marshalSize;
         }
@@ -124,35 +96,13 @@ namespace OpenDis.Dis1998
         /// Gets or sets the ID of the entitythat is the source of the communication
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "entityId")]
-        public EntityID EntityId
-        {
-            get
-            {
-                return this._entityId;
-            }
-
-            set
-            {
-                this._entityId = value;
-            }
-        }
+        public EntityID EntityId { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the particular radio within an entity
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "radioId")]
-        public ushort RadioId
-        {
-            get
-            {
-                return this._radioId;
-            }
-
-            set
-            {
-                this._radioId = value;
-            }
-        }
+        public ushort RadioId { get; set; }
 
         /// <summary>
         /// Automatically sets the length of the marshalled data, then calls the marshal method.
@@ -161,14 +111,11 @@ namespace OpenDis.Dis1998
         public virtual void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -177,22 +124,22 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._entityId.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._radioId);
+                    EntityId.Marshal(dos);
+                    dos.WriteUnsignedShort(RadioId);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -207,35 +154,28 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._entityId.Unmarshal(dis);
-                    this._radioId = dis.ReadUnsignedShort();
+                    EntityId.Unmarshal(dis);
+                    RadioId = dis.ReadUnsignedShort();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -244,64 +184,46 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<entityId>");
-                this._entityId.Reflection(sb);
+                EntityId.Reflection(sb);
                 sb.AppendLine("</entityId>");
-                sb.AppendLine("<radioId type=\"ushort\">" + this._radioId.ToString(CultureInfo.InvariantCulture) + "</radioId>");
+                sb.AppendLine("<radioId type=\"ushort\">" + RadioId.ToString(CultureInfo.InvariantCulture) + "</radioId>");
                 sb.AppendLine("</RadioCommunicationsFamilyPdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as RadioCommunicationsFamilyPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as RadioCommunicationsFamilyPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(RadioCommunicationsFamilyPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._entityId.Equals(obj._entityId))
+            bool ivarsEqual = base.Equals(obj);
+            if (!EntityId.Equals(obj.EntityId))
             {
                 ivarsEqual = false;
             }
 
-            if (this._radioId != obj._radioId)
+            if (RadioId != obj.RadioId)
             {
                 ivarsEqual = false;
             }
@@ -314,24 +236,17 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._entityId.GetHashCode();
-            result = GenerateHash(result) ^ this._radioId.GetHashCode();
+            result = GenerateHash(result) ^ EntityId.GetHashCode();
+            result = GenerateHash(result) ^ RadioId.GetHashCode();
 
             return result;
         }

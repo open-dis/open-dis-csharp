@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Environment.Gridded
 {
     /// <summary>
-    /// Enumeration values for ConstantGrid (env.gridded.constantgrid, Constant Grid, 
+    /// Enumeration values for ConstantGrid (env.gridded.constantgrid, Constant Grid,
     /// section 12.2.3)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

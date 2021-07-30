@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.Iff
 {
     /// <summary>
-    /// Enumeration values for SystemName (der.iff.name, System Name, 
+    /// Enumeration values for SystemName (der.iff.name, System Name,
     /// section 8.3.1.1.3)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -37,7 +36,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         Other = 0,
 
         /// <summary>
-        /// Mark X.  applies-to: 1,2.
+        /// Mark X. applies-to: 1,2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -47,7 +46,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         MarkXAppliesTo12 = 1,
 
         /// <summary>
-        /// Mark XII.  applies-to: 1,2.
+        /// Mark XII. applies-to: 1,2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -57,7 +56,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         MarkXIIAppliesTo12 = 2,
 
         /// <summary>
-        /// ATCRBS.  applies-to: 2.
+        /// ATCRBS. applies-to: 2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -67,7 +66,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         ATCRBSAppliesTo2 = 3,
 
         /// <summary>
-        /// Soviet.  applies-to: 3,4.
+        /// Soviet. applies-to: 3,4.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -77,7 +76,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         SovietAppliesTo34 = 4,
 
         /// <summary>
-        /// Mode S.  applies-to: 1,2.
+        /// Mode S. applies-to: 1,2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -87,7 +86,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         ModeSAppliesTo12 = 5,
 
         /// <summary>
-        /// Mark X/XII/ATCRBS.  applies-to: 1,2.
+        /// Mark X/XII/ATCRBS. applies-to: 1,2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -97,7 +96,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         MarkXXIIATCRBSAppliesTo12 = 6,
 
         /// <summary>
-        /// Mark X/XII/ATCRBS/Mode S.  applies-to: 1,2.
+        /// Mark X/XII/ATCRBS/Mode S. applies-to: 1,2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -107,7 +106,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         MarkXXIIATCRBSModeSAppliesTo12 = 7,
 
         /// <summary>
-        /// ARI 5954.  applies-to: 5.
+        /// ARI 5954. applies-to: 5.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -117,7 +116,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         ARI5954AppliesTo5 = 8,
 
         /// <summary>
-        /// ARI 5983.  applies-to: 5.
+        /// ARI 5983. applies-to: 5.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]

@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -53,38 +52,8 @@ namespace OpenDis.Dis1998
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class RecordSet
+    public partial class RecordSet : IEquatable<RecordSet>, IReflectable
     {
-        /// <summary>
-        /// record ID
-        /// </summary>
-        private uint _recordID;
-
-        /// <summary>
-        /// record set serial number
-        /// </summary>
-        private uint _recordSetSerialNumber;
-
-        /// <summary>
-        /// record length
-        /// </summary>
-        private ushort _recordLength;
-
-        /// <summary>
-        /// record count
-        /// </summary>
-        private ushort _recordCount;
-
-        /// <summary>
-        /// ^^^This is wrong--variable sized data records
-        /// </summary>
-        private ushort _recordValues;
-
-        /// <summary>
-        /// ^^^This is wrong--variable sized padding
-        /// </summary>
-        private byte _pad4;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RecordSet"/> class.
         /// </summary>
@@ -98,12 +67,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(RecordSet left, RecordSet right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(RecordSet left, RecordSet right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -111,26 +77,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(RecordSet left, RecordSet right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 4;  // this._recordID
             marshalSize += 4;  // this._recordSetSerialNumber
@@ -145,103 +99,37 @@ namespace OpenDis.Dis1998
         /// Gets or sets the record ID
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "recordID")]
-        public uint RecordID
-        {
-            get
-            {
-                return this._recordID;
-            }
-
-            set
-            {
-                this._recordID = value;
-            }
-        }
+        public uint RecordID { get; set; }
 
         /// <summary>
         /// Gets or sets the record set serial number
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "recordSetSerialNumber")]
-        public uint RecordSetSerialNumber
-        {
-            get
-            {
-                return this._recordSetSerialNumber;
-            }
-
-            set
-            {
-                this._recordSetSerialNumber = value;
-            }
-        }
+        public uint RecordSetSerialNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the record length
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "recordLength")]
-        public ushort RecordLength
-        {
-            get
-            {
-                return this._recordLength;
-            }
-
-            set
-            {
-                this._recordLength = value;
-            }
-        }
+        public ushort RecordLength { get; set; }
 
         /// <summary>
         /// Gets or sets the record count
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "recordCount")]
-        public ushort RecordCount
-        {
-            get
-            {
-                return this._recordCount;
-            }
-
-            set
-            {
-                this._recordCount = value;
-            }
-        }
+        public ushort RecordCount { get; set; }
 
         /// <summary>
         /// Gets or sets the ^^^This is wrong--variable sized data records
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "recordValues")]
-        public ushort RecordValues
-        {
-            get
-            {
-                return this._recordValues;
-            }
-
-            set
-            {
-                this._recordValues = value;
-            }
-        }
+        public ushort RecordValues { get; set; }
 
         /// <summary>
         /// Gets or sets the ^^^This is wrong--variable sized padding
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad4")]
-        public byte Pad4
-        {
-            get
-            {
-                return this._pad4;
-            }
-
-            set
-            {
-                this._pad4 = value;
-            }
-        }
+        public byte Pad4 { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -254,14 +142,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -271,12 +159,12 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedInt((uint)this._recordID);
-                    dos.WriteUnsignedInt((uint)this._recordSetSerialNumber);
-                    dos.WriteUnsignedShort((ushort)this._recordLength);
-                    dos.WriteUnsignedShort((ushort)this._recordCount);
-                    dos.WriteUnsignedShort((ushort)this._recordValues);
-                    dos.WriteUnsignedByte((byte)this._pad4);
+                    dos.WriteUnsignedInt(RecordID);
+                    dos.WriteUnsignedInt(RecordSetSerialNumber);
+                    dos.WriteUnsignedShort(RecordLength);
+                    dos.WriteUnsignedShort(RecordCount);
+                    dos.WriteUnsignedShort(RecordValues);
+                    dos.WriteUnsignedByte(Pad4);
                 }
                 catch (Exception e)
                 {
@@ -286,11 +174,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -303,12 +191,12 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._recordID = dis.ReadUnsignedInt();
-                    this._recordSetSerialNumber = dis.ReadUnsignedInt();
-                    this._recordLength = dis.ReadUnsignedShort();
-                    this._recordCount = dis.ReadUnsignedShort();
-                    this._recordValues = dis.ReadUnsignedShort();
-                    this._pad4 = dis.ReadUnsignedByte();
+                    RecordID = dis.ReadUnsignedInt();
+                    RecordSetSerialNumber = dis.ReadUnsignedInt();
+                    RecordLength = dis.ReadUnsignedShort();
+                    RecordCount = dis.ReadUnsignedShort();
+                    RecordValues = dis.ReadUnsignedShort();
+                    Pad4 = dis.ReadUnsignedByte();
                 }
                 catch (Exception e)
                 {
@@ -318,109 +206,87 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<RecordSet>");
             try
             {
-                sb.AppendLine("<recordID type=\"uint\">" + this._recordID.ToString(CultureInfo.InvariantCulture) + "</recordID>");
-                sb.AppendLine("<recordSetSerialNumber type=\"uint\">" + this._recordSetSerialNumber.ToString(CultureInfo.InvariantCulture) + "</recordSetSerialNumber>");
-                sb.AppendLine("<recordLength type=\"ushort\">" + this._recordLength.ToString(CultureInfo.InvariantCulture) + "</recordLength>");
-                sb.AppendLine("<recordCount type=\"ushort\">" + this._recordCount.ToString(CultureInfo.InvariantCulture) + "</recordCount>");
-                sb.AppendLine("<recordValues type=\"ushort\">" + this._recordValues.ToString(CultureInfo.InvariantCulture) + "</recordValues>");
-                sb.AppendLine("<pad4 type=\"byte\">" + this._pad4.ToString(CultureInfo.InvariantCulture) + "</pad4>");
+                sb.AppendLine("<recordID type=\"uint\">" + RecordID.ToString(CultureInfo.InvariantCulture) + "</recordID>");
+                sb.AppendLine("<recordSetSerialNumber type=\"uint\">" + RecordSetSerialNumber.ToString(CultureInfo.InvariantCulture) + "</recordSetSerialNumber>");
+                sb.AppendLine("<recordLength type=\"ushort\">" + RecordLength.ToString(CultureInfo.InvariantCulture) + "</recordLength>");
+                sb.AppendLine("<recordCount type=\"ushort\">" + RecordCount.ToString(CultureInfo.InvariantCulture) + "</recordCount>");
+                sb.AppendLine("<recordValues type=\"ushort\">" + RecordValues.ToString(CultureInfo.InvariantCulture) + "</recordValues>");
+                sb.AppendLine("<pad4 type=\"byte\">" + Pad4.ToString(CultureInfo.InvariantCulture) + "</pad4>");
                 sb.AppendLine("</RecordSet>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as RecordSet;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as RecordSet;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(RecordSet obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._recordID != obj._recordID)
+            if (RecordID != obj.RecordID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._recordSetSerialNumber != obj._recordSetSerialNumber)
+            if (RecordSetSerialNumber != obj.RecordSetSerialNumber)
             {
                 ivarsEqual = false;
             }
 
-            if (this._recordLength != obj._recordLength)
+            if (RecordLength != obj.RecordLength)
             {
                 ivarsEqual = false;
             }
 
-            if (this._recordCount != obj._recordCount)
+            if (RecordCount != obj.RecordCount)
             {
                 ivarsEqual = false;
             }
 
-            if (this._recordValues != obj._recordValues)
+            if (RecordValues != obj.RecordValues)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad4 != obj._pad4)
+            if (Pad4 != obj.Pad4)
             {
                 ivarsEqual = false;
             }
@@ -433,26 +299,19 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._recordID.GetHashCode();
-            result = GenerateHash(result) ^ this._recordSetSerialNumber.GetHashCode();
-            result = GenerateHash(result) ^ this._recordLength.GetHashCode();
-            result = GenerateHash(result) ^ this._recordCount.GetHashCode();
-            result = GenerateHash(result) ^ this._recordValues.GetHashCode();
-            result = GenerateHash(result) ^ this._pad4.GetHashCode();
+            result = GenerateHash(result) ^ RecordID.GetHashCode();
+            result = GenerateHash(result) ^ RecordSetSerialNumber.GetHashCode();
+            result = GenerateHash(result) ^ RecordLength.GetHashCode();
+            result = GenerateHash(result) ^ RecordCount.GetHashCode();
+            result = GenerateHash(result) ^ RecordValues.GetHashCode();
+            result = GenerateHash(result) ^ Pad4.GetHashCode();
 
             return result;
         }

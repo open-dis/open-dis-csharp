@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.IO;
-using System.Threading;
-using OpenDis.Dis1998;
 using OpenDis.Core;
-using OpenDis.Enumerations;
 
 namespace EspduReceiver
 {
-    class EspduReceiver
+    internal static class EspduReceiver
     {
         private static IPAddress mcastAddress;
         private static int mcastPort, broadcastPort;
@@ -29,7 +23,7 @@ namespace EspduReceiver
         private static void StartMulticast()
         {
             try
-            {                
+            {
                 mcastSocket = new Socket(AddressFamily.InterNetwork,
                                          SocketType.Dgram,
                                          ProtocolType.Udp);
@@ -38,21 +32,21 @@ namespace EspduReceiver
                 //IPAddress localIPAddr = IPAddress.Parse(Console.ReadLine());
                 //IPAddress localIPAddr = IPAddress.Parse("x.x.x.x");  //Easier than entering each time
 
-                IPAddress localIPAddr = IPAddress.Any;  //Easiest
-                                
-                EndPoint localEP = (EndPoint)new IPEndPoint(localIPAddr, 0);
+                var localIPAddr = IPAddress.Any;  //Easiest
+
+                var localEP = (EndPoint)new IPEndPoint(localIPAddr, 0);
 
                 try
                 {
                     mcastSocket.Bind(localEP);
                 }
-                catch (System.Net.Sockets.SocketException e)   //If port busy
+                catch (SocketException e)   //If port busy
                 {
                     Console.WriteLine(e.ToString());
                     mcastSocket.Close();
                     Console.Write("Unable to Bind port ---->   HIT ENTER TO EXIT");
                     Console.ReadLine();
-                    System.Environment.Exit(1);                   
+                    System.Environment.Exit(1);
                 }
 
                 // Define a MulticastOption object specifying the multicast group 
@@ -64,15 +58,12 @@ namespace EspduReceiver
                                             SocketOptionName.AddMembership,
                                             mcastOption);
 
-
                 // Display MulticastOption properties.
                 MulticastOptionProperties();
 
                 //remoteEP = new IPEndPoint(mcastAddress, mcastPort);
-                remoteEP = (EndPoint)new IPEndPoint(IPAddress.Any, mcastPort);  //Good for general Multicast 
-
+                remoteEP = new IPEndPoint(IPAddress.Any, mcastPort);  //Good for general Multicast 
             }
-
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
@@ -82,21 +73,18 @@ namespace EspduReceiver
         private static void StartBroadcast()
         {
             try
-            {        
-                remoteEP = (EndPoint)new IPEndPoint(IPAddress.Any, broadcastPort);  
+            {
+                remoteEP = new IPEndPoint(IPAddress.Any, broadcastPort);
 
-                mcastSocket = new Socket(AddressFamily.InterNetwork,
-                                         SocketType.Dgram,
-                                         ProtocolType.Udp);
-
-                mcastSocket.ExclusiveAddressUse = false;
+                mcastSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp)
+                { ExclusiveAddressUse = false };
 
                 mcastSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 
                 mcastSocket.Bind(remoteEP);
 
                 Console.WriteLine("Receive Broadcat UDP on Port: " + broadcastPort);
-                Console.WriteLine("----------------------------" );
+                Console.WriteLine("----------------------------");
             }
             catch (Exception e)
             {
@@ -108,12 +96,10 @@ namespace EspduReceiver
 
         private static void ReceiveBroadcastMessages()
         {
-            bool done = false;
-            byte[] bytes = new Byte[10000];
-            int length = 0;            
-            
-            PduProcessor pduProcessor = new PduProcessor();  //PduProcessor could use some work and move towards all static methods (PduXmlDecode is instance method)
-            pduProcessor.Endian = Endian.Big;   //DIS use Big Endian format
+            const bool done = false;
+            byte[] bytes = new byte[10000];
+            //PduProcessor could use some work and move towards all static methods (PduXmlDecode is instance method)
+            var pduProcessor = new PduProcessor { Endian = Endian.Big }; //DIS use Big Endian format
             List<object> pduList;
 
             try
@@ -123,9 +109,8 @@ namespace EspduReceiver
                     Console.WriteLine("Waiting for  packets.......");
                     Console.WriteLine("Enter ^C to terminate.");
 
-                    length = mcastSocket.ReceiveFrom(bytes, ref remoteEP);
-
-                    Console.WriteLine("Received broadcast from {0} :\n Bytes:{1}\n", remoteEP.ToString(),length);
+                    int length = mcastSocket.ReceiveFrom(bytes, ref remoteEP);
+                    Console.WriteLine("Received broadcast from {0} :\n Bytes:{1}\n", remoteEP.ToString(), length);
                     Console.WriteLine("________________________________\n");
 
                     //Decode only 1 PDU
@@ -134,33 +119,30 @@ namespace EspduReceiver
                     //Console.WriteLine("*******************************\n");
 
                     //Could be many PDU received in datagram packet so be safe and get list
-                    
-                    pduList = pduProcessor.ProcessPdu(bytes, Endian.Big); 
+
+                    pduList = pduProcessor.ProcessPdu(bytes, Endian.Big);
                     Console.WriteLine("Received PDU List Size:[{0}]\n ", pduList.Count);
                     Console.WriteLine("________________________________\n");
                     foreach (object pduObj in pduList)
-                    {                            
+                    {
                         //Both of below work fine
                         //Console.WriteLine("Received PDU List Info {0} :\n ", PduProcessor.DecodePdu(pduObj).ToString());
                         Console.WriteLine("Received PDU List XML Info {0} :\n ", pduProcessor.XmlDecodePdu(pduObj));
                         Console.WriteLine("*******************************\n");
                     }
-                    
-
                 }
 
                 mcastSocket.Close();
             }
-
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
         }
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            mcastAddress = IPAddress.Parse("239.1.2.3");            
+            mcastAddress = IPAddress.Parse("239.1.2.3");
             mcastPort = 62040;
             broadcastPort = 62040;  //3000 is default for DisMapper / VBS
 

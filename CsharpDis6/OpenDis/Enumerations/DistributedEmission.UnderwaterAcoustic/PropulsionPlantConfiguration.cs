@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic
 {
     /// <summary>
-    /// Enumeration values for PropulsionPlantConfiguration (der.ua.ppcfg, Propulsion Plant Configuration, 
+    /// Enumeration values for PropulsionPlantConfiguration (der.ua.ppcfg, Propulsion Plant Configuration,
     /// section 8.4.7)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct PropulsionPlantConfiguration
+    public struct PropulsionPlantConfiguration : IHashable<PropulsionPlantConfiguration>
     {
         /// <summary>
         /// Run internal simulation clock.
@@ -103,21 +102,15 @@ namespace OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic
             On = 1
         }
 
-        private PropulsionPlantConfiguration.ConfigurationValue configuration;
-        private PropulsionPlantConfiguration.HullMountedMaskerValue hullMountedMasker;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(PropulsionPlantConfiguration left, PropulsionPlantConfiguration right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(PropulsionPlantConfiguration left, PropulsionPlantConfiguration right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -125,87 +118,63 @@ namespace OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(PropulsionPlantConfiguration left, PropulsionPlantConfiguration right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> to <see cref="System.UInt32"/>.
+        /// Performs an explicit conversion from <see cref="PropulsionPlantConfiguration"/> to <see cref="uint"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="PropulsionPlantConfiguration"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator uint(PropulsionPlantConfiguration obj)
-        {
-            return obj.ToUInt32();
-        }
+        public static explicit operator uint(PropulsionPlantConfiguration obj) => obj.ToUInt32();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/>.
+        /// Performs an explicit conversion from <see cref="uint"/> to <see cref="PropulsionPlantConfiguration"/>.
         /// </summary>
         /// <param name="value">The uint value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator PropulsionPlantConfiguration(uint value)
-        {
-            return PropulsionPlantConfiguration.FromUInt32(value);
-        }
+        public static explicit operator PropulsionPlantConfiguration(uint value) => FromUInt32(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance from the byte array.
+        /// Creates the <see cref="PropulsionPlantConfiguration"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="PropulsionPlantConfiguration"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="PropulsionPlantConfiguration"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static PropulsionPlantConfiguration FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 4 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromUInt32(BitConverter.ToUInt32(array, index));
+                index + 4 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromUInt32(BitConverter.ToUInt32(array, index));
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance from the uint value.
+        /// Creates the <see cref="PropulsionPlantConfiguration"/> instance from the uint value.
         /// </summary>
-        /// <param name="value">The uint value which represents the <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance, represented by the uint value.</returns>
+        /// <param name="value">The uint value which represents the <see cref="PropulsionPlantConfiguration"/> instance.</param>
+        /// <returns>The <see cref="PropulsionPlantConfiguration"/> instance, represented by the uint value.</returns>
         public static PropulsionPlantConfiguration FromUInt32(uint value)
         {
-            PropulsionPlantConfiguration ps = new PropulsionPlantConfiguration();
+            var ps = new PropulsionPlantConfiguration();
 
-            uint mask0 = 0x007f;
-            byte shift0 = 0;
+            const uint mask0 = 0x007f;
+            const byte shift0 = 0;
             uint newValue0 = (value & mask0) >> shift0;
-            ps.Configuration = (PropulsionPlantConfiguration.ConfigurationValue)newValue0;
+            ps.Configuration = (ConfigurationValue)newValue0;
 
-            uint mask1 = 0x0080;
-            byte shift1 = 7;
+            const uint mask1 = 0x0080;
+            const byte shift1 = 7;
             uint newValue1 = (value & mask1) >> shift1;
-            ps.HullMountedMasker = (PropulsionPlantConfiguration.HullMountedMaskerValue)newValue1;
+            ps.HullMountedMasker = (HullMountedMaskerValue)newValue1;
 
             return ps;
         }
@@ -214,93 +183,53 @@ namespace OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic
         /// Gets or sets the configuration.
         /// </summary>
         /// <value>The configuration.</value>
-        public PropulsionPlantConfiguration.ConfigurationValue Configuration
-        {
-            get { return this.configuration; }
-            set { this.configuration = value; }
-        }
+        public ConfigurationValue Configuration { get; set; }
 
         /// <summary>
         /// Gets or sets the hullmountedmasker.
         /// </summary>
         /// <value>The hullmountedmasker.</value>
-        public PropulsionPlantConfiguration.HullMountedMaskerValue HullMountedMasker
-        {
-            get { return this.hullMountedMasker; }
-            set { this.hullMountedMasker = value; }
-        }
+        public HullMountedMaskerValue HullMountedMasker { get; set; }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is PropulsionPlantConfiguration other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="PropulsionPlantConfiguration"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="PropulsionPlantConfiguration"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is PropulsionPlantConfiguration))
-            {
-                return false;
-            }
-
-            return this.Equals((PropulsionPlantConfiguration)obj);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="PropulsionPlantConfiguration"/> is equal to this instance; otherwise,
+        /// <c>false</c>.
         /// </returns>
         public bool Equals(PropulsionPlantConfiguration other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.Configuration == other.Configuration &&
-                this.HullMountedMasker == other.HullMountedMasker;
+            return Configuration == other.Configuration &&
+                HullMountedMasker == other.HullMountedMasker;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> to the byte array.
+        /// Converts the instance of <see cref="PropulsionPlantConfiguration"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToUInt32());
-        }
+        /// <returns>The byte array representing the current <see cref="PropulsionPlantConfiguration"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToUInt32());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> to the uint value.
+        /// Converts the instance of <see cref="PropulsionPlantConfiguration"/> to the uint value.
         /// </summary>
-        /// <returns>The uint value representing the current <see cref="OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic.PropulsionPlantConfiguration"/> instance.</returns>
+        /// <returns>The uint value representing the current <see cref="PropulsionPlantConfiguration"/> instance.</returns>
         public uint ToUInt32()
         {
             uint val = 0;
 
-            val |= (uint)((uint)this.Configuration << 0);
-            val |= (uint)((uint)this.HullMountedMasker << 7);
+            val |= (uint)Configuration << 0;
+            val |= (uint)HullMountedMasker << 7;
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -308,8 +237,8 @@ namespace OpenDis.Enumerations.DistributedEmission.UnderwaterAcoustic
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.Configuration.GetHashCode();
-                hash = (hash * 29) + this.HullMountedMasker.GetHashCode();
+                hash = (hash * 29) + Configuration.GetHashCode();
+                hash = (hash * 29) + HullMountedMasker.GetHashCode();
             }
 
             return hash;

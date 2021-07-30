@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.12.11: reports the occurance of a significatnt event to the simulation manager. Needs manual     intervention to fix padding in variable datums. UNFINISHED.
+    /// Section 5.3.12.11: reports the occurance of a significatnt event to the simulation manager. Needs manual    intervention
+    /// to fix padding in variable datums. UNFINISHED.
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -58,41 +59,11 @@ namespace OpenDis.Dis1998
     public partial class EventReportReliablePdu : SimulationManagementWithReliabilityFamilyPdu, IEquatable<EventReportReliablePdu>
     {
         /// <summary>
-        /// Event type
-        /// </summary>
-        private ushort _eventType;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private uint _pad1;
-
-        /// <summary>
-        /// Fixed datum record count
-        /// </summary>
-        private uint _numberOfFixedDatumRecords;
-
-        /// <summary>
-        /// variable datum record count
-        /// </summary>
-        private uint _numberOfVariableDatumRecords;
-
-        /// <summary>
-        /// Fixed datum records
-        /// </summary>
-        private List<FixedDatum> _fixedDatumRecords = new List<FixedDatum>();
-
-        /// <summary>
-        /// Variable datum records
-        /// </summary>
-        private List<VariableDatum> _variableDatumRecords = new List<VariableDatum>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EventReportReliablePdu"/> class.
         /// </summary>
         public EventReportReliablePdu()
         {
-            PduType = (byte)61;
+            PduType = 61;
         }
 
         /// <summary>
@@ -101,12 +72,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(EventReportReliablePdu left, EventReportReliablePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(EventReportReliablePdu left, EventReportReliablePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -114,41 +82,27 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(EventReportReliablePdu left, EventReportReliablePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
+            int marshalSize = base.GetMarshalledSize();
             marshalSize += 2;  // this._eventType
             marshalSize += 4;  // this._pad1
             marshalSize += 4;  // this._numberOfFixedDatumRecords
             marshalSize += 4;  // this._numberOfVariableDatumRecords
-            for (int idx = 0; idx < this._fixedDatumRecords.Count; idx++)
+            for (int idx = 0; idx < FixedDatumRecords.Count; idx++)
             {
-                FixedDatum listElement = (FixedDatum)this._fixedDatumRecords[idx];
+                var listElement = FixedDatumRecords[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
-            for (int idx = 0; idx < this._variableDatumRecords.Count; idx++)
+            for (int idx = 0; idx < VariableDatumRecords.Count; idx++)
             {
-                VariableDatum listElement = (VariableDatum)this._variableDatumRecords[idx];
+                var listElement = VariableDatumRecords[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -159,119 +113,59 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Event type
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "eventType")]
-        public ushort EventType
-        {
-            get
-            {
-                return this._eventType;
-            }
-
-            set
-            {
-                this._eventType = value;
-            }
-        }
+        public ushort EventType { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "pad1")]
-        public uint Pad1
-        {
-            get
-            {
-                return this._pad1;
-            }
-
-            set
-            {
-                this._pad1 = value;
-            }
-        }
+        public uint Pad1 { get; set; }
 
         /// <summary>
         /// Gets or sets the Fixed datum record count
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfFixedDatumRecords method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfFixedDatumRecords method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(uint), ElementName = "numberOfFixedDatumRecords")]
-        public uint NumberOfFixedDatumRecords
-        {
-            get
-            {
-                return this._numberOfFixedDatumRecords;
-            }
-
-            set
-            {
-                this._numberOfFixedDatumRecords = value;
-            }
-        }
+        public uint NumberOfFixedDatumRecords { get; set; }
 
         /// <summary>
         /// Gets or sets the variable datum record count
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfVariableDatumRecords method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfVariableDatumRecords method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(uint), ElementName = "numberOfVariableDatumRecords")]
-        public uint NumberOfVariableDatumRecords
-        {
-            get
-            {
-                return this._numberOfVariableDatumRecords;
-            }
-
-            set
-            {
-                this._numberOfVariableDatumRecords = value;
-            }
-        }
+        public uint NumberOfVariableDatumRecords { get; set; }
 
         /// <summary>
         /// Gets the Fixed datum records
         /// </summary>
         [XmlElement(ElementName = "fixedDatumRecordsList", Type = typeof(List<FixedDatum>))]
-        public List<FixedDatum> FixedDatumRecords
-        {
-            get
-            {
-                return this._fixedDatumRecords;
-            }
-        }
+        public List<FixedDatum> FixedDatumRecords { get; } = new();
 
         /// <summary>
         /// Gets the Variable datum records
         /// </summary>
         [XmlElement(ElementName = "variableDatumRecordsList", Type = typeof(List<VariableDatum>))]
-        public List<VariableDatum> VariableDatumRecords
-        {
-            get
-            {
-                return this._variableDatumRecords;
-            }
-        }
+        public List<VariableDatum> VariableDatumRecords { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -280,36 +174,36 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedShort((ushort)this._eventType);
-                    dos.WriteUnsignedInt((uint)this._pad1);
-                    dos.WriteUnsignedInt((uint)this._fixedDatumRecords.Count);
-                    dos.WriteUnsignedInt((uint)this._variableDatumRecords.Count);
+                    dos.WriteUnsignedShort(EventType);
+                    dos.WriteUnsignedInt(Pad1);
+                    dos.WriteUnsignedInt((uint)FixedDatumRecords.Count);
+                    dos.WriteUnsignedInt((uint)VariableDatumRecords.Count);
 
-                    for (int idx = 0; idx < this._fixedDatumRecords.Count; idx++)
+                    for (int idx = 0; idx < FixedDatumRecords.Count; idx++)
                     {
-                        FixedDatum aFixedDatum = (FixedDatum)this._fixedDatumRecords[idx];
+                        var aFixedDatum = FixedDatumRecords[idx];
                         aFixedDatum.Marshal(dos);
                     }
 
-                    for (int idx = 0; idx < this._variableDatumRecords.Count; idx++)
+                    for (int idx = 0; idx < VariableDatumRecords.Count; idx++)
                     {
-                        VariableDatum aVariableDatum = (VariableDatum)this._variableDatumRecords[idx];
+                        var aVariableDatum = VariableDatumRecords[idx];
                         aVariableDatum.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -324,51 +218,44 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._eventType = dis.ReadUnsignedShort();
-                    this._pad1 = dis.ReadUnsignedInt();
-                    this._numberOfFixedDatumRecords = dis.ReadUnsignedInt();
-                    this._numberOfVariableDatumRecords = dis.ReadUnsignedInt();
+                    EventType = dis.ReadUnsignedShort();
+                    Pad1 = dis.ReadUnsignedInt();
+                    NumberOfFixedDatumRecords = dis.ReadUnsignedInt();
+                    NumberOfVariableDatumRecords = dis.ReadUnsignedInt();
 
-                    for (int idx = 0; idx < this.NumberOfFixedDatumRecords; idx++)
+                    for (int idx = 0; idx < NumberOfFixedDatumRecords; idx++)
                     {
-                        FixedDatum anX = new FixedDatum();
+                        var anX = new FixedDatum();
                         anX.Unmarshal(dis);
-                        this._fixedDatumRecords.Add(anX);
+                        FixedDatumRecords.Add(anX);
                     }
 
-                    for (int idx = 0; idx < this.NumberOfVariableDatumRecords; idx++)
+                    for (int idx = 0; idx < NumberOfVariableDatumRecords; idx++)
                     {
-                        VariableDatum anX = new VariableDatum();
+                        var anX = new VariableDatum();
                         anX.Unmarshal(dis);
-                        this._variableDatumRecords.Add(anX);
+                        VariableDatumRecords.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -376,22 +263,22 @@ namespace OpenDis.Dis1998
             base.Reflection(sb);
             try
             {
-                sb.AppendLine("<eventType type=\"ushort\">" + this._eventType.ToString(CultureInfo.InvariantCulture) + "</eventType>");
-                sb.AppendLine("<pad1 type=\"uint\">" + this._pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
-                sb.AppendLine("<fixedDatumRecords type=\"uint\">" + this._fixedDatumRecords.Count.ToString(CultureInfo.InvariantCulture) + "</fixedDatumRecords>");
-                sb.AppendLine("<variableDatumRecords type=\"uint\">" + this._variableDatumRecords.Count.ToString(CultureInfo.InvariantCulture) + "</variableDatumRecords>");
-                for (int idx = 0; idx < this._fixedDatumRecords.Count; idx++)
+                sb.AppendLine("<eventType type=\"ushort\">" + EventType.ToString(CultureInfo.InvariantCulture) + "</eventType>");
+                sb.AppendLine("<pad1 type=\"uint\">" + Pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
+                sb.AppendLine("<fixedDatumRecords type=\"uint\">" + FixedDatumRecords.Count.ToString(CultureInfo.InvariantCulture) + "</fixedDatumRecords>");
+                sb.AppendLine("<variableDatumRecords type=\"uint\">" + VariableDatumRecords.Count.ToString(CultureInfo.InvariantCulture) + "</variableDatumRecords>");
+                for (int idx = 0; idx < FixedDatumRecords.Count; idx++)
                 {
                     sb.AppendLine("<fixedDatumRecords" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"FixedDatum\">");
-                    FixedDatum aFixedDatum = (FixedDatum)this._fixedDatumRecords[idx];
+                    var aFixedDatum = FixedDatumRecords[idx];
                     aFixedDatum.Reflection(sb);
                     sb.AppendLine("</fixedDatumRecords" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                for (int idx = 0; idx < this._variableDatumRecords.Count; idx++)
+                for (int idx = 0; idx < VariableDatumRecords.Count; idx++)
                 {
                     sb.AppendLine("<variableDatumRecords" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"VariableDatum\">");
-                    VariableDatum aVariableDatum = (VariableDatum)this._variableDatumRecords[idx];
+                    var aVariableDatum = VariableDatumRecords[idx];
                     aVariableDatum.Reflection(sb);
                     sb.AppendLine("</variableDatumRecords" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -400,97 +287,79 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as EventReportReliablePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as EventReportReliablePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(EventReportReliablePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (this._eventType != obj._eventType)
+            bool ivarsEqual = base.Equals(obj);
+            if (EventType != obj.EventType)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad1 != obj._pad1)
+            if (Pad1 != obj.Pad1)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfFixedDatumRecords != obj._numberOfFixedDatumRecords)
+            if (NumberOfFixedDatumRecords != obj.NumberOfFixedDatumRecords)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfVariableDatumRecords != obj._numberOfVariableDatumRecords)
+            if (NumberOfVariableDatumRecords != obj.NumberOfVariableDatumRecords)
             {
                 ivarsEqual = false;
             }
 
-            if (this._fixedDatumRecords.Count != obj._fixedDatumRecords.Count)
+            if (FixedDatumRecords.Count != obj.FixedDatumRecords.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._fixedDatumRecords.Count; idx++)
+                for (int idx = 0; idx < FixedDatumRecords.Count; idx++)
                 {
-                    if (!this._fixedDatumRecords[idx].Equals(obj._fixedDatumRecords[idx]))
+                    if (!FixedDatumRecords[idx].Equals(obj.FixedDatumRecords[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._variableDatumRecords.Count != obj._variableDatumRecords.Count)
+            if (VariableDatumRecords.Count != obj.VariableDatumRecords.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._variableDatumRecords.Count; idx++)
+                for (int idx = 0; idx < VariableDatumRecords.Count; idx++)
                 {
-                    if (!this._variableDatumRecords[idx].Equals(obj._variableDatumRecords[idx]))
+                    if (!VariableDatumRecords[idx].Equals(obj.VariableDatumRecords[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -505,40 +374,33 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._eventType.GetHashCode();
-            result = GenerateHash(result) ^ this._pad1.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfFixedDatumRecords.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfVariableDatumRecords.GetHashCode();
+            result = GenerateHash(result) ^ EventType.GetHashCode();
+            result = GenerateHash(result) ^ Pad1.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfFixedDatumRecords.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfVariableDatumRecords.GetHashCode();
 
-            if (this._fixedDatumRecords.Count > 0)
+            if (FixedDatumRecords.Count > 0)
             {
-                for (int idx = 0; idx < this._fixedDatumRecords.Count; idx++)
+                for (int idx = 0; idx < FixedDatumRecords.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._fixedDatumRecords[idx].GetHashCode();
+                    result = GenerateHash(result) ^ FixedDatumRecords[idx].GetHashCode();
                 }
             }
 
-            if (this._variableDatumRecords.Count > 0)
+            if (VariableDatumRecords.Count > 0)
             {
-                for (int idx = 0; idx < this._variableDatumRecords.Count; idx++)
+                for (int idx = 0; idx < VariableDatumRecords.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._variableDatumRecords[idx].GetHashCode();
+                    result = GenerateHash(result) ^ VariableDatumRecords[idx].GetHashCode();
                 }
             }
 

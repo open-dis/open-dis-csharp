@@ -11,9 +11,6 @@ namespace OpenDis.Dis1998
         /// Calculates the length of the vector.
         /// </summary>
         /// <returns>The length of the vector.</returns>
-        public double CalculateLength()
-        {
-            return Math.Sqrt(Math.Pow(this.X, 2) + Math.Pow(this.Y, 2) + Math.Pow(this.Z, 2));
-        }
+        public double CalculateLength() => Math.Sqrt(Math.Pow(X, 2) + Math.Pow(Y, 2) + Math.Pow(Z, 2));
     }
 }

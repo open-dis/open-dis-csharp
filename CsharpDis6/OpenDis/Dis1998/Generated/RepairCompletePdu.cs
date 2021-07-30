@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -57,31 +56,11 @@ namespace OpenDis.Dis1998
     public partial class RepairCompletePdu : LogisticsFamilyPdu, IEquatable<RepairCompletePdu>
     {
         /// <summary>
-        /// Entity that is receiving service
-        /// </summary>
-        private EntityID _receivingEntityID = new EntityID();
-
-        /// <summary>
-        /// Entity that is supplying
-        /// </summary>
-        private EntityID _repairingEntityID = new EntityID();
-
-        /// <summary>
-        /// Enumeration for type of repair
-        /// </summary>
-        private ushort _repair;
-
-        /// <summary>
-        /// padding, number prevents conflict with superclass ivar name
-        /// </summary>
-        private short _padding2;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="RepairCompletePdu"/> class.
         /// </summary>
         public RepairCompletePdu()
         {
-            PduType = (byte)9;
+            PduType = 9;
         }
 
         /// <summary>
@@ -90,12 +69,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(RepairCompletePdu left, RepairCompletePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(RepairCompletePdu left, RepairCompletePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -103,30 +79,16 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(RepairCompletePdu left, RepairCompletePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._receivingEntityID.GetMarshalledSize();  // this._receivingEntityID
-            marshalSize += this._repairingEntityID.GetMarshalledSize();  // this._repairingEntityID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += ReceivingEntityID.GetMarshalledSize();  // this._receivingEntityID
+            marshalSize += RepairingEntityID.GetMarshalledSize();  // this._repairingEntityID
             marshalSize += 2;  // this._repair
             marshalSize += 2;  // this._padding2
             return marshalSize;
@@ -136,85 +98,35 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Entity that is receiving service
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "receivingEntityID")]
-        public EntityID ReceivingEntityID
-        {
-            get
-            {
-                return this._receivingEntityID;
-            }
-
-            set
-            {
-                this._receivingEntityID = value;
-            }
-        }
+        public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Entity that is supplying
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "repairingEntityID")]
-        public EntityID RepairingEntityID
-        {
-            get
-            {
-                return this._repairingEntityID;
-            }
-
-            set
-            {
-                this._repairingEntityID = value;
-            }
-        }
+        public EntityID RepairingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Enumeration for type of repair
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "repair")]
-        public ushort Repair
-        {
-            get
-            {
-                return this._repair;
-            }
-
-            set
-            {
-                this._repair = value;
-            }
-        }
+        public ushort Repair { get; set; }
 
         /// <summary>
         /// Gets or sets the padding, number prevents conflict with superclass ivar name
         /// </summary>
         [XmlElement(Type = typeof(short), ElementName = "padding2")]
-        public short Padding2
-        {
-            get
-            {
-                return this._padding2;
-            }
+        public short Padding2 { get; set; }
 
-            set
-            {
-                this._padding2 = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -223,24 +135,24 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._receivingEntityID.Marshal(dos);
-                    this._repairingEntityID.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._repair);
-                    dos.WriteShort((short)this._padding2);
+                    ReceivingEntityID.Marshal(dos);
+                    RepairingEntityID.Marshal(dos);
+                    dos.WriteUnsignedShort(Repair);
+                    dos.WriteShort(Padding2);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -255,37 +167,30 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._receivingEntityID.Unmarshal(dis);
-                    this._repairingEntityID.Unmarshal(dis);
-                    this._repair = dis.ReadUnsignedShort();
-                    this._padding2 = dis.ReadShort();
+                    ReceivingEntityID.Unmarshal(dis);
+                    RepairingEntityID.Unmarshal(dis);
+                    Repair = dis.ReadUnsignedShort();
+                    Padding2 = dis.ReadShort();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -294,78 +199,60 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<receivingEntityID>");
-                this._receivingEntityID.Reflection(sb);
+                ReceivingEntityID.Reflection(sb);
                 sb.AppendLine("</receivingEntityID>");
                 sb.AppendLine("<repairingEntityID>");
-                this._repairingEntityID.Reflection(sb);
+                RepairingEntityID.Reflection(sb);
                 sb.AppendLine("</repairingEntityID>");
-                sb.AppendLine("<repair type=\"ushort\">" + this._repair.ToString(CultureInfo.InvariantCulture) + "</repair>");
-                sb.AppendLine("<padding2 type=\"short\">" + this._padding2.ToString(CultureInfo.InvariantCulture) + "</padding2>");
+                sb.AppendLine("<repair type=\"ushort\">" + Repair.ToString(CultureInfo.InvariantCulture) + "</repair>");
+                sb.AppendLine("<padding2 type=\"short\">" + Padding2.ToString(CultureInfo.InvariantCulture) + "</padding2>");
                 sb.AppendLine("</RepairCompletePdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as RepairCompletePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as RepairCompletePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(RepairCompletePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._receivingEntityID.Equals(obj._receivingEntityID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!ReceivingEntityID.Equals(obj.ReceivingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._repairingEntityID.Equals(obj._repairingEntityID))
+            if (!RepairingEntityID.Equals(obj.RepairingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._repair != obj._repair)
+            if (Repair != obj.Repair)
             {
                 ivarsEqual = false;
             }
 
-            if (this._padding2 != obj._padding2)
+            if (Padding2 != obj.Padding2)
             {
                 ivarsEqual = false;
             }
@@ -378,26 +265,19 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._receivingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._repairingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._repair.GetHashCode();
-            result = GenerateHash(result) ^ this._padding2.GetHashCode();
+            result = GenerateHash(result) ^ ReceivingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ RepairingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ Repair.GetHashCode();
+            result = GenerateHash(result) ^ Padding2.GetHashCode();
 
             return result;
         }

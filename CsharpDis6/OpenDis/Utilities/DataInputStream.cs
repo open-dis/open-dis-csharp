@@ -36,13 +36,6 @@
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace OpenDis.Core
 {
@@ -51,13 +44,13 @@ namespace OpenDis.Core
     /// </summary>
     public class DataInputStream
     {
-		#region Fields (1) 
+        #region Fields (1) 
 
-        private DataStream pduDataStream;
+        private readonly DataStream pduDataStream;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Constructors (2) 
+        #region Constructors (2) 
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DataInputStream"/> class with
@@ -74,9 +67,8 @@ namespace OpenDis.Core
         /// <param name="endian">The endian.</param>
         public DataInputStream(Endian endian)
         {
-            this.pduDataStream = new DataStream();
-            this.pduDataStream.StreamCounter = 0;
-            this.Endian = endian;
+            pduDataStream = new DataStream { StreamCounter = 0 };
+            Endian = endian;
         }
 
         /// <summary>
@@ -87,13 +79,13 @@ namespace OpenDis.Core
         public DataInputStream(byte[] ds, Endian endian)
             : this(endian)
         {
-            this.pduDataStream.StreamByteArray = ds;
-            this.pduDataStream.Endian = endian;
+            pduDataStream.StreamByteArray = ds;
+            pduDataStream.Endian = endian;
         }
-        
-		#endregion Constructors 
 
-		#region Properties (1) 
+        #endregion Constructors 
+
+        #region Properties (1) 
 
         ///// <summary>
         ///// Used to convert an array of bytes to a MemoryStream
@@ -102,11 +94,11 @@ namespace OpenDis.Core
         ///// <returns>MemoryStream</returns>
         ////private MemoryStream ConvertBytesMemoryStream(byte[] data)
         ////{
-        ////    MemoryStream ms = new MemoryStream();
+        ////   MemoryStream ms = new MemoryStream();
 
-        ////    ms.Write(data, 0, data.Length);
+        ////   ms.Write(data, 0, data.Length);
 
-        ////    return ms;
+        ////   return ms;
         ////}
 
         /// <summary>
@@ -114,20 +106,14 @@ namespace OpenDis.Core
         /// </summary>
         public Endian Endian
         {
-            get
-            {
-                return this.pduDataStream.Endian;
-            }
+            get => pduDataStream.Endian;
 
-            set
-            {
-                this.pduDataStream.Endian = value;
-            }
+            set => pduDataStream.Endian = value;
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (11) 
+        #region Methods (11) 
 
         /// <summary>
         /// Reads from DataStream's byte array a byte
@@ -135,8 +121,8 @@ namespace OpenDis.Core
         /// <returns>byte value</returns>
         public byte ReadByte()
         {
-            byte returnedData = this.pduDataStream.StreamByteArray[this.pduDataStream.StreamCounter];
-            this.pduDataStream.StreamCounter++;
+            byte returnedData = pduDataStream.StreamByteArray[pduDataStream.StreamCounter];
+            pduDataStream.StreamCounter++;
             return returnedData;
         }
 
@@ -146,9 +132,9 @@ namespace OpenDis.Core
         /// <returns>byte value</returns>
         public byte[] ReadByteArray(int length)
         {
-            byte[] returnedData = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, length);
+            byte[] returnedData = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, length);
 
-            this.pduDataStream.StreamCounter += length;
+            pduDataStream.StreamCounter += length;
             return returnedData;
         }
 
@@ -158,16 +144,16 @@ namespace OpenDis.Core
         /// <returns>double value</returns>
         public double ReadDouble()
         {
-            int size = sizeof(double);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(double);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            double returnedData = System.BitConverter.ToDouble(temp, 0);
-            this.pduDataStream.StreamCounter += size;
+            double returnedData = BitConverter.ToDouble(temp, 0);
+            pduDataStream.StreamCounter += size;
             return returnedData;
         }
 
@@ -177,16 +163,16 @@ namespace OpenDis.Core
         /// <returns>float value</returns>
         public float ReadFloat()
         {
-            int size = sizeof(float);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(float);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            float returnedData = System.BitConverter.ToSingle(temp, 0);
-            this.pduDataStream.StreamCounter += size;
+            float returnedData = BitConverter.ToSingle(temp, 0);
+            pduDataStream.StreamCounter += size;
             return returnedData;
         }
 
@@ -196,18 +182,17 @@ namespace OpenDis.Core
         /// <returns>int value</returns>
         public int ReadInt()
         {
-            int size = sizeof(int);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(int);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            int returnedData = System.BitConverter.ToInt32(temp, 0);
-            this.pduDataStream.StreamCounter += size;
+            int returnedData = BitConverter.ToInt32(temp, 0);
+            pduDataStream.StreamCounter += size;
             return returnedData;
-
         }
 
         /// <summary>
@@ -216,16 +201,16 @@ namespace OpenDis.Core
         /// <returns>long value</returns>
         public long ReadLong()
         {
-            int size = sizeof(long);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(long);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            long returnedData = System.BitConverter.ToInt64(temp, 0);
-            this.pduDataStream.StreamCounter += size;
+            long returnedData = BitConverter.ToInt64(temp, 0);
+            pduDataStream.StreamCounter += size;
             return returnedData;
         }
 
@@ -235,16 +220,16 @@ namespace OpenDis.Core
         /// <returns>short value</returns>
         public short ReadShort()
         {
-            int size = sizeof(short);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(short);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            short returnedData = System.BitConverter.ToInt16(temp, 0);
-            this.pduDataStream.StreamCounter += size;
+            short returnedData = BitConverter.ToInt16(temp, 0);
+            pduDataStream.StreamCounter += size;
             return returnedData;
         }
 
@@ -252,10 +237,7 @@ namespace OpenDis.Core
         /// Reads from DataStream's byte array a byte
         /// </summary>
         /// <returns>byte value</returns>
-        public byte ReadUnsignedByte()
-        {
-            return this.ReadByte();
-        }
+        public byte ReadUnsignedByte() => ReadByte();
 
         /// <summary>
         /// Reads from DataStream's byte array a unsigned int
@@ -263,17 +245,17 @@ namespace OpenDis.Core
         /// <returns>unsigned int value</returns>
         public uint ReadUnsignedInt()
         {
-            int size = sizeof(uint);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(uint);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            uint returnedData = System.BitConverter.ToUInt32(temp, 0);
+            uint returnedData = BitConverter.ToUInt32(temp, 0);
 
-            this.pduDataStream.StreamCounter += size;
+            pduDataStream.StreamCounter += size;
             return returnedData;
         }
 
@@ -283,16 +265,16 @@ namespace OpenDis.Core
         /// <returns>ulong value</returns>
         public ulong ReadUnsignedLong()
         {
-            int size = sizeof(ulong);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(ulong);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            ulong returnedData = System.BitConverter.ToUInt64(temp, 0);
-            this.pduDataStream.StreamCounter += size;
+            ulong returnedData = BitConverter.ToUInt64(temp, 0);
+            pduDataStream.StreamCounter += size;
             return returnedData;
         }
 
@@ -302,19 +284,19 @@ namespace OpenDis.Core
         /// <returns>unsigned short value</returns>
         public ushort ReadUnsignedShort()
         {
-            int size = sizeof(ushort);
-            byte[] temp = DataStream.ReturnByteArray(this.pduDataStream.StreamByteArray, this.pduDataStream.StreamCounter, size);
+            const int size = sizeof(ushort);
+            byte[] temp = DataStream.ReturnByteArray(pduDataStream.StreamByteArray, pduDataStream.StreamCounter, size);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(temp);
             }
 
-            ushort returnedData = System.BitConverter.ToUInt16(temp, 0);
-            this.pduDataStream.StreamCounter += size;
+            ushort returnedData = BitConverter.ToUInt16(temp, 0);
+            pduDataStream.StreamCounter += size;
             return returnedData;
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

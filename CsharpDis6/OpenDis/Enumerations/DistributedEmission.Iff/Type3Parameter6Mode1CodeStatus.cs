@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.Iff
 {
     /// <summary>
-    /// Enumeration values for Type3Parameter6Mode1CodeStatus (der.iff.type.3.fop.param6, Parameter 6, 
+    /// Enumeration values for Type3Parameter6Mode1CodeStatus (der.iff.type.3.fop.param6, Parameter 6,
     /// section 8.3.3.2.7)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

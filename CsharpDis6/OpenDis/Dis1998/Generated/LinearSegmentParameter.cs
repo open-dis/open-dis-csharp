@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -56,53 +55,8 @@ namespace OpenDis.Dis1998
     [XmlInclude(typeof(SixByteChunk))]
     [XmlInclude(typeof(Vector3Double))]
     [XmlInclude(typeof(Orientation))]
-    public partial class LinearSegmentParameter
+    public partial class LinearSegmentParameter : IEquatable<LinearSegmentParameter>, IReflectable
     {
-        /// <summary>
-        /// number of segments
-        /// </summary>
-        private byte _segmentNumber;
-
-        /// <summary>
-        /// segment appearance
-        /// </summary>
-        private SixByteChunk _segmentAppearance = new SixByteChunk();
-
-        /// <summary>
-        /// location
-        /// </summary>
-        private Vector3Double _location = new Vector3Double();
-
-        /// <summary>
-        /// orientation
-        /// </summary>
-        private Orientation _orientation = new Orientation();
-
-        /// <summary>
-        /// segmentLength
-        /// </summary>
-        private ushort _segmentLength;
-
-        /// <summary>
-        /// segmentWidth
-        /// </summary>
-        private ushort _segmentWidth;
-
-        /// <summary>
-        /// segmentHeight
-        /// </summary>
-        private ushort _segmentHeight;
-
-        /// <summary>
-        /// segment Depth
-        /// </summary>
-        private ushort _segmentDepth;
-
-        /// <summary>
-        /// segment Depth
-        /// </summary>
-        private uint _pad1;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LinearSegmentParameter"/> class.
         /// </summary>
@@ -116,12 +70,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(LinearSegmentParameter left, LinearSegmentParameter right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(LinearSegmentParameter left, LinearSegmentParameter right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -129,31 +80,19 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(LinearSegmentParameter left, LinearSegmentParameter right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 1;  // this._segmentNumber
-            marshalSize += this._segmentAppearance.GetMarshalledSize();  // this._segmentAppearance
-            marshalSize += this._location.GetMarshalledSize();  // this._location
-            marshalSize += this._orientation.GetMarshalledSize();  // this._orientation
+            marshalSize += SegmentAppearance.GetMarshalledSize();  // this._segmentAppearance
+            marshalSize += Location.GetMarshalledSize();  // this._location
+            marshalSize += Orientation.GetMarshalledSize();  // this._orientation
             marshalSize += 2;  // this._segmentLength
             marshalSize += 2;  // this._segmentWidth
             marshalSize += 2;  // this._segmentHeight
@@ -166,154 +105,55 @@ namespace OpenDis.Dis1998
         /// Gets or sets the number of segments
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "segmentNumber")]
-        public byte SegmentNumber
-        {
-            get
-            {
-                return this._segmentNumber;
-            }
-
-            set
-            {
-                this._segmentNumber = value;
-            }
-        }
+        public byte SegmentNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the segment appearance
         /// </summary>
         [XmlElement(Type = typeof(SixByteChunk), ElementName = "segmentAppearance")]
-        public SixByteChunk SegmentAppearance
-        {
-            get
-            {
-                return this._segmentAppearance;
-            }
-
-            set
-            {
-                this._segmentAppearance = value;
-            }
-        }
+        public SixByteChunk SegmentAppearance { get; set; } = new SixByteChunk();
 
         /// <summary>
         /// Gets or sets the location
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "location")]
-        public Vector3Double Location
-        {
-            get
-            {
-                return this._location;
-            }
-
-            set
-            {
-                this._location = value;
-            }
-        }
+        public Vector3Double Location { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the orientation
         /// </summary>
         [XmlElement(Type = typeof(Orientation), ElementName = "orientation")]
-        public Orientation Orientation
-        {
-            get
-            {
-                return this._orientation;
-            }
-
-            set
-            {
-                this._orientation = value;
-            }
-        }
+        public Orientation Orientation { get; set; } = new Orientation();
 
         /// <summary>
         /// Gets or sets the segmentLength
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "segmentLength")]
-        public ushort SegmentLength
-        {
-            get
-            {
-                return this._segmentLength;
-            }
-
-            set
-            {
-                this._segmentLength = value;
-            }
-        }
+        public ushort SegmentLength { get; set; }
 
         /// <summary>
         /// Gets or sets the segmentWidth
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "segmentWidth")]
-        public ushort SegmentWidth
-        {
-            get
-            {
-                return this._segmentWidth;
-            }
-
-            set
-            {
-                this._segmentWidth = value;
-            }
-        }
+        public ushort SegmentWidth { get; set; }
 
         /// <summary>
         /// Gets or sets the segmentHeight
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "segmentHeight")]
-        public ushort SegmentHeight
-        {
-            get
-            {
-                return this._segmentHeight;
-            }
-
-            set
-            {
-                this._segmentHeight = value;
-            }
-        }
+        public ushort SegmentHeight { get; set; }
 
         /// <summary>
         /// Gets or sets the segment Depth
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "segmentDepth")]
-        public ushort SegmentDepth
-        {
-            get
-            {
-                return this._segmentDepth;
-            }
-
-            set
-            {
-                this._segmentDepth = value;
-            }
-        }
+        public ushort SegmentDepth { get; set; }
 
         /// <summary>
         /// Gets or sets the segment Depth
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "pad1")]
-        public uint Pad1
-        {
-            get
-            {
-                return this._pad1;
-            }
-
-            set
-            {
-                this._pad1 = value;
-            }
-        }
+        public uint Pad1 { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -326,14 +166,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -343,15 +183,15 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedByte((byte)this._segmentNumber);
-                    this._segmentAppearance.Marshal(dos);
-                    this._location.Marshal(dos);
-                    this._orientation.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._segmentLength);
-                    dos.WriteUnsignedShort((ushort)this._segmentWidth);
-                    dos.WriteUnsignedShort((ushort)this._segmentHeight);
-                    dos.WriteUnsignedShort((ushort)this._segmentDepth);
-                    dos.WriteUnsignedInt((uint)this._pad1);
+                    dos.WriteUnsignedByte(SegmentNumber);
+                    SegmentAppearance.Marshal(dos);
+                    Location.Marshal(dos);
+                    Orientation.Marshal(dos);
+                    dos.WriteUnsignedShort(SegmentLength);
+                    dos.WriteUnsignedShort(SegmentWidth);
+                    dos.WriteUnsignedShort(SegmentHeight);
+                    dos.WriteUnsignedShort(SegmentDepth);
+                    dos.WriteUnsignedInt(Pad1);
                 }
                 catch (Exception e)
                 {
@@ -361,11 +201,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -378,15 +218,15 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._segmentNumber = dis.ReadUnsignedByte();
-                    this._segmentAppearance.Unmarshal(dis);
-                    this._location.Unmarshal(dis);
-                    this._orientation.Unmarshal(dis);
-                    this._segmentLength = dis.ReadUnsignedShort();
-                    this._segmentWidth = dis.ReadUnsignedShort();
-                    this._segmentHeight = dis.ReadUnsignedShort();
-                    this._segmentDepth = dis.ReadUnsignedShort();
-                    this._pad1 = dis.ReadUnsignedInt();
+                    SegmentNumber = dis.ReadUnsignedByte();
+                    SegmentAppearance.Unmarshal(dis);
+                    Location.Unmarshal(dis);
+                    Orientation.Unmarshal(dis);
+                    SegmentLength = dis.ReadUnsignedShort();
+                    SegmentWidth = dis.ReadUnsignedShort();
+                    SegmentHeight = dis.ReadUnsignedShort();
+                    SegmentDepth = dis.ReadUnsignedShort();
+                    Pad1 = dis.ReadUnsignedInt();
                 }
                 catch (Exception e)
                 {
@@ -396,133 +236,111 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<LinearSegmentParameter>");
             try
             {
-                sb.AppendLine("<segmentNumber type=\"byte\">" + this._segmentNumber.ToString(CultureInfo.InvariantCulture) + "</segmentNumber>");
+                sb.AppendLine("<segmentNumber type=\"byte\">" + SegmentNumber.ToString(CultureInfo.InvariantCulture) + "</segmentNumber>");
                 sb.AppendLine("<segmentAppearance>");
-                this._segmentAppearance.Reflection(sb);
+                SegmentAppearance.Reflection(sb);
                 sb.AppendLine("</segmentAppearance>");
                 sb.AppendLine("<location>");
-                this._location.Reflection(sb);
+                Location.Reflection(sb);
                 sb.AppendLine("</location>");
                 sb.AppendLine("<orientation>");
-                this._orientation.Reflection(sb);
+                Orientation.Reflection(sb);
                 sb.AppendLine("</orientation>");
-                sb.AppendLine("<segmentLength type=\"ushort\">" + this._segmentLength.ToString(CultureInfo.InvariantCulture) + "</segmentLength>");
-                sb.AppendLine("<segmentWidth type=\"ushort\">" + this._segmentWidth.ToString(CultureInfo.InvariantCulture) + "</segmentWidth>");
-                sb.AppendLine("<segmentHeight type=\"ushort\">" + this._segmentHeight.ToString(CultureInfo.InvariantCulture) + "</segmentHeight>");
-                sb.AppendLine("<segmentDepth type=\"ushort\">" + this._segmentDepth.ToString(CultureInfo.InvariantCulture) + "</segmentDepth>");
-                sb.AppendLine("<pad1 type=\"uint\">" + this._pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
+                sb.AppendLine("<segmentLength type=\"ushort\">" + SegmentLength.ToString(CultureInfo.InvariantCulture) + "</segmentLength>");
+                sb.AppendLine("<segmentWidth type=\"ushort\">" + SegmentWidth.ToString(CultureInfo.InvariantCulture) + "</segmentWidth>");
+                sb.AppendLine("<segmentHeight type=\"ushort\">" + SegmentHeight.ToString(CultureInfo.InvariantCulture) + "</segmentHeight>");
+                sb.AppendLine("<segmentDepth type=\"ushort\">" + SegmentDepth.ToString(CultureInfo.InvariantCulture) + "</segmentDepth>");
+                sb.AppendLine("<pad1 type=\"uint\">" + Pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
                 sb.AppendLine("</LinearSegmentParameter>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as LinearSegmentParameter;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as LinearSegmentParameter;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(LinearSegmentParameter obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._segmentNumber != obj._segmentNumber)
+            if (SegmentNumber != obj.SegmentNumber)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._segmentAppearance.Equals(obj._segmentAppearance))
+            if (!SegmentAppearance.Equals(obj.SegmentAppearance))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._location.Equals(obj._location))
+            if (!Location.Equals(obj.Location))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._orientation.Equals(obj._orientation))
+            if (!Orientation.Equals(obj.Orientation))
             {
                 ivarsEqual = false;
             }
 
-            if (this._segmentLength != obj._segmentLength)
+            if (SegmentLength != obj.SegmentLength)
             {
                 ivarsEqual = false;
             }
 
-            if (this._segmentWidth != obj._segmentWidth)
+            if (SegmentWidth != obj.SegmentWidth)
             {
                 ivarsEqual = false;
             }
 
-            if (this._segmentHeight != obj._segmentHeight)
+            if (SegmentHeight != obj.SegmentHeight)
             {
                 ivarsEqual = false;
             }
 
-            if (this._segmentDepth != obj._segmentDepth)
+            if (SegmentDepth != obj.SegmentDepth)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad1 != obj._pad1)
+            if (Pad1 != obj.Pad1)
             {
                 ivarsEqual = false;
             }
@@ -535,29 +353,22 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._segmentNumber.GetHashCode();
-            result = GenerateHash(result) ^ this._segmentAppearance.GetHashCode();
-            result = GenerateHash(result) ^ this._location.GetHashCode();
-            result = GenerateHash(result) ^ this._orientation.GetHashCode();
-            result = GenerateHash(result) ^ this._segmentLength.GetHashCode();
-            result = GenerateHash(result) ^ this._segmentWidth.GetHashCode();
-            result = GenerateHash(result) ^ this._segmentHeight.GetHashCode();
-            result = GenerateHash(result) ^ this._segmentDepth.GetHashCode();
-            result = GenerateHash(result) ^ this._pad1.GetHashCode();
+            result = GenerateHash(result) ^ SegmentNumber.GetHashCode();
+            result = GenerateHash(result) ^ SegmentAppearance.GetHashCode();
+            result = GenerateHash(result) ^ Location.GetHashCode();
+            result = GenerateHash(result) ^ Orientation.GetHashCode();
+            result = GenerateHash(result) ^ SegmentLength.GetHashCode();
+            result = GenerateHash(result) ^ SegmentWidth.GetHashCode();
+            result = GenerateHash(result) ^ SegmentHeight.GetHashCode();
+            result = GenerateHash(result) ^ SegmentDepth.GetHashCode();
+            result = GenerateHash(result) ^ Pad1.GetHashCode();
 
             return result;
         }

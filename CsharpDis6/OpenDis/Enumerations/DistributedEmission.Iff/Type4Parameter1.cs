@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.Iff
 {
     /// <summary>
-    /// Enumeration values for Type4Parameter1 (der.iff.type.4.fop.param1, Parameter 1, 
+    /// Enumeration values for Type4Parameter1 (der.iff.type.4.fop.param1, Parameter 1,
     /// section 8.3.4.2.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

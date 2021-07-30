@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Type
 {
     /// <summary>
-    /// Enumeration values for USWeaponsForLifeForms (es.type.225.kind.3.subcat, U.S. Weapons for Life Forms Subcategory, 
+    /// Enumeration values for USWeaponsForLifeForms (es.type.225.kind.3.subcat, U.S. Weapons for Life Forms Subcategory,
     /// section 4.2.3.3.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

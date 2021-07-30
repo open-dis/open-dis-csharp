@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Appearance
 {
     /// <summary>
-    /// Enumeration values for LandPlatformAppearance (es.appear.platform.land, Platforms of the Land Domain, 
+    /// Enumeration values for LandPlatformAppearance (es.appear.platform.land, Platforms of the Land Domain,
     /// section 4.3.1.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.EntityState.Appearance
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct LandPlatformAppearance
+    public struct LandPlatformAppearance : IHashable<LandPlatformAppearance>
     {
         /// <summary>
         /// Describes the paint scheme of an entity
@@ -401,7 +400,8 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             NotFrozen = 0,
 
             /// <summary>
-            /// Frozen (Frozen entities should not be dead-reckoned, i.e. should be displayed as fixed at the current location even if non-zero velocity, acceleration or rotation data received from the frozen entity)
+            /// Frozen (Frozen entities should not be dead-reckoned, i.e. should be displayed as fixed at the current location
+            /// even if non-zero velocity, acceleration or rotation data received from the frozen entity)
             /// </summary>
             FrozenFrozenEntitiesShouldNotBeDeadReckonedIEShouldBeDisplayedAsFixedAtTheCurrentLocationEvenIfNonZeroVelocityAccelerationOrRotationDataReceivedFromTheFrozenEntity = 1
         }
@@ -616,44 +616,15 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             MaskedCloaked = 1
         }
 
-        private LandPlatformAppearance.PaintSchemeValue paintScheme;
-        private LandPlatformAppearance.MobilityValue mobility;
-        private LandPlatformAppearance.FirePowerValue firePower;
-        private LandPlatformAppearance.DamageValue damage;
-        private LandPlatformAppearance.SmokeValue smoke;
-        private LandPlatformAppearance.TrailingEffectsValue trailingEffects;
-        private LandPlatformAppearance.HatchValue hatch;
-        private LandPlatformAppearance.HeadLightsValue headLights;
-        private LandPlatformAppearance.TailLightsValue tailLights;
-        private LandPlatformAppearance.BrakeLightsValue brakeLights;
-        private LandPlatformAppearance.FlamingValue flaming;
-        private LandPlatformAppearance.LauncherValue launcher;
-        private LandPlatformAppearance.CamouflageTypeValue camouflageType;
-        private LandPlatformAppearance.ConcealedValue concealed;
-        private LandPlatformAppearance.FrozenStatusValue frozenStatus;
-        private LandPlatformAppearance.PowerPlantStatusValue powerPlantStatus;
-        private LandPlatformAppearance.StateValue state;
-        private LandPlatformAppearance.TentValue tent;
-        private LandPlatformAppearance.RampValue ramp;
-        private LandPlatformAppearance.BlackoutLightsValue blackoutLights;
-        private LandPlatformAppearance.BlackoutBrakeLightsValue blackoutBrakeLights;
-        private LandPlatformAppearance.SpotLightsValue spotLights;
-        private LandPlatformAppearance.InteriorLightsValue interiorLights;
-        private LandPlatformAppearance.SurrenderStateValue surrenderState;
-        private LandPlatformAppearance.MaskedCloakedValue maskedCloaked;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(LandPlatformAppearance left, LandPlatformAppearance right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(LandPlatformAppearance left, LandPlatformAppearance right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -661,202 +632,178 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(LandPlatformAppearance left, LandPlatformAppearance right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> to <see cref="System.UInt32"/>.
+        /// Performs an explicit conversion from <see cref="LandPlatformAppearance"/> to <see cref="uint"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="LandPlatformAppearance"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator uint(LandPlatformAppearance obj)
-        {
-            return obj.ToUInt32();
-        }
+        public static explicit operator uint(LandPlatformAppearance obj) => obj.ToUInt32();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/>.
+        /// Performs an explicit conversion from <see cref="uint"/> to <see cref="LandPlatformAppearance"/>.
         /// </summary>
         /// <param name="value">The uint value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator LandPlatformAppearance(uint value)
-        {
-            return LandPlatformAppearance.FromUInt32(value);
-        }
+        public static explicit operator LandPlatformAppearance(uint value) => FromUInt32(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance from the byte array.
+        /// Creates the <see cref="LandPlatformAppearance"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="LandPlatformAppearance"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="LandPlatformAppearance"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static LandPlatformAppearance FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 4 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromUInt32(BitConverter.ToUInt32(array, index));
+                index + 4 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromUInt32(BitConverter.ToUInt32(array, index));
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance from the uint value.
+        /// Creates the <see cref="LandPlatformAppearance"/> instance from the uint value.
         /// </summary>
-        /// <param name="value">The uint value which represents the <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance, represented by the uint value.</returns>
+        /// <param name="value">The uint value which represents the <see cref="LandPlatformAppearance"/> instance.</param>
+        /// <returns>The <see cref="LandPlatformAppearance"/> instance, represented by the uint value.</returns>
         public static LandPlatformAppearance FromUInt32(uint value)
         {
-            LandPlatformAppearance ps = new LandPlatformAppearance();
+            var ps = new LandPlatformAppearance();
 
-            uint mask0 = 0x0001;
-            byte shift0 = 0;
+            const uint mask0 = 0x0001;
+            const byte shift0 = 0;
             uint newValue0 = (value & mask0) >> shift0;
-            ps.PaintScheme = (LandPlatformAppearance.PaintSchemeValue)newValue0;
+            ps.PaintScheme = (PaintSchemeValue)newValue0;
 
-            uint mask1 = 0x0002;
-            byte shift1 = 1;
+            const uint mask1 = 0x0002;
+            const byte shift1 = 1;
             uint newValue1 = (value & mask1) >> shift1;
-            ps.Mobility = (LandPlatformAppearance.MobilityValue)newValue1;
+            ps.Mobility = (MobilityValue)newValue1;
 
-            uint mask2 = 0x0004;
-            byte shift2 = 2;
+            const uint mask2 = 0x0004;
+            const byte shift2 = 2;
             uint newValue2 = (value & mask2) >> shift2;
-            ps.FirePower = (LandPlatformAppearance.FirePowerValue)newValue2;
+            ps.FirePower = (FirePowerValue)newValue2;
 
-            uint mask3 = 0x0018;
-            byte shift3 = 3;
+            const uint mask3 = 0x0018;
+            const byte shift3 = 3;
             uint newValue3 = (value & mask3) >> shift3;
-            ps.Damage = (LandPlatformAppearance.DamageValue)newValue3;
+            ps.Damage = (DamageValue)newValue3;
 
-            uint mask4 = 0x0060;
-            byte shift4 = 5;
+            const uint mask4 = 0x0060;
+            const byte shift4 = 5;
             uint newValue4 = (value & mask4) >> shift4;
-            ps.Smoke = (LandPlatformAppearance.SmokeValue)newValue4;
+            ps.Smoke = (SmokeValue)newValue4;
 
-            uint mask5 = 0x0180;
-            byte shift5 = 7;
+            const uint mask5 = 0x0180;
+            const byte shift5 = 7;
             uint newValue5 = (value & mask5) >> shift5;
-            ps.TrailingEffects = (LandPlatformAppearance.TrailingEffectsValue)newValue5;
+            ps.TrailingEffects = (TrailingEffectsValue)newValue5;
 
-            uint mask6 = 0x0e00;
-            byte shift6 = 9;
+            const uint mask6 = 0x0e00;
+            const byte shift6 = 9;
             uint newValue6 = (value & mask6) >> shift6;
-            ps.Hatch = (LandPlatformAppearance.HatchValue)newValue6;
+            ps.Hatch = (HatchValue)newValue6;
 
-            uint mask7 = 0x1000;
-            byte shift7 = 12;
+            const uint mask7 = 0x1000;
+            const byte shift7 = 12;
             uint newValue7 = (value & mask7) >> shift7;
-            ps.HeadLights = (LandPlatformAppearance.HeadLightsValue)newValue7;
+            ps.HeadLights = (HeadLightsValue)newValue7;
 
-            uint mask8 = 0x2000;
-            byte shift8 = 13;
+            const uint mask8 = 0x2000;
+            const byte shift8 = 13;
             uint newValue8 = (value & mask8) >> shift8;
-            ps.TailLights = (LandPlatformAppearance.TailLightsValue)newValue8;
+            ps.TailLights = (TailLightsValue)newValue8;
 
-            uint mask9 = 0x4000;
-            byte shift9 = 14;
+            const uint mask9 = 0x4000;
+            const byte shift9 = 14;
             uint newValue9 = (value & mask9) >> shift9;
-            ps.BrakeLights = (LandPlatformAppearance.BrakeLightsValue)newValue9;
+            ps.BrakeLights = (BrakeLightsValue)newValue9;
 
-            uint mask10 = 0x8000;
-            byte shift10 = 15;
+            const uint mask10 = 0x8000;
+            const byte shift10 = 15;
             uint newValue10 = (value & mask10) >> shift10;
-            ps.Flaming = (LandPlatformAppearance.FlamingValue)newValue10;
+            ps.Flaming = (FlamingValue)newValue10;
 
-            uint mask11 = 0x10000;
-            byte shift11 = 16;
+            const uint mask11 = 0x10000;
+            const byte shift11 = 16;
             uint newValue11 = (value & mask11) >> shift11;
-            ps.Launcher = (LandPlatformAppearance.LauncherValue)newValue11;
+            ps.Launcher = (LauncherValue)newValue11;
 
-            uint mask12 = 0x60000;
-            byte shift12 = 17;
+            const uint mask12 = 0x60000;
+            const byte shift12 = 17;
             uint newValue12 = (value & mask12) >> shift12;
-            ps.CamouflageType = (LandPlatformAppearance.CamouflageTypeValue)newValue12;
+            ps.CamouflageType = (CamouflageTypeValue)newValue12;
 
-            uint mask13 = 0x80000;
-            byte shift13 = 19;
+            const uint mask13 = 0x80000;
+            const byte shift13 = 19;
             uint newValue13 = (value & mask13) >> shift13;
-            ps.Concealed = (LandPlatformAppearance.ConcealedValue)newValue13;
+            ps.Concealed = (ConcealedValue)newValue13;
 
-            uint mask15 = 0x200000;
-            byte shift15 = 21;
+            const uint mask15 = 0x200000;
+            const byte shift15 = 21;
             uint newValue15 = (value & mask15) >> shift15;
-            ps.FrozenStatus = (LandPlatformAppearance.FrozenStatusValue)newValue15;
+            ps.FrozenStatus = (FrozenStatusValue)newValue15;
 
-            uint mask16 = 0x400000;
-            byte shift16 = 22;
+            const uint mask16 = 0x400000;
+            const byte shift16 = 22;
             uint newValue16 = (value & mask16) >> shift16;
-            ps.PowerPlantStatus = (LandPlatformAppearance.PowerPlantStatusValue)newValue16;
+            ps.PowerPlantStatus = (PowerPlantStatusValue)newValue16;
 
-            uint mask17 = 0x800000;
-            byte shift17 = 23;
+            const uint mask17 = 0x800000;
+            const byte shift17 = 23;
             uint newValue17 = (value & mask17) >> shift17;
-            ps.State = (LandPlatformAppearance.StateValue)newValue17;
+            ps.State = (StateValue)newValue17;
 
-            uint mask18 = 0x1000000;
-            byte shift18 = 24;
+            const uint mask18 = 0x1000000;
+            const byte shift18 = 24;
             uint newValue18 = (value & mask18) >> shift18;
-            ps.Tent = (LandPlatformAppearance.TentValue)newValue18;
+            ps.Tent = (TentValue)newValue18;
 
-            uint mask19 = 0x2000000;
-            byte shift19 = 25;
+            const uint mask19 = 0x2000000;
+            const byte shift19 = 25;
             uint newValue19 = (value & mask19) >> shift19;
-            ps.Ramp = (LandPlatformAppearance.RampValue)newValue19;
+            ps.Ramp = (RampValue)newValue19;
 
-            uint mask20 = 0x4000000;
-            byte shift20 = 26;
+            const uint mask20 = 0x4000000;
+            const byte shift20 = 26;
             uint newValue20 = (value & mask20) >> shift20;
-            ps.BlackoutLights = (LandPlatformAppearance.BlackoutLightsValue)newValue20;
+            ps.BlackoutLights = (BlackoutLightsValue)newValue20;
 
-            uint mask21 = 0x8000000;
-            byte shift21 = 27;
+            const uint mask21 = 0x8000000;
+            const byte shift21 = 27;
             uint newValue21 = (value & mask21) >> shift21;
-            ps.BlackoutBrakeLights = (LandPlatformAppearance.BlackoutBrakeLightsValue)newValue21;
+            ps.BlackoutBrakeLights = (BlackoutBrakeLightsValue)newValue21;
 
-            uint mask22 = 0x10000000;
-            byte shift22 = 28;
+            const uint mask22 = 0x10000000;
+            const byte shift22 = 28;
             uint newValue22 = (value & mask22) >> shift22;
-            ps.SpotLights = (LandPlatformAppearance.SpotLightsValue)newValue22;
+            ps.SpotLights = (SpotLightsValue)newValue22;
 
-            uint mask23 = 0x20000000;
-            byte shift23 = 29;
+            const uint mask23 = 0x20000000;
+            const byte shift23 = 29;
             uint newValue23 = (value & mask23) >> shift23;
-            ps.InteriorLights = (LandPlatformAppearance.InteriorLightsValue)newValue23;
+            ps.InteriorLights = (InteriorLightsValue)newValue23;
 
-            uint mask24 = 0x40000000;
-            byte shift24 = 30;
+            const uint mask24 = 0x40000000;
+            const byte shift24 = 30;
             uint newValue24 = (value & mask24) >> shift24;
-            ps.SurrenderState = (LandPlatformAppearance.SurrenderStateValue)newValue24;
+            ps.SurrenderState = (SurrenderStateValue)newValue24;
 
-            uint mask25 = 0x80000000;
-            byte shift25 = 31;
+            const uint mask25 = 0x80000000;
+            const byte shift25 = 31;
             uint newValue25 = (value & mask25) >> shift25;
-            ps.MaskedCloaked = (LandPlatformAppearance.MaskedCloakedValue)newValue25;
+            ps.MaskedCloaked = (MaskedCloakedValue)newValue25;
 
             return ps;
         }
@@ -865,369 +812,236 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// Gets or sets the paintscheme.
         /// </summary>
         /// <value>The paintscheme.</value>
-        public LandPlatformAppearance.PaintSchemeValue PaintScheme
-        {
-            get { return this.paintScheme; }
-            set { this.paintScheme = value; }
-        }
+        public PaintSchemeValue PaintScheme { get; set; }
 
         /// <summary>
         /// Gets or sets the mobility.
         /// </summary>
         /// <value>The mobility.</value>
-        public LandPlatformAppearance.MobilityValue Mobility
-        {
-            get { return this.mobility; }
-            set { this.mobility = value; }
-        }
+        public MobilityValue Mobility { get; set; }
 
         /// <summary>
         /// Gets or sets the firepower.
         /// </summary>
         /// <value>The firepower.</value>
-        public LandPlatformAppearance.FirePowerValue FirePower
-        {
-            get { return this.firePower; }
-            set { this.firePower = value; }
-        }
+        public FirePowerValue FirePower { get; set; }
 
         /// <summary>
         /// Gets or sets the damage.
         /// </summary>
         /// <value>The damage.</value>
-        public LandPlatformAppearance.DamageValue Damage
-        {
-            get { return this.damage; }
-            set { this.damage = value; }
-        }
+        public DamageValue Damage { get; set; }
 
         /// <summary>
         /// Gets or sets the smoke.
         /// </summary>
         /// <value>The smoke.</value>
-        public LandPlatformAppearance.SmokeValue Smoke
-        {
-            get { return this.smoke; }
-            set { this.smoke = value; }
-        }
+        public SmokeValue Smoke { get; set; }
 
         /// <summary>
         /// Gets or sets the trailingeffects.
         /// </summary>
         /// <value>The trailingeffects.</value>
-        public LandPlatformAppearance.TrailingEffectsValue TrailingEffects
-        {
-            get { return this.trailingEffects; }
-            set { this.trailingEffects = value; }
-        }
+        public TrailingEffectsValue TrailingEffects { get; set; }
 
         /// <summary>
         /// Gets or sets the hatch.
         /// </summary>
         /// <value>The hatch.</value>
-        public LandPlatformAppearance.HatchValue Hatch
-        {
-            get { return this.hatch; }
-            set { this.hatch = value; }
-        }
+        public HatchValue Hatch { get; set; }
 
         /// <summary>
         /// Gets or sets the headlights.
         /// </summary>
         /// <value>The headlights.</value>
-        public LandPlatformAppearance.HeadLightsValue HeadLights
-        {
-            get { return this.headLights; }
-            set { this.headLights = value; }
-        }
+        public HeadLightsValue HeadLights { get; set; }
 
         /// <summary>
         /// Gets or sets the taillights.
         /// </summary>
         /// <value>The taillights.</value>
-        public LandPlatformAppearance.TailLightsValue TailLights
-        {
-            get { return this.tailLights; }
-            set { this.tailLights = value; }
-        }
+        public TailLightsValue TailLights { get; set; }
 
         /// <summary>
         /// Gets or sets the brakelights.
         /// </summary>
         /// <value>The brakelights.</value>
-        public LandPlatformAppearance.BrakeLightsValue BrakeLights
-        {
-            get { return this.brakeLights; }
-            set { this.brakeLights = value; }
-        }
+        public BrakeLightsValue BrakeLights { get; set; }
 
         /// <summary>
         /// Gets or sets the flaming.
         /// </summary>
         /// <value>The flaming.</value>
-        public LandPlatformAppearance.FlamingValue Flaming
-        {
-            get { return this.flaming; }
-            set { this.flaming = value; }
-        }
+        public FlamingValue Flaming { get; set; }
 
         /// <summary>
         /// Gets or sets the launcher.
         /// </summary>
         /// <value>The launcher.</value>
-        public LandPlatformAppearance.LauncherValue Launcher
-        {
-            get { return this.launcher; }
-            set { this.launcher = value; }
-        }
+        public LauncherValue Launcher { get; set; }
 
         /// <summary>
         /// Gets or sets the camouflagetype.
         /// </summary>
         /// <value>The camouflagetype.</value>
-        public LandPlatformAppearance.CamouflageTypeValue CamouflageType
-        {
-            get { return this.camouflageType; }
-            set { this.camouflageType = value; }
-        }
+        public CamouflageTypeValue CamouflageType { get; set; }
 
         /// <summary>
         /// Gets or sets the concealed.
         /// </summary>
         /// <value>The concealed.</value>
-        public LandPlatformAppearance.ConcealedValue Concealed
-        {
-            get { return this.concealed; }
-            set { this.concealed = value; }
-        }
+        public ConcealedValue Concealed { get; set; }
 
         /// <summary>
         /// Gets or sets the frozenstatus.
         /// </summary>
         /// <value>The frozenstatus.</value>
-        public LandPlatformAppearance.FrozenStatusValue FrozenStatus
-        {
-            get { return this.frozenStatus; }
-            set { this.frozenStatus = value; }
-        }
+        public FrozenStatusValue FrozenStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the powerplantstatus.
         /// </summary>
         /// <value>The powerplantstatus.</value>
-        public LandPlatformAppearance.PowerPlantStatusValue PowerPlantStatus
-        {
-            get { return this.powerPlantStatus; }
-            set { this.powerPlantStatus = value; }
-        }
+        public PowerPlantStatusValue PowerPlantStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the state.
         /// </summary>
         /// <value>The state.</value>
-        public LandPlatformAppearance.StateValue State
-        {
-            get { return this.state; }
-            set { this.state = value; }
-        }
+        public StateValue State { get; set; }
 
         /// <summary>
         /// Gets or sets the tent.
         /// </summary>
         /// <value>The tent.</value>
-        public LandPlatformAppearance.TentValue Tent
-        {
-            get { return this.tent; }
-            set { this.tent = value; }
-        }
+        public TentValue Tent { get; set; }
 
         /// <summary>
         /// Gets or sets the ramp.
         /// </summary>
         /// <value>The ramp.</value>
-        public LandPlatformAppearance.RampValue Ramp
-        {
-            get { return this.ramp; }
-            set { this.ramp = value; }
-        }
+        public RampValue Ramp { get; set; }
 
         /// <summary>
         /// Gets or sets the blackoutlights.
         /// </summary>
         /// <value>The blackoutlights.</value>
-        public LandPlatformAppearance.BlackoutLightsValue BlackoutLights
-        {
-            get { return this.blackoutLights; }
-            set { this.blackoutLights = value; }
-        }
+        public BlackoutLightsValue BlackoutLights { get; set; }
 
         /// <summary>
         /// Gets or sets the blackoutbrakelights.
         /// </summary>
         /// <value>The blackoutbrakelights.</value>
-        public LandPlatformAppearance.BlackoutBrakeLightsValue BlackoutBrakeLights
-        {
-            get { return this.blackoutBrakeLights; }
-            set { this.blackoutBrakeLights = value; }
-        }
+        public BlackoutBrakeLightsValue BlackoutBrakeLights { get; set; }
 
         /// <summary>
         /// Gets or sets the spotlights.
         /// </summary>
         /// <value>The spotlights.</value>
-        public LandPlatformAppearance.SpotLightsValue SpotLights
-        {
-            get { return this.spotLights; }
-            set { this.spotLights = value; }
-        }
+        public SpotLightsValue SpotLights { get; set; }
 
         /// <summary>
         /// Gets or sets the interiorlights.
         /// </summary>
         /// <value>The interiorlights.</value>
-        public LandPlatformAppearance.InteriorLightsValue InteriorLights
-        {
-            get { return this.interiorLights; }
-            set { this.interiorLights = value; }
-        }
+        public InteriorLightsValue InteriorLights { get; set; }
 
         /// <summary>
         /// Gets or sets the surrenderstate.
         /// </summary>
         /// <value>The surrenderstate.</value>
-        public LandPlatformAppearance.SurrenderStateValue SurrenderState
-        {
-            get { return this.surrenderState; }
-            set { this.surrenderState = value; }
-        }
+        public SurrenderStateValue SurrenderState { get; set; }
 
         /// <summary>
         /// Gets or sets the maskedcloaked.
         /// </summary>
         /// <value>The maskedcloaked.</value>
-        public LandPlatformAppearance.MaskedCloakedValue MaskedCloaked
-        {
-            get { return this.maskedCloaked; }
-            set { this.maskedCloaked = value; }
-        }
+        public MaskedCloakedValue MaskedCloaked { get; set; }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is LandPlatformAppearance other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="LandPlatformAppearance"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="LandPlatformAppearance"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is LandPlatformAppearance))
-            {
-                return false;
-            }
-
-            return this.Equals((LandPlatformAppearance)obj);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="LandPlatformAppearance"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(LandPlatformAppearance other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.PaintScheme == other.PaintScheme &&
-                this.Mobility == other.Mobility &&
-                this.FirePower == other.FirePower &&
-                this.Damage == other.Damage &&
-                this.Smoke == other.Smoke &&
-                this.TrailingEffects == other.TrailingEffects &&
-                this.Hatch == other.Hatch &&
-                this.HeadLights == other.HeadLights &&
-                this.TailLights == other.TailLights &&
-                this.BrakeLights == other.BrakeLights &&
-                this.Flaming == other.Flaming &&
-                this.Launcher == other.Launcher &&
-                this.CamouflageType == other.CamouflageType &&
-                this.Concealed == other.Concealed &&
-                this.FrozenStatus == other.FrozenStatus &&
-                this.PowerPlantStatus == other.PowerPlantStatus &&
-                this.State == other.State &&
-                this.Tent == other.Tent &&
-                this.Ramp == other.Ramp &&
-                this.BlackoutLights == other.BlackoutLights &&
-                this.BlackoutBrakeLights == other.BlackoutBrakeLights &&
-                this.SpotLights == other.SpotLights &&
-                this.InteriorLights == other.InteriorLights &&
-                this.SurrenderState == other.SurrenderState &&
-                this.MaskedCloaked == other.MaskedCloaked;
+            return PaintScheme == other.PaintScheme &&
+                Mobility == other.Mobility &&
+                FirePower == other.FirePower &&
+                Damage == other.Damage &&
+                Smoke == other.Smoke &&
+                TrailingEffects == other.TrailingEffects &&
+                Hatch == other.Hatch &&
+                HeadLights == other.HeadLights &&
+                TailLights == other.TailLights &&
+                BrakeLights == other.BrakeLights &&
+                Flaming == other.Flaming &&
+                Launcher == other.Launcher &&
+                CamouflageType == other.CamouflageType &&
+                Concealed == other.Concealed &&
+                FrozenStatus == other.FrozenStatus &&
+                PowerPlantStatus == other.PowerPlantStatus &&
+                State == other.State &&
+                Tent == other.Tent &&
+                Ramp == other.Ramp &&
+                BlackoutLights == other.BlackoutLights &&
+                BlackoutBrakeLights == other.BlackoutBrakeLights &&
+                SpotLights == other.SpotLights &&
+                InteriorLights == other.InteriorLights &&
+                SurrenderState == other.SurrenderState &&
+                MaskedCloaked == other.MaskedCloaked;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> to the byte array.
+        /// Converts the instance of <see cref="LandPlatformAppearance"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToUInt32());
-        }
+        /// <returns>The byte array representing the current <see cref="LandPlatformAppearance"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToUInt32());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> to the uint value.
+        /// Converts the instance of <see cref="LandPlatformAppearance"/> to the uint value.
         /// </summary>
-        /// <returns>The uint value representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.LandPlatformAppearance"/> instance.</returns>
+        /// <returns>The uint value representing the current <see cref="LandPlatformAppearance"/> instance.</returns>
         public uint ToUInt32()
         {
             uint val = 0;
 
-            val |= (uint)((uint)this.PaintScheme << 0);
-            val |= (uint)((uint)this.Mobility << 1);
-            val |= (uint)((uint)this.FirePower << 2);
-            val |= (uint)((uint)this.Damage << 3);
-            val |= (uint)((uint)this.Smoke << 5);
-            val |= (uint)((uint)this.TrailingEffects << 7);
-            val |= (uint)((uint)this.Hatch << 9);
-            val |= (uint)((uint)this.HeadLights << 12);
-            val |= (uint)((uint)this.TailLights << 13);
-            val |= (uint)((uint)this.BrakeLights << 14);
-            val |= (uint)((uint)this.Flaming << 15);
-            val |= (uint)((uint)this.Launcher << 16);
-            val |= (uint)((uint)this.CamouflageType << 17);
-            val |= (uint)((uint)this.Concealed << 19);
-            val |= (uint)((uint)this.FrozenStatus << 21);
-            val |= (uint)((uint)this.PowerPlantStatus << 22);
-            val |= (uint)((uint)this.State << 23);
-            val |= (uint)((uint)this.Tent << 24);
-            val |= (uint)((uint)this.Ramp << 25);
-            val |= (uint)((uint)this.BlackoutLights << 26);
-            val |= (uint)((uint)this.BlackoutBrakeLights << 27);
-            val |= (uint)((uint)this.SpotLights << 28);
-            val |= (uint)((uint)this.InteriorLights << 29);
-            val |= (uint)((uint)this.SurrenderState << 30);
-            val |= (uint)((uint)this.MaskedCloaked << 31);
+            val |= (uint)PaintScheme << 0;
+            val |= (uint)Mobility << 1;
+            val |= (uint)FirePower << 2;
+            val |= (uint)Damage << 3;
+            val |= (uint)Smoke << 5;
+            val |= (uint)TrailingEffects << 7;
+            val |= (uint)Hatch << 9;
+            val |= (uint)HeadLights << 12;
+            val |= (uint)TailLights << 13;
+            val |= (uint)BrakeLights << 14;
+            val |= (uint)Flaming << 15;
+            val |= (uint)Launcher << 16;
+            val |= (uint)CamouflageType << 17;
+            val |= (uint)Concealed << 19;
+            val |= (uint)FrozenStatus << 21;
+            val |= (uint)PowerPlantStatus << 22;
+            val |= (uint)State << 23;
+            val |= (uint)Tent << 24;
+            val |= (uint)Ramp << 25;
+            val |= (uint)BlackoutLights << 26;
+            val |= (uint)BlackoutBrakeLights << 27;
+            val |= (uint)SpotLights << 28;
+            val |= (uint)InteriorLights << 29;
+            val |= (uint)SurrenderState << 30;
+            val |= (uint)MaskedCloaked << 31;
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -1235,31 +1049,31 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.PaintScheme.GetHashCode();
-                hash = (hash * 29) + this.Mobility.GetHashCode();
-                hash = (hash * 29) + this.FirePower.GetHashCode();
-                hash = (hash * 29) + this.Damage.GetHashCode();
-                hash = (hash * 29) + this.Smoke.GetHashCode();
-                hash = (hash * 29) + this.TrailingEffects.GetHashCode();
-                hash = (hash * 29) + this.Hatch.GetHashCode();
-                hash = (hash * 29) + this.HeadLights.GetHashCode();
-                hash = (hash * 29) + this.TailLights.GetHashCode();
-                hash = (hash * 29) + this.BrakeLights.GetHashCode();
-                hash = (hash * 29) + this.Flaming.GetHashCode();
-                hash = (hash * 29) + this.Launcher.GetHashCode();
-                hash = (hash * 29) + this.CamouflageType.GetHashCode();
-                hash = (hash * 29) + this.Concealed.GetHashCode();
-                hash = (hash * 29) + this.FrozenStatus.GetHashCode();
-                hash = (hash * 29) + this.PowerPlantStatus.GetHashCode();
-                hash = (hash * 29) + this.State.GetHashCode();
-                hash = (hash * 29) + this.Tent.GetHashCode();
-                hash = (hash * 29) + this.Ramp.GetHashCode();
-                hash = (hash * 29) + this.BlackoutLights.GetHashCode();
-                hash = (hash * 29) + this.BlackoutBrakeLights.GetHashCode();
-                hash = (hash * 29) + this.SpotLights.GetHashCode();
-                hash = (hash * 29) + this.InteriorLights.GetHashCode();
-                hash = (hash * 29) + this.SurrenderState.GetHashCode();
-                hash = (hash * 29) + this.MaskedCloaked.GetHashCode();
+                hash = (hash * 29) + PaintScheme.GetHashCode();
+                hash = (hash * 29) + Mobility.GetHashCode();
+                hash = (hash * 29) + FirePower.GetHashCode();
+                hash = (hash * 29) + Damage.GetHashCode();
+                hash = (hash * 29) + Smoke.GetHashCode();
+                hash = (hash * 29) + TrailingEffects.GetHashCode();
+                hash = (hash * 29) + Hatch.GetHashCode();
+                hash = (hash * 29) + HeadLights.GetHashCode();
+                hash = (hash * 29) + TailLights.GetHashCode();
+                hash = (hash * 29) + BrakeLights.GetHashCode();
+                hash = (hash * 29) + Flaming.GetHashCode();
+                hash = (hash * 29) + Launcher.GetHashCode();
+                hash = (hash * 29) + CamouflageType.GetHashCode();
+                hash = (hash * 29) + Concealed.GetHashCode();
+                hash = (hash * 29) + FrozenStatus.GetHashCode();
+                hash = (hash * 29) + PowerPlantStatus.GetHashCode();
+                hash = (hash * 29) + State.GetHashCode();
+                hash = (hash * 29) + Tent.GetHashCode();
+                hash = (hash * 29) + Ramp.GetHashCode();
+                hash = (hash * 29) + BlackoutLights.GetHashCode();
+                hash = (hash * 29) + BlackoutBrakeLights.GetHashCode();
+                hash = (hash * 29) + SpotLights.GetHashCode();
+                hash = (hash * 29) + InteriorLights.GetHashCode();
+                hash = (hash * 29) + SurrenderState.GetHashCode();
+                hash = (hash * 29) + MaskedCloaked.GetHashCode();
             }
 
             return hash;

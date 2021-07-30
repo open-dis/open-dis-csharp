@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -61,43 +60,11 @@ namespace OpenDis.Dis1998
     public partial class FirePdu : WarfareFamilyPdu, IEquatable<FirePdu>
     {
         /// <summary>
-        /// ID of the munition that is being shot
-        /// </summary>
-        private EntityID _munitionID = new EntityID();
-
-        /// <summary>
-        /// ID of event
-        /// </summary>
-        private EventID _eventID = new EventID();
-
-        private int _fireMissionIndex;
-
-        /// <summary>
-        /// location of the firing event
-        /// </summary>
-        private Vector3Double _locationInWorldCoordinates = new Vector3Double();
-
-        /// <summary>
-        /// Describes munitions used in the firing event
-        /// </summary>
-        private BurstDescriptor _burstDescriptor = new BurstDescriptor();
-
-        /// <summary>
-        /// Velocity of the ammunition
-        /// </summary>
-        private Vector3Float _velocity = new Vector3Float();
-
-        /// <summary>
-        /// range to the target
-        /// </summary>
-        private float _range;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="FirePdu"/> class.
         /// </summary>
         public FirePdu()
         {
-            PduType = (byte)2;
+            PduType = 2;
         }
 
         /// <summary>
@@ -106,12 +73,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(FirePdu left, FirePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(FirePdu left, FirePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -119,34 +83,20 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(FirePdu left, FirePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._munitionID.GetMarshalledSize();  // this._munitionID
-            marshalSize += this._eventID.GetMarshalledSize();  // this._eventID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += MunitionID.GetMarshalledSize();  // this._munitionID
+            marshalSize += EventID.GetMarshalledSize();  // this._eventID
             marshalSize += 4;  // this._fireMissionIndex
-            marshalSize += this._locationInWorldCoordinates.GetMarshalledSize();  // this._locationInWorldCoordinates
-            marshalSize += this._burstDescriptor.GetMarshalledSize();  // this._burstDescriptor
-            marshalSize += this._velocity.GetMarshalledSize();  // this._velocity
+            marshalSize += LocationInWorldCoordinates.GetMarshalledSize();  // this._locationInWorldCoordinates
+            marshalSize += BurstDescriptor.GetMarshalledSize();  // this._burstDescriptor
+            marshalSize += Velocity.GetMarshalledSize();  // this._velocity
             marshalSize += 4;  // this._range
             return marshalSize;
         }
@@ -155,136 +105,53 @@ namespace OpenDis.Dis1998
         /// Gets or sets the ID of the munition that is being shot
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "munitionID")]
-        public EntityID MunitionID
-        {
-            get
-            {
-                return this._munitionID;
-            }
-
-            set
-            {
-                this._munitionID = value;
-            }
-        }
+        public EntityID MunitionID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID of event
         /// </summary>
         [XmlElement(Type = typeof(EventID), ElementName = "eventID")]
-        public EventID EventID
-        {
-            get
-            {
-                return this._eventID;
-            }
-
-            set
-            {
-                this._eventID = value;
-            }
-        }
+        public EventID EventID { get; set; } = new EventID();
 
         /// <summary>
         /// Gets or sets the fireMissionIndex
         /// </summary>
         [XmlElement(Type = typeof(int), ElementName = "fireMissionIndex")]
-        public int FireMissionIndex
-        {
-            get
-            {
-                return this._fireMissionIndex;
-            }
-
-            set
-            {
-                this._fireMissionIndex = value;
-            }
-        }
+        public int FireMissionIndex { get; set; }
 
         /// <summary>
         /// Gets or sets the location of the firing event
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "locationInWorldCoordinates")]
-        public Vector3Double LocationInWorldCoordinates
-        {
-            get
-            {
-                return this._locationInWorldCoordinates;
-            }
-
-            set
-            {
-                this._locationInWorldCoordinates = value;
-            }
-        }
+        public Vector3Double LocationInWorldCoordinates { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the Describes munitions used in the firing event
         /// </summary>
         [XmlElement(Type = typeof(BurstDescriptor), ElementName = "burstDescriptor")]
-        public BurstDescriptor BurstDescriptor
-        {
-            get
-            {
-                return this._burstDescriptor;
-            }
-
-            set
-            {
-                this._burstDescriptor = value;
-            }
-        }
+        public BurstDescriptor BurstDescriptor { get; set; } = new BurstDescriptor();
 
         /// <summary>
         /// Gets or sets the Velocity of the ammunition
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "velocity")]
-        public Vector3Float Velocity
-        {
-            get
-            {
-                return this._velocity;
-            }
-
-            set
-            {
-                this._velocity = value;
-            }
-        }
+        public Vector3Float Velocity { get; set; } = new Vector3Float();
 
         /// <summary>
         /// Gets or sets the range to the target
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "range")]
-        public float Range
-        {
-            get
-            {
-                return this._range;
-            }
+        public float Range { get; set; }
 
-            set
-            {
-                this._range = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -293,27 +160,27 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._munitionID.Marshal(dos);
-                    this._eventID.Marshal(dos);
-                    dos.WriteInt((int)this._fireMissionIndex);
-                    this._locationInWorldCoordinates.Marshal(dos);
-                    this._burstDescriptor.Marshal(dos);
-                    this._velocity.Marshal(dos);
-                    dos.WriteFloat((float)this._range);
+                    MunitionID.Marshal(dos);
+                    EventID.Marshal(dos);
+                    dos.WriteInt(FireMissionIndex);
+                    LocationInWorldCoordinates.Marshal(dos);
+                    BurstDescriptor.Marshal(dos);
+                    Velocity.Marshal(dos);
+                    dos.WriteFloat((float)Range);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -328,40 +195,33 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._munitionID.Unmarshal(dis);
-                    this._eventID.Unmarshal(dis);
-                    this._fireMissionIndex = dis.ReadInt();
-                    this._locationInWorldCoordinates.Unmarshal(dis);
-                    this._burstDescriptor.Unmarshal(dis);
-                    this._velocity.Unmarshal(dis);
-                    this._range = dis.ReadFloat();
+                    MunitionID.Unmarshal(dis);
+                    EventID.Unmarshal(dis);
+                    FireMissionIndex = dis.ReadInt();
+                    LocationInWorldCoordinates.Unmarshal(dis);
+                    BurstDescriptor.Unmarshal(dis);
+                    Velocity.Unmarshal(dis);
+                    Range = dis.ReadFloat();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -370,102 +230,84 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<munitionID>");
-                this._munitionID.Reflection(sb);
+                MunitionID.Reflection(sb);
                 sb.AppendLine("</munitionID>");
                 sb.AppendLine("<eventID>");
-                this._eventID.Reflection(sb);
+                EventID.Reflection(sb);
                 sb.AppendLine("</eventID>");
-                sb.AppendLine("<fireMissionIndex type=\"int\">" + this._fireMissionIndex.ToString(CultureInfo.InvariantCulture) + "</fireMissionIndex>");
+                sb.AppendLine("<fireMissionIndex type=\"int\">" + FireMissionIndex.ToString(CultureInfo.InvariantCulture) + "</fireMissionIndex>");
                 sb.AppendLine("<locationInWorldCoordinates>");
-                this._locationInWorldCoordinates.Reflection(sb);
+                LocationInWorldCoordinates.Reflection(sb);
                 sb.AppendLine("</locationInWorldCoordinates>");
                 sb.AppendLine("<burstDescriptor>");
-                this._burstDescriptor.Reflection(sb);
+                BurstDescriptor.Reflection(sb);
                 sb.AppendLine("</burstDescriptor>");
                 sb.AppendLine("<velocity>");
-                this._velocity.Reflection(sb);
+                Velocity.Reflection(sb);
                 sb.AppendLine("</velocity>");
-                sb.AppendLine("<range type=\"float\">" + this._range.ToString(CultureInfo.InvariantCulture) + "</range>");
+                sb.AppendLine("<range type=\"float\">" + Range.ToString(CultureInfo.InvariantCulture) + "</range>");
                 sb.AppendLine("</FirePdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as FirePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as FirePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(FirePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._munitionID.Equals(obj._munitionID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!MunitionID.Equals(obj.MunitionID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._eventID.Equals(obj._eventID))
+            if (!EventID.Equals(obj.EventID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._fireMissionIndex != obj._fireMissionIndex)
+            if (FireMissionIndex != obj.FireMissionIndex)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._locationInWorldCoordinates.Equals(obj._locationInWorldCoordinates))
+            if (!LocationInWorldCoordinates.Equals(obj.LocationInWorldCoordinates))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._burstDescriptor.Equals(obj._burstDescriptor))
+            if (!BurstDescriptor.Equals(obj.BurstDescriptor))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._velocity.Equals(obj._velocity))
+            if (!Velocity.Equals(obj.Velocity))
             {
                 ivarsEqual = false;
             }
 
-            if (this._range != obj._range)
+            if (Range != obj.Range)
             {
                 ivarsEqual = false;
             }
@@ -478,29 +320,22 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._munitionID.GetHashCode();
-            result = GenerateHash(result) ^ this._eventID.GetHashCode();
-            result = GenerateHash(result) ^ this._fireMissionIndex.GetHashCode();
-            result = GenerateHash(result) ^ this._locationInWorldCoordinates.GetHashCode();
-            result = GenerateHash(result) ^ this._burstDescriptor.GetHashCode();
-            result = GenerateHash(result) ^ this._velocity.GetHashCode();
-            result = GenerateHash(result) ^ this._range.GetHashCode();
+            result = GenerateHash(result) ^ MunitionID.GetHashCode();
+            result = GenerateHash(result) ^ EventID.GetHashCode();
+            result = GenerateHash(result) ^ FireMissionIndex.GetHashCode();
+            result = GenerateHash(result) ^ LocationInWorldCoordinates.GetHashCode();
+            result = GenerateHash(result) ^ BurstDescriptor.GetHashCode();
+            result = GenerateHash(result) ^ Velocity.GetHashCode();
+            result = GenerateHash(result) ^ Range.GetHashCode();
 
             return result;
         }

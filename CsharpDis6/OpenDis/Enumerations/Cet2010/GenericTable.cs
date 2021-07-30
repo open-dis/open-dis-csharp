@@ -10,11 +10,11 @@ using OpenDis.Core;
 namespace OpenDis.Enumerations.Cet2010
 {
     [XmlInclude(typeof(Cet))]
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public abstract class GenericTable : CetBase, INotifyPropertyChanged
     {
-		#region Fields (10) 
+        #region Fields (10) 
 
         private List<object> itemsField;
 
@@ -28,34 +28,31 @@ namespace OpenDis.Enumerations.Cet2010
         private ulong uid;
         private string uidField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Delegates and Events (1) 
+        #region Delegates and Events (1) 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Delegates and Events 
+        #endregion Delegates and Events 
 
-		#region Properties (10) 
+        #region Properties (10) 
 
         [XmlElement("cr", typeof(Cr), Form = XmlSchemaForm.Unqualified)]
         [XmlElement("cr_range", typeof(CrRange), Form = XmlSchemaForm.Unqualified)]
         public List<object> ChangeRequests
         {
-            get
-            {
-                return this.itemsField;
-            }
+            get => itemsField;
 
             set
             {
-                if (this.itemsField == value)
+                if (itemsField == value)
                 {
                     return;
                 }
 
-                this.itemsField = value;
-                this.RaisePropertyChanged("ChangeRequests");
+                itemsField = value;
+                RaisePropertyChanged(nameof(ChangeRequests));
             }
         }
 
@@ -66,20 +63,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "deprecated")]
         public bool Deprecated
         {
-            get
-            {
-                return this.deprecatedField;
-            }
+            get => deprecatedField;
 
             set
             {
-                if (this.deprecatedField == value)
+                if (deprecatedField == value)
                 {
                     return;
                 }
 
-                this.deprecatedField = value;
-                this.RaisePropertyChanged("Deprecated");
+                deprecatedField = value;
+                RaisePropertyChanged(nameof(Deprecated));
             }
         }
 
@@ -87,47 +81,42 @@ namespace OpenDis.Enumerations.Cet2010
         /// Gets or sets a value indicating whether deprecated field is specified.
         /// </summary>
         /// <value><c>true</c> if deprecated field is specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool DeprecatedSpecified
         {
-            get
-            {
-                return this.deprecatedFieldSpecified;
-            }
+            get => deprecatedFieldSpecified;
 
             set
             {
-                if (this.deprecatedFieldSpecified == value)
+                if (deprecatedFieldSpecified == value)
                 {
                     return;
                 }
 
-                this.deprecatedFieldSpecified = value;
-                this.RaisePropertyChanged("DeprecatedSpecified");
+                deprecatedFieldSpecified = value;
+                RaisePropertyChanged(nameof(DeprecatedSpecified));
             }
         }
 
         /// <summary>
-        /// Gets or sets the value denoting the table is to be used to define the allowed groups for elements of the enumeration table.
+        /// Gets or sets the value denoting the table is to be used to define the allowed groups for elements of the enumeration
+        /// table.
         /// </summary>
         /// <value>The group value defining the allowed groups for elements of the enumeration table.</value>
         [XmlAttribute(AttributeName = "group")]
         public int Group
         {
-            get
-            {
-                return this.groupField;
-            }
+            get => groupField;
 
             set
             {
-                if (this.groupField == value)
+                if (groupField == value)
                 {
                     return;
                 }
 
-                this.groupField = value;
-                this.RaisePropertyChanged("Group");
+                groupField = value;
+                RaisePropertyChanged(nameof(Group));
             }
         }
 
@@ -135,23 +124,20 @@ namespace OpenDis.Enumerations.Cet2010
         /// Gets or sets a value indicating whether value for group is specified.
         /// </summary>
         /// <value><c>true</c> if value for group is specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool GroupSpecified
         {
-            get
-            {
-                return this.groupFieldSpecified;
-            }
+            get => groupFieldSpecified;
 
             set
             {
-                if (this.groupFieldSpecified == value)
+                if (groupFieldSpecified == value)
                 {
                     return;
                 }
 
-                this.groupFieldSpecified = value;
-                this.RaisePropertyChanged("GroupSpecified");
+                groupFieldSpecified = value;
+                RaisePropertyChanged(nameof(GroupSpecified));
             }
         }
 
@@ -162,44 +148,40 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "draft1278")]
         public bool IsDraft1278
         {
-            get
-            {
-                return this.draft1278Field;
-            }
+            get => draft1278Field;
 
             set
             {
-                if (this.draft1278Field == value)
+                if (draft1278Field == value)
                 {
                     return;
                 }
 
-                this.draft1278Field = value;
-                this.RaisePropertyChanged("IsDraft1278");
+                draft1278Field = value;
+                RaisePropertyChanged(nameof(IsDraft1278));
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the value indicating whether the enumeration entry applies to a draft revision of IEEE 1278 is specified.
+        /// Gets or sets a value indicating whether the value indicating whether the enumeration entry applies to a draft revision
+        /// of IEEE 1278 is specified.
         /// </summary>
-        /// <value><c>true</c> if the value indicating whether the enumeration entry applies to a draft revision of IEEE 1278 is specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        /// <value><c>true</c> if the value indicating whether the enumeration entry applies to a draft revision of IEEE 1278
+        /// is specified; otherwise, <c>false</c>.</value>
+        [XmlIgnore]
         public bool IsDraft1278Specified
         {
-            get
-            {
-                return this.draft1278FieldSpecified;
-            }
+            get => draft1278FieldSpecified;
 
             set
             {
-                if (this.draft1278FieldSpecified == value)
+                if (draft1278FieldSpecified == value)
                 {
                     return;
                 }
 
-                this.draft1278FieldSpecified = value;
-                this.RaisePropertyChanged("IsDraft1278Specified");
+                draft1278FieldSpecified = value;
+                RaisePropertyChanged(nameof(IsDraft1278Specified));
             }
         }
 
@@ -210,20 +192,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "name")]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get => nameField;
 
             set
             {
-                if (this.nameField == value)
+                if (nameField == value)
                 {
                     return;
                 }
 
-                this.nameField = value;
-                this.RaisePropertyChanged("Name");
+                nameField = value;
+                RaisePropertyChanged(nameof(Name));
             }
         }
 
@@ -234,21 +213,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "uid", DataType = "positiveInteger")]
         public string RawUId
         {
-            get
-            {
-                return this.uidField;
-            }
+            get => uidField;
 
             set
             {
-                if (this.uidField == value)
+                if (uidField == value)
                 {
                     return;
                 }
 
-                this.uidField = value;
-                this.uid = ulong.Parse(value, CultureInfo.InvariantCulture);
-                this.RaisePropertyChanged("RawUId");
+                uidField = value;
+                uid = ulong.Parse(value, CultureInfo.InvariantCulture);
+                RaisePropertyChanged(nameof(RawUId));
             }
         }
 
@@ -259,33 +235,27 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public ulong UId
         {
-            get
-            {
-                return this.uid;
-            }
+            get => uid;
 
             set
             {
-                if (this.uid != value)
+                if (uid != value)
                 {
-                    this.RawUId = ((ulong)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("UId");
+                    RawUId = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(UId));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (1) 
+        #region Methods (1) 
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

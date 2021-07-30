@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Type
 {
     /// <summary>
-    /// Enumeration values for SpacePlatform (es.type.kind.1.domain.5.cat, Platform-Space Category, 
+    /// Enumeration values for SpacePlatform (es.type.kind.1.domain.5.cat, Platform-Space Category,
     /// section 4.2.1.1.3.5)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

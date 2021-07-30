@@ -60,81 +60,11 @@ namespace OpenDis.Dis1998
     public partial class MinefieldDataPdu : MinefieldFamilyPdu, IEquatable<MinefieldDataPdu>
     {
         /// <summary>
-        /// Minefield ID
-        /// </summary>
-        private EntityID _minefieldID = new EntityID();
-
-        /// <summary>
-        /// ID of entity making request
-        /// </summary>
-        private EntityID _requestingEntityID = new EntityID();
-
-        /// <summary>
-        /// Minefield sequence number
-        /// </summary>
-        private ushort _minefieldSequenceNumbeer;
-
-        /// <summary>
-        /// request ID
-        /// </summary>
-        private byte _requestID;
-
-        /// <summary>
-        /// pdu sequence number
-        /// </summary>
-        private byte _pduSequenceNumber;
-
-        /// <summary>
-        /// number of pdus in response
-        /// </summary>
-        private byte _numberOfPdus;
-
-        /// <summary>
-        /// how many mines are in this PDU
-        /// </summary>
-        private byte _numberOfMinesInThisPdu;
-
-        /// <summary>
-        /// how many sensor type are in this PDU
-        /// </summary>
-        private byte _numberOfSensorTypes;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private byte _pad2;
-
-        /// <summary>
-        /// 32 boolean fields
-        /// </summary>
-        private uint _dataFilter;
-
-        /// <summary>
-        /// Mine type
-        /// </summary>
-        private EntityType _mineType = new EntityType();
-
-        /// <summary>
-        /// Sensor types, each 16 bits long
-        /// </summary>
-        private List<TwoByteChunk> _sensorTypes = new List<TwoByteChunk>();
-
-        /// <summary>
-        /// Padding to get things 32-bit aligned. ^^^this is wrong--dyanmically sized padding needed
-        /// </summary>
-        private byte _pad3;
-
-        /// <summary>
-        /// Mine locations
-        /// </summary>
-        private List<Vector3Float> _mineLocation = new List<Vector3Float>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MinefieldDataPdu"/> class.
         /// </summary>
         public MinefieldDataPdu()
         {
-            PduType = (byte)39;
+            PduType = 39;
         }
 
         /// <summary>
@@ -143,12 +73,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(MinefieldDataPdu left, MinefieldDataPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(MinefieldDataPdu left, MinefieldDataPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -156,30 +83,16 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(MinefieldDataPdu left, MinefieldDataPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._minefieldID.GetMarshalledSize();  // this._minefieldID
-            marshalSize += this._requestingEntityID.GetMarshalledSize();  // this._requestingEntityID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += MinefieldID.GetMarshalledSize();  // this._minefieldID
+            marshalSize += RequestingEntityID.GetMarshalledSize();  // this._requestingEntityID
             marshalSize += 2;  // this._minefieldSequenceNumbeer
             marshalSize += 1;  // this._requestID
             marshalSize += 1;  // this._pduSequenceNumber
@@ -188,17 +101,17 @@ namespace OpenDis.Dis1998
             marshalSize += 1;  // this._numberOfSensorTypes
             marshalSize += 1;  // this._pad2
             marshalSize += 4;  // this._dataFilter
-            marshalSize += this._mineType.GetMarshalledSize();  // this._mineType
-            for (int idx = 0; idx < this._sensorTypes.Count; idx++)
+            marshalSize += MineType.GetMarshalledSize();  // this._mineType
+            for (int idx = 0; idx < SensorTypes.Count; idx++)
             {
-                TwoByteChunk listElement = (TwoByteChunk)this._sensorTypes[idx];
+                var listElement = SensorTypes[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
             marshalSize += 1;  // this._pad3
-            for (int idx = 0; idx < this._mineLocation.Count; idx++)
+            for (int idx = 0; idx < MineLocation.Count; idx++)
             {
-                Vector3Float listElement = (Vector3Float)this._mineLocation[idx];
+                var listElement = MineLocation[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -209,255 +122,107 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Minefield ID
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "minefieldID")]
-        public EntityID MinefieldID
-        {
-            get
-            {
-                return this._minefieldID;
-            }
-
-            set
-            {
-                this._minefieldID = value;
-            }
-        }
+        public EntityID MinefieldID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID of entity making request
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "requestingEntityID")]
-        public EntityID RequestingEntityID
-        {
-            get
-            {
-                return this._requestingEntityID;
-            }
-
-            set
-            {
-                this._requestingEntityID = value;
-            }
-        }
+        public EntityID RequestingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Minefield sequence number
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "minefieldSequenceNumbeer")]
-        public ushort MinefieldSequenceNumbeer
-        {
-            get
-            {
-                return this._minefieldSequenceNumbeer;
-            }
-
-            set
-            {
-                this._minefieldSequenceNumbeer = value;
-            }
-        }
+        public ushort MinefieldSequenceNumbeer { get; set; }
 
         /// <summary>
         /// Gets or sets the request ID
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "requestID")]
-        public byte RequestID
-        {
-            get
-            {
-                return this._requestID;
-            }
-
-            set
-            {
-                this._requestID = value;
-            }
-        }
+        public byte RequestID { get; set; }
 
         /// <summary>
         /// Gets or sets the pdu sequence number
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pduSequenceNumber")]
-        public byte PduSequenceNumber
-        {
-            get
-            {
-                return this._pduSequenceNumber;
-            }
-
-            set
-            {
-                this._pduSequenceNumber = value;
-            }
-        }
+        public byte PduSequenceNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the number of pdus in response
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfPdus")]
-        public byte NumberOfPdus
-        {
-            get
-            {
-                return this._numberOfPdus;
-            }
-
-            set
-            {
-                this._numberOfPdus = value;
-            }
-        }
+        public byte NumberOfPdus { get; set; }
 
         /// <summary>
         /// Gets or sets the how many mines are in this PDU
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfMinesInThisPdu method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfMinesInThisPdu method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfMinesInThisPdu")]
-        public byte NumberOfMinesInThisPdu
-        {
-            get
-            {
-                return this._numberOfMinesInThisPdu;
-            }
-
-            set
-            {
-                this._numberOfMinesInThisPdu = value;
-            }
-        }
+        public byte NumberOfMinesInThisPdu { get; set; }
 
         /// <summary>
         /// Gets or sets the how many sensor type are in this PDU
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfSensorTypes method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfSensorTypes method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfSensorTypes")]
-        public byte NumberOfSensorTypes
-        {
-            get
-            {
-                return this._numberOfSensorTypes;
-            }
-
-            set
-            {
-                this._numberOfSensorTypes = value;
-            }
-        }
+        public byte NumberOfSensorTypes { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad2")]
-        public byte Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
-
-            set
-            {
-                this._pad2 = value;
-            }
-        }
+        public byte Pad2 { get; set; }
 
         /// <summary>
         /// Gets or sets the 32 boolean fields
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "dataFilter")]
-        public uint DataFilter
-        {
-            get
-            {
-                return this._dataFilter;
-            }
-
-            set
-            {
-                this._dataFilter = value;
-            }
-        }
+        public uint DataFilter { get; set; }
 
         /// <summary>
         /// Gets or sets the Mine type
         /// </summary>
         [XmlElement(Type = typeof(EntityType), ElementName = "mineType")]
-        public EntityType MineType
-        {
-            get
-            {
-                return this._mineType;
-            }
-
-            set
-            {
-                this._mineType = value;
-            }
-        }
+        public EntityType MineType { get; set; } = new EntityType();
 
         /// <summary>
         /// Gets the Sensor types, each 16 bits long
         /// </summary>
         [XmlElement(ElementName = "sensorTypesList", Type = typeof(List<TwoByteChunk>))]
-        public List<TwoByteChunk> SensorTypes
-        {
-            get
-            {
-                return this._sensorTypes;
-            }
-        }
+        public List<TwoByteChunk> SensorTypes { get; } = new();
 
         /// <summary>
         /// Gets or sets the Padding to get things 32-bit aligned. ^^^this is wrong--dyanmically sized padding needed
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad3")]
-        public byte Pad3
-        {
-            get
-            {
-                return this._pad3;
-            }
-
-            set
-            {
-                this._pad3 = value;
-            }
-        }
+        public byte Pad3 { get; set; }
 
         /// <summary>
         /// Gets the Mine locations
         /// </summary>
         [XmlElement(ElementName = "mineLocationList", Type = typeof(List<Vector3Float>))]
-        public List<Vector3Float> MineLocation
-        {
-            get
-            {
-                return this._mineLocation;
-            }
-        }
+        public List<Vector3Float> MineLocation { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -466,45 +231,45 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._minefieldID.Marshal(dos);
-                    this._requestingEntityID.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._minefieldSequenceNumbeer);
-                    dos.WriteUnsignedByte((byte)this._requestID);
-                    dos.WriteUnsignedByte((byte)this._pduSequenceNumber);
-                    dos.WriteUnsignedByte((byte)this._numberOfPdus);
-                    dos.WriteUnsignedByte((byte)this._mineLocation.Count);
-                    dos.WriteUnsignedByte((byte)this._sensorTypes.Count);
-                    dos.WriteUnsignedByte((byte)this._pad2);
-                    dos.WriteUnsignedInt((uint)this._dataFilter);
-                    this._mineType.Marshal(dos);
+                    MinefieldID.Marshal(dos);
+                    RequestingEntityID.Marshal(dos);
+                    dos.WriteUnsignedShort(MinefieldSequenceNumbeer);
+                    dos.WriteUnsignedByte(RequestID);
+                    dos.WriteUnsignedByte(PduSequenceNumber);
+                    dos.WriteUnsignedByte(NumberOfPdus);
+                    dos.WriteUnsignedByte((byte)MineLocation.Count);
+                    dos.WriteUnsignedByte((byte)SensorTypes.Count);
+                    dos.WriteUnsignedByte(Pad2);
+                    dos.WriteUnsignedInt(DataFilter);
+                    MineType.Marshal(dos);
 
-                    for (int idx = 0; idx < this._sensorTypes.Count; idx++)
+                    for (int idx = 0; idx < SensorTypes.Count; idx++)
                     {
-                        TwoByteChunk aTwoByteChunk = (TwoByteChunk)this._sensorTypes[idx];
+                        var aTwoByteChunk = SensorTypes[idx];
                         aTwoByteChunk.Marshal(dos);
                     }
 
-                    dos.WriteUnsignedByte((byte)this._pad3);
+                    dos.WriteUnsignedByte(Pad3);
 
-                    for (int idx = 0; idx < this._mineLocation.Count; idx++)
+                    for (int idx = 0; idx < MineLocation.Count; idx++)
                     {
-                        Vector3Float aVector3Float = (Vector3Float)this._mineLocation[idx];
+                        var aVector3Float = MineLocation[idx];
                         aVector3Float.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -519,60 +284,53 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._minefieldID.Unmarshal(dis);
-                    this._requestingEntityID.Unmarshal(dis);
-                    this._minefieldSequenceNumbeer = dis.ReadUnsignedShort();
-                    this._requestID = dis.ReadUnsignedByte();
-                    this._pduSequenceNumber = dis.ReadUnsignedByte();
-                    this._numberOfPdus = dis.ReadUnsignedByte();
-                    this._numberOfMinesInThisPdu = dis.ReadUnsignedByte();
-                    this._numberOfSensorTypes = dis.ReadUnsignedByte();
-                    this._pad2 = dis.ReadUnsignedByte();
-                    this._dataFilter = dis.ReadUnsignedInt();
-                    this._mineType.Unmarshal(dis);
+                    MinefieldID.Unmarshal(dis);
+                    RequestingEntityID.Unmarshal(dis);
+                    MinefieldSequenceNumbeer = dis.ReadUnsignedShort();
+                    RequestID = dis.ReadUnsignedByte();
+                    PduSequenceNumber = dis.ReadUnsignedByte();
+                    NumberOfPdus = dis.ReadUnsignedByte();
+                    NumberOfMinesInThisPdu = dis.ReadUnsignedByte();
+                    NumberOfSensorTypes = dis.ReadUnsignedByte();
+                    Pad2 = dis.ReadUnsignedByte();
+                    DataFilter = dis.ReadUnsignedInt();
+                    MineType.Unmarshal(dis);
 
-                    for (int idx = 0; idx < this.NumberOfSensorTypes; idx++)
+                    for (int idx = 0; idx < NumberOfSensorTypes; idx++)
                     {
-                        TwoByteChunk anX = new TwoByteChunk();
+                        var anX = new TwoByteChunk();
                         anX.Unmarshal(dis);
-                        this._sensorTypes.Add(anX);
+                        SensorTypes.Add(anX);
                     }
 
-                    this._pad3 = dis.ReadUnsignedByte();
+                    Pad3 = dis.ReadUnsignedByte();
 
-                    for (int idx = 0; idx < this.NumberOfMinesInThisPdu; idx++)
+                    for (int idx = 0; idx < NumberOfMinesInThisPdu; idx++)
                     {
-                        Vector3Float anX = new Vector3Float();
+                        var anX = new Vector3Float();
                         anX.Unmarshal(dis);
-                        this._mineLocation.Add(anX);
+                        MineLocation.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -581,35 +339,35 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<minefieldID>");
-                this._minefieldID.Reflection(sb);
+                MinefieldID.Reflection(sb);
                 sb.AppendLine("</minefieldID>");
                 sb.AppendLine("<requestingEntityID>");
-                this._requestingEntityID.Reflection(sb);
+                RequestingEntityID.Reflection(sb);
                 sb.AppendLine("</requestingEntityID>");
-                sb.AppendLine("<minefieldSequenceNumbeer type=\"ushort\">" + this._minefieldSequenceNumbeer.ToString(CultureInfo.InvariantCulture) + "</minefieldSequenceNumbeer>");
-                sb.AppendLine("<requestID type=\"byte\">" + this._requestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
-                sb.AppendLine("<pduSequenceNumber type=\"byte\">" + this._pduSequenceNumber.ToString(CultureInfo.InvariantCulture) + "</pduSequenceNumber>");
-                sb.AppendLine("<numberOfPdus type=\"byte\">" + this._numberOfPdus.ToString(CultureInfo.InvariantCulture) + "</numberOfPdus>");
-                sb.AppendLine("<mineLocation type=\"byte\">" + this._mineLocation.Count.ToString(CultureInfo.InvariantCulture) + "</mineLocation>");
-                sb.AppendLine("<sensorTypes type=\"byte\">" + this._sensorTypes.Count.ToString(CultureInfo.InvariantCulture) + "</sensorTypes>");
-                sb.AppendLine("<pad2 type=\"byte\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
-                sb.AppendLine("<dataFilter type=\"uint\">" + this._dataFilter.ToString(CultureInfo.InvariantCulture) + "</dataFilter>");
+                sb.AppendLine("<minefieldSequenceNumbeer type=\"ushort\">" + MinefieldSequenceNumbeer.ToString(CultureInfo.InvariantCulture) + "</minefieldSequenceNumbeer>");
+                sb.AppendLine("<requestID type=\"byte\">" + RequestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
+                sb.AppendLine("<pduSequenceNumber type=\"byte\">" + PduSequenceNumber.ToString(CultureInfo.InvariantCulture) + "</pduSequenceNumber>");
+                sb.AppendLine("<numberOfPdus type=\"byte\">" + NumberOfPdus.ToString(CultureInfo.InvariantCulture) + "</numberOfPdus>");
+                sb.AppendLine("<mineLocation type=\"byte\">" + MineLocation.Count.ToString(CultureInfo.InvariantCulture) + "</mineLocation>");
+                sb.AppendLine("<sensorTypes type=\"byte\">" + SensorTypes.Count.ToString(CultureInfo.InvariantCulture) + "</sensorTypes>");
+                sb.AppendLine("<pad2 type=\"byte\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                sb.AppendLine("<dataFilter type=\"uint\">" + DataFilter.ToString(CultureInfo.InvariantCulture) + "</dataFilter>");
                 sb.AppendLine("<mineType>");
-                this._mineType.Reflection(sb);
+                MineType.Reflection(sb);
                 sb.AppendLine("</mineType>");
-                for (int idx = 0; idx < this._sensorTypes.Count; idx++)
+                for (int idx = 0; idx < SensorTypes.Count; idx++)
                 {
                     sb.AppendLine("<sensorTypes" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"TwoByteChunk\">");
-                    TwoByteChunk aTwoByteChunk = (TwoByteChunk)this._sensorTypes[idx];
+                    var aTwoByteChunk = SensorTypes[idx];
                     aTwoByteChunk.Reflection(sb);
                     sb.AppendLine("</sensorTypes" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                sb.AppendLine("<pad3 type=\"byte\">" + this._pad3.ToString(CultureInfo.InvariantCulture) + "</pad3>");
-                for (int idx = 0; idx < this._mineLocation.Count; idx++)
+                sb.AppendLine("<pad3 type=\"byte\">" + Pad3.ToString(CultureInfo.InvariantCulture) + "</pad3>");
+                for (int idx = 0; idx < MineLocation.Count; idx++)
                 {
                     sb.AppendLine("<mineLocation" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"Vector3Float\">");
-                    Vector3Float aVector3Float = (Vector3Float)this._mineLocation[idx];
+                    var aVector3Float = MineLocation[idx];
                     aVector3Float.Reflection(sb);
                     sb.AppendLine("</mineLocation" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -618,137 +376,119 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as MinefieldDataPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as MinefieldDataPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(MinefieldDataPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._minefieldID.Equals(obj._minefieldID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!MinefieldID.Equals(obj.MinefieldID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._requestingEntityID.Equals(obj._requestingEntityID))
+            if (!RequestingEntityID.Equals(obj.RequestingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._minefieldSequenceNumbeer != obj._minefieldSequenceNumbeer)
+            if (MinefieldSequenceNumbeer != obj.MinefieldSequenceNumbeer)
             {
                 ivarsEqual = false;
             }
 
-            if (this._requestID != obj._requestID)
+            if (RequestID != obj.RequestID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pduSequenceNumber != obj._pduSequenceNumber)
+            if (PduSequenceNumber != obj.PduSequenceNumber)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfPdus != obj._numberOfPdus)
+            if (NumberOfPdus != obj.NumberOfPdus)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfMinesInThisPdu != obj._numberOfMinesInThisPdu)
+            if (NumberOfMinesInThisPdu != obj.NumberOfMinesInThisPdu)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfSensorTypes != obj._numberOfSensorTypes)
+            if (NumberOfSensorTypes != obj.NumberOfSensorTypes)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
 
-            if (this._dataFilter != obj._dataFilter)
+            if (DataFilter != obj.DataFilter)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._mineType.Equals(obj._mineType))
+            if (!MineType.Equals(obj.MineType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._sensorTypes.Count != obj._sensorTypes.Count)
+            if (SensorTypes.Count != obj.SensorTypes.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._sensorTypes.Count; idx++)
+                for (int idx = 0; idx < SensorTypes.Count; idx++)
                 {
-                    if (!this._sensorTypes[idx].Equals(obj._sensorTypes[idx]))
+                    if (!SensorTypes[idx].Equals(obj.SensorTypes[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._pad3 != obj._pad3)
+            if (Pad3 != obj.Pad3)
             {
                 ivarsEqual = false;
             }
 
-            if (this._mineLocation.Count != obj._mineLocation.Count)
+            if (MineLocation.Count != obj.MineLocation.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._mineLocation.Count; idx++)
+                for (int idx = 0; idx < MineLocation.Count; idx++)
                 {
-                    if (!this._mineLocation[idx].Equals(obj._mineLocation[idx]))
+                    if (!MineLocation[idx].Equals(obj.MineLocation[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -763,49 +503,42 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._minefieldID.GetHashCode();
-            result = GenerateHash(result) ^ this._requestingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._minefieldSequenceNumbeer.GetHashCode();
-            result = GenerateHash(result) ^ this._requestID.GetHashCode();
-            result = GenerateHash(result) ^ this._pduSequenceNumber.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfPdus.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfMinesInThisPdu.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfSensorTypes.GetHashCode();
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
-            result = GenerateHash(result) ^ this._dataFilter.GetHashCode();
-            result = GenerateHash(result) ^ this._mineType.GetHashCode();
+            result = GenerateHash(result) ^ MinefieldID.GetHashCode();
+            result = GenerateHash(result) ^ RequestingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ MinefieldSequenceNumbeer.GetHashCode();
+            result = GenerateHash(result) ^ RequestID.GetHashCode();
+            result = GenerateHash(result) ^ PduSequenceNumber.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfPdus.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfMinesInThisPdu.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfSensorTypes.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
+            result = GenerateHash(result) ^ DataFilter.GetHashCode();
+            result = GenerateHash(result) ^ MineType.GetHashCode();
 
-            if (this._sensorTypes.Count > 0)
+            if (SensorTypes.Count > 0)
             {
-                for (int idx = 0; idx < this._sensorTypes.Count; idx++)
+                for (int idx = 0; idx < SensorTypes.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._sensorTypes[idx].GetHashCode();
+                    result = GenerateHash(result) ^ SensorTypes[idx].GetHashCode();
                 }
             }
 
-            result = GenerateHash(result) ^ this._pad3.GetHashCode();
+            result = GenerateHash(result) ^ Pad3.GetHashCode();
 
-            if (this._mineLocation.Count > 0)
+            if (MineLocation.Count > 0)
             {
-                for (int idx = 0; idx < this._mineLocation.Count; idx++)
+                for (int idx = 0; idx < MineLocation.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._mineLocation[idx].GetHashCode();
+                    result = GenerateHash(result) ^ MineLocation[idx].GetHashCode();
                 }
             }
 

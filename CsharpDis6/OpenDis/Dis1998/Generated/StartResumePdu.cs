@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -57,26 +56,11 @@ namespace OpenDis.Dis1998
     public partial class StartResumePdu : SimulationManagementFamilyPdu, IEquatable<StartResumePdu>
     {
         /// <summary>
-        /// UTC time at which the simulation shall start or resume
-        /// </summary>
-        private ClockTime _realWorldTime = new ClockTime();
-
-        /// <summary>
-        /// Simulation clock time at which the simulation shall start or resume
-        /// </summary>
-        private ClockTime _simulationTime = new ClockTime();
-
-        /// <summary>
-        /// Identifier for the request
-        /// </summary>
-        private uint _requestID;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="StartResumePdu"/> class.
         /// </summary>
         public StartResumePdu()
         {
-            PduType = (byte)13;
+            PduType = 13;
         }
 
         /// <summary>
@@ -85,12 +69,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(StartResumePdu left, StartResumePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(StartResumePdu left, StartResumePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -98,30 +79,16 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(StartResumePdu left, StartResumePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._realWorldTime.GetMarshalledSize();  // this._realWorldTime
-            marshalSize += this._simulationTime.GetMarshalledSize();  // this._simulationTime
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += RealWorldTime.GetMarshalledSize();  // this._realWorldTime
+            marshalSize += SimulationTime.GetMarshalledSize();  // this._simulationTime
             marshalSize += 4;  // this._requestID
             return marshalSize;
         }
@@ -130,68 +97,29 @@ namespace OpenDis.Dis1998
         /// Gets or sets the UTC time at which the simulation shall start or resume
         /// </summary>
         [XmlElement(Type = typeof(ClockTime), ElementName = "realWorldTime")]
-        public ClockTime RealWorldTime
-        {
-            get
-            {
-                return this._realWorldTime;
-            }
-
-            set
-            {
-                this._realWorldTime = value;
-            }
-        }
+        public ClockTime RealWorldTime { get; set; } = new ClockTime();
 
         /// <summary>
         /// Gets or sets the Simulation clock time at which the simulation shall start or resume
         /// </summary>
         [XmlElement(Type = typeof(ClockTime), ElementName = "simulationTime")]
-        public ClockTime SimulationTime
-        {
-            get
-            {
-                return this._simulationTime;
-            }
-
-            set
-            {
-                this._simulationTime = value;
-            }
-        }
+        public ClockTime SimulationTime { get; set; } = new ClockTime();
 
         /// <summary>
         /// Gets or sets the Identifier for the request
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "requestID")]
-        public uint RequestID
-        {
-            get
-            {
-                return this._requestID;
-            }
+        public uint RequestID { get; set; }
 
-            set
-            {
-                this._requestID = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -200,23 +128,23 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._realWorldTime.Marshal(dos);
-                    this._simulationTime.Marshal(dos);
-                    dos.WriteUnsignedInt((uint)this._requestID);
+                    RealWorldTime.Marshal(dos);
+                    SimulationTime.Marshal(dos);
+                    dos.WriteUnsignedInt(RequestID);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -231,36 +159,29 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._realWorldTime.Unmarshal(dis);
-                    this._simulationTime.Unmarshal(dis);
-                    this._requestID = dis.ReadUnsignedInt();
+                    RealWorldTime.Unmarshal(dis);
+                    SimulationTime.Unmarshal(dis);
+                    RequestID = dis.ReadUnsignedInt();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -269,72 +190,54 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<realWorldTime>");
-                this._realWorldTime.Reflection(sb);
+                RealWorldTime.Reflection(sb);
                 sb.AppendLine("</realWorldTime>");
                 sb.AppendLine("<simulationTime>");
-                this._simulationTime.Reflection(sb);
+                SimulationTime.Reflection(sb);
                 sb.AppendLine("</simulationTime>");
-                sb.AppendLine("<requestID type=\"uint\">" + this._requestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
+                sb.AppendLine("<requestID type=\"uint\">" + RequestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
                 sb.AppendLine("</StartResumePdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as StartResumePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as StartResumePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(StartResumePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._realWorldTime.Equals(obj._realWorldTime))
+            bool ivarsEqual = base.Equals(obj);
+            if (!RealWorldTime.Equals(obj.RealWorldTime))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._simulationTime.Equals(obj._simulationTime))
+            if (!SimulationTime.Equals(obj.SimulationTime))
             {
                 ivarsEqual = false;
             }
 
-            if (this._requestID != obj._requestID)
+            if (RequestID != obj.RequestID)
             {
                 ivarsEqual = false;
             }
@@ -347,25 +250,18 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._realWorldTime.GetHashCode();
-            result = GenerateHash(result) ^ this._simulationTime.GetHashCode();
-            result = GenerateHash(result) ^ this._requestID.GetHashCode();
+            result = GenerateHash(result) ^ RealWorldTime.GetHashCode();
+            result = GenerateHash(result) ^ SimulationTime.GetHashCode();
+            result = GenerateHash(result) ^ RequestID.GetHashCode();
 
             return result;
         }

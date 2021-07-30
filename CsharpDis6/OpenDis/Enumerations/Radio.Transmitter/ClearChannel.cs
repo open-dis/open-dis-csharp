@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Radio.Transmitter
 {
     /// <summary>
-    /// Enumeration values for ClearChannel (radio.tx.param.cctt.clear, Clear Channel, 
+    /// Enumeration values for ClearChannel (radio.tx.param.cctt.clear, Clear Channel,
     /// section 9.1.7.1.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

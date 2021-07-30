@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Radio.Transmitter
 {
     /// <summary>
-    /// Enumeration values for SpreadSpectrum (radio.tx.mod.spreadspectrum, Spread Spectrum, 
+    /// Enumeration values for SpreadSpectrum (radio.tx.mod.spreadspectrum, Spread Spectrum,
     /// section 9.1.1.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

@@ -10,7 +10,7 @@ namespace OpenDis.Core
         /// <param name="e">The exception.</param>
         public PduExceptionEventArgs(Exception e)
         {
-            this.Exception = e;
+            Exception = e;
         }
 
         /// <summary>

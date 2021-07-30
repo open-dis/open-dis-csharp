@@ -38,10 +38,8 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Text;
 using System.Xml.Serialization;
 using OpenDis.Core;
@@ -57,21 +55,11 @@ namespace OpenDis.Dis1995
     public partial class ResupplyCancelPdu : LogisticsPdu, IEquatable<ResupplyCancelPdu>
     {
         /// <summary>
-        /// Entity that is receiving service
-        /// </summary>
-        private EntityID _receivingEntityID = new EntityID();
-
-        /// <summary>
-        /// Entity that is supplying
-        /// </summary>
-        private EntityID _supplyingEntityID = new EntityID();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ResupplyCancelPdu"/> class.
         /// </summary>
         public ResupplyCancelPdu()
         {
-            PduType = (byte)8;
+            PduType = 8;
         }
 
         /// <summary>
@@ -80,12 +68,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(ResupplyCancelPdu left, ResupplyCancelPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(ResupplyCancelPdu left, ResupplyCancelPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -93,30 +78,16 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(ResupplyCancelPdu left, ResupplyCancelPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._receivingEntityID.GetMarshalledSize();  // this._receivingEntityID
-            marshalSize += this._supplyingEntityID.GetMarshalledSize();  // this._supplyingEntityID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += ReceivingEntityID.GetMarshalledSize();  // this._receivingEntityID
+            marshalSize += SupplyingEntityID.GetMarshalledSize();  // this._supplyingEntityID
             return marshalSize;
         }
 
@@ -124,51 +95,23 @@ namespace OpenDis.Dis1995
         /// Gets or sets the Entity that is receiving service
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "receivingEntityID")]
-        public EntityID ReceivingEntityID
-        {
-            get
-            {
-                return this._receivingEntityID;
-            }
-
-            set
-            {
-                this._receivingEntityID = value;
-            }
-        }
+        public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Entity that is supplying
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "supplyingEntityID")]
-        public EntityID SupplyingEntityID
-        {
-            get
-            {
-                return this._supplyingEntityID;
-            }
+        public EntityID SupplyingEntityID { get; set; } = new EntityID();
 
-            set
-            {
-                this._supplyingEntityID = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -177,22 +120,22 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._receivingEntityID.Marshal(dos);
-                    this._supplyingEntityID.Marshal(dos);
+                    ReceivingEntityID.Marshal(dos);
+                    SupplyingEntityID.Marshal(dos);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -207,35 +150,28 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._receivingEntityID.Unmarshal(dis);
-                    this._supplyingEntityID.Unmarshal(dis);
+                    ReceivingEntityID.Unmarshal(dis);
+                    SupplyingEntityID.Unmarshal(dis);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -244,66 +180,48 @@ namespace OpenDis.Dis1995
             try
             {
                 sb.AppendLine("<receivingEntityID>");
-                this._receivingEntityID.Reflection(sb);
+                ReceivingEntityID.Reflection(sb);
                 sb.AppendLine("</receivingEntityID>");
                 sb.AppendLine("<supplyingEntityID>");
-                this._supplyingEntityID.Reflection(sb);
+                SupplyingEntityID.Reflection(sb);
                 sb.AppendLine("</supplyingEntityID>");
                 sb.AppendLine("</ResupplyCancelPdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as ResupplyCancelPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as ResupplyCancelPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(ResupplyCancelPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._receivingEntityID.Equals(obj._receivingEntityID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!ReceivingEntityID.Equals(obj.ReceivingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._supplyingEntityID.Equals(obj._supplyingEntityID))
+            if (!SupplyingEntityID.Equals(obj.SupplyingEntityID))
             {
                 ivarsEqual = false;
             }
@@ -316,24 +234,17 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._receivingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._supplyingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ ReceivingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ SupplyingEntityID.GetHashCode();
 
             return result;
         }

@@ -1,7 +1,5 @@
 ﻿using System;
 using OpenDis.Enumerations;
-using Dis1995 = OpenDis.Dis1995;
-using Dis1998 = OpenDis.Dis1998;
 
 namespace OpenDis.Core
 {
@@ -15,12 +13,9 @@ namespace OpenDis.Core
         /// <returns>
         /// Returns the corresponding PDU instance or null if type equals 0.
         /// </returns>
-        /// <exception cref="NotImplementedException">if the PDU type specified in parameter is not supported.</exception>
+        /// <exception cref="NotSupportedException">if the PDU type specified in parameter is not supported.</exception>
         /// <exception cref="ArgumentException">if the protocol version is not supported</exception>
-        public static IPdu CreatePdu(byte type, ProtocolVersion version)
-        {
-            return CreatePdu((PduType)type, version);
-        }
+        public static IPdu CreatePdu(byte type, ProtocolVersion version) => CreatePdu((PduType)type, version);
 
         /// <summary>
         /// Creates the PDU. Supported protocol versions are IEEE 1278.1-1995 and IEEE 1278.1A-1998.
@@ -29,7 +24,7 @@ namespace OpenDis.Core
         /// <returns>
         /// Returns the corresponding PDU instance or null if PduType.Other is specified.
         /// </returns>
-        /// <exception cref="NotImplementedException">if the PDU type specified in parameter is not supported.</exception>
+        /// <exception cref="NotSupportedException">if the PDU type specified in parameter is not supported.</exception>
         /// <exception cref="ArgumentException">if the protocol version is not supported</exception>
         public static IPdu CreatePdu(PduType type, ProtocolVersion version)
         {

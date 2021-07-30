@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.8.1. Detailed information about a radio transmitter. This PDU requires manually         written code to complete, since the modulation parameters are of variable length. UNFINISHED
+    /// Section 5.3.8.1. Detailed information about a radio transmitter. This PDU requires manually        written code
+    /// to complete, since the modulation parameters are of variable length. UNFINISHED
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -62,106 +63,11 @@ namespace OpenDis.Dis1998
     public partial class TransmitterPdu : RadioCommunicationsFamilyPdu, IEquatable<TransmitterPdu>
     {
         /// <summary>
-        /// linear accelleration of entity
-        /// </summary>
-        private RadioEntityType _radioEntityType = new RadioEntityType();
-
-        /// <summary>
-        /// transmit state
-        /// </summary>
-        private byte _transmitState;
-
-        /// <summary>
-        /// input source
-        /// </summary>
-        private byte _inputSource;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private ushort _padding1;
-
-        /// <summary>
-        /// Location of antenna
-        /// </summary>
-        private Vector3Double _antennaLocation = new Vector3Double();
-
-        /// <summary>
-        /// relative location of antenna
-        /// </summary>
-        private Vector3Float _relativeAntennaLocation = new Vector3Float();
-
-        /// <summary>
-        /// antenna pattern type
-        /// </summary>
-        private ushort _antennaPatternType;
-
-        /// <summary>
-        /// atenna pattern length
-        /// </summary>
-        private ushort _antennaPatternCount;
-
-        /// <summary>
-        /// frequency
-        /// </summary>
-        private ulong _frequency;
-
-        /// <summary>
-        /// transmit frequency Bandwidth
-        /// </summary>
-        private float _transmitFrequencyBandwidth;
-
-        /// <summary>
-        /// transmission power
-        /// </summary>
-        private float _power;
-
-        /// <summary>
-        /// modulation
-        /// </summary>
-        private ModulationType _modulationType = new ModulationType();
-
-        /// <summary>
-        /// crypto system enumeration
-        /// </summary>
-        private ushort _cryptoSystem;
-
-        /// <summary>
-        /// crypto system key identifer
-        /// </summary>
-        private ushort _cryptoKeyId;
-
-        /// <summary>
-        /// how many modulation parameters we have
-        /// </summary>
-        private byte _modulationParameterCount;
-
-        /// <summary>
-        /// padding2
-        /// </summary>
-        private ushort _padding2;
-
-        /// <summary>
-        /// padding3
-        /// </summary>
-        private byte _padding3;
-
-        /// <summary>
-        /// variable length list of modulation parameters
-        /// </summary>
-        private List<Vector3Float> _modulationParametersList = new List<Vector3Float>();
-
-        /// <summary>
-        /// variable length list of antenna pattern records
-        /// </summary>
-        private List<Vector3Float> _antennaPatternList = new List<Vector3Float>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="TransmitterPdu"/> class.
         /// </summary>
         public TransmitterPdu()
         {
-            PduType = (byte)25;
+            PduType = 25;
         }
 
         /// <summary>
@@ -170,12 +76,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(TransmitterPdu left, TransmitterPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(TransmitterPdu left, TransmitterPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -183,54 +86,40 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(TransmitterPdu left, TransmitterPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._radioEntityType.GetMarshalledSize();  // this._radioEntityType
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += RadioEntityType.GetMarshalledSize();  // this._radioEntityType
             marshalSize += 1;  // this._transmitState
             marshalSize += 1;  // this._inputSource
             marshalSize += 2;  // this._padding1
-            marshalSize += this._antennaLocation.GetMarshalledSize();  // this._antennaLocation
-            marshalSize += this._relativeAntennaLocation.GetMarshalledSize();  // this._relativeAntennaLocation
+            marshalSize += AntennaLocation.GetMarshalledSize();  // this._antennaLocation
+            marshalSize += RelativeAntennaLocation.GetMarshalledSize();  // this._relativeAntennaLocation
             marshalSize += 2;  // this._antennaPatternType
             marshalSize += 2;  // this._antennaPatternCount
             marshalSize += 8;  // this._frequency
             marshalSize += 4;  // this._transmitFrequencyBandwidth
             marshalSize += 4;  // this._power
-            marshalSize += this._modulationType.GetMarshalledSize();  // this._modulationType
+            marshalSize += ModulationType.GetMarshalledSize();  // this._modulationType
             marshalSize += 2;  // this._cryptoSystem
             marshalSize += 2;  // this._cryptoKeyId
             marshalSize += 1;  // this._modulationParameterCount
             marshalSize += 2;  // this._padding2
             marshalSize += 1;  // this._padding3
-            for (int idx = 0; idx < this._modulationParametersList.Count; idx++)
+            for (int idx = 0; idx < ModulationParametersList.Count; idx++)
             {
-                Vector3Float listElement = (Vector3Float)this._modulationParametersList[idx];
+                var listElement = ModulationParametersList[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
-            for (int idx = 0; idx < this._antennaPatternList.Count; idx++)
+            for (int idx = 0; idx < AntennaPatternList.Count; idx++)
             {
-                Vector3Float listElement = (Vector3Float)this._antennaPatternList[idx];
+                var listElement = AntennaPatternList[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -241,340 +130,137 @@ namespace OpenDis.Dis1998
         /// Gets or sets the linear accelleration of entity
         /// </summary>
         [XmlElement(Type = typeof(RadioEntityType), ElementName = "radioEntityType")]
-        public RadioEntityType RadioEntityType
-        {
-            get
-            {
-                return this._radioEntityType;
-            }
-
-            set
-            {
-                this._radioEntityType = value;
-            }
-        }
+        public RadioEntityType RadioEntityType { get; set; } = new RadioEntityType();
 
         /// <summary>
         /// Gets or sets the transmit state
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "transmitState")]
-        public byte TransmitState
-        {
-            get
-            {
-                return this._transmitState;
-            }
-
-            set
-            {
-                this._transmitState = value;
-            }
-        }
+        public byte TransmitState { get; set; }
 
         /// <summary>
         /// Gets or sets the input source
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "inputSource")]
-        public byte InputSource
-        {
-            get
-            {
-                return this._inputSource;
-            }
-
-            set
-            {
-                this._inputSource = value;
-            }
-        }
+        public byte InputSource { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "padding1")]
-        public ushort Padding1
-        {
-            get
-            {
-                return this._padding1;
-            }
-
-            set
-            {
-                this._padding1 = value;
-            }
-        }
+        public ushort Padding1 { get; set; }
 
         /// <summary>
         /// Gets or sets the Location of antenna
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "antennaLocation")]
-        public Vector3Double AntennaLocation
-        {
-            get
-            {
-                return this._antennaLocation;
-            }
-
-            set
-            {
-                this._antennaLocation = value;
-            }
-        }
+        public Vector3Double AntennaLocation { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the relative location of antenna
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "relativeAntennaLocation")]
-        public Vector3Float RelativeAntennaLocation
-        {
-            get
-            {
-                return this._relativeAntennaLocation;
-            }
-
-            set
-            {
-                this._relativeAntennaLocation = value;
-            }
-        }
+        public Vector3Float RelativeAntennaLocation { get; set; } = new Vector3Float();
 
         /// <summary>
         /// Gets or sets the antenna pattern type
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "antennaPatternType")]
-        public ushort AntennaPatternType
-        {
-            get
-            {
-                return this._antennaPatternType;
-            }
-
-            set
-            {
-                this._antennaPatternType = value;
-            }
-        }
+        public ushort AntennaPatternType { get; set; }
 
         /// <summary>
         /// Gets or sets the atenna pattern length
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getantennaPatternCount method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getantennaPatternCount method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "antennaPatternCount")]
-        public ushort AntennaPatternCount
-        {
-            get
-            {
-                return this._antennaPatternCount;
-            }
-
-            set
-            {
-                this._antennaPatternCount = value;
-            }
-        }
+        public ushort AntennaPatternCount { get; set; }
 
         /// <summary>
         /// Gets or sets the frequency
         /// </summary>
         [XmlElement(Type = typeof(ulong), ElementName = "frequency")]
-        public ulong Frequency
-        {
-            get
-            {
-                return this._frequency;
-            }
-
-            set
-            {
-                this._frequency = value;
-            }
-        }
+        public ulong Frequency { get; set; }
 
         /// <summary>
         /// Gets or sets the transmit frequency Bandwidth
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "transmitFrequencyBandwidth")]
-        public float TransmitFrequencyBandwidth
-        {
-            get
-            {
-                return this._transmitFrequencyBandwidth;
-            }
-
-            set
-            {
-                this._transmitFrequencyBandwidth = value;
-            }
-        }
+        public float TransmitFrequencyBandwidth { get; set; }
 
         /// <summary>
         /// Gets or sets the transmission power
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "power")]
-        public float Power
-        {
-            get
-            {
-                return this._power;
-            }
-
-            set
-            {
-                this._power = value;
-            }
-        }
+        public float Power { get; set; }
 
         /// <summary>
         /// Gets or sets the modulation
         /// </summary>
         [XmlElement(Type = typeof(ModulationType), ElementName = "modulationType")]
-        public ModulationType ModulationType
-        {
-            get
-            {
-                return this._modulationType;
-            }
-
-            set
-            {
-                this._modulationType = value;
-            }
-        }
+        public ModulationType ModulationType { get; set; } = new ModulationType();
 
         /// <summary>
         /// Gets or sets the crypto system enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "cryptoSystem")]
-        public ushort CryptoSystem
-        {
-            get
-            {
-                return this._cryptoSystem;
-            }
-
-            set
-            {
-                this._cryptoSystem = value;
-            }
-        }
+        public ushort CryptoSystem { get; set; }
 
         /// <summary>
         /// Gets or sets the crypto system key identifer
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "cryptoKeyId")]
-        public ushort CryptoKeyId
-        {
-            get
-            {
-                return this._cryptoKeyId;
-            }
-
-            set
-            {
-                this._cryptoKeyId = value;
-            }
-        }
+        public ushort CryptoKeyId { get; set; }
 
         /// <summary>
         /// Gets or sets the how many modulation parameters we have
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getmodulationParameterCount method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getmodulationParameterCount method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "modulationParameterCount")]
-        public byte ModulationParameterCount
-        {
-            get
-            {
-                return this._modulationParameterCount;
-            }
-
-            set
-            {
-                this._modulationParameterCount = value;
-            }
-        }
+        public byte ModulationParameterCount { get; set; }
 
         /// <summary>
         /// Gets or sets the padding2
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "padding2")]
-        public ushort Padding2
-        {
-            get
-            {
-                return this._padding2;
-            }
-
-            set
-            {
-                this._padding2 = value;
-            }
-        }
+        public ushort Padding2 { get; set; }
 
         /// <summary>
         /// Gets or sets the padding3
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "padding3")]
-        public byte Padding3
-        {
-            get
-            {
-                return this._padding3;
-            }
-
-            set
-            {
-                this._padding3 = value;
-            }
-        }
+        public byte Padding3 { get; set; }
 
         /// <summary>
         /// Gets the variable length list of modulation parameters
         /// </summary>
         [XmlElement(ElementName = "modulationParametersListList", Type = typeof(List<Vector3Float>))]
-        public List<Vector3Float> ModulationParametersList
-        {
-            get
-            {
-                return this._modulationParametersList;
-            }
-        }
+        public List<Vector3Float> ModulationParametersList { get; } = new();
 
         /// <summary>
         /// Gets the variable length list of antenna pattern records
         /// </summary>
         [XmlElement(ElementName = "antennaPatternListList", Type = typeof(List<Vector3Float>))]
-        public List<Vector3Float> AntennaPatternList
-        {
-            get
-            {
-                return this._antennaPatternList;
-            }
-        }
+        public List<Vector3Float> AntennaPatternList { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -583,49 +269,49 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._radioEntityType.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._transmitState);
-                    dos.WriteUnsignedByte((byte)this._inputSource);
-                    dos.WriteUnsignedShort((ushort)this._padding1);
-                    this._antennaLocation.Marshal(dos);
-                    this._relativeAntennaLocation.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._antennaPatternType);
-                    dos.WriteUnsignedShort((ushort)this._antennaPatternList.Count);
-                    dos.WriteUnsignedLong((ulong)this._frequency);
-                    dos.WriteFloat((float)this._transmitFrequencyBandwidth);
-                    dos.WriteFloat((float)this._power);
-                    this._modulationType.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._cryptoSystem);
-                    dos.WriteUnsignedShort((ushort)this._cryptoKeyId);
-                    dos.WriteUnsignedByte((byte)this._modulationParametersList.Count);
-                    dos.WriteUnsignedShort((ushort)this._padding2);
-                    dos.WriteUnsignedByte((byte)this._padding3);
+                    RadioEntityType.Marshal(dos);
+                    dos.WriteUnsignedByte(TransmitState);
+                    dos.WriteUnsignedByte(InputSource);
+                    dos.WriteUnsignedShort(Padding1);
+                    AntennaLocation.Marshal(dos);
+                    RelativeAntennaLocation.Marshal(dos);
+                    dos.WriteUnsignedShort(AntennaPatternType);
+                    dos.WriteUnsignedShort((ushort)AntennaPatternList.Count);
+                    dos.WriteUnsignedLong(Frequency);
+                    dos.WriteFloat((float)TransmitFrequencyBandwidth);
+                    dos.WriteFloat((float)Power);
+                    ModulationType.Marshal(dos);
+                    dos.WriteUnsignedShort(CryptoSystem);
+                    dos.WriteUnsignedShort(CryptoKeyId);
+                    dos.WriteUnsignedByte((byte)ModulationParametersList.Count);
+                    dos.WriteUnsignedShort(Padding2);
+                    dos.WriteUnsignedByte(Padding3);
 
-                    for (int idx = 0; idx < this._modulationParametersList.Count; idx++)
+                    for (int idx = 0; idx < ModulationParametersList.Count; idx++)
                     {
-                        Vector3Float aVector3Float = (Vector3Float)this._modulationParametersList[idx];
+                        var aVector3Float = ModulationParametersList[idx];
                         aVector3Float.Marshal(dos);
                     }
 
-                    for (int idx = 0; idx < this._antennaPatternList.Count; idx++)
+                    for (int idx = 0; idx < AntennaPatternList.Count; idx++)
                     {
-                        Vector3Float aVector3Float = (Vector3Float)this._antennaPatternList[idx];
+                        var aVector3Float = AntennaPatternList[idx];
                         aVector3Float.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -640,64 +326,57 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._radioEntityType.Unmarshal(dis);
-                    this._transmitState = dis.ReadUnsignedByte();
-                    this._inputSource = dis.ReadUnsignedByte();
-                    this._padding1 = dis.ReadUnsignedShort();
-                    this._antennaLocation.Unmarshal(dis);
-                    this._relativeAntennaLocation.Unmarshal(dis);
-                    this._antennaPatternType = dis.ReadUnsignedShort();
-                    this._antennaPatternCount = dis.ReadUnsignedShort();
-                    this._frequency = dis.ReadUnsignedLong();
-                    this._transmitFrequencyBandwidth = dis.ReadFloat();
-                    this._power = dis.ReadFloat();
-                    this._modulationType.Unmarshal(dis);
-                    this._cryptoSystem = dis.ReadUnsignedShort();
-                    this._cryptoKeyId = dis.ReadUnsignedShort();
-                    this._modulationParameterCount = dis.ReadUnsignedByte();
-                    this._padding2 = dis.ReadUnsignedShort();
-                    this._padding3 = dis.ReadUnsignedByte();
+                    RadioEntityType.Unmarshal(dis);
+                    TransmitState = dis.ReadUnsignedByte();
+                    InputSource = dis.ReadUnsignedByte();
+                    Padding1 = dis.ReadUnsignedShort();
+                    AntennaLocation.Unmarshal(dis);
+                    RelativeAntennaLocation.Unmarshal(dis);
+                    AntennaPatternType = dis.ReadUnsignedShort();
+                    AntennaPatternCount = dis.ReadUnsignedShort();
+                    Frequency = dis.ReadUnsignedLong();
+                    TransmitFrequencyBandwidth = dis.ReadFloat();
+                    Power = dis.ReadFloat();
+                    ModulationType.Unmarshal(dis);
+                    CryptoSystem = dis.ReadUnsignedShort();
+                    CryptoKeyId = dis.ReadUnsignedShort();
+                    ModulationParameterCount = dis.ReadUnsignedByte();
+                    Padding2 = dis.ReadUnsignedShort();
+                    Padding3 = dis.ReadUnsignedByte();
 
-                    for (int idx = 0; idx < this.ModulationParameterCount; idx++)
+                    for (int idx = 0; idx < ModulationParameterCount; idx++)
                     {
-                        Vector3Float anX = new Vector3Float();
+                        var anX = new Vector3Float();
                         anX.Unmarshal(dis);
-                        this._modulationParametersList.Add(anX);
+                        ModulationParametersList.Add(anX);
                     }
 
-                    for (int idx = 0; idx < this.AntennaPatternCount; idx++)
+                    for (int idx = 0; idx < AntennaPatternCount; idx++)
                     {
-                        Vector3Float anX = new Vector3Float();
+                        var anX = new Vector3Float();
                         anX.Unmarshal(dis);
-                        this._antennaPatternList.Add(anX);
+                        AntennaPatternList.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -706,42 +385,42 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<radioEntityType>");
-                this._radioEntityType.Reflection(sb);
+                RadioEntityType.Reflection(sb);
                 sb.AppendLine("</radioEntityType>");
-                sb.AppendLine("<transmitState type=\"byte\">" + this._transmitState.ToString(CultureInfo.InvariantCulture) + "</transmitState>");
-                sb.AppendLine("<inputSource type=\"byte\">" + this._inputSource.ToString(CultureInfo.InvariantCulture) + "</inputSource>");
-                sb.AppendLine("<padding1 type=\"ushort\">" + this._padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
+                sb.AppendLine("<transmitState type=\"byte\">" + TransmitState.ToString(CultureInfo.InvariantCulture) + "</transmitState>");
+                sb.AppendLine("<inputSource type=\"byte\">" + InputSource.ToString(CultureInfo.InvariantCulture) + "</inputSource>");
+                sb.AppendLine("<padding1 type=\"ushort\">" + Padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
                 sb.AppendLine("<antennaLocation>");
-                this._antennaLocation.Reflection(sb);
+                AntennaLocation.Reflection(sb);
                 sb.AppendLine("</antennaLocation>");
                 sb.AppendLine("<relativeAntennaLocation>");
-                this._relativeAntennaLocation.Reflection(sb);
+                RelativeAntennaLocation.Reflection(sb);
                 sb.AppendLine("</relativeAntennaLocation>");
-                sb.AppendLine("<antennaPatternType type=\"ushort\">" + this._antennaPatternType.ToString(CultureInfo.InvariantCulture) + "</antennaPatternType>");
-                sb.AppendLine("<antennaPatternList type=\"ushort\">" + this._antennaPatternList.Count.ToString(CultureInfo.InvariantCulture) + "</antennaPatternList>");
-                sb.AppendLine("<frequency type=\"ulong\">" + this._frequency.ToString(CultureInfo.InvariantCulture) + "</frequency>");
-                sb.AppendLine("<transmitFrequencyBandwidth type=\"float\">" + this._transmitFrequencyBandwidth.ToString(CultureInfo.InvariantCulture) + "</transmitFrequencyBandwidth>");
-                sb.AppendLine("<power type=\"float\">" + this._power.ToString(CultureInfo.InvariantCulture) + "</power>");
+                sb.AppendLine("<antennaPatternType type=\"ushort\">" + AntennaPatternType.ToString(CultureInfo.InvariantCulture) + "</antennaPatternType>");
+                sb.AppendLine("<antennaPatternList type=\"ushort\">" + AntennaPatternList.Count.ToString(CultureInfo.InvariantCulture) + "</antennaPatternList>");
+                sb.AppendLine("<frequency type=\"ulong\">" + Frequency.ToString(CultureInfo.InvariantCulture) + "</frequency>");
+                sb.AppendLine("<transmitFrequencyBandwidth type=\"float\">" + TransmitFrequencyBandwidth.ToString(CultureInfo.InvariantCulture) + "</transmitFrequencyBandwidth>");
+                sb.AppendLine("<power type=\"float\">" + Power.ToString(CultureInfo.InvariantCulture) + "</power>");
                 sb.AppendLine("<modulationType>");
-                this._modulationType.Reflection(sb);
+                ModulationType.Reflection(sb);
                 sb.AppendLine("</modulationType>");
-                sb.AppendLine("<cryptoSystem type=\"ushort\">" + this._cryptoSystem.ToString(CultureInfo.InvariantCulture) + "</cryptoSystem>");
-                sb.AppendLine("<cryptoKeyId type=\"ushort\">" + this._cryptoKeyId.ToString(CultureInfo.InvariantCulture) + "</cryptoKeyId>");
-                sb.AppendLine("<modulationParametersList type=\"byte\">" + this._modulationParametersList.Count.ToString(CultureInfo.InvariantCulture) + "</modulationParametersList>");
-                sb.AppendLine("<padding2 type=\"ushort\">" + this._padding2.ToString(CultureInfo.InvariantCulture) + "</padding2>");
-                sb.AppendLine("<padding3 type=\"byte\">" + this._padding3.ToString(CultureInfo.InvariantCulture) + "</padding3>");
-                for (int idx = 0; idx < this._modulationParametersList.Count; idx++)
+                sb.AppendLine("<cryptoSystem type=\"ushort\">" + CryptoSystem.ToString(CultureInfo.InvariantCulture) + "</cryptoSystem>");
+                sb.AppendLine("<cryptoKeyId type=\"ushort\">" + CryptoKeyId.ToString(CultureInfo.InvariantCulture) + "</cryptoKeyId>");
+                sb.AppendLine("<modulationParametersList type=\"byte\">" + ModulationParametersList.Count.ToString(CultureInfo.InvariantCulture) + "</modulationParametersList>");
+                sb.AppendLine("<padding2 type=\"ushort\">" + Padding2.ToString(CultureInfo.InvariantCulture) + "</padding2>");
+                sb.AppendLine("<padding3 type=\"byte\">" + Padding3.ToString(CultureInfo.InvariantCulture) + "</padding3>");
+                for (int idx = 0; idx < ModulationParametersList.Count; idx++)
                 {
                     sb.AppendLine("<modulationParametersList" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"Vector3Float\">");
-                    Vector3Float aVector3Float = (Vector3Float)this._modulationParametersList[idx];
+                    var aVector3Float = ModulationParametersList[idx];
                     aVector3Float.Reflection(sb);
                     sb.AppendLine("</modulationParametersList" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                for (int idx = 0; idx < this._antennaPatternList.Count; idx++)
+                for (int idx = 0; idx < AntennaPatternList.Count; idx++)
                 {
                     sb.AppendLine("<antennaPatternList" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"Vector3Float\">");
-                    Vector3Float aVector3Float = (Vector3Float)this._antennaPatternList[idx];
+                    var aVector3Float = AntennaPatternList[idx];
                     aVector3Float.Reflection(sb);
                     sb.AppendLine("</antennaPatternList" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -750,162 +429,144 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as TransmitterPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as TransmitterPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(TransmitterPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._radioEntityType.Equals(obj._radioEntityType))
+            bool ivarsEqual = base.Equals(obj);
+            if (!RadioEntityType.Equals(obj.RadioEntityType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._transmitState != obj._transmitState)
+            if (TransmitState != obj.TransmitState)
             {
                 ivarsEqual = false;
             }
 
-            if (this._inputSource != obj._inputSource)
+            if (InputSource != obj.InputSource)
             {
                 ivarsEqual = false;
             }
 
-            if (this._padding1 != obj._padding1)
+            if (Padding1 != obj.Padding1)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._antennaLocation.Equals(obj._antennaLocation))
+            if (!AntennaLocation.Equals(obj.AntennaLocation))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._relativeAntennaLocation.Equals(obj._relativeAntennaLocation))
+            if (!RelativeAntennaLocation.Equals(obj.RelativeAntennaLocation))
             {
                 ivarsEqual = false;
             }
 
-            if (this._antennaPatternType != obj._antennaPatternType)
+            if (AntennaPatternType != obj.AntennaPatternType)
             {
                 ivarsEqual = false;
             }
 
-            if (this._antennaPatternCount != obj._antennaPatternCount)
+            if (AntennaPatternCount != obj.AntennaPatternCount)
             {
                 ivarsEqual = false;
             }
 
-            if (this._frequency != obj._frequency)
+            if (Frequency != obj.Frequency)
             {
                 ivarsEqual = false;
             }
 
-            if (this._transmitFrequencyBandwidth != obj._transmitFrequencyBandwidth)
+            if (TransmitFrequencyBandwidth != obj.TransmitFrequencyBandwidth)
             {
                 ivarsEqual = false;
             }
 
-            if (this._power != obj._power)
+            if (Power != obj.Power)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._modulationType.Equals(obj._modulationType))
+            if (!ModulationType.Equals(obj.ModulationType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._cryptoSystem != obj._cryptoSystem)
+            if (CryptoSystem != obj.CryptoSystem)
             {
                 ivarsEqual = false;
             }
 
-            if (this._cryptoKeyId != obj._cryptoKeyId)
+            if (CryptoKeyId != obj.CryptoKeyId)
             {
                 ivarsEqual = false;
             }
 
-            if (this._modulationParameterCount != obj._modulationParameterCount)
+            if (ModulationParameterCount != obj.ModulationParameterCount)
             {
                 ivarsEqual = false;
             }
 
-            if (this._padding2 != obj._padding2)
+            if (Padding2 != obj.Padding2)
             {
                 ivarsEqual = false;
             }
 
-            if (this._padding3 != obj._padding3)
+            if (Padding3 != obj.Padding3)
             {
                 ivarsEqual = false;
             }
 
-            if (this._modulationParametersList.Count != obj._modulationParametersList.Count)
+            if (ModulationParametersList.Count != obj.ModulationParametersList.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._modulationParametersList.Count; idx++)
+                for (int idx = 0; idx < ModulationParametersList.Count; idx++)
                 {
-                    if (!this._modulationParametersList[idx].Equals(obj._modulationParametersList[idx]))
+                    if (!ModulationParametersList[idx].Equals(obj.ModulationParametersList[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._antennaPatternList.Count != obj._antennaPatternList.Count)
+            if (AntennaPatternList.Count != obj.AntennaPatternList.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._antennaPatternList.Count; idx++)
+                for (int idx = 0; idx < AntennaPatternList.Count; idx++)
                 {
-                    if (!this._antennaPatternList[idx].Equals(obj._antennaPatternList[idx]))
+                    if (!AntennaPatternList[idx].Equals(obj.AntennaPatternList[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -920,53 +581,46 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._radioEntityType.GetHashCode();
-            result = GenerateHash(result) ^ this._transmitState.GetHashCode();
-            result = GenerateHash(result) ^ this._inputSource.GetHashCode();
-            result = GenerateHash(result) ^ this._padding1.GetHashCode();
-            result = GenerateHash(result) ^ this._antennaLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._relativeAntennaLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._antennaPatternType.GetHashCode();
-            result = GenerateHash(result) ^ this._antennaPatternCount.GetHashCode();
-            result = GenerateHash(result) ^ this._frequency.GetHashCode();
-            result = GenerateHash(result) ^ this._transmitFrequencyBandwidth.GetHashCode();
-            result = GenerateHash(result) ^ this._power.GetHashCode();
-            result = GenerateHash(result) ^ this._modulationType.GetHashCode();
-            result = GenerateHash(result) ^ this._cryptoSystem.GetHashCode();
-            result = GenerateHash(result) ^ this._cryptoKeyId.GetHashCode();
-            result = GenerateHash(result) ^ this._modulationParameterCount.GetHashCode();
-            result = GenerateHash(result) ^ this._padding2.GetHashCode();
-            result = GenerateHash(result) ^ this._padding3.GetHashCode();
+            result = GenerateHash(result) ^ RadioEntityType.GetHashCode();
+            result = GenerateHash(result) ^ TransmitState.GetHashCode();
+            result = GenerateHash(result) ^ InputSource.GetHashCode();
+            result = GenerateHash(result) ^ Padding1.GetHashCode();
+            result = GenerateHash(result) ^ AntennaLocation.GetHashCode();
+            result = GenerateHash(result) ^ RelativeAntennaLocation.GetHashCode();
+            result = GenerateHash(result) ^ AntennaPatternType.GetHashCode();
+            result = GenerateHash(result) ^ AntennaPatternCount.GetHashCode();
+            result = GenerateHash(result) ^ Frequency.GetHashCode();
+            result = GenerateHash(result) ^ TransmitFrequencyBandwidth.GetHashCode();
+            result = GenerateHash(result) ^ Power.GetHashCode();
+            result = GenerateHash(result) ^ ModulationType.GetHashCode();
+            result = GenerateHash(result) ^ CryptoSystem.GetHashCode();
+            result = GenerateHash(result) ^ CryptoKeyId.GetHashCode();
+            result = GenerateHash(result) ^ ModulationParameterCount.GetHashCode();
+            result = GenerateHash(result) ^ Padding2.GetHashCode();
+            result = GenerateHash(result) ^ Padding3.GetHashCode();
 
-            if (this._modulationParametersList.Count > 0)
+            if (ModulationParametersList.Count > 0)
             {
-                for (int idx = 0; idx < this._modulationParametersList.Count; idx++)
+                for (int idx = 0; idx < ModulationParametersList.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._modulationParametersList[idx].GetHashCode();
+                    result = GenerateHash(result) ^ ModulationParametersList[idx].GetHashCode();
                 }
             }
 
-            if (this._antennaPatternList.Count > 0)
+            if (AntennaPatternList.Count > 0)
             {
-                for (int idx = 0; idx < this._antennaPatternList.Count; idx++)
+                for (int idx = 0; idx < AntennaPatternList.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._antennaPatternList[idx].GetHashCode();
+                    result = GenerateHash(result) ^ AntennaPatternList[idx].GetHashCode();
                 }
             }
 

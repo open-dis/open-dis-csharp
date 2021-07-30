@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -49,7 +48,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.11.3: Inormation abut the addition or modification of a synthecic enviroment object that is anchored      to the terrain with a single point. COMPLETE
+    /// Section 5.3.11.3: Inormation abut the addition or modification of a synthecic enviroment object that is anchored
+    ///     to the terrain with a single point. COMPLETE
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -61,71 +61,11 @@ namespace OpenDis.Dis1998
     public partial class PointObjectStatePdu : SyntheticEnvironmentFamilyPdu, IEquatable<PointObjectStatePdu>
     {
         /// <summary>
-        /// Object in synthetic environment
-        /// </summary>
-        private EntityID _objectID = new EntityID();
-
-        /// <summary>
-        /// Object with which this point object is associated
-        /// </summary>
-        private EntityID _referencedObjectID = new EntityID();
-
-        /// <summary>
-        /// unique update number of each state transition of an object
-        /// </summary>
-        private ushort _updateNumber;
-
-        /// <summary>
-        /// force ID
-        /// </summary>
-        private byte _forceID;
-
-        /// <summary>
-        /// modifications
-        /// </summary>
-        private byte _modifications;
-
-        /// <summary>
-        /// Object type
-        /// </summary>
-        private ObjectType _objectType = new ObjectType();
-
-        /// <summary>
-        /// Object location
-        /// </summary>
-        private Vector3Double _objectLocation = new Vector3Double();
-
-        /// <summary>
-        /// Object orientation
-        /// </summary>
-        private Orientation _objectOrientation = new Orientation();
-
-        /// <summary>
-        /// Object apperance
-        /// </summary>
-        private double _objectAppearance;
-
-        /// <summary>
-        /// requesterID
-        /// </summary>
-        private SimulationAddress _requesterID = new SimulationAddress();
-
-        /// <summary>
-        /// receiver ID
-        /// </summary>
-        private SimulationAddress _receivingID = new SimulationAddress();
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private uint _pad2;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="PointObjectStatePdu"/> class.
         /// </summary>
         public PointObjectStatePdu()
         {
-            PduType = (byte)43;
+            PduType = 43;
         }
 
         /// <summary>
@@ -134,12 +74,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(PointObjectStatePdu left, PointObjectStatePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(PointObjectStatePdu left, PointObjectStatePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -147,39 +84,25 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(PointObjectStatePdu left, PointObjectStatePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._objectID.GetMarshalledSize();  // this._objectID
-            marshalSize += this._referencedObjectID.GetMarshalledSize();  // this._referencedObjectID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += ObjectID.GetMarshalledSize();  // this._objectID
+            marshalSize += ReferencedObjectID.GetMarshalledSize();  // this._referencedObjectID
             marshalSize += 2;  // this._updateNumber
             marshalSize += 1;  // this._forceID
             marshalSize += 1;  // this._modifications
-            marshalSize += this._objectType.GetMarshalledSize();  // this._objectType
-            marshalSize += this._objectLocation.GetMarshalledSize();  // this._objectLocation
-            marshalSize += this._objectOrientation.GetMarshalledSize();  // this._objectOrientation
+            marshalSize += ObjectType.GetMarshalledSize();  // this._objectType
+            marshalSize += ObjectLocation.GetMarshalledSize();  // this._objectLocation
+            marshalSize += ObjectOrientation.GetMarshalledSize();  // this._objectOrientation
             marshalSize += 8;  // this._objectAppearance
-            marshalSize += this._requesterID.GetMarshalledSize();  // this._requesterID
-            marshalSize += this._receivingID.GetMarshalledSize();  // this._receivingID
+            marshalSize += RequesterID.GetMarshalledSize();  // this._requesterID
+            marshalSize += ReceivingID.GetMarshalledSize();  // this._receivingID
             marshalSize += 4;  // this._pad2
             return marshalSize;
         }
@@ -188,221 +111,83 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Object in synthetic environment
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "objectID")]
-        public EntityID ObjectID
-        {
-            get
-            {
-                return this._objectID;
-            }
-
-            set
-            {
-                this._objectID = value;
-            }
-        }
+        public EntityID ObjectID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Object with which this point object is associated
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "referencedObjectID")]
-        public EntityID ReferencedObjectID
-        {
-            get
-            {
-                return this._referencedObjectID;
-            }
-
-            set
-            {
-                this._referencedObjectID = value;
-            }
-        }
+        public EntityID ReferencedObjectID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the unique update number of each state transition of an object
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "updateNumber")]
-        public ushort UpdateNumber
-        {
-            get
-            {
-                return this._updateNumber;
-            }
-
-            set
-            {
-                this._updateNumber = value;
-            }
-        }
+        public ushort UpdateNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the force ID
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "forceID")]
-        public byte ForceID
-        {
-            get
-            {
-                return this._forceID;
-            }
-
-            set
-            {
-                this._forceID = value;
-            }
-        }
+        public byte ForceID { get; set; }
 
         /// <summary>
         /// Gets or sets the modifications
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "modifications")]
-        public byte Modifications
-        {
-            get
-            {
-                return this._modifications;
-            }
-
-            set
-            {
-                this._modifications = value;
-            }
-        }
+        public byte Modifications { get; set; }
 
         /// <summary>
         /// Gets or sets the Object type
         /// </summary>
         [XmlElement(Type = typeof(ObjectType), ElementName = "objectType")]
-        public ObjectType ObjectType
-        {
-            get
-            {
-                return this._objectType;
-            }
-
-            set
-            {
-                this._objectType = value;
-            }
-        }
+        public ObjectType ObjectType { get; set; } = new ObjectType();
 
         /// <summary>
         /// Gets or sets the Object location
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "objectLocation")]
-        public Vector3Double ObjectLocation
-        {
-            get
-            {
-                return this._objectLocation;
-            }
-
-            set
-            {
-                this._objectLocation = value;
-            }
-        }
+        public Vector3Double ObjectLocation { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the Object orientation
         /// </summary>
         [XmlElement(Type = typeof(Orientation), ElementName = "objectOrientation")]
-        public Orientation ObjectOrientation
-        {
-            get
-            {
-                return this._objectOrientation;
-            }
-
-            set
-            {
-                this._objectOrientation = value;
-            }
-        }
+        public Orientation ObjectOrientation { get; set; } = new Orientation();
 
         /// <summary>
         /// Gets or sets the Object apperance
         /// </summary>
         [XmlElement(Type = typeof(double), ElementName = "objectAppearance")]
-        public double ObjectAppearance
-        {
-            get
-            {
-                return this._objectAppearance;
-            }
-
-            set
-            {
-                this._objectAppearance = value;
-            }
-        }
+        public double ObjectAppearance { get; set; }
 
         /// <summary>
         /// Gets or sets the requesterID
         /// </summary>
         [XmlElement(Type = typeof(SimulationAddress), ElementName = "requesterID")]
-        public SimulationAddress RequesterID
-        {
-            get
-            {
-                return this._requesterID;
-            }
-
-            set
-            {
-                this._requesterID = value;
-            }
-        }
+        public SimulationAddress RequesterID { get; set; } = new SimulationAddress();
 
         /// <summary>
         /// Gets or sets the receiver ID
         /// </summary>
         [XmlElement(Type = typeof(SimulationAddress), ElementName = "receivingID")]
-        public SimulationAddress ReceivingID
-        {
-            get
-            {
-                return this._receivingID;
-            }
-
-            set
-            {
-                this._receivingID = value;
-            }
-        }
+        public SimulationAddress ReceivingID { get; set; } = new SimulationAddress();
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "pad2")]
-        public uint Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
+        public uint Pad2 { get; set; }
 
-            set
-            {
-                this._pad2 = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -411,32 +196,32 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._objectID.Marshal(dos);
-                    this._referencedObjectID.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._updateNumber);
-                    dos.WriteUnsignedByte((byte)this._forceID);
-                    dos.WriteUnsignedByte((byte)this._modifications);
-                    this._objectType.Marshal(dos);
-                    this._objectLocation.Marshal(dos);
-                    this._objectOrientation.Marshal(dos);
-                    dos.WriteDouble((double)this._objectAppearance);
-                    this._requesterID.Marshal(dos);
-                    this._receivingID.Marshal(dos);
-                    dos.WriteUnsignedInt((uint)this._pad2);
+                    ObjectID.Marshal(dos);
+                    ReferencedObjectID.Marshal(dos);
+                    dos.WriteUnsignedShort(UpdateNumber);
+                    dos.WriteUnsignedByte(ForceID);
+                    dos.WriteUnsignedByte(Modifications);
+                    ObjectType.Marshal(dos);
+                    ObjectLocation.Marshal(dos);
+                    ObjectOrientation.Marshal(dos);
+                    dos.WriteDouble(ObjectAppearance);
+                    RequesterID.Marshal(dos);
+                    ReceivingID.Marshal(dos);
+                    dos.WriteUnsignedInt(Pad2);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -451,45 +236,38 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._objectID.Unmarshal(dis);
-                    this._referencedObjectID.Unmarshal(dis);
-                    this._updateNumber = dis.ReadUnsignedShort();
-                    this._forceID = dis.ReadUnsignedByte();
-                    this._modifications = dis.ReadUnsignedByte();
-                    this._objectType.Unmarshal(dis);
-                    this._objectLocation.Unmarshal(dis);
-                    this._objectOrientation.Unmarshal(dis);
-                    this._objectAppearance = dis.ReadDouble();
-                    this._requesterID.Unmarshal(dis);
-                    this._receivingID.Unmarshal(dis);
-                    this._pad2 = dis.ReadUnsignedInt();
+                    ObjectID.Unmarshal(dis);
+                    ReferencedObjectID.Unmarshal(dis);
+                    UpdateNumber = dis.ReadUnsignedShort();
+                    ForceID = dis.ReadUnsignedByte();
+                    Modifications = dis.ReadUnsignedByte();
+                    ObjectType.Unmarshal(dis);
+                    ObjectLocation.Unmarshal(dis);
+                    ObjectOrientation.Unmarshal(dis);
+                    ObjectAppearance = dis.ReadDouble();
+                    RequesterID.Unmarshal(dis);
+                    ReceivingID.Unmarshal(dis);
+                    Pad2 = dis.ReadUnsignedInt();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -498,136 +276,118 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<objectID>");
-                this._objectID.Reflection(sb);
+                ObjectID.Reflection(sb);
                 sb.AppendLine("</objectID>");
                 sb.AppendLine("<referencedObjectID>");
-                this._referencedObjectID.Reflection(sb);
+                ReferencedObjectID.Reflection(sb);
                 sb.AppendLine("</referencedObjectID>");
-                sb.AppendLine("<updateNumber type=\"ushort\">" + this._updateNumber.ToString(CultureInfo.InvariantCulture) + "</updateNumber>");
-                sb.AppendLine("<forceID type=\"byte\">" + this._forceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
-                sb.AppendLine("<modifications type=\"byte\">" + this._modifications.ToString(CultureInfo.InvariantCulture) + "</modifications>");
+                sb.AppendLine("<updateNumber type=\"ushort\">" + UpdateNumber.ToString(CultureInfo.InvariantCulture) + "</updateNumber>");
+                sb.AppendLine("<forceID type=\"byte\">" + ForceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
+                sb.AppendLine("<modifications type=\"byte\">" + Modifications.ToString(CultureInfo.InvariantCulture) + "</modifications>");
                 sb.AppendLine("<objectType>");
-                this._objectType.Reflection(sb);
+                ObjectType.Reflection(sb);
                 sb.AppendLine("</objectType>");
                 sb.AppendLine("<objectLocation>");
-                this._objectLocation.Reflection(sb);
+                ObjectLocation.Reflection(sb);
                 sb.AppendLine("</objectLocation>");
                 sb.AppendLine("<objectOrientation>");
-                this._objectOrientation.Reflection(sb);
+                ObjectOrientation.Reflection(sb);
                 sb.AppendLine("</objectOrientation>");
-                sb.AppendLine("<objectAppearance type=\"double\">" + this._objectAppearance.ToString(CultureInfo.InvariantCulture) + "</objectAppearance>");
+                sb.AppendLine("<objectAppearance type=\"double\">" + ObjectAppearance.ToString(CultureInfo.InvariantCulture) + "</objectAppearance>");
                 sb.AppendLine("<requesterID>");
-                this._requesterID.Reflection(sb);
+                RequesterID.Reflection(sb);
                 sb.AppendLine("</requesterID>");
                 sb.AppendLine("<receivingID>");
-                this._receivingID.Reflection(sb);
+                ReceivingID.Reflection(sb);
                 sb.AppendLine("</receivingID>");
-                sb.AppendLine("<pad2 type=\"uint\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                sb.AppendLine("<pad2 type=\"uint\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
                 sb.AppendLine("</PointObjectStatePdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as PointObjectStatePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as PointObjectStatePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(PointObjectStatePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._objectID.Equals(obj._objectID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!ObjectID.Equals(obj.ObjectID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._referencedObjectID.Equals(obj._referencedObjectID))
+            if (!ReferencedObjectID.Equals(obj.ReferencedObjectID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._updateNumber != obj._updateNumber)
+            if (UpdateNumber != obj.UpdateNumber)
             {
                 ivarsEqual = false;
             }
 
-            if (this._forceID != obj._forceID)
+            if (ForceID != obj.ForceID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._modifications != obj._modifications)
+            if (Modifications != obj.Modifications)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._objectType.Equals(obj._objectType))
+            if (!ObjectType.Equals(obj.ObjectType))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._objectLocation.Equals(obj._objectLocation))
+            if (!ObjectLocation.Equals(obj.ObjectLocation))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._objectOrientation.Equals(obj._objectOrientation))
+            if (!ObjectOrientation.Equals(obj.ObjectOrientation))
             {
                 ivarsEqual = false;
             }
 
-            if (this._objectAppearance != obj._objectAppearance)
+            if (ObjectAppearance != obj.ObjectAppearance)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._requesterID.Equals(obj._requesterID))
+            if (!RequesterID.Equals(obj.RequesterID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._receivingID.Equals(obj._receivingID))
+            if (!ReceivingID.Equals(obj.ReceivingID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
@@ -640,34 +400,27 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._objectID.GetHashCode();
-            result = GenerateHash(result) ^ this._referencedObjectID.GetHashCode();
-            result = GenerateHash(result) ^ this._updateNumber.GetHashCode();
-            result = GenerateHash(result) ^ this._forceID.GetHashCode();
-            result = GenerateHash(result) ^ this._modifications.GetHashCode();
-            result = GenerateHash(result) ^ this._objectType.GetHashCode();
-            result = GenerateHash(result) ^ this._objectLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._objectOrientation.GetHashCode();
-            result = GenerateHash(result) ^ this._objectAppearance.GetHashCode();
-            result = GenerateHash(result) ^ this._requesterID.GetHashCode();
-            result = GenerateHash(result) ^ this._receivingID.GetHashCode();
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
+            result = GenerateHash(result) ^ ObjectID.GetHashCode();
+            result = GenerateHash(result) ^ ReferencedObjectID.GetHashCode();
+            result = GenerateHash(result) ^ UpdateNumber.GetHashCode();
+            result = GenerateHash(result) ^ ForceID.GetHashCode();
+            result = GenerateHash(result) ^ Modifications.GetHashCode();
+            result = GenerateHash(result) ^ ObjectType.GetHashCode();
+            result = GenerateHash(result) ^ ObjectLocation.GetHashCode();
+            result = GenerateHash(result) ^ ObjectOrientation.GetHashCode();
+            result = GenerateHash(result) ^ ObjectAppearance.GetHashCode();
+            result = GenerateHash(result) ^ RequesterID.GetHashCode();
+            result = GenerateHash(result) ^ ReceivingID.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
 
             return result;
         }

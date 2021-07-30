@@ -12,7 +12,7 @@ namespace OpenDis.Core
         /// in an exception.</param>
         /// <exception cref="ArgumentNullException">When the <c>allowNullOrEmpty</c> is false and value is
         /// null or empty.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">When the value is not null or empty and contains 
+        /// <exception cref="ArgumentOutOfRangeException">When the value is not null or empty and contains
         /// non-numerical character.</exception>
         protected void VerifyNumericString(string value, bool allowNullOrEmpty)
         {
@@ -26,7 +26,7 @@ namespace OpenDis.Core
             {
                 for (int i = 0; i < value.Length; i++)
                 {
-                    if (value[i] < '0' || value[i] > '9')
+                    if (value[i] is < '0' or > '9')
                     {
                         throw new ArgumentOutOfRangeException("Value must be greater or equal to 0.");
                     }

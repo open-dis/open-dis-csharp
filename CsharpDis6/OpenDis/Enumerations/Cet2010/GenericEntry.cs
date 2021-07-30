@@ -26,13 +26,13 @@ namespace OpenDis.Enumerations.Cet2010
     [XmlInclude(typeof(Subcategory))]
     [XmlInclude(typeof(Category))]
     [XmlInclude(typeof(GenericEntryString))]
-    [Serializable()]
-    [DebuggerStepThrough()]
-    public abstract class GenericEntry : CetBase, INotifyPropertyChanged, OpenDis.Enumerations.Cet2010.IGenericEntry
+    [Serializable]
+    [DebuggerStepThrough]
+    public abstract class GenericEntry : CetBase, INotifyPropertyChanged, IGenericEntry
     {
-		#region Fields (14) 
+        #region Fields (14) 
 
-        private static Regex uuidRegEx = new Regex("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
+        private static readonly Regex uuidRegEx = new("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}");
 
         private List<object> itemsField;
 
@@ -49,15 +49,15 @@ namespace OpenDis.Enumerations.Cet2010
         private ulong xref;
         private string xrefField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Delegates and Events (1) 
+        #region Delegates and Events (1) 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Delegates and Events 
+        #endregion Delegates and Events 
 
-		#region Properties (13) 
+        #region Properties (13) 
 
         /// <summary>
         /// Gets or sets a value indicating whether this entry was based on another enumeration entry UUID.
@@ -66,20 +66,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "baseuuid")]
         public bool BaseUuid
         {
-            get
-            {
-                return this.baseuuidField;
-            }
+            get => baseuuidField;
 
             set
             {
-                if (this.baseuuidField == value)
+                if (baseuuidField == value)
                 {
                     return;
                 }
 
-                this.baseuuidField = value;
-                this.RaisePropertyChanged("BaseUuid");
+                baseuuidField = value;
+                RaisePropertyChanged(nameof(BaseUuid));
             }
         }
 
@@ -87,23 +84,20 @@ namespace OpenDis.Enumerations.Cet2010
         /// Gets or sets a value indicating whether Base UUID is specified
         /// </summary>
         /// <value><c>true</c> if base is UUID specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool BaseUuidSpecified
         {
-            get
-            {
-                return this.baseuuidFieldSpecified;
-            }
+            get => baseuuidFieldSpecified;
 
             set
             {
-                if (this.baseuuidFieldSpecified == value)
+                if (baseuuidFieldSpecified == value)
                 {
                     return;
                 }
 
-                this.baseuuidFieldSpecified = value;
-                this.RaisePropertyChanged("BaseUuidSpecified");
+                baseuuidFieldSpecified = value;
+                RaisePropertyChanged(nameof(BaseUuidSpecified));
             }
         }
 
@@ -111,20 +105,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlElement("cr_range", typeof(CrRange), Form = XmlSchemaForm.Unqualified)]
         public List<object> ChangeRequests
         {
-            get
-            {
-                return this.itemsField;
-            }
+            get => itemsField;
 
             set
             {
-                if (this.itemsField == value)
+                if (itemsField == value)
                 {
                     return;
                 }
 
-                this.itemsField = value;
-                this.RaisePropertyChanged("ChangeRequests");
+                itemsField = value;
+                RaisePropertyChanged(nameof(ChangeRequests));
             }
         }
 
@@ -135,20 +126,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "deprecated")]
         public bool Deprecated
         {
-            get
-            {
-                return this.deprecatedField;
-            }
+            get => deprecatedField;
 
             set
             {
-                if (this.deprecatedField == value)
+                if (deprecatedField == value)
                 {
                     return;
                 }
 
-                this.deprecatedField = value;
-                this.RaisePropertyChanged("Deprecated");
+                deprecatedField = value;
+                RaisePropertyChanged(nameof(Deprecated));
             }
         }
 
@@ -156,23 +144,20 @@ namespace OpenDis.Enumerations.Cet2010
         /// Gets or sets a value indicating whether deprecated field is specified.
         /// </summary>
         /// <value><c>true</c> if deprecated field is specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool DeprecatedSpecified
         {
-            get
-            {
-                return this.deprecatedFieldSpecified;
-            }
+            get => deprecatedFieldSpecified;
 
             set
             {
-                if (this.deprecatedFieldSpecified == value)
+                if (deprecatedFieldSpecified == value)
                 {
                     return;
                 }
 
-                this.deprecatedFieldSpecified = value;
-                this.RaisePropertyChanged("DeprecatedSpecified");
+                deprecatedFieldSpecified = value;
+                RaisePropertyChanged(nameof(DeprecatedSpecified));
             }
         }
 
@@ -183,44 +168,40 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "draft1278")]
         public bool Draft1278
         {
-            get
-            {
-                return this.draft1278Field;
-            }
+            get => draft1278Field;
 
             set
             {
-                if (this.draft1278Field == value)
+                if (draft1278Field == value)
                 {
                     return;
                 }
 
-                this.draft1278Field = value;
-                this.RaisePropertyChanged("Draft1278");
+                draft1278Field = value;
+                RaisePropertyChanged(nameof(Draft1278));
             }
         }
 
         /// <summary>
-        /// Gets or sets a value indicating whether the value indicating whether the enumeration entry applies to a draft revision of IEEE 1278 is specified.
+        /// Gets or sets a value indicating whether the value indicating whether the enumeration entry applies to a draft revision
+        /// of IEEE 1278 is specified.
         /// </summary>
-        /// <value><c>true</c> if the value indicating whether the enumeration entry applies to a draft revision of IEEE 1278 is specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        /// <value><c>true</c> if the value indicating whether the enumeration entry applies to a draft revision of IEEE 1278
+        /// is specified; otherwise, <c>false</c>.</value>
+        [XmlIgnore]
         public bool Draft1278Specified
         {
-            get
-            {
-                return this.draft1278FieldSpecified;
-            }
+            get => draft1278FieldSpecified;
 
             set
             {
-                if (this.draft1278FieldSpecified == value)
+                if (draft1278FieldSpecified == value)
                 {
                     return;
                 }
 
-                this.draft1278FieldSpecified = value;
-                this.RaisePropertyChanged("Draft1278Specified");
+                draft1278FieldSpecified = value;
+                RaisePropertyChanged(nameof(Draft1278Specified));
             }
         }
 
@@ -231,20 +212,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "footnote")]
         public string Footnote
         {
-            get
-            {
-                return this.footnoteField;
-            }
+            get => footnoteField;
 
             set
             {
-                if (this.footnoteField == value)
+                if (footnoteField == value)
                 {
                     return;
                 }
 
-                this.footnoteField = value;
-                this.RaisePropertyChanged("Footnote");
+                footnoteField = value;
+                RaisePropertyChanged(nameof(Footnote));
             }
         }
 
@@ -255,21 +233,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "xref", DataType = "positiveInteger")]
         public string RawXRef
         {
-            get
-            {
-                return this.xrefField;
-            }
+            get => xrefField;
 
             set
             {
-                if (this.xrefField == value)
+                if (xrefField == value)
                 {
                     return;
                 }
 
-                this.xrefField = value;
-                this.xref = ulong.Parse(value, CultureInfo.InvariantCulture);
-                this.RaisePropertyChanged("RawXRref");
+                xrefField = value;
+                xref = ulong.Parse(value, CultureInfo.InvariantCulture);
+                RaisePropertyChanged("RawXRref");
             }
         }
 
@@ -280,20 +255,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "status")]
         public GenericEntryStatus Status
         {
-            get
-            {
-                return this.statusField;
-            }
+            get => statusField;
 
             set
             {
-                if (this.statusField == value)
+                if (statusField == value)
                 {
                     return;
                 }
 
-                this.statusField = value;
-                this.RaisePropertyChanged("Status");
+                statusField = value;
+                RaisePropertyChanged(nameof(Status));
             }
         }
 
@@ -301,23 +273,20 @@ namespace OpenDis.Enumerations.Cet2010
         /// Gets or sets a value indicating whether the status is specified.
         /// </summary>
         /// <value><c>true</c> if the status is specified; otherwise, <c>false</c>.</value>
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool StatusSpecified
         {
-            get
-            {
-                return this.statusFieldSpecified;
-            }
+            get => statusFieldSpecified;
 
             set
             {
-                if (this.statusFieldSpecified == value)
+                if (statusFieldSpecified == value)
                 {
                     return;
                 }
 
-                this.statusFieldSpecified = value;
-                this.RaisePropertyChanged("StatusSpecified");
+                statusFieldSpecified = value;
+                RaisePropertyChanged(nameof(StatusSpecified));
             }
         }
 
@@ -327,14 +296,11 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "uuid")]
         public string Uuid
         {
-            get
-            {
-                return this.uuidField;
-            }
+            get => uuidField;
 
             set
             {
-                if (this.uuidField == value)
+                if (uuidField == value)
                 {
                     return;
                 }
@@ -344,8 +310,8 @@ namespace OpenDis.Enumerations.Cet2010
                     throw new ArgumentException("Invalid value! Value must be conformant with RFC-4122.");
                 }
 
-                this.uuidField = value;
-                this.RaisePropertyChanged("Uuid");
+                uuidField = value;
+                RaisePropertyChanged(nameof(Uuid));
             }
         }
 
@@ -356,33 +322,27 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public ulong XRef
         {
-            get
-            {
-                return this.xref;
-            }
+            get => xref;
 
             set
             {
-                if (this.xref != value)
+                if (xref != value)
                 {
-                    this.RawXRef = ((ulong)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("XRef");
+                    RawXRef = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(XRef));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (1) 
+        #region Methods (1) 
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

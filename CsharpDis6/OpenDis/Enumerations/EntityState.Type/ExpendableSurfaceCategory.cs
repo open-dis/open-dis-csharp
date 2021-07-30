@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Type
 {
     /// <summary>
-    /// Enumeration values for ExpendableSurfaceCategory (es.type.kind.8.domain.3.cat, Expendable-Surface Category, 
+    /// Enumeration values for ExpendableSurfaceCategory (es.type.kind.8.domain.3.cat, Expendable-Surface Category,
     /// section 4.2.1.8.3.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

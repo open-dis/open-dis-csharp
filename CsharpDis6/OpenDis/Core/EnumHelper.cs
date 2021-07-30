@@ -36,22 +36,17 @@
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Reflection;
-using OpenDis.Core;
-using System.Collections.Generic;
 
 namespace OpenDis.Core
 {
     public static class EnumHelper
     {
-		#region Static methods (7) 
+        #region Static methods (7) 
 
-        public static bool EnumerationForValueExists<T>(int number)
-        {
-            return Enum.IsDefined(typeof(T), number);
-        }
+        public static bool EnumerationForValueExists<T>(int number) => Enum.IsDefined(typeof(T), number);
 
         /// <summary>
         /// Gets the description.
@@ -63,14 +58,14 @@ namespace OpenDis.Core
         {
             string retVal = string.Empty;
 
-            DescriptionAttribute attr = GetEnumValueAttribute<DescriptionAttribute, T>(value);
+            var attr = GetEnumValueAttribute<DescriptionAttribute, T>(value);
 
             if (attr != null)
             {
                 retVal = attr.Description;
             }
 
-            return retVal; 
+            return retVal;
         }
 
         /// <summary>
@@ -79,18 +74,13 @@ namespace OpenDis.Core
         /// <typeparam name="T">Enumeration Type</typeparam>
         /// <param name="number">Enumeration value</param>
         /// <returns>Enumeration of that value</returns>
-        /// <exception cref="EnumNotFoundException">if the nuber (parameter) 
+        /// <exception cref="EnumNotFoundException">if the nuber (parameter)
         /// value is not found in the enum definition</exception>
         public static T GetEnumerationForValue<T>(int number)
         {
-            if (Enum.IsDefined(typeof(T), number) == true)
-            {
-                return (T)Enum.ToObject(typeof(T), number);
-            }
-            else
-            {
-                throw new EnumNotFoundException(string.Format("No enumeration found for value {0} of enumeration {1}", number, typeof(T).Name), typeof(T));
-            }
+            return Enum.IsDefined(typeof(T), number)
+                ? (T)Enum.ToObject(typeof(T), number)
+                : throw new EnumNotFoundException(string.Format("No enumeration found for value {0} of enumeration {1}", number, typeof(T).Name), typeof(T));
         }
 
         /// <summary>
@@ -102,20 +92,19 @@ namespace OpenDis.Core
         /// <returns>The instance of the attribute or null if the attribute is not found</returns>
         public static T GetEnumValueAttribute<T, U>(U value)
         {
-            Type t = typeof(U);
+            var t = typeof(U);
 
             if (t.IsEnum)
             {
                 if (value != null)
                 {
-                    FieldInfo fieldInfo = typeof(U).GetField(Enum.GetName(typeof(U), value));
+                    var fieldInfo = typeof(U).GetField(Enum.GetName(typeof(U), value));
 
                     if (fieldInfo != null)
                     {
                         object[] attributes = fieldInfo.GetCustomAttributes(typeof(T), false);
 
-                        if (attributes != null &&
-                           attributes.Length > 0)
+                        if (attributes?.Length > 0)
                         {
                             return (T)attributes[0];
                         }
@@ -127,7 +116,7 @@ namespace OpenDis.Core
                 throw new ArgumentException("Type must be an enum.");
             }
 
-            return default(T);
+            return default;
         }
 
         /// <summary>
@@ -139,22 +128,21 @@ namespace OpenDis.Core
         /// <returns>The instance of the attribute or null if the attribute is not found</returns>
         public static IEnumerable<T> GetEnumValueAttributes<T, U>(U value)
         {
-            Type t = typeof(U);
+            var t = typeof(U);
 
             if (t.IsEnum)
             {
                 if (value != null)
                 {
-                    FieldInfo fieldInfo = typeof(U).GetField(Enum.GetName(typeof(U), value));
+                    var fieldInfo = typeof(U).GetField(Enum.GetName(typeof(U), value));
 
                     if (fieldInfo != null)
                     {
                         object[] attributes = fieldInfo.GetCustomAttributes(typeof(T), false);
-                        
-                        if (attributes != null &&
-                           attributes.Length > 0)
+
+                        if (attributes?.Length > 0)
                         {
-                            return attributes.Cast<T>(); ;
+                            return attributes.Cast<T>();
                         }
                     }
                 }
@@ -179,7 +167,7 @@ namespace OpenDis.Core
         {
             string retVal = string.Empty;
 
-            InternetDomainCodeAttribute attr = GetEnumValueAttribute<InternetDomainCodeAttribute, T>(value);
+            var attr = GetEnumValueAttribute<InternetDomainCodeAttribute, T>(value);
 
             if (attr != null)
             {
@@ -195,10 +183,7 @@ namespace OpenDis.Core
         /// <typeparam name="T">The enum type</typeparam>
         /// <param name="value">The string value.</param>
         /// <returns>Enum value.</returns>
-        public static T Parse<T>(string value)
-        {
-            return (T)Enum.Parse(typeof(T), value);
-        }
+        public static T Parse<T>(string value) => (T)Enum.Parse(typeof(T), value);
 
         /// <summary>
         /// Parses the specified value.
@@ -207,11 +192,8 @@ namespace OpenDis.Core
         /// <param name="value">The value.</param>
         /// <param name="ignoreCase">if set to <c>true</c> [ignore case].</param>
         /// <returns>Enum value.</returns>
-        public static T Parse<T>(string value, bool ignoreCase)
-        {
-            return (T)Enum.Parse(typeof(T), value, ignoreCase);
-        }
+        public static T Parse<T>(string value, bool ignoreCase) => (T)Enum.Parse(typeof(T), value, ignoreCase);
 
-		#endregion Static methods 
+        #endregion Static methods 
     }
 }

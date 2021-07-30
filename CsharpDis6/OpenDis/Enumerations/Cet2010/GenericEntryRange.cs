@@ -11,18 +11,18 @@ namespace OpenDis.Enumerations.Cet2010
     [XmlInclude(typeof(SpecificRange))]
     [XmlInclude(typeof(SubcategoryRange))]
     [XmlInclude(typeof(CategoryRange))]
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public abstract class GenericEntryRange : GenericEntryDescription
     {
-		#region Fields (2) 
+        #region Fields (2) 
 
         private int value_maxField;
         private int value_minField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Properties (2) 
+        #region Properties (2) 
 
         /// <summary>
         /// Gets or sets the maximum value (inclusive) of the enumerated range.
@@ -30,20 +30,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "value_max")]
         public int Max
         {
-            get
-            {
-                return this.value_maxField;
-            }
+            get => value_maxField;
 
             set
             {
-                if (this.value_maxField == value)
+                if (value_maxField == value)
                 {
                     return;
                 }
 
-                this.value_maxField = value;
-                this.RaisePropertyChanged("Max");
+                value_maxField = value;
+                RaisePropertyChanged(nameof(Max));
             }
         }
 
@@ -53,23 +50,20 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "value_min")]
         public int Min
         {
-            get
-            {
-                return this.value_minField;
-            }
+            get => value_minField;
 
             set
             {
-                if (this.value_minField == value)
+                if (value_minField == value)
                 {
                     return;
                 }
 
-                this.value_minField = value;
-                this.RaisePropertyChanged("Min");
+                value_minField = value;
+                RaisePropertyChanged(nameof(Min));
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }

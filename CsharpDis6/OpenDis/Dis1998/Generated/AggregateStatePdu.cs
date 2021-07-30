@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.9.1 informationa bout aggregating entities anc communicating information about the aggregated entities.        requires manual intervention to fix the padding between entityID lists and silent aggregate sysem lists--this padding        is dependent on how many entityIDs there are, and needs to be on a 32 bit word boundary. UNFINISHED
+    /// Section 5.3.9.1 informationa bout aggregating entities anc communicating information about the aggregated entities.
+    ///       requires manual intervention to fix the padding between entityID lists and silent aggregate sysem lists--this padding        is dependent on how many entityIDs there are, and needs to be on a 32 bit word boundary. UNFINISHED
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -67,116 +68,11 @@ namespace OpenDis.Dis1998
     public partial class AggregateStatePdu : EntityManagementFamilyPdu, IEquatable<AggregateStatePdu>
     {
         /// <summary>
-        /// ID of aggregated entities
-        /// </summary>
-        private EntityID _aggregateID = new EntityID();
-
-        /// <summary>
-        /// force ID
-        /// </summary>
-        private byte _forceID;
-
-        /// <summary>
-        /// state of aggregate
-        /// </summary>
-        private byte _aggregateState;
-
-        /// <summary>
-        /// entity type of the aggregated entities
-        /// </summary>
-        private EntityType _aggregateType = new EntityType();
-
-        /// <summary>
-        /// formation of aggregated entities
-        /// </summary>
-        private uint _formation;
-
-        /// <summary>
-        /// marking for aggregate; first char is charset type, rest is char data
-        /// </summary>
-        private AggregateMarking _aggregateMarking = new AggregateMarking();
-
-        /// <summary>
-        /// dimensions of bounding box for the aggregated entities, origin at the center of mass
-        /// </summary>
-        private Vector3Float _dimensions = new Vector3Float();
-
-        /// <summary>
-        /// orientation of the bounding box
-        /// </summary>
-        private Orientation _orientation = new Orientation();
-
-        /// <summary>
-        /// center of mass of the aggregation
-        /// </summary>
-        private Vector3Double _centerOfMass = new Vector3Double();
-
-        /// <summary>
-        /// velocity of aggregation
-        /// </summary>
-        private Vector3Float _velocity = new Vector3Float();
-
-        /// <summary>
-        /// number of aggregates
-        /// </summary>
-        private ushort _numberOfDisAggregates;
-
-        /// <summary>
-        /// number of entities
-        /// </summary>
-        private ushort _numberOfDisEntities;
-
-        /// <summary>
-        /// number of silent aggregate types
-        /// </summary>
-        private ushort _numberOfSilentAggregateTypes;
-
-        /// <summary>
-        /// number of silent entity types
-        /// </summary>
-        private ushort _numberOfSilentEntityTypes;
-
-        /// <summary>
-        /// aggregates  list
-        /// </summary>
-        private List<AggregateID> _aggregateIDList = new List<AggregateID>();
-
-        /// <summary>
-        /// entity ID list
-        /// </summary>
-        private List<EntityID> _entityIDList = new List<EntityID>();
-
-        /// <summary>
-        /// ^^^padding to put the start of the next list on a 32 bit boundary. This needs to be fixed
-        /// </summary>
-        private byte _pad2;
-
-        /// <summary>
-        /// silent entity types
-        /// </summary>
-        private List<EntityType> _silentAggregateSystemList = new List<EntityType>();
-
-        /// <summary>
-        /// silent entity types
-        /// </summary>
-        private List<EntityType> _silentEntitySystemList = new List<EntityType>();
-
-        /// <summary>
-        /// number of variable datum records
-        /// </summary>
-        private uint _numberOfVariableDatumRecords;
-
-        /// <summary>
-        /// variableDatums
-        /// </summary>
-        private List<VariableDatum> _variableDatumList = new List<VariableDatum>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AggregateStatePdu"/> class.
         /// </summary>
         public AggregateStatePdu()
         {
-            PduType = (byte)33;
+            PduType = 33;
         }
 
         /// <summary>
@@ -185,12 +81,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AggregateStatePdu left, AggregateStatePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AggregateStatePdu left, AggregateStatePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -198,71 +91,57 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AggregateStatePdu left, AggregateStatePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._aggregateID.GetMarshalledSize();  // this._aggregateID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += AggregateID.GetMarshalledSize();  // this._aggregateID
             marshalSize += 1;  // this._forceID
             marshalSize += 1;  // this._aggregateState
-            marshalSize += this._aggregateType.GetMarshalledSize();  // this._aggregateType
+            marshalSize += AggregateType.GetMarshalledSize();  // this._aggregateType
             marshalSize += 4;  // this._formation
-            marshalSize += this._aggregateMarking.GetMarshalledSize();  // this._aggregateMarking
-            marshalSize += this._dimensions.GetMarshalledSize();  // this._dimensions
-            marshalSize += this._orientation.GetMarshalledSize();  // this._orientation
-            marshalSize += this._centerOfMass.GetMarshalledSize();  // this._centerOfMass
-            marshalSize += this._velocity.GetMarshalledSize();  // this._velocity
+            marshalSize += AggregateMarking.GetMarshalledSize();  // this._aggregateMarking
+            marshalSize += Dimensions.GetMarshalledSize();  // this._dimensions
+            marshalSize += Orientation.GetMarshalledSize();  // this._orientation
+            marshalSize += CenterOfMass.GetMarshalledSize();  // this._centerOfMass
+            marshalSize += Velocity.GetMarshalledSize();  // this._velocity
             marshalSize += 2;  // this._numberOfDisAggregates
             marshalSize += 2;  // this._numberOfDisEntities
             marshalSize += 2;  // this._numberOfSilentAggregateTypes
             marshalSize += 2;  // this._numberOfSilentEntityTypes
-            for (int idx = 0; idx < this._aggregateIDList.Count; idx++)
+            for (int idx = 0; idx < AggregateIDList.Count; idx++)
             {
-                AggregateID listElement = (AggregateID)this._aggregateIDList[idx];
+                var listElement = AggregateIDList[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
-            for (int idx = 0; idx < this._entityIDList.Count; idx++)
+            for (int idx = 0; idx < EntityIDList.Count; idx++)
             {
-                EntityID listElement = (EntityID)this._entityIDList[idx];
+                var listElement = EntityIDList[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
             marshalSize += 1;  // this._pad2
-            for (int idx = 0; idx < this._silentAggregateSystemList.Count; idx++)
+            for (int idx = 0; idx < SilentAggregateSystemList.Count; idx++)
             {
-                EntityType listElement = (EntityType)this._silentAggregateSystemList[idx];
+                var listElement = SilentAggregateSystemList[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
-            for (int idx = 0; idx < this._silentEntitySystemList.Count; idx++)
+            for (int idx = 0; idx < SilentEntitySystemList.Count; idx++)
             {
-                EntityType listElement = (EntityType)this._silentEntitySystemList[idx];
+                var listElement = SilentEntitySystemList[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
             marshalSize += 4;  // this._numberOfVariableDatumRecords
-            for (int idx = 0; idx < this._variableDatumList.Count; idx++)
+            for (int idx = 0; idx < VariableDatumList.Count; idx++)
             {
-                VariableDatum listElement = (VariableDatum)this._variableDatumList[idx];
+                var listElement = VariableDatumList[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -273,374 +152,167 @@ namespace OpenDis.Dis1998
         /// Gets or sets the ID of aggregated entities
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "aggregateID")]
-        public EntityID AggregateID
-        {
-            get
-            {
-                return this._aggregateID;
-            }
-
-            set
-            {
-                this._aggregateID = value;
-            }
-        }
+        public EntityID AggregateID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the force ID
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "forceID")]
-        public byte ForceID
-        {
-            get
-            {
-                return this._forceID;
-            }
-
-            set
-            {
-                this._forceID = value;
-            }
-        }
+        public byte ForceID { get; set; }
 
         /// <summary>
         /// Gets or sets the state of aggregate
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "aggregateState")]
-        public byte AggregateState
-        {
-            get
-            {
-                return this._aggregateState;
-            }
-
-            set
-            {
-                this._aggregateState = value;
-            }
-        }
+        public byte AggregateState { get; set; }
 
         /// <summary>
         /// Gets or sets the entity type of the aggregated entities
         /// </summary>
         [XmlElement(Type = typeof(EntityType), ElementName = "aggregateType")]
-        public EntityType AggregateType
-        {
-            get
-            {
-                return this._aggregateType;
-            }
-
-            set
-            {
-                this._aggregateType = value;
-            }
-        }
+        public EntityType AggregateType { get; set; } = new EntityType();
 
         /// <summary>
         /// Gets or sets the formation of aggregated entities
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "formation")]
-        public uint Formation
-        {
-            get
-            {
-                return this._formation;
-            }
-
-            set
-            {
-                this._formation = value;
-            }
-        }
+        public uint Formation { get; set; }
 
         /// <summary>
         /// Gets or sets the marking for aggregate; first char is charset type, rest is char data
         /// </summary>
         [XmlElement(Type = typeof(AggregateMarking), ElementName = "aggregateMarking")]
-        public AggregateMarking AggregateMarking
-        {
-            get
-            {
-                return this._aggregateMarking;
-            }
-
-            set
-            {
-                this._aggregateMarking = value;
-            }
-        }
+        public AggregateMarking AggregateMarking { get; set; } = new AggregateMarking();
 
         /// <summary>
         /// Gets or sets the dimensions of bounding box for the aggregated entities, origin at the center of mass
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "dimensions")]
-        public Vector3Float Dimensions
-        {
-            get
-            {
-                return this._dimensions;
-            }
-
-            set
-            {
-                this._dimensions = value;
-            }
-        }
+        public Vector3Float Dimensions { get; set; } = new Vector3Float();
 
         /// <summary>
         /// Gets or sets the orientation of the bounding box
         /// </summary>
         [XmlElement(Type = typeof(Orientation), ElementName = "orientation")]
-        public Orientation Orientation
-        {
-            get
-            {
-                return this._orientation;
-            }
-
-            set
-            {
-                this._orientation = value;
-            }
-        }
+        public Orientation Orientation { get; set; } = new Orientation();
 
         /// <summary>
         /// Gets or sets the center of mass of the aggregation
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "centerOfMass")]
-        public Vector3Double CenterOfMass
-        {
-            get
-            {
-                return this._centerOfMass;
-            }
-
-            set
-            {
-                this._centerOfMass = value;
-            }
-        }
+        public Vector3Double CenterOfMass { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the velocity of aggregation
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "velocity")]
-        public Vector3Float Velocity
-        {
-            get
-            {
-                return this._velocity;
-            }
-
-            set
-            {
-                this._velocity = value;
-            }
-        }
+        public Vector3Float Velocity { get; set; } = new Vector3Float();
 
         /// <summary>
         /// Gets or sets the number of aggregates
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfDisAggregates method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfDisAggregates method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfDisAggregates")]
-        public ushort NumberOfDisAggregates
-        {
-            get
-            {
-                return this._numberOfDisAggregates;
-            }
-
-            set
-            {
-                this._numberOfDisAggregates = value;
-            }
-        }
+        public ushort NumberOfDisAggregates { get; set; }
 
         /// <summary>
         /// Gets or sets the number of entities
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfDisEntities method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfDisEntities method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfDisEntities")]
-        public ushort NumberOfDisEntities
-        {
-            get
-            {
-                return this._numberOfDisEntities;
-            }
-
-            set
-            {
-                this._numberOfDisEntities = value;
-            }
-        }
+        public ushort NumberOfDisEntities { get; set; }
 
         /// <summary>
         /// Gets or sets the number of silent aggregate types
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfSilentAggregateTypes method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfSilentAggregateTypes method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfSilentAggregateTypes")]
-        public ushort NumberOfSilentAggregateTypes
-        {
-            get
-            {
-                return this._numberOfSilentAggregateTypes;
-            }
-
-            set
-            {
-                this._numberOfSilentAggregateTypes = value;
-            }
-        }
+        public ushort NumberOfSilentAggregateTypes { get; set; }
 
         /// <summary>
         /// Gets or sets the number of silent entity types
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfSilentEntityTypes method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfSilentEntityTypes method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfSilentEntityTypes")]
-        public ushort NumberOfSilentEntityTypes
-        {
-            get
-            {
-                return this._numberOfSilentEntityTypes;
-            }
-
-            set
-            {
-                this._numberOfSilentEntityTypes = value;
-            }
-        }
+        public ushort NumberOfSilentEntityTypes { get; set; }
 
         /// <summary>
-        /// Gets the aggregates  list
+        /// Gets the aggregates list
         /// </summary>
         [XmlElement(ElementName = "aggregateIDListList", Type = typeof(List<AggregateID>))]
-        public List<AggregateID> AggregateIDList
-        {
-            get
-            {
-                return this._aggregateIDList;
-            }
-        }
+        public List<AggregateID> AggregateIDList { get; } = new();
 
         /// <summary>
         /// Gets the entity ID list
         /// </summary>
         [XmlElement(ElementName = "entityIDListList", Type = typeof(List<EntityID>))]
-        public List<EntityID> EntityIDList
-        {
-            get
-            {
-                return this._entityIDList;
-            }
-        }
+        public List<EntityID> EntityIDList { get; } = new();
 
         /// <summary>
         /// Gets or sets the ^^^padding to put the start of the next list on a 32 bit boundary. This needs to be fixed
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad2")]
-        public byte Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
-
-            set
-            {
-                this._pad2 = value;
-            }
-        }
+        public byte Pad2 { get; set; }
 
         /// <summary>
         /// Gets the silent entity types
         /// </summary>
         [XmlElement(ElementName = "silentAggregateSystemListList", Type = typeof(List<EntityType>))]
-        public List<EntityType> SilentAggregateSystemList
-        {
-            get
-            {
-                return this._silentAggregateSystemList;
-            }
-        }
+        public List<EntityType> SilentAggregateSystemList { get; } = new();
 
         /// <summary>
         /// Gets the silent entity types
         /// </summary>
         [XmlElement(ElementName = "silentEntitySystemListList", Type = typeof(List<EntityType>))]
-        public List<EntityType> SilentEntitySystemList
-        {
-            get
-            {
-                return this._silentEntitySystemList;
-            }
-        }
+        public List<EntityType> SilentEntitySystemList { get; } = new();
 
         /// <summary>
         /// Gets or sets the number of variable datum records
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfVariableDatumRecords method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfVariableDatumRecords method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(uint), ElementName = "numberOfVariableDatumRecords")]
-        public uint NumberOfVariableDatumRecords
-        {
-            get
-            {
-                return this._numberOfVariableDatumRecords;
-            }
-
-            set
-            {
-                this._numberOfVariableDatumRecords = value;
-            }
-        }
+        public uint NumberOfVariableDatumRecords { get; set; }
 
         /// <summary>
         /// Gets the variableDatums
         /// </summary>
         [XmlElement(ElementName = "variableDatumListList", Type = typeof(List<VariableDatum>))]
-        public List<VariableDatum> VariableDatumList
-        {
-            get
-            {
-                return this._variableDatumList;
-            }
-        }
+        public List<VariableDatum> VariableDatumList { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -649,68 +321,68 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._aggregateID.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._forceID);
-                    dos.WriteUnsignedByte((byte)this._aggregateState);
-                    this._aggregateType.Marshal(dos);
-                    dos.WriteUnsignedInt((uint)this._formation);
-                    this._aggregateMarking.Marshal(dos);
-                    this._dimensions.Marshal(dos);
-                    this._orientation.Marshal(dos);
-                    this._centerOfMass.Marshal(dos);
-                    this._velocity.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._aggregateIDList.Count);
-                    dos.WriteUnsignedShort((ushort)this._entityIDList.Count);
-                    dos.WriteUnsignedShort((ushort)this._silentAggregateSystemList.Count);
-                    dos.WriteUnsignedShort((ushort)this._silentEntitySystemList.Count);
+                    AggregateID.Marshal(dos);
+                    dos.WriteUnsignedByte(ForceID);
+                    dos.WriteUnsignedByte(AggregateState);
+                    AggregateType.Marshal(dos);
+                    dos.WriteUnsignedInt(Formation);
+                    AggregateMarking.Marshal(dos);
+                    Dimensions.Marshal(dos);
+                    Orientation.Marshal(dos);
+                    CenterOfMass.Marshal(dos);
+                    Velocity.Marshal(dos);
+                    dos.WriteUnsignedShort((ushort)AggregateIDList.Count);
+                    dos.WriteUnsignedShort((ushort)EntityIDList.Count);
+                    dos.WriteUnsignedShort((ushort)SilentAggregateSystemList.Count);
+                    dos.WriteUnsignedShort((ushort)SilentEntitySystemList.Count);
 
-                    for (int idx = 0; idx < this._aggregateIDList.Count; idx++)
+                    for (int idx = 0; idx < AggregateIDList.Count; idx++)
                     {
-                        AggregateID aAggregateID = (AggregateID)this._aggregateIDList[idx];
+                        var aAggregateID = AggregateIDList[idx];
                         aAggregateID.Marshal(dos);
                     }
 
-                    for (int idx = 0; idx < this._entityIDList.Count; idx++)
+                    for (int idx = 0; idx < EntityIDList.Count; idx++)
                     {
-                        EntityID aEntityID = (EntityID)this._entityIDList[idx];
+                        var aEntityID = EntityIDList[idx];
                         aEntityID.Marshal(dos);
                     }
 
-                    dos.WriteUnsignedByte((byte)this._pad2);
+                    dos.WriteUnsignedByte(Pad2);
 
-                    for (int idx = 0; idx < this._silentAggregateSystemList.Count; idx++)
+                    for (int idx = 0; idx < SilentAggregateSystemList.Count; idx++)
                     {
-                        EntityType aEntityType = (EntityType)this._silentAggregateSystemList[idx];
+                        var aEntityType = SilentAggregateSystemList[idx];
                         aEntityType.Marshal(dos);
                     }
 
-                    for (int idx = 0; idx < this._silentEntitySystemList.Count; idx++)
+                    for (int idx = 0; idx < SilentEntitySystemList.Count; idx++)
                     {
-                        EntityType aEntityType = (EntityType)this._silentEntitySystemList[idx];
+                        var aEntityType = SilentEntitySystemList[idx];
                         aEntityType.Marshal(dos);
                     }
 
-                    dos.WriteUnsignedInt((uint)this._variableDatumList.Count);
+                    dos.WriteUnsignedInt((uint)VariableDatumList.Count);
 
-                    for (int idx = 0; idx < this._variableDatumList.Count; idx++)
+                    for (int idx = 0; idx < VariableDatumList.Count; idx++)
                     {
-                        VariableDatum aVariableDatum = (VariableDatum)this._variableDatumList[idx];
+                        var aVariableDatum = VariableDatumList[idx];
                         aVariableDatum.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -725,86 +397,79 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._aggregateID.Unmarshal(dis);
-                    this._forceID = dis.ReadUnsignedByte();
-                    this._aggregateState = dis.ReadUnsignedByte();
-                    this._aggregateType.Unmarshal(dis);
-                    this._formation = dis.ReadUnsignedInt();
-                    this._aggregateMarking.Unmarshal(dis);
-                    this._dimensions.Unmarshal(dis);
-                    this._orientation.Unmarshal(dis);
-                    this._centerOfMass.Unmarshal(dis);
-                    this._velocity.Unmarshal(dis);
-                    this._numberOfDisAggregates = dis.ReadUnsignedShort();
-                    this._numberOfDisEntities = dis.ReadUnsignedShort();
-                    this._numberOfSilentAggregateTypes = dis.ReadUnsignedShort();
-                    this._numberOfSilentEntityTypes = dis.ReadUnsignedShort();
+                    AggregateID.Unmarshal(dis);
+                    ForceID = dis.ReadUnsignedByte();
+                    AggregateState = dis.ReadUnsignedByte();
+                    AggregateType.Unmarshal(dis);
+                    Formation = dis.ReadUnsignedInt();
+                    AggregateMarking.Unmarshal(dis);
+                    Dimensions.Unmarshal(dis);
+                    Orientation.Unmarshal(dis);
+                    CenterOfMass.Unmarshal(dis);
+                    Velocity.Unmarshal(dis);
+                    NumberOfDisAggregates = dis.ReadUnsignedShort();
+                    NumberOfDisEntities = dis.ReadUnsignedShort();
+                    NumberOfSilentAggregateTypes = dis.ReadUnsignedShort();
+                    NumberOfSilentEntityTypes = dis.ReadUnsignedShort();
 
-                    for (int idx = 0; idx < this.NumberOfDisAggregates; idx++)
+                    for (int idx = 0; idx < NumberOfDisAggregates; idx++)
                     {
-                        AggregateID anX = new AggregateID();
+                        var anX = new AggregateID();
                         anX.Unmarshal(dis);
-                        this._aggregateIDList.Add(anX);
+                        AggregateIDList.Add(anX);
                     }
 
-                    for (int idx = 0; idx < this.NumberOfDisEntities; idx++)
+                    for (int idx = 0; idx < NumberOfDisEntities; idx++)
                     {
-                        EntityID anX = new EntityID();
+                        var anX = new EntityID();
                         anX.Unmarshal(dis);
-                        this._entityIDList.Add(anX);
+                        EntityIDList.Add(anX);
                     }
 
-                    this._pad2 = dis.ReadUnsignedByte();
+                    Pad2 = dis.ReadUnsignedByte();
 
-                    for (int idx = 0; idx < this.NumberOfSilentAggregateTypes; idx++)
+                    for (int idx = 0; idx < NumberOfSilentAggregateTypes; idx++)
                     {
-                        EntityType anX = new EntityType();
+                        var anX = new EntityType();
                         anX.Unmarshal(dis);
-                        this._silentAggregateSystemList.Add(anX);
+                        SilentAggregateSystemList.Add(anX);
                     }
 
-                    for (int idx = 0; idx < this.NumberOfSilentEntityTypes; idx++)
+                    for (int idx = 0; idx < NumberOfSilentEntityTypes; idx++)
                     {
-                        EntityType anX = new EntityType();
+                        var anX = new EntityType();
                         anX.Unmarshal(dis);
-                        this._silentEntitySystemList.Add(anX);
+                        SilentEntitySystemList.Add(anX);
                     }
 
-                    this._numberOfVariableDatumRecords = dis.ReadUnsignedInt();
+                    NumberOfVariableDatumRecords = dis.ReadUnsignedInt();
 
-                    for (int idx = 0; idx < this.NumberOfVariableDatumRecords; idx++)
+                    for (int idx = 0; idx < NumberOfVariableDatumRecords; idx++)
                     {
-                        VariableDatum anX = new VariableDatum();
+                        var anX = new VariableDatum();
                         anX.Unmarshal(dis);
-                        this._variableDatumList.Add(anX);
+                        VariableDatumList.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -813,71 +478,71 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<aggregateID>");
-                this._aggregateID.Reflection(sb);
+                AggregateID.Reflection(sb);
                 sb.AppendLine("</aggregateID>");
-                sb.AppendLine("<forceID type=\"byte\">" + this._forceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
-                sb.AppendLine("<aggregateState type=\"byte\">" + this._aggregateState.ToString(CultureInfo.InvariantCulture) + "</aggregateState>");
+                sb.AppendLine("<forceID type=\"byte\">" + ForceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
+                sb.AppendLine("<aggregateState type=\"byte\">" + AggregateState.ToString(CultureInfo.InvariantCulture) + "</aggregateState>");
                 sb.AppendLine("<aggregateType>");
-                this._aggregateType.Reflection(sb);
+                AggregateType.Reflection(sb);
                 sb.AppendLine("</aggregateType>");
-                sb.AppendLine("<formation type=\"uint\">" + this._formation.ToString(CultureInfo.InvariantCulture) + "</formation>");
+                sb.AppendLine("<formation type=\"uint\">" + Formation.ToString(CultureInfo.InvariantCulture) + "</formation>");
                 sb.AppendLine("<aggregateMarking>");
-                this._aggregateMarking.Reflection(sb);
+                AggregateMarking.Reflection(sb);
                 sb.AppendLine("</aggregateMarking>");
                 sb.AppendLine("<dimensions>");
-                this._dimensions.Reflection(sb);
+                Dimensions.Reflection(sb);
                 sb.AppendLine("</dimensions>");
                 sb.AppendLine("<orientation>");
-                this._orientation.Reflection(sb);
+                Orientation.Reflection(sb);
                 sb.AppendLine("</orientation>");
                 sb.AppendLine("<centerOfMass>");
-                this._centerOfMass.Reflection(sb);
+                CenterOfMass.Reflection(sb);
                 sb.AppendLine("</centerOfMass>");
                 sb.AppendLine("<velocity>");
-                this._velocity.Reflection(sb);
+                Velocity.Reflection(sb);
                 sb.AppendLine("</velocity>");
-                sb.AppendLine("<aggregateIDList type=\"ushort\">" + this._aggregateIDList.Count.ToString(CultureInfo.InvariantCulture) + "</aggregateIDList>");
-                sb.AppendLine("<entityIDList type=\"ushort\">" + this._entityIDList.Count.ToString(CultureInfo.InvariantCulture) + "</entityIDList>");
-                sb.AppendLine("<silentAggregateSystemList type=\"ushort\">" + this._silentAggregateSystemList.Count.ToString(CultureInfo.InvariantCulture) + "</silentAggregateSystemList>");
-                sb.AppendLine("<silentEntitySystemList type=\"ushort\">" + this._silentEntitySystemList.Count.ToString(CultureInfo.InvariantCulture) + "</silentEntitySystemList>");
-                for (int idx = 0; idx < this._aggregateIDList.Count; idx++)
+                sb.AppendLine("<aggregateIDList type=\"ushort\">" + AggregateIDList.Count.ToString(CultureInfo.InvariantCulture) + "</aggregateIDList>");
+                sb.AppendLine("<entityIDList type=\"ushort\">" + EntityIDList.Count.ToString(CultureInfo.InvariantCulture) + "</entityIDList>");
+                sb.AppendLine("<silentAggregateSystemList type=\"ushort\">" + SilentAggregateSystemList.Count.ToString(CultureInfo.InvariantCulture) + "</silentAggregateSystemList>");
+                sb.AppendLine("<silentEntitySystemList type=\"ushort\">" + SilentEntitySystemList.Count.ToString(CultureInfo.InvariantCulture) + "</silentEntitySystemList>");
+                for (int idx = 0; idx < AggregateIDList.Count; idx++)
                 {
                     sb.AppendLine("<aggregateIDList" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"AggregateID\">");
-                    AggregateID aAggregateID = (AggregateID)this._aggregateIDList[idx];
+                    var aAggregateID = AggregateIDList[idx];
                     aAggregateID.Reflection(sb);
                     sb.AppendLine("</aggregateIDList" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                for (int idx = 0; idx < this._entityIDList.Count; idx++)
+                for (int idx = 0; idx < EntityIDList.Count; idx++)
                 {
                     sb.AppendLine("<entityIDList" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"EntityID\">");
-                    EntityID aEntityID = (EntityID)this._entityIDList[idx];
+                    var aEntityID = EntityIDList[idx];
                     aEntityID.Reflection(sb);
                     sb.AppendLine("</entityIDList" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                sb.AppendLine("<pad2 type=\"byte\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
-                for (int idx = 0; idx < this._silentAggregateSystemList.Count; idx++)
+                sb.AppendLine("<pad2 type=\"byte\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                for (int idx = 0; idx < SilentAggregateSystemList.Count; idx++)
                 {
                     sb.AppendLine("<silentAggregateSystemList" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"EntityType\">");
-                    EntityType aEntityType = (EntityType)this._silentAggregateSystemList[idx];
+                    var aEntityType = SilentAggregateSystemList[idx];
                     aEntityType.Reflection(sb);
                     sb.AppendLine("</silentAggregateSystemList" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                for (int idx = 0; idx < this._silentEntitySystemList.Count; idx++)
+                for (int idx = 0; idx < SilentEntitySystemList.Count; idx++)
                 {
                     sb.AppendLine("<silentEntitySystemList" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"EntityType\">");
-                    EntityType aEntityType = (EntityType)this._silentEntitySystemList[idx];
+                    var aEntityType = SilentEntitySystemList[idx];
                     aEntityType.Reflection(sb);
                     sb.AppendLine("</silentEntitySystemList" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                sb.AppendLine("<variableDatumList type=\"uint\">" + this._variableDatumList.Count.ToString(CultureInfo.InvariantCulture) + "</variableDatumList>");
-                for (int idx = 0; idx < this._variableDatumList.Count; idx++)
+                sb.AppendLine("<variableDatumList type=\"uint\">" + VariableDatumList.Count.ToString(CultureInfo.InvariantCulture) + "</variableDatumList>");
+                for (int idx = 0; idx < VariableDatumList.Count; idx++)
                 {
                     sb.AppendLine("<variableDatumList" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"VariableDatum\">");
-                    VariableDatum aVariableDatum = (VariableDatum)this._variableDatumList[idx];
+                    var aVariableDatum = VariableDatumList[idx];
                     aVariableDatum.Reflection(sb);
                     sb.AppendLine("</variableDatumList" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -886,205 +551,187 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as AggregateStatePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as AggregateStatePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(AggregateStatePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._aggregateID.Equals(obj._aggregateID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!AggregateID.Equals(obj.AggregateID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._forceID != obj._forceID)
+            if (ForceID != obj.ForceID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._aggregateState != obj._aggregateState)
+            if (AggregateState != obj.AggregateState)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._aggregateType.Equals(obj._aggregateType))
+            if (!AggregateType.Equals(obj.AggregateType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._formation != obj._formation)
+            if (Formation != obj.Formation)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._aggregateMarking.Equals(obj._aggregateMarking))
+            if (!AggregateMarking.Equals(obj.AggregateMarking))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._dimensions.Equals(obj._dimensions))
+            if (!Dimensions.Equals(obj.Dimensions))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._orientation.Equals(obj._orientation))
+            if (!Orientation.Equals(obj.Orientation))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._centerOfMass.Equals(obj._centerOfMass))
+            if (!CenterOfMass.Equals(obj.CenterOfMass))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._velocity.Equals(obj._velocity))
+            if (!Velocity.Equals(obj.Velocity))
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfDisAggregates != obj._numberOfDisAggregates)
+            if (NumberOfDisAggregates != obj.NumberOfDisAggregates)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfDisEntities != obj._numberOfDisEntities)
+            if (NumberOfDisEntities != obj.NumberOfDisEntities)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfSilentAggregateTypes != obj._numberOfSilentAggregateTypes)
+            if (NumberOfSilentAggregateTypes != obj.NumberOfSilentAggregateTypes)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfSilentEntityTypes != obj._numberOfSilentEntityTypes)
+            if (NumberOfSilentEntityTypes != obj.NumberOfSilentEntityTypes)
             {
                 ivarsEqual = false;
             }
 
-            if (this._aggregateIDList.Count != obj._aggregateIDList.Count)
+            if (AggregateIDList.Count != obj.AggregateIDList.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._aggregateIDList.Count; idx++)
+                for (int idx = 0; idx < AggregateIDList.Count; idx++)
                 {
-                    if (!this._aggregateIDList[idx].Equals(obj._aggregateIDList[idx]))
+                    if (!AggregateIDList[idx].Equals(obj.AggregateIDList[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._entityIDList.Count != obj._entityIDList.Count)
+            if (EntityIDList.Count != obj.EntityIDList.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._entityIDList.Count; idx++)
+                for (int idx = 0; idx < EntityIDList.Count; idx++)
                 {
-                    if (!this._entityIDList[idx].Equals(obj._entityIDList[idx]))
+                    if (!EntityIDList[idx].Equals(obj.EntityIDList[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
 
-            if (this._silentAggregateSystemList.Count != obj._silentAggregateSystemList.Count)
+            if (SilentAggregateSystemList.Count != obj.SilentAggregateSystemList.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._silentAggregateSystemList.Count; idx++)
+                for (int idx = 0; idx < SilentAggregateSystemList.Count; idx++)
                 {
-                    if (!this._silentAggregateSystemList[idx].Equals(obj._silentAggregateSystemList[idx]))
+                    if (!SilentAggregateSystemList[idx].Equals(obj.SilentAggregateSystemList[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._silentEntitySystemList.Count != obj._silentEntitySystemList.Count)
+            if (SilentEntitySystemList.Count != obj.SilentEntitySystemList.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._silentEntitySystemList.Count; idx++)
+                for (int idx = 0; idx < SilentEntitySystemList.Count; idx++)
                 {
-                    if (!this._silentEntitySystemList[idx].Equals(obj._silentEntitySystemList[idx]))
+                    if (!SilentEntitySystemList[idx].Equals(obj.SilentEntitySystemList[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._numberOfVariableDatumRecords != obj._numberOfVariableDatumRecords)
+            if (NumberOfVariableDatumRecords != obj.NumberOfVariableDatumRecords)
             {
                 ivarsEqual = false;
             }
 
-            if (this._variableDatumList.Count != obj._variableDatumList.Count)
+            if (VariableDatumList.Count != obj.VariableDatumList.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._variableDatumList.Count; idx++)
+                for (int idx = 0; idx < VariableDatumList.Count; idx++)
                 {
-                    if (!this._variableDatumList[idx].Equals(obj._variableDatumList[idx]))
+                    if (!VariableDatumList[idx].Equals(obj.VariableDatumList[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -1099,78 +746,71 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._aggregateID.GetHashCode();
-            result = GenerateHash(result) ^ this._forceID.GetHashCode();
-            result = GenerateHash(result) ^ this._aggregateState.GetHashCode();
-            result = GenerateHash(result) ^ this._aggregateType.GetHashCode();
-            result = GenerateHash(result) ^ this._formation.GetHashCode();
-            result = GenerateHash(result) ^ this._aggregateMarking.GetHashCode();
-            result = GenerateHash(result) ^ this._dimensions.GetHashCode();
-            result = GenerateHash(result) ^ this._orientation.GetHashCode();
-            result = GenerateHash(result) ^ this._centerOfMass.GetHashCode();
-            result = GenerateHash(result) ^ this._velocity.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfDisAggregates.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfDisEntities.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfSilentAggregateTypes.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfSilentEntityTypes.GetHashCode();
+            result = GenerateHash(result) ^ AggregateID.GetHashCode();
+            result = GenerateHash(result) ^ ForceID.GetHashCode();
+            result = GenerateHash(result) ^ AggregateState.GetHashCode();
+            result = GenerateHash(result) ^ AggregateType.GetHashCode();
+            result = GenerateHash(result) ^ Formation.GetHashCode();
+            result = GenerateHash(result) ^ AggregateMarking.GetHashCode();
+            result = GenerateHash(result) ^ Dimensions.GetHashCode();
+            result = GenerateHash(result) ^ Orientation.GetHashCode();
+            result = GenerateHash(result) ^ CenterOfMass.GetHashCode();
+            result = GenerateHash(result) ^ Velocity.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfDisAggregates.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfDisEntities.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfSilentAggregateTypes.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfSilentEntityTypes.GetHashCode();
 
-            if (this._aggregateIDList.Count > 0)
+            if (AggregateIDList.Count > 0)
             {
-                for (int idx = 0; idx < this._aggregateIDList.Count; idx++)
+                for (int idx = 0; idx < AggregateIDList.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._aggregateIDList[idx].GetHashCode();
+                    result = GenerateHash(result) ^ AggregateIDList[idx].GetHashCode();
                 }
             }
 
-            if (this._entityIDList.Count > 0)
+            if (EntityIDList.Count > 0)
             {
-                for (int idx = 0; idx < this._entityIDList.Count; idx++)
+                for (int idx = 0; idx < EntityIDList.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._entityIDList[idx].GetHashCode();
+                    result = GenerateHash(result) ^ EntityIDList[idx].GetHashCode();
                 }
             }
 
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
 
-            if (this._silentAggregateSystemList.Count > 0)
+            if (SilentAggregateSystemList.Count > 0)
             {
-                for (int idx = 0; idx < this._silentAggregateSystemList.Count; idx++)
+                for (int idx = 0; idx < SilentAggregateSystemList.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._silentAggregateSystemList[idx].GetHashCode();
+                    result = GenerateHash(result) ^ SilentAggregateSystemList[idx].GetHashCode();
                 }
             }
 
-            if (this._silentEntitySystemList.Count > 0)
+            if (SilentEntitySystemList.Count > 0)
             {
-                for (int idx = 0; idx < this._silentEntitySystemList.Count; idx++)
+                for (int idx = 0; idx < SilentEntitySystemList.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._silentEntitySystemList[idx].GetHashCode();
+                    result = GenerateHash(result) ^ SilentEntitySystemList[idx].GetHashCode();
                 }
             }
 
-            result = GenerateHash(result) ^ this._numberOfVariableDatumRecords.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfVariableDatumRecords.GetHashCode();
 
-            if (this._variableDatumList.Count > 0)
+            if (VariableDatumList.Count > 0)
             {
-                for (int idx = 0; idx < this._variableDatumList.Count; idx++)
+                for (int idx = 0; idx < VariableDatumList.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._variableDatumList[idx].GetHashCode();
+                    result = GenerateHash(result) ^ VariableDatumList[idx].GetHashCode();
                 }
             }
 

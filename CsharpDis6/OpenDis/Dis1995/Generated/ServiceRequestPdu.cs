@@ -58,38 +58,11 @@ namespace OpenDis.Dis1995
     public partial class ServiceRequestPdu : LogisticsPdu, IEquatable<ServiceRequestPdu>
     {
         /// <summary>
-        /// Entity that is requesting service
-        /// </summary>
-        private EntityID _requestingEntityID = new EntityID();
-
-        /// <summary>
-        /// Entity that is providing the service
-        /// </summary>
-        private EntityID _servicingEntityID = new EntityID();
-
-        /// <summary>
-        /// type of service requested
-        /// </summary>
-        private byte _serviceTypeRequested;
-
-        /// <summary>
-        /// How many requested
-        /// </summary>
-        private byte _numberOfSupplyTypes;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private short _serviceRequestPadding;
-
-        private List<SupplyQuantity> _supplies = new List<SupplyQuantity>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ServiceRequestPdu"/> class.
         /// </summary>
         public ServiceRequestPdu()
         {
-            PduType = (byte)5;
+            PduType = 5;
         }
 
         /// <summary>
@@ -98,12 +71,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(ServiceRequestPdu left, ServiceRequestPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(ServiceRequestPdu left, ServiceRequestPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -111,36 +81,22 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(ServiceRequestPdu left, ServiceRequestPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._requestingEntityID.GetMarshalledSize();  // this._requestingEntityID
-            marshalSize += this._servicingEntityID.GetMarshalledSize();  // this._servicingEntityID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += RequestingEntityID.GetMarshalledSize();  // this._requestingEntityID
+            marshalSize += ServicingEntityID.GetMarshalledSize();  // this._servicingEntityID
             marshalSize += 1;  // this._serviceTypeRequested
             marshalSize += 1;  // this._numberOfSupplyTypes
             marshalSize += 2;  // this._serviceRequestPadding
-            for (int idx = 0; idx < this._supplies.Count; idx++)
+            for (int idx = 0; idx < Supplies.Count; idx++)
             {
-                SupplyQuantity listElement = (SupplyQuantity)this._supplies[idx];
+                var listElement = Supplies[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -151,119 +107,53 @@ namespace OpenDis.Dis1995
         /// Gets or sets the Entity that is requesting service
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "requestingEntityID")]
-        public EntityID RequestingEntityID
-        {
-            get
-            {
-                return this._requestingEntityID;
-            }
-
-            set
-            {
-                this._requestingEntityID = value;
-            }
-        }
+        public EntityID RequestingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Entity that is providing the service
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "servicingEntityID")]
-        public EntityID ServicingEntityID
-        {
-            get
-            {
-                return this._servicingEntityID;
-            }
-
-            set
-            {
-                this._servicingEntityID = value;
-            }
-        }
+        public EntityID ServicingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the type of service requested
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "serviceTypeRequested")]
-        public byte ServiceTypeRequested
-        {
-            get
-            {
-                return this._serviceTypeRequested;
-            }
-
-            set
-            {
-                this._serviceTypeRequested = value;
-            }
-        }
+        public byte ServiceTypeRequested { get; set; }
 
         /// <summary>
         /// Gets or sets the How many requested
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfSupplyTypes method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfSupplyTypes method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfSupplyTypes")]
-        public byte NumberOfSupplyTypes
-        {
-            get
-            {
-                return this._numberOfSupplyTypes;
-            }
-
-            set
-            {
-                this._numberOfSupplyTypes = value;
-            }
-        }
+        public byte NumberOfSupplyTypes { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(short), ElementName = "serviceRequestPadding")]
-        public short ServiceRequestPadding
-        {
-            get
-            {
-                return this._serviceRequestPadding;
-            }
-
-            set
-            {
-                this._serviceRequestPadding = value;
-            }
-        }
+        public short ServiceRequestPadding { get; set; }
 
         /// <summary>
         /// Gets the supplies
         /// </summary>
         [XmlElement(ElementName = "suppliesList", Type = typeof(List<SupplyQuantity>))]
-        public List<SupplyQuantity> Supplies
-        {
-            get
-            {
-                return this._supplies;
-            }
-        }
+        public List<SupplyQuantity> Supplies { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -272,31 +162,31 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._requestingEntityID.Marshal(dos);
-                    this._servicingEntityID.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._serviceTypeRequested);
-                    dos.WriteUnsignedByte((byte)this._supplies.Count);
-                    dos.WriteShort((short)this._serviceRequestPadding);
+                    RequestingEntityID.Marshal(dos);
+                    ServicingEntityID.Marshal(dos);
+                    dos.WriteUnsignedByte(ServiceTypeRequested);
+                    dos.WriteUnsignedByte((byte)Supplies.Count);
+                    dos.WriteShort(ServiceRequestPadding);
 
-                    for (int idx = 0; idx < this._supplies.Count; idx++)
+                    for (int idx = 0; idx < Supplies.Count; idx++)
                     {
-                        SupplyQuantity aSupplyQuantity = (SupplyQuantity)this._supplies[idx];
+                        var aSupplyQuantity = Supplies[idx];
                         aSupplyQuantity.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -311,45 +201,38 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._requestingEntityID.Unmarshal(dis);
-                    this._servicingEntityID.Unmarshal(dis);
-                    this._serviceTypeRequested = dis.ReadUnsignedByte();
-                    this._numberOfSupplyTypes = dis.ReadUnsignedByte();
-                    this._serviceRequestPadding = dis.ReadShort();
+                    RequestingEntityID.Unmarshal(dis);
+                    ServicingEntityID.Unmarshal(dis);
+                    ServiceTypeRequested = dis.ReadUnsignedByte();
+                    NumberOfSupplyTypes = dis.ReadUnsignedByte();
+                    ServiceRequestPadding = dis.ReadShort();
 
-                    for (int idx = 0; idx < this.NumberOfSupplyTypes; idx++)
+                    for (int idx = 0; idx < NumberOfSupplyTypes; idx++)
                     {
-                        SupplyQuantity anX = new SupplyQuantity();
+                        var anX = new SupplyQuantity();
                         anX.Unmarshal(dis);
-                        this._supplies.Add(anX);
+                        Supplies.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -358,18 +241,18 @@ namespace OpenDis.Dis1995
             try
             {
                 sb.AppendLine("<requestingEntityID>");
-                this._requestingEntityID.Reflection(sb);
+                RequestingEntityID.Reflection(sb);
                 sb.AppendLine("</requestingEntityID>");
                 sb.AppendLine("<servicingEntityID>");
-                this._servicingEntityID.Reflection(sb);
+                ServicingEntityID.Reflection(sb);
                 sb.AppendLine("</servicingEntityID>");
-                sb.AppendLine("<serviceTypeRequested type=\"byte\">" + this._serviceTypeRequested.ToString(CultureInfo.InvariantCulture) + "</serviceTypeRequested>");
-                sb.AppendLine("<supplies type=\"byte\">" + this._supplies.Count.ToString(CultureInfo.InvariantCulture) + "</supplies>");
-                sb.AppendLine("<serviceRequestPadding type=\"short\">" + this._serviceRequestPadding.ToString(CultureInfo.InvariantCulture) + "</serviceRequestPadding>");
-                for (int idx = 0; idx < this._supplies.Count; idx++)
+                sb.AppendLine("<serviceTypeRequested type=\"byte\">" + ServiceTypeRequested.ToString(CultureInfo.InvariantCulture) + "</serviceTypeRequested>");
+                sb.AppendLine("<supplies type=\"byte\">" + Supplies.Count.ToString(CultureInfo.InvariantCulture) + "</supplies>");
+                sb.AppendLine("<serviceRequestPadding type=\"short\">" + ServiceRequestPadding.ToString(CultureInfo.InvariantCulture) + "</serviceRequestPadding>");
+                for (int idx = 0; idx < Supplies.Count; idx++)
                 {
                     sb.AppendLine("<supplies" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"SupplyQuantity\">");
-                    SupplyQuantity aSupplyQuantity = (SupplyQuantity)this._supplies[idx];
+                    var aSupplyQuantity = Supplies[idx];
                     aSupplyQuantity.Reflection(sb);
                     sb.AppendLine("</supplies" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -378,86 +261,68 @@ namespace OpenDis.Dis1995
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as ServiceRequestPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as ServiceRequestPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(ServiceRequestPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._requestingEntityID.Equals(obj._requestingEntityID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!RequestingEntityID.Equals(obj.RequestingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._servicingEntityID.Equals(obj._servicingEntityID))
+            if (!ServicingEntityID.Equals(obj.ServicingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._serviceTypeRequested != obj._serviceTypeRequested)
+            if (ServiceTypeRequested != obj.ServiceTypeRequested)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfSupplyTypes != obj._numberOfSupplyTypes)
+            if (NumberOfSupplyTypes != obj.NumberOfSupplyTypes)
             {
                 ivarsEqual = false;
             }
 
-            if (this._serviceRequestPadding != obj._serviceRequestPadding)
+            if (ServiceRequestPadding != obj.ServiceRequestPadding)
             {
                 ivarsEqual = false;
             }
 
-            if (this._supplies.Count != obj._supplies.Count)
+            if (Supplies.Count != obj.Supplies.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._supplies.Count; idx++)
+                for (int idx = 0; idx < Supplies.Count; idx++)
                 {
-                    if (!this._supplies[idx].Equals(obj._supplies[idx]))
+                    if (!Supplies[idx].Equals(obj.Supplies[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -472,33 +337,26 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._requestingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._servicingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._serviceTypeRequested.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfSupplyTypes.GetHashCode();
-            result = GenerateHash(result) ^ this._serviceRequestPadding.GetHashCode();
+            result = GenerateHash(result) ^ RequestingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ ServicingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ ServiceTypeRequested.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfSupplyTypes.GetHashCode();
+            result = GenerateHash(result) ^ ServiceRequestPadding.GetHashCode();
 
-            if (this._supplies.Count > 0)
+            if (Supplies.Count > 0)
             {
-                for (int idx = 0; idx < this._supplies.Count; idx++)
+                for (int idx = 0; idx < Supplies.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._supplies[idx].GetHashCode();
+                    result = GenerateHash(result) ^ Supplies[idx].GetHashCode();
                 }
             }
 

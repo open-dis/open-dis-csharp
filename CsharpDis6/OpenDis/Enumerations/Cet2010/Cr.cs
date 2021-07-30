@@ -10,24 +10,24 @@ namespace OpenDis.Enumerations.Cet2010
     /// <summary>
     /// Change request
     /// </summary>
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class Cr : CetBase, INotifyPropertyChanged
     {
-		#region Fields (2) 
+        #region Fields (2) 
 
         private ulong value;
         private string valueField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Delegates and Events (1) 
+        #region Delegates and Events (1) 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Delegates and Events 
+        #endregion Delegates and Events 
 
-		#region Properties (2) 
+        #region Properties (2) 
 
         /// <summary>
         /// Gets or sets the change request number - RAW value.
@@ -36,21 +36,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "value", DataType = "positiveInteger")]
         public string RawValue
         {
-            get
-            {
-                return this.valueField;
-            }
+            get => valueField;
 
             set
             {
-                if (this.valueField == value)
+                if (valueField == value)
                 {
                     return;
                 }
 
-                this.valueField = value;
+                valueField = value;
                 this.value = ulong.Parse(value, CultureInfo.InvariantCulture);
-                this.RaisePropertyChanged("RawValue");
+                RaisePropertyChanged(nameof(RawValue));
             }
         }
 
@@ -61,33 +58,27 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public ulong Value
         {
-            get
-            {
-                return this.value;
-            }
+            get => value;
 
             set
             {
                 if (this.value != value)
                 {
-                    this.RawValue = ((ulong)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Value");
+                    RawValue = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Value));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (1) 
+        #region Methods (1) 
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

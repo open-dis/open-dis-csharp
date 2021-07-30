@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -53,58 +52,8 @@ namespace OpenDis.Dis1998
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class IffFundamentalData
+    public partial class IffFundamentalData : IEquatable<IffFundamentalData>, IReflectable
     {
-        /// <summary>
-        /// system status
-        /// </summary>
-        private byte _systemStatus;
-
-        /// <summary>
-        /// Alternate parameter 4
-        /// </summary>
-        private byte _alternateParameter4;
-
-        /// <summary>
-        /// eight boolean fields
-        /// </summary>
-        private byte _informationLayers;
-
-        /// <summary>
-        /// enumeration
-        /// </summary>
-        private byte _modifier;
-
-        /// <summary>
-        /// parameter, enumeration
-        /// </summary>
-        private ushort _parameter1;
-
-        /// <summary>
-        /// parameter, enumeration
-        /// </summary>
-        private ushort _parameter2;
-
-        /// <summary>
-        /// parameter, enumeration
-        /// </summary>
-        private ushort _parameter3;
-
-        /// <summary>
-        /// parameter, enumeration
-        /// </summary>
-        private ushort _parameter4;
-
-        /// <summary>
-        /// parameter, enumeration
-        /// </summary>
-        private ushort _parameter5;
-
-        /// <summary>
-        /// parameter, enumeration
-        /// </summary>
-        private ushort _parameter6;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="IffFundamentalData"/> class.
         /// </summary>
@@ -118,12 +67,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(IffFundamentalData left, IffFundamentalData right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(IffFundamentalData left, IffFundamentalData right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -131,26 +77,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(IffFundamentalData left, IffFundamentalData right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 1;  // this._systemStatus
             marshalSize += 1;  // this._alternateParameter4
@@ -169,171 +103,61 @@ namespace OpenDis.Dis1998
         /// Gets or sets the system status
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "systemStatus")]
-        public byte SystemStatus
-        {
-            get
-            {
-                return this._systemStatus;
-            }
-
-            set
-            {
-                this._systemStatus = value;
-            }
-        }
+        public byte SystemStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the Alternate parameter 4
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "alternateParameter4")]
-        public byte AlternateParameter4
-        {
-            get
-            {
-                return this._alternateParameter4;
-            }
-
-            set
-            {
-                this._alternateParameter4 = value;
-            }
-        }
+        public byte AlternateParameter4 { get; set; }
 
         /// <summary>
         /// Gets or sets the eight boolean fields
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "informationLayers")]
-        public byte InformationLayers
-        {
-            get
-            {
-                return this._informationLayers;
-            }
-
-            set
-            {
-                this._informationLayers = value;
-            }
-        }
+        public byte InformationLayers { get; set; }
 
         /// <summary>
         /// Gets or sets the enumeration
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "modifier")]
-        public byte Modifier
-        {
-            get
-            {
-                return this._modifier;
-            }
-
-            set
-            {
-                this._modifier = value;
-            }
-        }
+        public byte Modifier { get; set; }
 
         /// <summary>
         /// Gets or sets the parameter, enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "parameter1")]
-        public ushort Parameter1
-        {
-            get
-            {
-                return this._parameter1;
-            }
-
-            set
-            {
-                this._parameter1 = value;
-            }
-        }
+        public ushort Parameter1 { get; set; }
 
         /// <summary>
         /// Gets or sets the parameter, enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "parameter2")]
-        public ushort Parameter2
-        {
-            get
-            {
-                return this._parameter2;
-            }
-
-            set
-            {
-                this._parameter2 = value;
-            }
-        }
+        public ushort Parameter2 { get; set; }
 
         /// <summary>
         /// Gets or sets the parameter, enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "parameter3")]
-        public ushort Parameter3
-        {
-            get
-            {
-                return this._parameter3;
-            }
-
-            set
-            {
-                this._parameter3 = value;
-            }
-        }
+        public ushort Parameter3 { get; set; }
 
         /// <summary>
         /// Gets or sets the parameter, enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "parameter4")]
-        public ushort Parameter4
-        {
-            get
-            {
-                return this._parameter4;
-            }
-
-            set
-            {
-                this._parameter4 = value;
-            }
-        }
+        public ushort Parameter4 { get; set; }
 
         /// <summary>
         /// Gets or sets the parameter, enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "parameter5")]
-        public ushort Parameter5
-        {
-            get
-            {
-                return this._parameter5;
-            }
-
-            set
-            {
-                this._parameter5 = value;
-            }
-        }
+        public ushort Parameter5 { get; set; }
 
         /// <summary>
         /// Gets or sets the parameter, enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "parameter6")]
-        public ushort Parameter6
-        {
-            get
-            {
-                return this._parameter6;
-            }
-
-            set
-            {
-                this._parameter6 = value;
-            }
-        }
+        public ushort Parameter6 { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -346,14 +170,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -363,16 +187,16 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedByte((byte)this._systemStatus);
-                    dos.WriteUnsignedByte((byte)this._alternateParameter4);
-                    dos.WriteUnsignedByte((byte)this._informationLayers);
-                    dos.WriteUnsignedByte((byte)this._modifier);
-                    dos.WriteUnsignedShort((ushort)this._parameter1);
-                    dos.WriteUnsignedShort((ushort)this._parameter2);
-                    dos.WriteUnsignedShort((ushort)this._parameter3);
-                    dos.WriteUnsignedShort((ushort)this._parameter4);
-                    dos.WriteUnsignedShort((ushort)this._parameter5);
-                    dos.WriteUnsignedShort((ushort)this._parameter6);
+                    dos.WriteUnsignedByte(SystemStatus);
+                    dos.WriteUnsignedByte(AlternateParameter4);
+                    dos.WriteUnsignedByte(InformationLayers);
+                    dos.WriteUnsignedByte(Modifier);
+                    dos.WriteUnsignedShort(Parameter1);
+                    dos.WriteUnsignedShort(Parameter2);
+                    dos.WriteUnsignedShort(Parameter3);
+                    dos.WriteUnsignedShort(Parameter4);
+                    dos.WriteUnsignedShort(Parameter5);
+                    dos.WriteUnsignedShort(Parameter6);
                 }
                 catch (Exception e)
                 {
@@ -382,11 +206,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -399,16 +223,16 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._systemStatus = dis.ReadUnsignedByte();
-                    this._alternateParameter4 = dis.ReadUnsignedByte();
-                    this._informationLayers = dis.ReadUnsignedByte();
-                    this._modifier = dis.ReadUnsignedByte();
-                    this._parameter1 = dis.ReadUnsignedShort();
-                    this._parameter2 = dis.ReadUnsignedShort();
-                    this._parameter3 = dis.ReadUnsignedShort();
-                    this._parameter4 = dis.ReadUnsignedShort();
-                    this._parameter5 = dis.ReadUnsignedShort();
-                    this._parameter6 = dis.ReadUnsignedShort();
+                    SystemStatus = dis.ReadUnsignedByte();
+                    AlternateParameter4 = dis.ReadUnsignedByte();
+                    InformationLayers = dis.ReadUnsignedByte();
+                    Modifier = dis.ReadUnsignedByte();
+                    Parameter1 = dis.ReadUnsignedShort();
+                    Parameter2 = dis.ReadUnsignedShort();
+                    Parameter3 = dis.ReadUnsignedShort();
+                    Parameter4 = dis.ReadUnsignedShort();
+                    Parameter5 = dis.ReadUnsignedShort();
+                    Parameter6 = dis.ReadUnsignedShort();
                 }
                 catch (Exception e)
                 {
@@ -418,133 +242,111 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<IffFundamentalData>");
             try
             {
-                sb.AppendLine("<systemStatus type=\"byte\">" + this._systemStatus.ToString(CultureInfo.InvariantCulture) + "</systemStatus>");
-                sb.AppendLine("<alternateParameter4 type=\"byte\">" + this._alternateParameter4.ToString(CultureInfo.InvariantCulture) + "</alternateParameter4>");
-                sb.AppendLine("<informationLayers type=\"byte\">" + this._informationLayers.ToString(CultureInfo.InvariantCulture) + "</informationLayers>");
-                sb.AppendLine("<modifier type=\"byte\">" + this._modifier.ToString(CultureInfo.InvariantCulture) + "</modifier>");
-                sb.AppendLine("<parameter1 type=\"ushort\">" + this._parameter1.ToString(CultureInfo.InvariantCulture) + "</parameter1>");
-                sb.AppendLine("<parameter2 type=\"ushort\">" + this._parameter2.ToString(CultureInfo.InvariantCulture) + "</parameter2>");
-                sb.AppendLine("<parameter3 type=\"ushort\">" + this._parameter3.ToString(CultureInfo.InvariantCulture) + "</parameter3>");
-                sb.AppendLine("<parameter4 type=\"ushort\">" + this._parameter4.ToString(CultureInfo.InvariantCulture) + "</parameter4>");
-                sb.AppendLine("<parameter5 type=\"ushort\">" + this._parameter5.ToString(CultureInfo.InvariantCulture) + "</parameter5>");
-                sb.AppendLine("<parameter6 type=\"ushort\">" + this._parameter6.ToString(CultureInfo.InvariantCulture) + "</parameter6>");
+                sb.AppendLine("<systemStatus type=\"byte\">" + SystemStatus.ToString(CultureInfo.InvariantCulture) + "</systemStatus>");
+                sb.AppendLine("<alternateParameter4 type=\"byte\">" + AlternateParameter4.ToString(CultureInfo.InvariantCulture) + "</alternateParameter4>");
+                sb.AppendLine("<informationLayers type=\"byte\">" + InformationLayers.ToString(CultureInfo.InvariantCulture) + "</informationLayers>");
+                sb.AppendLine("<modifier type=\"byte\">" + Modifier.ToString(CultureInfo.InvariantCulture) + "</modifier>");
+                sb.AppendLine("<parameter1 type=\"ushort\">" + Parameter1.ToString(CultureInfo.InvariantCulture) + "</parameter1>");
+                sb.AppendLine("<parameter2 type=\"ushort\">" + Parameter2.ToString(CultureInfo.InvariantCulture) + "</parameter2>");
+                sb.AppendLine("<parameter3 type=\"ushort\">" + Parameter3.ToString(CultureInfo.InvariantCulture) + "</parameter3>");
+                sb.AppendLine("<parameter4 type=\"ushort\">" + Parameter4.ToString(CultureInfo.InvariantCulture) + "</parameter4>");
+                sb.AppendLine("<parameter5 type=\"ushort\">" + Parameter5.ToString(CultureInfo.InvariantCulture) + "</parameter5>");
+                sb.AppendLine("<parameter6 type=\"ushort\">" + Parameter6.ToString(CultureInfo.InvariantCulture) + "</parameter6>");
                 sb.AppendLine("</IffFundamentalData>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as IffFundamentalData;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as IffFundamentalData;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(IffFundamentalData obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._systemStatus != obj._systemStatus)
+            if (SystemStatus != obj.SystemStatus)
             {
                 ivarsEqual = false;
             }
 
-            if (this._alternateParameter4 != obj._alternateParameter4)
+            if (AlternateParameter4 != obj.AlternateParameter4)
             {
                 ivarsEqual = false;
             }
 
-            if (this._informationLayers != obj._informationLayers)
+            if (InformationLayers != obj.InformationLayers)
             {
                 ivarsEqual = false;
             }
 
-            if (this._modifier != obj._modifier)
+            if (Modifier != obj.Modifier)
             {
                 ivarsEqual = false;
             }
 
-            if (this._parameter1 != obj._parameter1)
+            if (Parameter1 != obj.Parameter1)
             {
                 ivarsEqual = false;
             }
 
-            if (this._parameter2 != obj._parameter2)
+            if (Parameter2 != obj.Parameter2)
             {
                 ivarsEqual = false;
             }
 
-            if (this._parameter3 != obj._parameter3)
+            if (Parameter3 != obj.Parameter3)
             {
                 ivarsEqual = false;
             }
 
-            if (this._parameter4 != obj._parameter4)
+            if (Parameter4 != obj.Parameter4)
             {
                 ivarsEqual = false;
             }
 
-            if (this._parameter5 != obj._parameter5)
+            if (Parameter5 != obj.Parameter5)
             {
                 ivarsEqual = false;
             }
 
-            if (this._parameter6 != obj._parameter6)
+            if (Parameter6 != obj.Parameter6)
             {
                 ivarsEqual = false;
             }
@@ -557,30 +359,23 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._systemStatus.GetHashCode();
-            result = GenerateHash(result) ^ this._alternateParameter4.GetHashCode();
-            result = GenerateHash(result) ^ this._informationLayers.GetHashCode();
-            result = GenerateHash(result) ^ this._modifier.GetHashCode();
-            result = GenerateHash(result) ^ this._parameter1.GetHashCode();
-            result = GenerateHash(result) ^ this._parameter2.GetHashCode();
-            result = GenerateHash(result) ^ this._parameter3.GetHashCode();
-            result = GenerateHash(result) ^ this._parameter4.GetHashCode();
-            result = GenerateHash(result) ^ this._parameter5.GetHashCode();
-            result = GenerateHash(result) ^ this._parameter6.GetHashCode();
+            result = GenerateHash(result) ^ SystemStatus.GetHashCode();
+            result = GenerateHash(result) ^ AlternateParameter4.GetHashCode();
+            result = GenerateHash(result) ^ InformationLayers.GetHashCode();
+            result = GenerateHash(result) ^ Modifier.GetHashCode();
+            result = GenerateHash(result) ^ Parameter1.GetHashCode();
+            result = GenerateHash(result) ^ Parameter2.GetHashCode();
+            result = GenerateHash(result) ^ Parameter3.GetHashCode();
+            result = GenerateHash(result) ^ Parameter4.GetHashCode();
+            result = GenerateHash(result) ^ Parameter5.GetHashCode();
+            result = GenerateHash(result) ^ Parameter6.GetHashCode();
 
             return result;
         }

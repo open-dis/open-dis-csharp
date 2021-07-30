@@ -6,39 +6,36 @@ using System.Xml.Serialization;
 
 namespace OpenDis.Enumerations.Cet2010
 {
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     [XmlRoot("cet", IsNullable = false)]
     public class Cet : GenericTable
     {
-		#region Fields (1) 
+        #region Fields (1) 
 
         private List<Entity> entityField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Properties (1) 
+        #region Properties (1) 
 
         [XmlElement("entity", Form = XmlSchemaForm.Unqualified)]
         public List<Entity> Entities
         {
-            get
-            {
-                return this.entityField;
-            }
+            get => entityField;
 
             set
             {
-                if (this.entityField == value)
+                if (entityField == value)
                 {
                     return;
                 }
 
-                this.entityField = value;
-                this.RaisePropertyChanged("Entities");
+                entityField = value;
+                RaisePropertyChanged(nameof(Entities));
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }

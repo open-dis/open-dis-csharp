@@ -10,11 +10,11 @@ namespace OpenDis.Enumerations.Cet2006
     [XmlInclude(typeof(Specific))]
     [XmlInclude(typeof(Subcategory))]
     [XmlInclude(typeof(Category))]
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class GenericEntry : CetBase, INotifyPropertyChanged
     {
-		#region Fields (7) 
+        #region Fields (7) 
 
         private bool deletedField;
         private bool deletedFieldSpecified;
@@ -24,48 +24,42 @@ namespace OpenDis.Enumerations.Cet2006
         private bool unusedFieldSpecified;
         private string xrefField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Delegates and Events (1) 
+        #region Delegates and Events (1) 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Delegates and Events 
+        #endregion Delegates and Events 
 
-		#region Properties (7) 
+        #region Properties (7) 
 
         [XmlAttribute(AttributeName = "deleted")]
         public bool Deleted
         {
-            get
-            {
-                return this.deletedField;
-            }
+            get => deletedField;
 
             set
             {
-                if (this.deletedField != value)
+                if (deletedField != value)
                 {
-                    this.deletedField = value;
-                    this.RaisePropertyChanged("Deleted");
+                    deletedField = value;
+                    RaisePropertyChanged(nameof(Deleted));
                 }
             }
         }
 
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool DeletedSpecified
         {
-            get
-            {
-                return this.deletedFieldSpecified;
-            }
+            get => deletedFieldSpecified;
 
             set
             {
-                if (this.deletedFieldSpecified != value)
+                if (deletedFieldSpecified != value)
                 {
-                    this.deletedFieldSpecified = value;
-                    this.RaisePropertyChanged("DeletedSpecified");
+                    deletedFieldSpecified = value;
+                    RaisePropertyChanged(nameof(DeletedSpecified));
                 }
             }
         }
@@ -73,17 +67,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "description")]
         public string Description
         {
-            get
-            {
-                return this.descriptionField;
-            }
+            get => descriptionField;
 
             set
             {
-                if (this.descriptionField != value)
+                if (descriptionField != value)
                 {
-                    this.descriptionField = value;
-                    this.RaisePropertyChanged("Description");
+                    descriptionField = value;
+                    RaisePropertyChanged(nameof(Description));
                 }
             }
         }
@@ -91,17 +82,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "footnote")]
         public string Footnote
         {
-            get
-            {
-                return this.footnoteField;
-            }
+            get => footnoteField;
 
             set
             {
-                if (this.footnoteField != value)
+                if (footnoteField != value)
                 {
-                    this.footnoteField = value;
-                    this.RaisePropertyChanged("Footnote");
+                    footnoteField = value;
+                    RaisePropertyChanged(nameof(Footnote));
                 }
             }
         }
@@ -109,35 +97,29 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "unused")]
         public bool Unused
         {
-            get
-            {
-                return this.unusedField;
-            }
+            get => unusedField;
 
             set
             {
-                if (this.unusedField != value)
+                if (unusedField != value)
                 {
-                    this.unusedField = value;
-                    this.RaisePropertyChanged("Unused");
+                    unusedField = value;
+                    RaisePropertyChanged(nameof(Unused));
                 }
             }
         }
 
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool UnusedSpecified
         {
-            get
-            {
-                return this.unusedFieldSpecified;
-            }
+            get => unusedFieldSpecified;
 
             set
             {
-                if (this.unusedFieldSpecified)
+                if (unusedFieldSpecified)
                 {
-                    this.unusedFieldSpecified = value;
-                    this.RaisePropertyChanged("UnusedSpecified");
+                    unusedFieldSpecified = value;
+                    RaisePropertyChanged(nameof(UnusedSpecified));
                 }
             }
         }
@@ -145,33 +127,27 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "xref")]
         public string XRef
         {
-            get
-            {
-                return this.xrefField;
-            }
+            get => xrefField;
 
             set
             {
-                if (this.xrefField != value)
+                if (xrefField != value)
                 {
-                    this.xrefField = value;
-                    this.RaisePropertyChanged("XRef");
+                    xrefField = value;
+                    RaisePropertyChanged(nameof(XRef));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (1) 
+        #region Methods (1) 
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

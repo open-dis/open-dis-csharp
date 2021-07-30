@@ -49,45 +49,16 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Used in the UA pdu; ties together an emmitter and a location. This requires manual cleanup; the beam data should not be attached to each emitter system.
+    /// Used in the UA pdu; ties together an emmitter and a location. This requires manual cleanup; the beam data should
+    /// not be attached to each emitter system.
     /// </summary>
     [Serializable]
     [XmlRoot]
     [XmlInclude(typeof(AcousticEmitterSystem))]
     [XmlInclude(typeof(Vector3Float))]
     [XmlInclude(typeof(AcousticBeamData))]
-    public partial class AcousticEmitterSystemData
+    public partial class AcousticEmitterSystemData : IEquatable<AcousticEmitterSystemData>, IReflectable
     {
-        /// <summary>
-        /// Length of emitter system data
-        /// </summary>
-        private byte _emitterSystemDataLength;
-
-        /// <summary>
-        /// Number of beams
-        /// </summary>
-        private byte _numberOfBeams;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private ushort _pad2;
-
-        /// <summary>
-        /// This field shall specify the system for a particular UA emitter.
-        /// </summary>
-        private AcousticEmitterSystem _acousticEmitterSystem = new AcousticEmitterSystem();
-
-        /// <summary>
-        /// Represents the location wrt the entity
-        /// </summary>
-        private Vector3Float _emitterLocation = new Vector3Float();
-
-        /// <summary>
-        /// For each beam in numberOfBeams, an emitter system. This is not right--the beam records need to be at the end of the PDU, rather than attached to each system.
-        /// </summary>
-        private List<AcousticBeamData> _beamRecords = new List<AcousticBeamData>();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AcousticEmitterSystemData"/> class.
         /// </summary>
@@ -101,12 +72,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AcousticEmitterSystemData left, AcousticEmitterSystemData right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AcousticEmitterSystemData left, AcousticEmitterSystemData right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -114,35 +82,23 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AcousticEmitterSystemData left, AcousticEmitterSystemData right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 1;  // this._emitterSystemDataLength
             marshalSize += 1;  // this._numberOfBeams
             marshalSize += 2;  // this._pad2
-            marshalSize += this._acousticEmitterSystem.GetMarshalledSize();  // this._acousticEmitterSystem
-            marshalSize += this._emitterLocation.GetMarshalledSize();  // this._emitterLocation
-            for (int idx = 0; idx < this._beamRecords.Count; idx++)
+            marshalSize += AcousticEmitterSystem.GetMarshalledSize();  // this._acousticEmitterSystem
+            marshalSize += EmitterLocation.GetMarshalledSize();  // this._emitterLocation
+            for (int idx = 0; idx < BeamRecords.Count; idx++)
             {
-                AcousticBeamData listElement = (AcousticBeamData)this._beamRecords[idx];
+                var listElement = BeamRecords[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -153,103 +109,44 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Length of emitter system data
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "emitterSystemDataLength")]
-        public byte EmitterSystemDataLength
-        {
-            get
-            {
-                return this._emitterSystemDataLength;
-            }
-
-            set
-            {
-                this._emitterSystemDataLength = value;
-            }
-        }
+        public byte EmitterSystemDataLength { get; set; }
 
         /// <summary>
         /// Gets or sets the Number of beams
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfBeams method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfBeams method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfBeams")]
-        public byte NumberOfBeams
-        {
-            get
-            {
-                return this._numberOfBeams;
-            }
-
-            set
-            {
-                this._numberOfBeams = value;
-            }
-        }
+        public byte NumberOfBeams { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "pad2")]
-        public ushort Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
-
-            set
-            {
-                this._pad2 = value;
-            }
-        }
+        public ushort Pad2 { get; set; }
 
         /// <summary>
         /// Gets or sets the This field shall specify the system for a particular UA emitter.
         /// </summary>
         [XmlElement(Type = typeof(AcousticEmitterSystem), ElementName = "acousticEmitterSystem")]
-        public AcousticEmitterSystem AcousticEmitterSystem
-        {
-            get
-            {
-                return this._acousticEmitterSystem;
-            }
-
-            set
-            {
-                this._acousticEmitterSystem = value;
-            }
-        }
+        public AcousticEmitterSystem AcousticEmitterSystem { get; set; } = new AcousticEmitterSystem();
 
         /// <summary>
         /// Gets or sets the Represents the location wrt the entity
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "emitterLocation")]
-        public Vector3Float EmitterLocation
-        {
-            get
-            {
-                return this._emitterLocation;
-            }
-
-            set
-            {
-                this._emitterLocation = value;
-            }
-        }
+        public Vector3Float EmitterLocation { get; set; } = new Vector3Float();
 
         /// <summary>
-        /// Gets the For each beam in numberOfBeams, an emitter system. This is not right--the beam records need to be at the end of the PDU, rather than attached to each system.
+        /// Gets the For each beam in numberOfBeams, an emitter system. This is not right--the beam records need to be at the
+        /// end of the PDU, rather than attached to each system.
         /// </summary>
         [XmlElement(ElementName = "beamRecordsList", Type = typeof(List<AcousticBeamData>))]
-        public List<AcousticBeamData> BeamRecords
-        {
-            get
-            {
-                return this._beamRecords;
-            }
-        }
+        public List<AcousticBeamData> BeamRecords { get; } = new();
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -262,14 +159,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -279,15 +176,15 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedByte((byte)this._emitterSystemDataLength);
-                    dos.WriteUnsignedByte((byte)this._beamRecords.Count);
-                    dos.WriteUnsignedShort((ushort)this._pad2);
-                    this._acousticEmitterSystem.Marshal(dos);
-                    this._emitterLocation.Marshal(dos);
+                    dos.WriteUnsignedByte(EmitterSystemDataLength);
+                    dos.WriteUnsignedByte((byte)BeamRecords.Count);
+                    dos.WriteUnsignedShort(Pad2);
+                    AcousticEmitterSystem.Marshal(dos);
+                    EmitterLocation.Marshal(dos);
 
-                    for (int idx = 0; idx < this._beamRecords.Count; idx++)
+                    for (int idx = 0; idx < BeamRecords.Count; idx++)
                     {
-                        AcousticBeamData aAcousticBeamData = (AcousticBeamData)this._beamRecords[idx];
+                        var aAcousticBeamData = BeamRecords[idx];
                         aAcousticBeamData.Marshal(dos);
                     }
                 }
@@ -299,11 +196,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -316,17 +213,17 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._emitterSystemDataLength = dis.ReadUnsignedByte();
-                    this._numberOfBeams = dis.ReadUnsignedByte();
-                    this._pad2 = dis.ReadUnsignedShort();
-                    this._acousticEmitterSystem.Unmarshal(dis);
-                    this._emitterLocation.Unmarshal(dis);
+                    EmitterSystemDataLength = dis.ReadUnsignedByte();
+                    NumberOfBeams = dis.ReadUnsignedByte();
+                    Pad2 = dis.ReadUnsignedShort();
+                    AcousticEmitterSystem.Unmarshal(dis);
+                    EmitterLocation.Unmarshal(dis);
 
-                    for (int idx = 0; idx < this.NumberOfBeams; idx++)
+                    for (int idx = 0; idx < NumberOfBeams; idx++)
                     {
-                        AcousticBeamData anX = new AcousticBeamData();
+                        var anX = new AcousticBeamData();
                         anX.Unmarshal(dis);
-                        this._beamRecords.Add(anX);
+                        BeamRecords.Add(anX);
                     }
                 }
                 catch (Exception e)
@@ -337,43 +234,36 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<AcousticEmitterSystemData>");
             try
             {
-                sb.AppendLine("<emitterSystemDataLength type=\"byte\">" + this._emitterSystemDataLength.ToString(CultureInfo.InvariantCulture) + "</emitterSystemDataLength>");
-                sb.AppendLine("<beamRecords type=\"byte\">" + this._beamRecords.Count.ToString(CultureInfo.InvariantCulture) + "</beamRecords>");
-                sb.AppendLine("<pad2 type=\"ushort\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                sb.AppendLine("<emitterSystemDataLength type=\"byte\">" + EmitterSystemDataLength.ToString(CultureInfo.InvariantCulture) + "</emitterSystemDataLength>");
+                sb.AppendLine("<beamRecords type=\"byte\">" + BeamRecords.Count.ToString(CultureInfo.InvariantCulture) + "</beamRecords>");
+                sb.AppendLine("<pad2 type=\"ushort\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
                 sb.AppendLine("<acousticEmitterSystem>");
-                this._acousticEmitterSystem.Reflection(sb);
+                AcousticEmitterSystem.Reflection(sb);
                 sb.AppendLine("</acousticEmitterSystem>");
                 sb.AppendLine("<emitterLocation>");
-                this._emitterLocation.Reflection(sb);
+                EmitterLocation.Reflection(sb);
                 sb.AppendLine("</emitterLocation>");
-                for (int idx = 0; idx < this._beamRecords.Count; idx++)
+                for (int idx = 0; idx < BeamRecords.Count; idx++)
                 {
                     sb.AppendLine("<beamRecords" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"AcousticBeamData\">");
-                    AcousticBeamData aAcousticBeamData = (AcousticBeamData)this._beamRecords[idx];
+                    var aAcousticBeamData = BeamRecords[idx];
                     aAcousticBeamData.Reflection(sb);
                     sb.AppendLine("</beamRecords" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -382,84 +272,69 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as AcousticEmitterSystemData;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as AcousticEmitterSystemData;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(AcousticEmitterSystemData obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._emitterSystemDataLength != obj._emitterSystemDataLength)
+            if (EmitterSystemDataLength != obj.EmitterSystemDataLength)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfBeams != obj._numberOfBeams)
+            if (NumberOfBeams != obj.NumberOfBeams)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._acousticEmitterSystem.Equals(obj._acousticEmitterSystem))
+            if (!AcousticEmitterSystem.Equals(obj.AcousticEmitterSystem))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._emitterLocation.Equals(obj._emitterLocation))
+            if (!EmitterLocation.Equals(obj.EmitterLocation))
             {
                 ivarsEqual = false;
             }
 
-            if (this._beamRecords.Count != obj._beamRecords.Count)
+            if (BeamRecords.Count != obj.BeamRecords.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._beamRecords.Count; idx++)
+                for (int idx = 0; idx < BeamRecords.Count; idx++)
                 {
-                    if (!this._beamRecords[idx].Equals(obj._beamRecords[idx]))
+                    if (!BeamRecords[idx].Equals(obj.BeamRecords[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -474,31 +349,24 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._emitterSystemDataLength.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfBeams.GetHashCode();
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
-            result = GenerateHash(result) ^ this._acousticEmitterSystem.GetHashCode();
-            result = GenerateHash(result) ^ this._emitterLocation.GetHashCode();
+            result = GenerateHash(result) ^ EmitterSystemDataLength.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfBeams.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
+            result = GenerateHash(result) ^ AcousticEmitterSystem.GetHashCode();
+            result = GenerateHash(result) ^ EmitterLocation.GetHashCode();
 
-            if (this._beamRecords.Count > 0)
+            if (BeamRecords.Count > 0)
             {
-                for (int idx = 0; idx < this._beamRecords.Count; idx++)
+                for (int idx = 0; idx < BeamRecords.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._beamRecords[idx].GetHashCode();
+                    result = GenerateHash(result) ^ BeamRecords[idx].GetHashCode();
                 }
             }
 

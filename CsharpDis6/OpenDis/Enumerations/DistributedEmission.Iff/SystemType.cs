@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.Iff
 {
     /// <summary>
-    /// Enumeration values for SystemType (der.iff.type, System Type, 
+    /// Enumeration values for SystemType (der.iff.type, System Type,
     /// section 8.3.1.1.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

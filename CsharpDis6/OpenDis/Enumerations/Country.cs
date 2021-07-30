@@ -9,13 +9,12 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using OpenDis.Core;
 
 namespace OpenDis.Enumerations
 {
     /// <summary>
-    /// Enumeration values for Country (es.type.country, Country, 
+    /// Enumeration values for Country (es.type.country, Country,
     /// section 4.2.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -38,7 +37,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         Other = 0,
 
-
         /// <summary>
         /// Afghanistan
         /// </summary>
@@ -49,7 +47,6 @@ namespace OpenDis.Enumerations
         [Description("Afghanistan")]
         [InternetDomainCode("AF")]
         Afghanistan = 1,
-
 
         /// <summary>
         /// Albania
@@ -62,7 +59,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("AL")]
         Albania = 2,
 
-
         /// <summary>
         /// Algeria
         /// </summary>
@@ -73,7 +69,6 @@ namespace OpenDis.Enumerations
         [Description("Algeria")]
         [InternetDomainCode("DZ")]
         Algeria = 3,
-
 
         /// <summary>
         /// American Samoa (United States)
@@ -86,7 +81,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         AmericanSamoaUnitedStates = 4,
 
-
         /// <summary>
         /// Andorra
         /// </summary>
@@ -97,7 +91,6 @@ namespace OpenDis.Enumerations
         [Description("Andorra")]
         [InternetDomainCode("AD")]
         Andorra = 5,
-
 
         /// <summary>
         /// Angola
@@ -110,7 +103,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("AO")]
         Angola = 6,
 
-
         /// <summary>
         /// Anguilla
         /// </summary>
@@ -121,7 +113,6 @@ namespace OpenDis.Enumerations
         [Description("Anguilla")]
         [InternetDomainCode("AI")]
         Anguilla = 7,
-
 
         /// <summary>
         /// Antarctica (International)
@@ -134,7 +125,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         AntarcticaInternational = 8,
 
-
         /// <summary>
         /// Antigua and Barbuda
         /// </summary>
@@ -145,7 +135,6 @@ namespace OpenDis.Enumerations
         [Description("Antigua and Barbuda")]
         [InternetDomainCode("AG")]
         AntiguaAndBarbuda = 9,
-
 
         /// <summary>
         /// Argentina
@@ -158,7 +147,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("AR")]
         Argentina = 10,
 
-
         /// <summary>
         /// Armenia
         /// </summary>
@@ -169,7 +157,6 @@ namespace OpenDis.Enumerations
         [Description("Armenia")]
         [InternetDomainCode("AM")]
         Armenia = 244,
-
 
         /// <summary>
         /// Aruba
@@ -182,7 +169,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("AW")]
         Aruba = 11,
 
-
         /// <summary>
         /// Ashmore and Cartier Islands (Australia)
         /// </summary>
@@ -193,7 +179,6 @@ namespace OpenDis.Enumerations
         [Description("Ashmore and Cartier Islands (Australia)")]
         [InternetDomainCode("Unknown")]
         AshmoreAndCartierIslandsAustralia = 12,
-
 
         /// <summary>
         /// Australia
@@ -206,7 +191,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("AU")]
         Australia = 13,
 
-
         /// <summary>
         /// Austria
         /// </summary>
@@ -217,7 +201,6 @@ namespace OpenDis.Enumerations
         [Description("Austria")]
         [InternetDomainCode("AT")]
         Austria = 14,
-
 
         /// <summary>
         /// Azerbaijan
@@ -230,7 +213,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("AZ")]
         Azerbaijan = 245,
 
-
         /// <summary>
         /// Bahamas
         /// </summary>
@@ -241,7 +223,6 @@ namespace OpenDis.Enumerations
         [Description("Bahamas")]
         [InternetDomainCode("BS")]
         Bahamas = 15,
-
 
         /// <summary>
         /// Bahrain
@@ -254,7 +235,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("BH")]
         Bahrain = 16,
 
-
         /// <summary>
         /// Baker Island (United States)
         /// </summary>
@@ -265,7 +245,6 @@ namespace OpenDis.Enumerations
         [Description("Baker Island (United States)")]
         [InternetDomainCode("Unknown")]
         BakerIslandUnitedStates = 17,
-
 
         /// <summary>
         /// Bangladesh
@@ -278,7 +257,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("BD")]
         Bangladesh = 18,
 
-
         /// <summary>
         /// Barbados
         /// </summary>
@@ -289,7 +267,6 @@ namespace OpenDis.Enumerations
         [Description("Barbados")]
         [InternetDomainCode("BB")]
         Barbados = 19,
-
 
         /// <summary>
         /// Bassas da India (France)
@@ -302,7 +279,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         BassasDaIndiaFrance = 20,
 
-
         /// <summary>
         /// Belarus
         /// </summary>
@@ -313,7 +289,6 @@ namespace OpenDis.Enumerations
         [Description("Belarus")]
         [InternetDomainCode("BY")]
         Belarus = 246,
-
 
         /// <summary>
         /// Belgium
@@ -326,7 +301,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("BE")]
         Belgium = 21,
 
-
         /// <summary>
         /// Belize
         /// </summary>
@@ -337,7 +311,6 @@ namespace OpenDis.Enumerations
         [Description("Belize")]
         [InternetDomainCode("BZ")]
         Belize = 22,
-
 
         /// <summary>
         /// Benin (aka Dahomey)
@@ -350,7 +323,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         BeninAkaDahomey = 23,
 
-
         /// <summary>
         /// Bermuda (United Kingdom)
         /// </summary>
@@ -361,7 +333,6 @@ namespace OpenDis.Enumerations
         [Description("Bermuda (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         BermudaUnitedKingdom = 24,
-
 
         /// <summary>
         /// Bhutan
@@ -374,7 +345,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("BT")]
         Bhutan = 25,
 
-
         /// <summary>
         /// Bolivia
         /// </summary>
@@ -385,7 +355,6 @@ namespace OpenDis.Enumerations
         [Description("Bolivia")]
         [InternetDomainCode("BO")]
         Bolivia = 26,
-
 
         /// <summary>
         /// Bosnia and Hercegovina
@@ -398,7 +367,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         BosniaAndHercegovina = 247,
 
-
         /// <summary>
         /// Botswana
         /// </summary>
@@ -409,7 +377,6 @@ namespace OpenDis.Enumerations
         [Description("Botswana")]
         [InternetDomainCode("BW")]
         Botswana = 27,
-
 
         /// <summary>
         /// Bouvet Island (Norway)
@@ -422,7 +389,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         BouvetIslandNorway = 28,
 
-
         /// <summary>
         /// Brazil
         /// </summary>
@@ -433,7 +399,6 @@ namespace OpenDis.Enumerations
         [Description("Brazil")]
         [InternetDomainCode("BR")]
         Brazil = 29,
-
 
         /// <summary>
         /// British Indian Ocean Territory (United Kingdom)
@@ -446,7 +411,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         BritishIndianOceanTerritoryUnitedKingdom = 30,
 
-
         /// <summary>
         /// British Virgin Islands (United Kingdom)
         /// </summary>
@@ -457,7 +421,6 @@ namespace OpenDis.Enumerations
         [Description("British Virgin Islands (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         BritishVirginIslandsUnitedKingdom = 31,
-
 
         /// <summary>
         /// Brunei
@@ -470,7 +433,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         Brunei = 32,
 
-
         /// <summary>
         /// Bulgaria
         /// </summary>
@@ -481,7 +443,6 @@ namespace OpenDis.Enumerations
         [Description("Bulgaria")]
         [InternetDomainCode("BG")]
         Bulgaria = 33,
-
 
         /// <summary>
         /// Burkina (aka Burkina Faso or Upper Volta)
@@ -494,7 +455,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         BurkinaAkaBurkinaFasoOrUpperVolta = 34,
 
-
         /// <summary>
         /// Burma (Myanmar)
         /// </summary>
@@ -505,7 +465,6 @@ namespace OpenDis.Enumerations
         [Description("Burma (Myanmar)")]
         [InternetDomainCode("Unknown")]
         BurmaMyanmar = 35,
-
 
         /// <summary>
         /// Burundi
@@ -518,7 +477,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("BI")]
         Burundi = 36,
 
-
         /// <summary>
         /// Cambodia (aka Kampuchea)
         /// </summary>
@@ -529,7 +487,6 @@ namespace OpenDis.Enumerations
         [Description("Cambodia (aka Kampuchea)")]
         [InternetDomainCode("Unknown")]
         CambodiaAkaKampuchea = 37,
-
 
         /// <summary>
         /// Cameroon
@@ -542,7 +499,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("CM")]
         Cameroon = 38,
 
-
         /// <summary>
         /// Canada
         /// </summary>
@@ -553,7 +509,6 @@ namespace OpenDis.Enumerations
         [Description("Canada")]
         [InternetDomainCode("CA")]
         Canada = 39,
-
 
         /// <summary>
         /// Cape Verde, Republic of
@@ -566,7 +521,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         CapeVerdeRepublicOf = 40,
 
-
         /// <summary>
         /// Cayman Islands (United Kingdom)
         /// </summary>
@@ -577,7 +531,6 @@ namespace OpenDis.Enumerations
         [Description("Cayman Islands (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         CaymanIslandsUnitedKingdom = 41,
-
 
         /// <summary>
         /// Central African Republic
@@ -590,7 +543,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("CF")]
         CentralAfricanRepublic = 42,
 
-
         /// <summary>
         /// Chad
         /// </summary>
@@ -601,7 +553,6 @@ namespace OpenDis.Enumerations
         [Description("Chad")]
         [InternetDomainCode("TD")]
         Chad = 43,
-
 
         /// <summary>
         /// Chile
@@ -614,7 +565,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("CL")]
         Chile = 44,
 
-
         /// <summary>
         /// China, People's Republic of
         /// </summary>
@@ -625,7 +575,6 @@ namespace OpenDis.Enumerations
         [Description("China, People's Republic of")]
         [InternetDomainCode("Unknown")]
         ChinaPeopleSRepublicOf = 45,
-
 
         /// <summary>
         /// Christmas Island (Australia)
@@ -638,7 +587,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         ChristmasIslandAustralia = 46,
 
-
         /// <summary>
         /// Clipperton Island (France)
         /// </summary>
@@ -649,7 +597,6 @@ namespace OpenDis.Enumerations
         [Description("Clipperton Island (France)")]
         [InternetDomainCode("Unknown")]
         ClippertonIslandFrance = 248,
-
 
         /// <summary>
         /// Cocos (Keeling) Islands (Australia)
@@ -662,7 +609,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         CocosKeelingIslandsAustralia = 47,
 
-
         /// <summary>
         /// Colombia
         /// </summary>
@@ -673,7 +619,6 @@ namespace OpenDis.Enumerations
         [Description("Colombia")]
         [InternetDomainCode("CO")]
         Colombia = 48,
-
 
         /// <summary>
         /// Commonwealth of Independent States
@@ -686,7 +631,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         CommonwealthOfIndependentStates = 222,
 
-
         /// <summary>
         /// Comoros
         /// </summary>
@@ -697,7 +641,6 @@ namespace OpenDis.Enumerations
         [Description("Comoros")]
         [InternetDomainCode("KM")]
         Comoros = 49,
-
 
         /// <summary>
         /// Congo, Republic of
@@ -710,7 +653,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         CongoRepublicOf = 50,
 
-
         /// <summary>
         /// Cook Islands (New Zealand)
         /// </summary>
@@ -721,7 +663,6 @@ namespace OpenDis.Enumerations
         [Description("Cook Islands (New Zealand)")]
         [InternetDomainCode("Unknown")]
         CookIslandsNewZealand = 51,
-
 
         /// <summary>
         /// Coral Sea Islands (Australia)
@@ -734,7 +675,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         CoralSeaIslandsAustralia = 52,
 
-
         /// <summary>
         /// Costa Rica
         /// </summary>
@@ -745,7 +685,6 @@ namespace OpenDis.Enumerations
         [Description("Costa Rica")]
         [InternetDomainCode("CR")]
         CostaRica = 53,
-
 
         /// <summary>
         /// (Cote D'Ivoire (aka Ivory Coast)
@@ -758,7 +697,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         CoteDIvoireAkaIvoryCoast = 107,
 
-
         /// <summary>
         /// Croatia
         /// </summary>
@@ -769,7 +707,6 @@ namespace OpenDis.Enumerations
         [Description("Croatia")]
         [InternetDomainCode("Unknown")]
         Croatia = 249,
-
 
         /// <summary>
         /// Cuba
@@ -782,7 +719,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("CU")]
         Cuba = 54,
 
-
         /// <summary>
         /// Cyprus
         /// </summary>
@@ -793,7 +729,6 @@ namespace OpenDis.Enumerations
         [Description("Cyprus")]
         [InternetDomainCode("CY")]
         Cyprus = 55,
-
 
         /// <summary>
         /// Czechoslovakia (separating into Czech Republic and Slovak Republic)
@@ -806,7 +741,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         CzechoslovakiaSeparatingIntoCzechRepublicAndSlovakRepublic = 56,
 
-
         /// <summary>
         /// Dahomey (aka Benin)
         /// </summary>
@@ -817,7 +751,6 @@ namespace OpenDis.Enumerations
         [Description("Dahomey (aka Benin)")]
         [InternetDomainCode("Unknown")]
         DahomeyAkaBenin = 23,
-
 
         /// <summary>
         /// Denmark
@@ -830,7 +763,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("DK")]
         Denmark = 57,
 
-
         /// <summary>
         /// Djibouti
         /// </summary>
@@ -841,7 +773,6 @@ namespace OpenDis.Enumerations
         [Description("Djibouti")]
         [InternetDomainCode("DJ")]
         Djibouti = 58,
-
 
         /// <summary>
         /// Dominica
@@ -854,7 +785,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("DM")]
         Dominica = 59,
 
-
         /// <summary>
         /// Dominican Republic
         /// </summary>
@@ -865,7 +795,6 @@ namespace OpenDis.Enumerations
         [Description("Dominican Republic")]
         [InternetDomainCode("DO")]
         DominicanRepublic = 60,
-
 
         /// <summary>
         /// Ecuador
@@ -878,7 +807,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("EC")]
         Ecuador = 61,
 
-
         /// <summary>
         /// Egypt
         /// </summary>
@@ -889,7 +817,6 @@ namespace OpenDis.Enumerations
         [Description("Egypt")]
         [InternetDomainCode("EG")]
         Egypt = 62,
-
 
         /// <summary>
         /// El Salvador
@@ -902,7 +829,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("SV")]
         ElSalvador = 63,
 
-
         /// <summary>
         /// Equatorial Guinea
         /// </summary>
@@ -913,7 +839,6 @@ namespace OpenDis.Enumerations
         [Description("Equatorial Guinea")]
         [InternetDomainCode("GQ")]
         EquatorialGuinea = 64,
-
 
         /// <summary>
         /// Estonia
@@ -926,7 +851,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("EE")]
         Estonia = 250,
 
-
         /// <summary>
         /// Ethiopia
         /// </summary>
@@ -937,7 +861,6 @@ namespace OpenDis.Enumerations
         [Description("Ethiopia")]
         [InternetDomainCode("ET")]
         Ethiopia = 65,
-
 
         /// <summary>
         /// Europa Island (France)
@@ -950,7 +873,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         EuropaIslandFrance = 66,
 
-
         /// <summary>
         /// Falkland Islands (aka Islas Malvinas) (United Kingdom)
         /// </summary>
@@ -961,7 +883,6 @@ namespace OpenDis.Enumerations
         [Description("Falkland Islands (aka Islas Malvinas) (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         FalklandIslandsAkaIslasMalvinasUnitedKingdom = 67,
-
 
         /// <summary>
         /// Faroe Islands (Denmark)
@@ -974,7 +895,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         FaroeIslandsDenmark = 68,
 
-
         /// <summary>
         /// Fiji
         /// </summary>
@@ -985,7 +905,6 @@ namespace OpenDis.Enumerations
         [Description("Fiji")]
         [InternetDomainCode("FJ")]
         Fiji = 69,
-
 
         /// <summary>
         /// Finland
@@ -998,7 +917,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("FI")]
         Finland = 70,
 
-
         /// <summary>
         /// France
         /// </summary>
@@ -1009,7 +927,6 @@ namespace OpenDis.Enumerations
         [Description("France")]
         [InternetDomainCode("FR")]
         France = 71,
-
 
         /// <summary>
         /// French Guiana (France)
@@ -1022,7 +939,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         FrenchGuianaFrance = 72,
 
-
         /// <summary>
         /// French Polynesia (France)
         /// </summary>
@@ -1033,7 +949,6 @@ namespace OpenDis.Enumerations
         [Description("French Polynesia (France)")]
         [InternetDomainCode("Unknown")]
         FrenchPolynesiaFrance = 73,
-
 
         /// <summary>
         /// French Southern and Antarctic Islands (France)
@@ -1046,7 +961,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         FrenchSouthernAndAntarcticIslandsFrance = 74,
 
-
         /// <summary>
         /// Gabon
         /// </summary>
@@ -1057,7 +971,6 @@ namespace OpenDis.Enumerations
         [Description("Gabon")]
         [InternetDomainCode("GA")]
         Gabon = 75,
-
 
         /// <summary>
         /// Gambia, The
@@ -1070,7 +983,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         GambiaThe = 76,
 
-
         /// <summary>
         /// Gaza Strip (Israel)
         /// </summary>
@@ -1081,7 +993,6 @@ namespace OpenDis.Enumerations
         [Description("Gaza Strip (Israel)")]
         [InternetDomainCode("Unknown")]
         GazaStripIsrael = 77,
-
 
         /// <summary>
         /// Georgia
@@ -1094,7 +1005,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("GE")]
         Georgia = 251,
 
-
         /// <summary>
         /// Germany
         /// </summary>
@@ -1105,7 +1015,6 @@ namespace OpenDis.Enumerations
         [Description("Germany")]
         [InternetDomainCode("DE")]
         Germany = 78,
-
 
         /// <summary>
         /// Ghana
@@ -1118,7 +1027,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("GH")]
         Ghana = 79,
 
-
         /// <summary>
         /// Gibraltar (United Kingdom)
         /// </summary>
@@ -1129,7 +1037,6 @@ namespace OpenDis.Enumerations
         [Description("Gibraltar (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         GibraltarUnitedKingdom = 80,
-
 
         /// <summary>
         /// Glorioso Islands (France)
@@ -1142,7 +1049,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         GloriosoIslandsFrance = 81,
 
-
         /// <summary>
         /// Greece
         /// </summary>
@@ -1153,7 +1059,6 @@ namespace OpenDis.Enumerations
         [Description("Greece")]
         [InternetDomainCode("GR")]
         Greece = 82,
-
 
         /// <summary>
         /// Greenland (Denmark)
@@ -1166,7 +1071,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         GreenlandDenmark = 83,
 
-
         /// <summary>
         /// Grenada
         /// </summary>
@@ -1177,7 +1081,6 @@ namespace OpenDis.Enumerations
         [Description("Grenada")]
         [InternetDomainCode("GD")]
         Grenada = 84,
-
 
         /// <summary>
         /// Guadaloupe (France)
@@ -1190,7 +1093,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         GuadaloupeFrance = 85,
 
-
         /// <summary>
         /// Guam (United States)
         /// </summary>
@@ -1201,7 +1103,6 @@ namespace OpenDis.Enumerations
         [Description("Guam (United States)")]
         [InternetDomainCode("Unknown")]
         GuamUnitedStates = 86,
-
 
         /// <summary>
         /// Guatemala
@@ -1214,7 +1115,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("GT")]
         Guatemala = 87,
 
-
         /// <summary>
         /// Guernsey (United Kingdom)
         /// </summary>
@@ -1225,7 +1125,6 @@ namespace OpenDis.Enumerations
         [Description("Guernsey (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         GuernseyUnitedKingdom = 88,
-
 
         /// <summary>
         /// Guinea
@@ -1238,7 +1137,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("GN")]
         Guinea = 89,
 
-
         /// <summary>
         /// Guinea- Bissau
         /// </summary>
@@ -1249,7 +1147,6 @@ namespace OpenDis.Enumerations
         [Description("Guinea- Bissau")]
         [InternetDomainCode("Unknown")]
         GuineaBissau = 90,
-
 
         /// <summary>
         /// Guyana
@@ -1262,7 +1159,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("GY")]
         Guyana = 91,
 
-
         /// <summary>
         /// Haiti
         /// </summary>
@@ -1273,7 +1169,6 @@ namespace OpenDis.Enumerations
         [Description("Haiti")]
         [InternetDomainCode("HT")]
         Haiti = 92,
-
 
         /// <summary>
         /// Heard Island and McDonald Islands (Australia)
@@ -1286,7 +1181,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         HeardIslandAndMcDonaldIslandsAustralia = 93,
 
-
         /// <summary>
         /// Honduras
         /// </summary>
@@ -1297,7 +1191,6 @@ namespace OpenDis.Enumerations
         [Description("Honduras")]
         [InternetDomainCode("HN")]
         Honduras = 94,
-
 
         /// <summary>
         /// Hong Kong (United Kingdom)
@@ -1310,7 +1203,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         HongKongUnitedKingdom = 95,
 
-
         /// <summary>
         /// Howland Island (United States)
         /// </summary>
@@ -1321,7 +1213,6 @@ namespace OpenDis.Enumerations
         [Description("Howland Island (United States)")]
         [InternetDomainCode("Unknown")]
         HowlandIslandUnitedStates = 96,
-
 
         /// <summary>
         /// Hungary
@@ -1334,7 +1225,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("HU")]
         Hungary = 97,
 
-
         /// <summary>
         /// Iceland
         /// </summary>
@@ -1345,7 +1235,6 @@ namespace OpenDis.Enumerations
         [Description("Iceland")]
         [InternetDomainCode("IS")]
         Iceland = 98,
-
 
         /// <summary>
         /// India
@@ -1358,7 +1247,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("IN")]
         India = 99,
 
-
         /// <summary>
         /// Indonesia
         /// </summary>
@@ -1369,7 +1257,6 @@ namespace OpenDis.Enumerations
         [Description("Indonesia")]
         [InternetDomainCode("ID")]
         Indonesia = 100,
-
 
         /// <summary>
         /// Iran
@@ -1382,7 +1269,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("IR")]
         Iran = 101,
 
-
         /// <summary>
         /// Iraq
         /// </summary>
@@ -1393,7 +1279,6 @@ namespace OpenDis.Enumerations
         [Description("Iraq")]
         [InternetDomainCode("IQ")]
         Iraq = 102,
-
 
         /// <summary>
         /// Ireland
@@ -1406,7 +1291,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("IE")]
         Ireland = 104,
 
-
         /// <summary>
         /// Israel
         /// </summary>
@@ -1417,7 +1301,6 @@ namespace OpenDis.Enumerations
         [Description("Israel")]
         [InternetDomainCode("IL")]
         Israel = 105,
-
 
         /// <summary>
         /// Italy
@@ -1430,7 +1313,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("IT")]
         Italy = 106,
 
-
         /// <summary>
         /// Ivory Coast (aka Cote D'Ivoire)
         /// </summary>
@@ -1441,7 +1323,6 @@ namespace OpenDis.Enumerations
         [Description("Ivory Coast (aka Cote D'Ivoire)")]
         [InternetDomainCode("Unknown")]
         IvoryCoastAkaCoteDIvoire = 107,
-
 
         /// <summary>
         /// Jamaica
@@ -1454,7 +1335,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("JM")]
         Jamaica = 108,
 
-
         /// <summary>
         /// Jan Mayen (Norway)
         /// </summary>
@@ -1465,7 +1345,6 @@ namespace OpenDis.Enumerations
         [Description("Jan Mayen (Norway)")]
         [InternetDomainCode("Unknown")]
         JanMayenNorway = 109,
-
 
         /// <summary>
         /// Japan
@@ -1478,7 +1357,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("JP")]
         Japan = 110,
 
-
         /// <summary>
         /// Jarvis Island (United States)
         /// </summary>
@@ -1489,7 +1367,6 @@ namespace OpenDis.Enumerations
         [Description("Jarvis Island (United States)")]
         [InternetDomainCode("Unknown")]
         JarvisIslandUnitedStates = 111,
-
 
         /// <summary>
         /// Jersey (United Kingdom)
@@ -1502,7 +1379,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         JerseyUnitedKingdom = 112,
 
-
         /// <summary>
         /// Johnston Atoll (United States)
         /// </summary>
@@ -1513,7 +1389,6 @@ namespace OpenDis.Enumerations
         [Description("Johnston Atoll (United States)")]
         [InternetDomainCode("Unknown")]
         JohnstonAtollUnitedStates = 113,
-
 
         /// <summary>
         /// Jordan
@@ -1526,7 +1401,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("JO")]
         Jordan = 114,
 
-
         /// <summary>
         /// Juan de Nova Island
         /// </summary>
@@ -1537,7 +1411,6 @@ namespace OpenDis.Enumerations
         [Description("Juan de Nova Island")]
         [InternetDomainCode("Unknown")]
         JuanDeNovaIsland = 115,
-
 
         /// <summary>
         /// Kazakhstan
@@ -1550,7 +1423,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("KZ")]
         Kazakhstan = 252,
 
-
         /// <summary>
         /// Kenya
         /// </summary>
@@ -1561,7 +1433,6 @@ namespace OpenDis.Enumerations
         [Description("Kenya")]
         [InternetDomainCode("KE")]
         Kenya = 116,
-
 
         /// <summary>
         /// Kingman Reef (United States)
@@ -1574,7 +1445,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         KingmanReefUnitedStates = 117,
 
-
         /// <summary>
         /// Kiribati
         /// </summary>
@@ -1585,7 +1455,6 @@ namespace OpenDis.Enumerations
         [Description("Kiribati")]
         [InternetDomainCode("KI")]
         Kiribati = 118,
-
 
         /// <summary>
         /// Korea, Democratic People's Republic of (North)
@@ -1598,7 +1467,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         KoreaDemocraticPeopleSRepublicOfNorth = 119,
 
-
         /// <summary>
         /// Korea, Republic of (South)
         /// </summary>
@@ -1609,7 +1477,6 @@ namespace OpenDis.Enumerations
         [Description("Korea, Republic of (South)")]
         [InternetDomainCode("Unknown")]
         KoreaRepublicOfSouth = 120,
-
 
         /// <summary>
         /// Kuwait
@@ -1622,7 +1489,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("KW")]
         Kuwait = 121,
 
-
         /// <summary>
         /// Kyrgyzstan
         /// </summary>
@@ -1633,7 +1499,6 @@ namespace OpenDis.Enumerations
         [Description("Kyrgyzstan")]
         [InternetDomainCode("KG")]
         Kyrgyzstan = 253,
-
 
         /// <summary>
         /// Laos
@@ -1646,7 +1511,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("LA")]
         Laos = 122,
 
-
         /// <summary>
         /// Latvia
         /// </summary>
@@ -1657,7 +1521,6 @@ namespace OpenDis.Enumerations
         [Description("Latvia")]
         [InternetDomainCode("LV")]
         Latvia = 254,
-
 
         /// <summary>
         /// Lebanon
@@ -1670,7 +1533,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("LB")]
         Lebanon = 123,
 
-
         /// <summary>
         /// Lesotho
         /// </summary>
@@ -1681,7 +1543,6 @@ namespace OpenDis.Enumerations
         [Description("Lesotho")]
         [InternetDomainCode("LS")]
         Lesotho = 124,
-
 
         /// <summary>
         /// Liberia
@@ -1694,7 +1555,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("LR")]
         Liberia = 125,
 
-
         /// <summary>
         /// Libya
         /// </summary>
@@ -1705,7 +1565,6 @@ namespace OpenDis.Enumerations
         [Description("Libya")]
         [InternetDomainCode("LY")]
         Libya = 126,
-
 
         /// <summary>
         /// Liechtenstein
@@ -1718,7 +1577,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("LI")]
         Liechtenstein = 127,
 
-
         /// <summary>
         /// Lithuania
         /// </summary>
@@ -1729,7 +1587,6 @@ namespace OpenDis.Enumerations
         [Description("Lithuania")]
         [InternetDomainCode("LT")]
         Lithuania = 255,
-
 
         /// <summary>
         /// Luxembourg
@@ -1742,7 +1599,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("LU")]
         Luxembourg = 128,
 
-
         /// <summary>
         /// Macau (Portugal)
         /// </summary>
@@ -1753,7 +1609,6 @@ namespace OpenDis.Enumerations
         [Description("Macau (Portugal)")]
         [InternetDomainCode("Unknown")]
         MacauPortugal = 130,
-
 
         /// <summary>
         /// Macedonia
@@ -1766,7 +1621,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MK")]
         Macedonia = 256,
 
-
         /// <summary>
         /// Madagascar
         /// </summary>
@@ -1777,7 +1631,6 @@ namespace OpenDis.Enumerations
         [Description("Madagascar")]
         [InternetDomainCode("MG")]
         Madagascar = 129,
-
 
         /// <summary>
         /// Malawi
@@ -1790,7 +1643,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MW")]
         Malawi = 131,
 
-
         /// <summary>
         /// Malaysia
         /// </summary>
@@ -1801,7 +1653,6 @@ namespace OpenDis.Enumerations
         [Description("Malaysia")]
         [InternetDomainCode("MY")]
         Malaysia = 132,
-
 
         /// <summary>
         /// Maldives
@@ -1814,7 +1665,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MV")]
         Maldives = 133,
 
-
         /// <summary>
         /// Mali
         /// </summary>
@@ -1825,7 +1675,6 @@ namespace OpenDis.Enumerations
         [Description("Mali")]
         [InternetDomainCode("ML")]
         Mali = 134,
-
 
         /// <summary>
         /// Malta
@@ -1838,7 +1687,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MT")]
         Malta = 135,
 
-
         /// <summary>
         /// Man, Isle of (United Kingdom)
         /// </summary>
@@ -1849,7 +1697,6 @@ namespace OpenDis.Enumerations
         [Description("Man, Isle of (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         ManIsleOfUnitedKingdom = 136,
-
 
         /// <summary>
         /// Marshall Islands
@@ -1862,7 +1709,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MH")]
         MarshallIslands = 137,
 
-
         /// <summary>
         /// Martinique (France)
         /// </summary>
@@ -1873,7 +1719,6 @@ namespace OpenDis.Enumerations
         [Description("Martinique (France)")]
         [InternetDomainCode("Unknown")]
         MartiniqueFrance = 138,
-
 
         /// <summary>
         /// Mauritania
@@ -1886,7 +1731,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MR")]
         Mauritania = 139,
 
-
         /// <summary>
         /// Mauritius
         /// </summary>
@@ -1897,7 +1741,6 @@ namespace OpenDis.Enumerations
         [Description("Mauritius")]
         [InternetDomainCode("MU")]
         Mauritius = 140,
-
 
         /// <summary>
         /// Mayotte (France)
@@ -1910,7 +1753,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         MayotteFrance = 141,
 
-
         /// <summary>
         /// Mexico
         /// </summary>
@@ -1921,7 +1763,6 @@ namespace OpenDis.Enumerations
         [Description("Mexico")]
         [InternetDomainCode("MX")]
         Mexico = 142,
-
 
         /// <summary>
         /// Micronesia, Federative States of
@@ -1934,7 +1775,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         MicronesiaFederativeStatesOf = 143,
 
-
         /// <summary>
         /// Midway Islands (United States)
         /// </summary>
@@ -1945,7 +1785,6 @@ namespace OpenDis.Enumerations
         [Description("Midway Islands (United States)")]
         [InternetDomainCode("Unknown")]
         MidwayIslandsUnitedStates = 257,
-
 
         /// <summary>
         /// Moldova
@@ -1958,7 +1797,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MD")]
         Moldova = 258,
 
-
         /// <summary>
         /// Monaco
         /// </summary>
@@ -1969,7 +1807,6 @@ namespace OpenDis.Enumerations
         [Description("Monaco")]
         [InternetDomainCode("MC")]
         Monaco = 144,
-
 
         /// <summary>
         /// Mongolia
@@ -1982,7 +1819,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MN")]
         Mongolia = 145,
 
-
         /// <summary>
         /// Montenegro
         /// </summary>
@@ -1993,7 +1829,6 @@ namespace OpenDis.Enumerations
         [Description("Montenegro")]
         [InternetDomainCode("Unknown")]
         Montenegro = 259,
-
 
         /// <summary>
         /// Montserrat (United Kingdom)
@@ -2006,7 +1841,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         MontserratUnitedKingdom = 146,
 
-
         /// <summary>
         /// Morocco
         /// </summary>
@@ -2017,7 +1851,6 @@ namespace OpenDis.Enumerations
         [Description("Morocco")]
         [InternetDomainCode("MA")]
         Morocco = 147,
-
 
         /// <summary>
         /// Mozambique
@@ -2030,7 +1863,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("MZ")]
         Mozambique = 148,
 
-
         /// <summary>
         /// Myanmar (aka Burma)
         /// </summary>
@@ -2041,7 +1873,6 @@ namespace OpenDis.Enumerations
         [Description("Myanmar (aka Burma)")]
         [InternetDomainCode("Unknown")]
         MyanmarAkaBurma = 35,
-
 
         /// <summary>
         /// Namibia (South West Africa)
@@ -2054,7 +1885,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         NamibiaSouthWestAfrica = 149,
 
-
         /// <summary>
         /// Nauru
         /// </summary>
@@ -2065,7 +1895,6 @@ namespace OpenDis.Enumerations
         [Description("Nauru")]
         [InternetDomainCode("NR")]
         Nauru = 150,
-
 
         /// <summary>
         /// Navassa Island (United States)
@@ -2078,7 +1907,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         NavassaIslandUnitedStates = 151,
 
-
         /// <summary>
         /// Nepal
         /// </summary>
@@ -2089,7 +1917,6 @@ namespace OpenDis.Enumerations
         [Description("Nepal")]
         [InternetDomainCode("NP")]
         Nepal = 152,
-
 
         /// <summary>
         /// Netherlands
@@ -2102,7 +1929,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("NL")]
         Netherlands = 153,
 
-
         /// <summary>
         /// Netherlands Antilles (Curacao, Bonaire, Saba, Sint Maarten Sint Eustatius)
         /// </summary>
@@ -2113,7 +1939,6 @@ namespace OpenDis.Enumerations
         [Description("Netherlands Antilles (Curacao, Bonaire, Saba, Sint Maarten Sint Eustatius)")]
         [InternetDomainCode("Unknown")]
         NetherlandsAntillesCuracaoBonaireSabaSintMaartenSintEustatius = 154,
-
 
         /// <summary>
         /// New Caledonia (France)
@@ -2126,7 +1951,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         NewCaledoniaFrance = 155,
 
-
         /// <summary>
         /// New Zealand
         /// </summary>
@@ -2137,7 +1961,6 @@ namespace OpenDis.Enumerations
         [Description("New Zealand")]
         [InternetDomainCode("Unknown")]
         NewZealand = 156,
-
 
         /// <summary>
         /// Nicaragua
@@ -2150,7 +1973,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("NI")]
         Nicaragua = 157,
 
-
         /// <summary>
         /// Niger
         /// </summary>
@@ -2161,7 +1983,6 @@ namespace OpenDis.Enumerations
         [Description("Niger")]
         [InternetDomainCode("NE")]
         Niger = 158,
-
 
         /// <summary>
         /// Nigeria
@@ -2174,7 +1995,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("NG")]
         Nigeria = 159,
 
-
         /// <summary>
         /// Niue (New Zealand)
         /// </summary>
@@ -2185,7 +2005,6 @@ namespace OpenDis.Enumerations
         [Description("Niue (New Zealand)")]
         [InternetDomainCode("Unknown")]
         NiueNewZealand = 160,
-
 
         /// <summary>
         /// Norfolk Island (Australia)
@@ -2198,7 +2017,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         NorfolkIslandAustralia = 161,
 
-
         /// <summary>
         /// Northern Mariana Islands (United States)
         /// </summary>
@@ -2209,7 +2027,6 @@ namespace OpenDis.Enumerations
         [Description("Northern Mariana Islands (United States)")]
         [InternetDomainCode("Unknown")]
         NorthernMarianaIslandsUnitedStates = 162,
-
 
         /// <summary>
         /// Norway
@@ -2222,7 +2039,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("NO")]
         Norway = 163,
 
-
         /// <summary>
         /// Oman
         /// </summary>
@@ -2233,7 +2049,6 @@ namespace OpenDis.Enumerations
         [Description("Oman")]
         [InternetDomainCode("OM")]
         Oman = 164,
-
 
         /// <summary>
         /// Pacific Islands, Trust Territory of the (Palau)
@@ -2246,7 +2061,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         PacificIslandsTrustTerritoryOfThePalau = 216,
 
-
         /// <summary>
         /// Pakistan
         /// </summary>
@@ -2257,7 +2071,6 @@ namespace OpenDis.Enumerations
         [Description("Pakistan")]
         [InternetDomainCode("PK")]
         Pakistan = 165,
-
 
         /// <summary>
         /// Palmyra Atoll (United States)
@@ -2270,7 +2083,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         PalmyraAtollUnitedStates = 166,
 
-
         /// <summary>
         /// Panama
         /// </summary>
@@ -2281,7 +2093,6 @@ namespace OpenDis.Enumerations
         [Description("Panama")]
         [InternetDomainCode("PA")]
         Panama = 168,
-
 
         /// <summary>
         /// Papua New Guinea
@@ -2294,7 +2105,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("PG")]
         PapuaNewGuinea = 169,
 
-
         /// <summary>
         /// Paracel Islands (International - Occupied by China, also claimed by Taiwan and Vietnam)
         /// </summary>
@@ -2305,7 +2115,6 @@ namespace OpenDis.Enumerations
         [Description("Paracel Islands (International - Occupied by China, also claimed by Taiwan and Vietnam)")]
         [InternetDomainCode("Unknown")]
         ParacelIslandsInternationalOccupiedByChinaAlsoClaimedByTaiwanAndVietnam = 170,
-
 
         /// <summary>
         /// Paraguay
@@ -2318,7 +2127,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("PY")]
         Paraguay = 171,
 
-
         /// <summary>
         /// Peru
         /// </summary>
@@ -2329,7 +2137,6 @@ namespace OpenDis.Enumerations
         [Description("Peru")]
         [InternetDomainCode("PE")]
         Peru = 172,
-
 
         /// <summary>
         /// Philippines
@@ -2342,7 +2149,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("PH")]
         Philippines = 173,
 
-
         /// <summary>
         /// Pitcairn Islands (United Kingdom)
         /// </summary>
@@ -2353,7 +2159,6 @@ namespace OpenDis.Enumerations
         [Description("Pitcairn Islands (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         PitcairnIslandsUnitedKingdom = 174,
-
 
         /// <summary>
         /// Poland
@@ -2366,7 +2171,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("PL")]
         Poland = 175,
 
-
         /// <summary>
         /// Portugal
         /// </summary>
@@ -2377,7 +2181,6 @@ namespace OpenDis.Enumerations
         [Description("Portugal")]
         [InternetDomainCode("PT")]
         Portugal = 176,
-
 
         /// <summary>
         /// Puerto Rico (United States)
@@ -2390,7 +2193,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         PuertoRicoUnitedStates = 177,
 
-
         /// <summary>
         /// Qatar
         /// </summary>
@@ -2401,7 +2203,6 @@ namespace OpenDis.Enumerations
         [Description("Qatar")]
         [InternetDomainCode("QA")]
         Qatar = 178,
-
 
         /// <summary>
         /// Reunion (France)
@@ -2414,7 +2215,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         ReunionFrance = 179,
 
-
         /// <summary>
         /// Romania
         /// </summary>
@@ -2425,7 +2225,6 @@ namespace OpenDis.Enumerations
         [Description("Romania")]
         [InternetDomainCode("RO")]
         Romania = 180,
-
 
         /// <summary>
         /// Russia
@@ -2438,7 +2237,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         Russia = 260,
 
-
         /// <summary>
         /// Rwanda
         /// </summary>
@@ -2449,7 +2247,6 @@ namespace OpenDis.Enumerations
         [Description("Rwanda")]
         [InternetDomainCode("RW")]
         Rwanda = 181,
-
 
         /// <summary>
         /// St. Helena (United Kingdom)
@@ -2462,7 +2259,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         StHelenaUnitedKingdom = 183,
 
-
         /// <summary>
         /// St. Lucia
         /// </summary>
@@ -2473,7 +2269,6 @@ namespace OpenDis.Enumerations
         [Description("St. Lucia")]
         [InternetDomainCode("Unknown")]
         StLucia = 184,
-
 
         /// <summary>
         /// St. Vincent and the Grenadines
@@ -2486,7 +2281,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         StVincentAndTheGrenadines = 186,
 
-
         /// <summary>
         /// St. Kitts and Nevis
         /// </summary>
@@ -2497,7 +2291,6 @@ namespace OpenDis.Enumerations
         [Description("St. Kitts and Nevis")]
         [InternetDomainCode("Unknown")]
         StKittsAndNevis = 182,
-
 
         /// <summary>
         /// St. Pierre and Miquelon (France)
@@ -2510,7 +2303,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         StPierreAndMiquelonFrance = 185,
 
-
         /// <summary>
         /// San Marino
         /// </summary>
@@ -2521,7 +2313,6 @@ namespace OpenDis.Enumerations
         [Description("San Marino")]
         [InternetDomainCode("SM")]
         SanMarino = 187,
-
 
         /// <summary>
         /// Sao Tome and Principe
@@ -2534,7 +2325,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("ST")]
         SaoTomeAndPrincipe = 188,
 
-
         /// <summary>
         /// Saudi Arabia
         /// </summary>
@@ -2545,7 +2335,6 @@ namespace OpenDis.Enumerations
         [Description("Saudi Arabia")]
         [InternetDomainCode("SA")]
         SaudiArabia = 189,
-
 
         /// <summary>
         /// Senegal
@@ -2558,7 +2347,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("SN")]
         Senegal = 190,
 
-
         /// <summary>
         /// Serbia and Montenegro (Montenegro to separate)
         /// </summary>
@@ -2569,7 +2357,6 @@ namespace OpenDis.Enumerations
         [Description("Serbia and Montenegro (Montenegro to separate)")]
         [InternetDomainCode("Unknown")]
         SerbiaAndMontenegroMontenegroToSeparate = 261,
-
 
         /// <summary>
         /// Seychelles
@@ -2582,7 +2369,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("SC")]
         Seychelles = 191,
 
-
         /// <summary>
         /// Sierra Leone
         /// </summary>
@@ -2593,7 +2379,6 @@ namespace OpenDis.Enumerations
         [Description("Sierra Leone")]
         [InternetDomainCode("SL")]
         SierraLeone = 192,
-
 
         /// <summary>
         /// Singapore
@@ -2606,7 +2391,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("SG")]
         Singapore = 193,
 
-
         /// <summary>
         /// Slovenia
         /// </summary>
@@ -2617,7 +2401,6 @@ namespace OpenDis.Enumerations
         [Description("Slovenia")]
         [InternetDomainCode("SI")]
         Slovenia = 262,
-
 
         /// <summary>
         /// Solomon Islands
@@ -2630,7 +2413,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("SB")]
         SolomonIslands = 194,
 
-
         /// <summary>
         /// Somalia
         /// </summary>
@@ -2641,7 +2423,6 @@ namespace OpenDis.Enumerations
         [Description("Somalia")]
         [InternetDomainCode("SO")]
         Somalia = 195,
-
 
         /// <summary>
         /// South Africa
@@ -2654,7 +2435,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("ZA")]
         SouthAfrica = 197,
 
-
         /// <summary>
         /// South Georgia and the South Sandwich Islands (United Kingdom)
         /// </summary>
@@ -2665,7 +2445,6 @@ namespace OpenDis.Enumerations
         [Description("South Georgia and the South Sandwich Islands (United Kingdom)")]
         [InternetDomainCode("Unknown")]
         SouthGeorgiaAndTheSouthSandwichIslandsUnitedKingdom = 196,
-
 
         /// <summary>
         /// Spain
@@ -2678,7 +2457,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("ES")]
         Spain = 198,
 
-
         /// <summary>
         /// Spratly Islands (International - parts occupied and claimed by China,Malaysia, Philippines, Taiwan, Vietnam)
         /// </summary>
@@ -2689,7 +2467,6 @@ namespace OpenDis.Enumerations
         [Description("Spratly Islands (International - parts occupied and claimed by China,Malaysia, Philippines, Taiwan, Vietnam)")]
         [InternetDomainCode("Unknown")]
         SpratlyIslandsInternationalPartsOccupiedAndClaimedByChinaMalaysiaPhilippinesTaiwanVietnam = 199,
-
 
         /// <summary>
         /// Sri Lanka
@@ -2702,7 +2479,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("LK")]
         SriLanka = 200,
 
-
         /// <summary>
         /// Sudan
         /// </summary>
@@ -2713,7 +2489,6 @@ namespace OpenDis.Enumerations
         [Description("Sudan")]
         [InternetDomainCode("SD")]
         Sudan = 201,
-
 
         /// <summary>
         /// Suriname
@@ -2726,7 +2501,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("SR")]
         Suriname = 202,
 
-
         /// <summary>
         /// Svalbard (Norway)
         /// </summary>
@@ -2737,7 +2511,6 @@ namespace OpenDis.Enumerations
         [Description("Svalbard (Norway)")]
         [InternetDomainCode("Unknown")]
         SvalbardNorway = 203,
-
 
         /// <summary>
         /// Swaziland
@@ -2750,7 +2523,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("SZ")]
         Swaziland = 204,
 
-
         /// <summary>
         /// Sweden
         /// </summary>
@@ -2761,7 +2533,6 @@ namespace OpenDis.Enumerations
         [Description("Sweden")]
         [InternetDomainCode("SE")]
         Sweden = 205,
-
 
         /// <summary>
         /// Switzerland
@@ -2774,7 +2545,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("CH")]
         Switzerland = 206,
 
-
         /// <summary>
         /// Syria
         /// </summary>
@@ -2785,7 +2555,6 @@ namespace OpenDis.Enumerations
         [Description("Syria")]
         [InternetDomainCode("SY")]
         Syria = 207,
-
 
         /// <summary>
         /// Taiwan
@@ -2798,7 +2567,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("TW")]
         Taiwan = 208,
 
-
         /// <summary>
         /// Tajikistan
         /// </summary>
@@ -2809,7 +2577,6 @@ namespace OpenDis.Enumerations
         [Description("Tajikistan")]
         [InternetDomainCode("TJ")]
         Tajikistan = 263,
-
 
         /// <summary>
         /// Tanzania
@@ -2822,7 +2589,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("TZ")]
         Tanzania = 209,
 
-
         /// <summary>
         /// Thailand
         /// </summary>
@@ -2833,7 +2599,6 @@ namespace OpenDis.Enumerations
         [Description("Thailand")]
         [InternetDomainCode("TH")]
         Thailand = 210,
-
 
         /// <summary>
         /// Togo
@@ -2846,7 +2611,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("TG")]
         Togo = 211,
 
-
         /// <summary>
         /// Tokelau (New Zealand)
         /// </summary>
@@ -2857,7 +2621,6 @@ namespace OpenDis.Enumerations
         [Description("Tokelau (New Zealand)")]
         [InternetDomainCode("Unknown")]
         TokelauNewZealand = 212,
-
 
         /// <summary>
         /// Tonga
@@ -2870,7 +2633,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("TO")]
         Tonga = 213,
 
-
         /// <summary>
         /// Trinidad and Tobago
         /// </summary>
@@ -2881,7 +2643,6 @@ namespace OpenDis.Enumerations
         [Description("Trinidad and Tobago")]
         [InternetDomainCode("TT")]
         TrinidadAndTobago = 214,
-
 
         /// <summary>
         /// Tromelin Island (France)
@@ -2894,7 +2655,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         TromelinIslandFrance = 215,
 
-
         /// <summary>
         /// Tunisia
         /// </summary>
@@ -2905,7 +2665,6 @@ namespace OpenDis.Enumerations
         [Description("Tunisia")]
         [InternetDomainCode("TN")]
         Tunisia = 217,
-
 
         /// <summary>
         /// Turkey
@@ -2918,7 +2677,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("TR")]
         Turkey = 218,
 
-
         /// <summary>
         /// Turkmenistan
         /// </summary>
@@ -2929,7 +2687,6 @@ namespace OpenDis.Enumerations
         [Description("Turkmenistan")]
         [InternetDomainCode("TM")]
         Turkmenistan = 264,
-
 
         /// <summary>
         /// Turks and Caicos Islands (United Kingdom)
@@ -2942,7 +2699,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         TurksAndCaicosIslandsUnitedKingdom = 219,
 
-
         /// <summary>
         /// Tuvalu
         /// </summary>
@@ -2953,7 +2709,6 @@ namespace OpenDis.Enumerations
         [Description("Tuvalu")]
         [InternetDomainCode("TV")]
         Tuvalu = 220,
-
 
         /// <summary>
         /// Uganda
@@ -2966,7 +2721,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("UG")]
         Uganda = 221,
 
-
         /// <summary>
         /// Ukraine
         /// </summary>
@@ -2977,7 +2731,6 @@ namespace OpenDis.Enumerations
         [Description("Ukraine")]
         [InternetDomainCode("UA")]
         Ukraine = 265,
-
 
         /// <summary>
         /// United Arab Emirates
@@ -2990,7 +2743,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("AE")]
         UnitedArabEmirates = 223,
 
-
         /// <summary>
         /// United Kingdom
         /// </summary>
@@ -3001,7 +2753,6 @@ namespace OpenDis.Enumerations
         [Description("United Kingdom")]
         [InternetDomainCode("UK")]
         UnitedKingdom = 224,
-
 
         /// <summary>
         /// United States
@@ -3014,7 +2765,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("US")]
         UnitedStates = 225,
 
-
         /// <summary>
         /// Upper Volta (aka Burkina or Burkina Faso)
         /// </summary>
@@ -3025,7 +2775,6 @@ namespace OpenDis.Enumerations
         [Description("Upper Volta (aka Burkina or Burkina Faso)")]
         [InternetDomainCode("Unknown")]
         UpperVoltaAkaBurkinaOrBurkinaFaso = 34,
-
 
         /// <summary>
         /// Uruguay
@@ -3038,7 +2787,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("UY")]
         Uruguay = 226,
 
-
         /// <summary>
         /// Uzbekistan
         /// </summary>
@@ -3049,7 +2797,6 @@ namespace OpenDis.Enumerations
         [Description("Uzbekistan")]
         [InternetDomainCode("UZ")]
         Uzbekistan = 266,
-
 
         /// <summary>
         /// Vanuatu
@@ -3062,7 +2809,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("VU")]
         Vanuatu = 227,
 
-
         /// <summary>
         /// Vatican City (Holy See)
         /// </summary>
@@ -3073,7 +2819,6 @@ namespace OpenDis.Enumerations
         [Description("Vatican City (Holy See)")]
         [InternetDomainCode("Unknown")]
         VaticanCityHolySee = 228,
-
 
         /// <summary>
         /// Venezuela
@@ -3086,7 +2831,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("VE")]
         Venezuela = 229,
 
-
         /// <summary>
         /// Vietnam
         /// </summary>
@@ -3097,7 +2841,6 @@ namespace OpenDis.Enumerations
         [Description("Vietnam")]
         [InternetDomainCode("Unknown")]
         Vietnam = 230,
-
 
         /// <summary>
         /// Virgin Islands (United States)
@@ -3110,7 +2853,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         VirginIslandsUnitedStates = 231,
 
-
         /// <summary>
         /// Wake Island (United States)
         /// </summary>
@@ -3121,7 +2863,6 @@ namespace OpenDis.Enumerations
         [Description("Wake Island (United States)")]
         [InternetDomainCode("Unknown")]
         WakeIslandUnitedStates = 232,
-
 
         /// <summary>
         /// Wallis and Futuna (France)
@@ -3134,7 +2875,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         WallisAndFutunaFrance = 233,
 
-
         /// <summary>
         /// West Bank (Israel)
         /// </summary>
@@ -3145,7 +2885,6 @@ namespace OpenDis.Enumerations
         [Description("West Bank (Israel)")]
         [InternetDomainCode("Unknown")]
         WestBankIsrael = 235,
-
 
         /// <summary>
         /// Western Sahara
@@ -3158,7 +2897,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("EH")]
         WesternSahara = 234,
 
-
         /// <summary>
         /// Western Samoa
         /// </summary>
@@ -3169,7 +2907,6 @@ namespace OpenDis.Enumerations
         [Description("Western Samoa")]
         [InternetDomainCode("Unknown")]
         WesternSamoa = 236,
-
 
         /// <summary>
         /// Yemen
@@ -3182,7 +2919,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("YE")]
         Yemen = 237,
 
-
         /// <summary>
         /// Serbia and Montenegro
         /// </summary>
@@ -3193,7 +2929,6 @@ namespace OpenDis.Enumerations
         [Description("Serbia and Montenegro")]
         [InternetDomainCode("CS")]
         SerbiaAndMontenegro = 240,
-
 
         /// <summary>
         /// Zaire
@@ -3206,7 +2941,6 @@ namespace OpenDis.Enumerations
         [InternetDomainCode("Unknown")]
         Zaire = 241,
 
-
         /// <summary>
         /// Zambia
         /// </summary>
@@ -3217,7 +2951,6 @@ namespace OpenDis.Enumerations
         [Description("Zambia")]
         [InternetDomainCode("ZM")]
         Zambia = 242,
-
 
         /// <summary>
         /// Zimbabwe

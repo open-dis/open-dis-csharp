@@ -10,11 +10,11 @@ using OpenDis.Enumerations.EntityState.Type;
 
 namespace OpenDis.Enumerations.Cet2006
 {
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class Entity : CetBase, INotifyPropertyChanged
     {
-		#region Fields (12) 
+        #region Fields (12) 
 
         private List<Category> categoryField;
 
@@ -30,30 +30,27 @@ namespace OpenDis.Enumerations.Cet2006
         private bool unusedFieldSpecified;
         private string xrefField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Delegates and Events (1) 
+        #region Delegates and Events (1) 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Delegates and Events 
+        #endregion Delegates and Events 
 
-		#region Properties (12) 
+        #region Properties (12) 
 
         [XmlElement("category", Form = XmlSchemaForm.Unqualified)]
         public List<Category> Categories
         {
-            get
-            {
-                return this.categoryField;
-            }
+            get => categoryField;
 
             set
             {
-                if (this.categoryField != value)
+                if (categoryField != value)
                 {
-                    this.categoryField = value;
-                    this.RaisePropertyChanged("Category");
+                    categoryField = value;
+                    RaisePropertyChanged("Category");
                 }
             }
         }
@@ -61,17 +58,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlIgnore]
         public Country Country
         {
-            get
-            {
-                return this.country;
-            }
+            get => country;
 
             set
             {
-                if (this.country != value)
+                if (country != value)
                 {
-                    this.RawCountry = ((int)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Country");
+                    RawCountry = ((int)value).ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Country));
                 }
             }
         }
@@ -79,17 +73,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "description")]
         public string Description
         {
-            get
-            {
-                return this.descriptionField;
-            }
+            get => descriptionField;
 
             set
             {
-                if (this.descriptionField != value)
+                if (descriptionField != value)
                 {
-                    this.descriptionField = value;
-                    this.RaisePropertyChanged("Description");
+                    descriptionField = value;
+                    RaisePropertyChanged(nameof(Description));
                 }
             }
         }
@@ -97,17 +88,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlIgnore]
         public byte Domain
         {
-            get
-            {
-                return this.domain;
-            }
+            get => domain;
 
             set
             {
-                if (this.domain != value)
+                if (domain != value)
                 {
-                    this.RawDomain = ((byte)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Domain");
+                    RawDomain = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Domain));
                 }
             }
         }
@@ -115,17 +103,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "footnote")]
         public string Footnote
         {
-            get
-            {
-                return this.footnoteField;
-            }
+            get => footnoteField;
 
             set
             {
-                if (this.footnoteField != value)
+                if (footnoteField != value)
                 {
-                    this.footnoteField = value;
-                    this.RaisePropertyChanged("Footnote");
+                    footnoteField = value;
+                    RaisePropertyChanged(nameof(Footnote));
                 }
             }
         }
@@ -133,17 +118,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlIgnore]
         public EntityKind Kind
         {
-            get
-            {
-                return this.kind;
-            }
+            get => kind;
 
             set
             {
-                if (this.kind != value)
+                if (kind != value)
                 {
-                    this.RawKind = ((byte)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Kind");
+                    RawKind = ((byte)value).ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Kind));
                 }
             }
         }
@@ -151,21 +133,18 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "country", DataType = "nonNegativeInteger")]
         public string RawCountry
         {
-            get
-            {
-                return this.countryField;
-            }
+            get => countryField;
 
             set
             {
-                this.VerifyNumericString(value, false);
+                VerifyNumericString(value, false);
 
-                if (this.countryField != value)
+                if (countryField != value)
                 {
-                    this.countryField = value;
+                    countryField = value;
                     int intValue = int.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
-                    this.country = (Country)Enum.ToObject(typeof(Country), intValue);
-                    this.RaisePropertyChanged("RawCountry");
+                    country = (Country)Enum.ToObject(typeof(Country), intValue);
+                    RaisePropertyChanged(nameof(RawCountry));
                 }
             }
         }
@@ -173,20 +152,17 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "domain", DataType = "nonNegativeInteger")]
         public string RawDomain
         {
-            get
-            {
-                return this.domainField;
-            }
+            get => domainField;
 
             set
             {
-                this.VerifyNumericString(value, false);
+                VerifyNumericString(value, false);
 
-                if (this.domainField != value)
+                if (domainField != value)
                 {
-                    this.domainField = value;
-                    this.domain = byte.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("RawDomain");
+                    domainField = value;
+                    domain = byte.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(RawDomain));
                 }
             }
         }
@@ -194,19 +170,16 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "kind", DataType = "nonNegativeInteger")]
         public string RawKind
         {
-            get
-            {
-                return this.kindField;
-            }
+            get => kindField;
 
             set
             {
-                if (this.kindField != value)
+                if (kindField != value)
                 {
-                    this.kindField = value;
+                    kindField = value;
                     byte byteValue = byte.Parse(value, CultureInfo.InvariantCulture);
-                    this.kind = (EntityKind)Enum.ToObject(typeof(EntityKind), byteValue);
-                    this.RaisePropertyChanged("RawKind");
+                    kind = (EntityKind)Enum.ToObject(typeof(EntityKind), byteValue);
+                    RaisePropertyChanged(nameof(RawKind));
                 }
             }
         }
@@ -214,35 +187,29 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "unused")]
         public bool Unused
         {
-            get
-            {
-                return this.unusedField;
-            }
+            get => unusedField;
 
             set
             {
-                if (this.unusedField != value)
+                if (unusedField != value)
                 {
-                    this.unusedField = value;
-                    this.RaisePropertyChanged("Unused");
+                    unusedField = value;
+                    RaisePropertyChanged(nameof(Unused));
                 }
             }
         }
 
-        [XmlIgnore()]
+        [XmlIgnore]
         public bool UnusedSpecified
         {
-            get
-            {
-                return this.unusedFieldSpecified;
-            }
+            get => unusedFieldSpecified;
 
             set
             {
-                if (this.unusedFieldSpecified != value)
+                if (unusedFieldSpecified != value)
                 {
-                    this.unusedFieldSpecified = value;
-                    this.RaisePropertyChanged("UnusedSpecified");
+                    unusedFieldSpecified = value;
+                    RaisePropertyChanged(nameof(UnusedSpecified));
                 }
             }
         }
@@ -250,33 +217,27 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "xref")]
         public string XRef
         {
-            get
-            {
-                return this.xrefField;
-            }
+            get => xrefField;
 
             set
             {
-                if (this.xrefField != value)
+                if (xrefField != value)
                 {
-                    this.xrefField = value;
-                    this.RaisePropertyChanged("XRef");
+                    xrefField = value;
+                    RaisePropertyChanged(nameof(XRef));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (1) 
+        #region Methods (1) 
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

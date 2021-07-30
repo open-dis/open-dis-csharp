@@ -34,10 +34,6 @@
 // Author Peter Smith (Naval Air Warfare Center - Training Systems Division) 01/23/2009
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OpenDis.Core
 {
     /// <summary>

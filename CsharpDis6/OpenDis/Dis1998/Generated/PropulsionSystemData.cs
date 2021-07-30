@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -53,18 +52,8 @@ namespace OpenDis.Dis1998
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class PropulsionSystemData
+    public partial class PropulsionSystemData : IEquatable<PropulsionSystemData>, IReflectable
     {
-        /// <summary>
-        /// powerSetting
-        /// </summary>
-        private float _powerSetting;
-
-        /// <summary>
-        /// engine RPMs
-        /// </summary>
-        private float _engineRpm;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="PropulsionSystemData"/> class.
         /// </summary>
@@ -78,12 +67,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(PropulsionSystemData left, PropulsionSystemData right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(PropulsionSystemData left, PropulsionSystemData right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -91,26 +77,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(PropulsionSystemData left, PropulsionSystemData right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 4;  // this._powerSetting
             marshalSize += 4;  // this._engineRpm
@@ -121,35 +95,13 @@ namespace OpenDis.Dis1998
         /// Gets or sets the powerSetting
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "powerSetting")]
-        public float PowerSetting
-        {
-            get
-            {
-                return this._powerSetting;
-            }
-
-            set
-            {
-                this._powerSetting = value;
-            }
-        }
+        public float PowerSetting { get; set; }
 
         /// <summary>
         /// Gets or sets the engine RPMs
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "engineRpm")]
-        public float EngineRpm
-        {
-            get
-            {
-                return this._engineRpm;
-            }
-
-            set
-            {
-                this._engineRpm = value;
-            }
-        }
+        public float EngineRpm { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -162,14 +114,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -179,8 +131,8 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteFloat((float)this._powerSetting);
-                    dos.WriteFloat((float)this._engineRpm);
+                    dos.WriteFloat((float)PowerSetting);
+                    dos.WriteFloat((float)EngineRpm);
                 }
                 catch (Exception e)
                 {
@@ -190,11 +142,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -207,8 +159,8 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._powerSetting = dis.ReadFloat();
-                    this._engineRpm = dis.ReadFloat();
+                    PowerSetting = dis.ReadFloat();
+                    EngineRpm = dis.ReadFloat();
                 }
                 catch (Exception e)
                 {
@@ -218,85 +170,63 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<PropulsionSystemData>");
             try
             {
-                sb.AppendLine("<powerSetting type=\"float\">" + this._powerSetting.ToString(CultureInfo.InvariantCulture) + "</powerSetting>");
-                sb.AppendLine("<engineRpm type=\"float\">" + this._engineRpm.ToString(CultureInfo.InvariantCulture) + "</engineRpm>");
+                sb.AppendLine("<powerSetting type=\"float\">" + PowerSetting.ToString(CultureInfo.InvariantCulture) + "</powerSetting>");
+                sb.AppendLine("<engineRpm type=\"float\">" + EngineRpm.ToString(CultureInfo.InvariantCulture) + "</engineRpm>");
                 sb.AppendLine("</PropulsionSystemData>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as PropulsionSystemData;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as PropulsionSystemData;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(PropulsionSystemData obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._powerSetting != obj._powerSetting)
+            if (PowerSetting != obj.PowerSetting)
             {
                 ivarsEqual = false;
             }
 
-            if (this._engineRpm != obj._engineRpm)
+            if (EngineRpm != obj.EngineRpm)
             {
                 ivarsEqual = false;
             }
@@ -309,22 +239,15 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._powerSetting.GetHashCode();
-            result = GenerateHash(result) ^ this._engineRpm.GetHashCode();
+            result = GenerateHash(result) ^ PowerSetting.GetHashCode();
+            result = GenerateHash(result) ^ EngineRpm.GetHashCode();
 
             return result;
         }

@@ -8,11 +8,11 @@ using OpenDis.Enumerations.EntityState.Type;
 
 namespace OpenDis.Enumerations.Cet2010
 {
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class Entity : GenericEntry
     {
-		#region Fields (9) 
+        #region Fields (9) 
 
         private List<GenericEntryDescription> categories;
 
@@ -25,45 +25,39 @@ namespace OpenDis.Enumerations.Cet2010
         private ulong uid;
         private string uidField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Properties (9) 
+        #region Properties (9) 
 
         [XmlElement("category", typeof(Category), Form = XmlSchemaForm.Unqualified)]
         [XmlElement("category_range", typeof(CategoryRange), Form = XmlSchemaForm.Unqualified)]
         public List<GenericEntryDescription> Categories
         {
-            get
-            {
-                return this.categories;
-            }
+            get => categories;
 
             set
             {
-                if (this.categories == value)
+                if (categories == value)
                 {
                     return;
                 }
 
-                this.categories = value;
-                this.RaisePropertyChanged("Categories");
+                categories = value;
+                RaisePropertyChanged(nameof(Categories));
             }
         }
 
         [XmlIgnore]
         public Country Country
         {
-            get
-            {
-                return this.country;
-            }
+            get => country;
 
             set
             {
-                if (this.country != value)
+                if (country != value)
                 {
-                    this.RawCountry = ((int)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Country");
+                    RawCountry = ((int)value).ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Country));
                 }
             }
         }
@@ -71,17 +65,14 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public byte Domain
         {
-            get
-            {
-                return this.domain;
-            }
+            get => domain;
 
             set
             {
-                if (this.domain != value)
+                if (domain != value)
                 {
-                    this.RawDomain = ((byte)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Domain");
+                    RawDomain = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Domain));
                 }
             }
         }
@@ -89,17 +80,14 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public EntityKind Kind
         {
-            get
-            {
-                return this.kind;
-            }
+            get => kind;
 
             set
             {
-                if (this.kind != value)
+                if (kind != value)
                 {
-                    this.RawKind = ((byte)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Kind");
+                    RawKind = ((byte)value).ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Kind));
                 }
             }
         }
@@ -107,21 +95,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "country", DataType = "nonNegativeInteger")]
         public string RawCountry
         {
-            get
-            {
-                return this.countryField;
-            }
+            get => countryField;
 
             set
             {
-                this.VerifyNumericString(value, false);
+                VerifyNumericString(value, false);
 
-                if (this.countryField != value)
+                if (countryField != value)
                 {
-                    this.countryField = value;
+                    countryField = value;
                     int intValue = int.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
-                    this.country = (Country)Enum.ToObject(typeof(Country), intValue);
-                    this.RaisePropertyChanged("RawCountry");
+                    country = (Country)Enum.ToObject(typeof(Country), intValue);
+                    RaisePropertyChanged(nameof(RawCountry));
                 }
             }
         }
@@ -129,20 +114,17 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "domain", DataType = "nonNegativeInteger")]
         public string RawDomain
         {
-            get
-            {
-                return this.domainField;
-            }
+            get => domainField;
 
             set
             {
-                this.VerifyNumericString(value, false);
+                VerifyNumericString(value, false);
 
-                if (this.domainField != value)
+                if (domainField != value)
                 {
-                    this.domainField = value;
-                    this.domain = byte.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("RawDomain");
+                    domainField = value;
+                    domain = byte.Parse(value, NumberStyles.Integer, CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(RawDomain));
                 }
             }
         }
@@ -150,19 +132,16 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "kind", DataType = "nonNegativeInteger")]
         public string RawKind
         {
-            get
-            {
-                return this.kindField;
-            }
+            get => kindField;
 
             set
             {
-                if (this.kindField != value)
+                if (kindField != value)
                 {
-                    this.kindField = value;
+                    kindField = value;
                     byte byteValue = byte.Parse(value, CultureInfo.InvariantCulture);
-                    this.kind = (EntityKind)Enum.ToObject(typeof(EntityKind), byteValue);
-                    this.RaisePropertyChanged("RawKind");
+                    kind = (EntityKind)Enum.ToObject(typeof(EntityKind), byteValue);
+                    RaisePropertyChanged(nameof(RawKind));
                 }
             }
         }
@@ -174,21 +153,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "uid", DataType = "nonNegativeInteger")]
         public string RawUId
         {
-            get
-            {
-                return this.uidField;
-            }
+            get => uidField;
 
             set
             {
-                if (this.uidField == value)
+                if (uidField == value)
                 {
                     return;
                 }
 
-                this.uidField = value;
-                this.uid = ulong.Parse(value, CultureInfo.InvariantCulture);
-                this.RaisePropertyChanged("RawUId");
+                uidField = value;
+                uid = ulong.Parse(value, CultureInfo.InvariantCulture);
+                RaisePropertyChanged(nameof(RawUId));
             }
         }
 
@@ -199,21 +175,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public ulong UId
         {
-            get
-            {
-                return this.uid;
-            }
+            get => uid;
 
             set
             {
-                if (this.uid != value)
+                if (uid != value)
                 {
-                    this.RawUId = ((ulong)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("UId");
+                    RawUId = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(UId));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }

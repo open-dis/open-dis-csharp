@@ -11,229 +11,89 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="type">The type of PDU to be created.</param>
         /// <returns>Returns the corresponding PDU instance or null if type equals 0.</returns>
-        /// <exception cref="NotImplementedException">if the PDU type specified in parameter is not supported.</exception>
-        public static IPdu CreatePdu(byte type)
-        {
-            return CreatePdu((PduType)type);
-        }
+        /// <exception cref="NotSupportedException">if the PDU type specified in parameter is not supported.</exception>
+        public static IPdu CreatePdu(byte type) => CreatePdu((PduType)type);
 
         /// <summary>
         /// Creates the PDU.
         /// </summary>
         /// <param name="type">The type of PDU to be created.</param>
         /// <returns>Returns the corresponding PDU instance or null if PduType.Other is specified.</returns>
-        /// <exception cref="NotImplementedException">if the PDU type specified in parameter is not supported.</exception>
+        /// <exception cref="NotSupportedException">if the PDU type specified in parameter is not supported.</exception>
         public static IPdu CreatePdu(PduType type)
         {
-            IPdu pdu = null;
-
-            switch (type)
+            return type switch
             {
-                case PduType.Other:
-                    pdu = new Pdu();
-                    break;
-                case PduType.EntityState:
-                    pdu = new EntityStatePdu();
-                    break;
-                case PduType.Fire:
-                    pdu = new FirePdu();
-                    break;
-                case PduType.Detonation:
-                    pdu = new DetonationPdu();
-                    break;
-                case PduType.Collision:
-                    pdu = new CollisionPdu();
-                    break;
-                case PduType.ServiceRequest:
-                    pdu = new ServiceRequestPdu();
-                    break;
-                case PduType.ResupplyOffer:
-                    pdu = new ResupplyOfferPdu();
-                    break;
-                case PduType.ResupplyReceived:
-                    pdu = new ResupplyReceivedPdu();
-                    break;
-                case PduType.ResupplyCancel:
-                    pdu = new ResupplyCancelPdu();
-                    break;
-                case PduType.RepairComplete:
-                    pdu = new RepairCompletePdu();
-                    break;
-                case PduType.RepairResponse:
-                    pdu = new RepairResponsePdu();
-                    break;
-                case PduType.CreateEntity:
-                    pdu = new CreateEntityPdu();
-                    break;
-                case PduType.RemoveEntity:
-                    pdu = new RemoveEntityPdu();
-                    break;
-                case PduType.StartResume:
-                    pdu = new StartResumePdu();
-                    break;
-                case PduType.StopFreeze:
-                    pdu = new StopFreezePdu();
-                    break;
-                case PduType.Acknowledge:
-                    pdu = new AcknowledgePdu();
-                    break;
-                case PduType.ActionRequest:
-                    pdu = new ActionRequestPdu();
-                    break;
-                case PduType.ActionResponse:
-                    pdu = new ActionResponsePdu();
-                    break;
-                case PduType.DataQuery:
-                    pdu = new DataQueryPdu();
-                    break;
-                case PduType.SetData:
-                    pdu = new SetDataPdu();
-                    break;
-                case PduType.Data:
-                    pdu = new DataPdu();
-                    break;
-                case PduType.EventReport:
-                    pdu = new EventReportPdu();
-                    break;
-                case PduType.Comment:
-                    pdu = new CommentPdu();
-                    break;
-                case PduType.ElectromagneticEmission:
-                    pdu = new ElectronicEmissionsPdu();
-                    break;
-                case PduType.Designator:
-                    pdu = new DesignatorPdu();
-                    break;
-                case PduType.Transmitter:
-                    pdu = new TransmitterPdu();
-                    break;
-                case PduType.Signal:
-                    pdu = new SignalPdu();
-                    break;
-                case PduType.Receiver:
-                    pdu = new ReceiverPdu();
-                    break;
-                case PduType.IFF_ATC_NAVAIDS:
-                    pdu = new IffAtcNavAidsLayer1Pdu();
-                    break;
-                case PduType.UnderwaterAcoustic:
-                    pdu = new UaPdu();
-                    break;
-                case PduType.SupplementalEmissionEntityState:
-                    pdu = new SeesPdu();
-                    break;
-                case PduType.IntercomSignal:
-                    pdu = new IntercomSignalPdu();
-                    break;
-                case PduType.IntercomControl:
-                    pdu = new IntercomControlPdu();
-                    break;
-                case PduType.AggregateState:
-                    pdu = new AggregateStatePdu();
-                    break;
-                case PduType.IsGroupOf:
-                    pdu = new IsGroupOfPdu();
-                    break;
-                case PduType.TransferControl:
-                    pdu = new TransferControlRequestPdu();
-                    break;
-                case PduType.IsPartOf:
-                    pdu = new IsPartOfPdu();
-                    break;
-                case PduType.MinefieldState:
-                    pdu = new MinefieldStatePdu();
-                    break;
-                case PduType.MinefieldQuery:
-                    pdu = new MinefieldQueryPdu();
-                    break;
-                case PduType.MinefieldData:
-                    pdu = new MinefieldDataPdu();
-                    break;
-                case PduType.MinefieldResponseNAK:
-                    pdu = new MinefieldResponseNackPdu();
-                    break;
-                case PduType.EnvironmentalProcess:
-                    pdu = new EnvironmentalProcessPdu();
-                    break;
-                case PduType.GriddedData:
-                    pdu = new GriddedDataPdu();
-                    break;
-                case PduType.PointObjectState:
-                    pdu = new PointObjectStatePdu();
-                    break;
-                case PduType.LinearObjectState:
-                    pdu = new LinearObjectStatePdu();
-                    break;
-                case PduType.ArealObjectState:
-                    pdu = new ArealObjectStatePdu();
-                    break;
-                case PduType.TSPI:
-                    throw new NotImplementedException();
-                case PduType.Appearance:
-                    throw new NotImplementedException();
-                case PduType.ArticulatedParts:
-                    throw new NotImplementedException();
-                case PduType.LEFire:
-                    throw new NotImplementedException();
-                case PduType.LEDetonation:
-                    throw new NotImplementedException();
-                case PduType.CreateEntityR:
-                    pdu = new CreateEntityReliablePdu();
-                    break;
-                case PduType.RemoveEntityR:
-                    pdu = new RemoveEntityReliablePdu();
-                    break;
-                case PduType.StartResumeR:
-                    pdu = new StartResumeReliablePdu();
-                    break;
-                case PduType.StopFreezeR:
-                    pdu = new StopFreezeReliablePdu();
-                    break;
-                case PduType.AcknowledgeR:
-                    pdu = new AcknowledgeReliablePdu();
-                    break;
-                case PduType.ActionRequestR:
-                    pdu = new ActionRequestReliablePdu();
-                    break;
-                case PduType.ActionResponseR:
-                    pdu = new ActionResponseReliablePdu();
-                    break;
-                case PduType.DataQueryR:
-                    pdu = new DataQueryReliablePdu();
-                    break;
-                case PduType.SetDataR:
-                    pdu = new SetDataReliablePdu();
-                    break;
-                case PduType.DataR:
-                    pdu = new DataReliablePdu();
-                    break;
-                case PduType.EventReportR:
-                    pdu = new EventReportReliablePdu();
-                    break;
-                case PduType.CommentR:
-                    pdu = new CommentReliablePdu();
-                    break;
-                case PduType.RecordR:
-                    pdu = new RecordQueryReliablePdu();
-                    break;
-                case PduType.SetRecordR:
-                    pdu = new SetRecordReliablePdu();
-                    break;
-                case PduType.RecordQueryR:
-                    pdu = new RecordQueryReliablePdu();
-                    break;
-                case PduType.CollisionElastic:
-                    pdu = new CollisionElasticPdu();
-                    break;
-                case PduType.EntityStateUpdate:
-                    pdu = new EntityStateUpdatePdu();
-                    break;
-                default:
-                    pdu = null;
-                    break;
-            }
-
-            return pdu;
+                PduType.Other => new Pdu(),
+                PduType.EntityState => new EntityStatePdu(),
+                PduType.Fire => new FirePdu(),
+                PduType.Detonation => new DetonationPdu(),
+                PduType.Collision => new CollisionPdu(),
+                PduType.ServiceRequest => new ServiceRequestPdu(),
+                PduType.ResupplyOffer => new ResupplyOfferPdu(),
+                PduType.ResupplyReceived => new ResupplyReceivedPdu(),
+                PduType.ResupplyCancel => new ResupplyCancelPdu(),
+                PduType.RepairComplete => new RepairCompletePdu(),
+                PduType.RepairResponse => new RepairResponsePdu(),
+                PduType.CreateEntity => new CreateEntityPdu(),
+                PduType.RemoveEntity => new RemoveEntityPdu(),
+                PduType.StartResume => new StartResumePdu(),
+                PduType.StopFreeze => new StopFreezePdu(),
+                PduType.Acknowledge => new AcknowledgePdu(),
+                PduType.ActionRequest => new ActionRequestPdu(),
+                PduType.ActionResponse => new ActionResponsePdu(),
+                PduType.DataQuery => new DataQueryPdu(),
+                PduType.SetData => new SetDataPdu(),
+                PduType.Data => new DataPdu(),
+                PduType.EventReport => new EventReportPdu(),
+                PduType.Comment => new CommentPdu(),
+                PduType.ElectromagneticEmission => new ElectronicEmissionsPdu(),
+                PduType.Designator => new DesignatorPdu(),
+                PduType.Transmitter => new TransmitterPdu(),
+                PduType.Signal => new SignalPdu(),
+                PduType.Receiver => new ReceiverPdu(),
+                PduType.IFF_ATC_NAVAIDS => new IffAtcNavAidsLayer1Pdu(),
+                PduType.UnderwaterAcoustic => new UaPdu(),
+                PduType.SupplementalEmissionEntityState => new SeesPdu(),
+                PduType.IntercomSignal => new IntercomSignalPdu(),
+                PduType.IntercomControl => new IntercomControlPdu(),
+                PduType.AggregateState => new AggregateStatePdu(),
+                PduType.IsGroupOf => new IsGroupOfPdu(),
+                PduType.TransferControl => new TransferControlRequestPdu(),
+                PduType.IsPartOf => new IsPartOfPdu(),
+                PduType.MinefieldState => new MinefieldStatePdu(),
+                PduType.MinefieldQuery => new MinefieldQueryPdu(),
+                PduType.MinefieldData => new MinefieldDataPdu(),
+                PduType.MinefieldResponseNAK => new MinefieldResponseNackPdu(),
+                PduType.EnvironmentalProcess => new EnvironmentalProcessPdu(),
+                PduType.GriddedData => new GriddedDataPdu(),
+                PduType.PointObjectState => new PointObjectStatePdu(),
+                PduType.LinearObjectState => new LinearObjectStatePdu(),
+                PduType.ArealObjectState => new ArealObjectStatePdu(),
+                PduType.TSPI => throw new NotSupportedException(),
+                PduType.Appearance => throw new NotSupportedException(),
+                PduType.ArticulatedParts => throw new NotSupportedException(),
+                PduType.LEFire => throw new NotSupportedException(),
+                PduType.LEDetonation => throw new NotSupportedException(),
+                PduType.CreateEntityR => new CreateEntityReliablePdu(),
+                PduType.RemoveEntityR => new RemoveEntityReliablePdu(),
+                PduType.StartResumeR => new StartResumeReliablePdu(),
+                PduType.StopFreezeR => new StopFreezeReliablePdu(),
+                PduType.AcknowledgeR => new AcknowledgeReliablePdu(),
+                PduType.ActionRequestR => new ActionRequestReliablePdu(),
+                PduType.ActionResponseR => new ActionResponseReliablePdu(),
+                PduType.DataQueryR => new DataQueryReliablePdu(),
+                PduType.SetDataR => new SetDataReliablePdu(),
+                PduType.DataR => new DataReliablePdu(),
+                PduType.EventReportR => new EventReportReliablePdu(),
+                PduType.CommentR => new CommentReliablePdu(),
+                PduType.RecordR => new RecordQueryReliablePdu(),
+                PduType.SetRecordR => new SetRecordReliablePdu(),
+                PduType.RecordQueryR => new RecordQueryReliablePdu(),
+                PduType.CollisionElastic => new CollisionElasticPdu(),
+                PduType.EntityStateUpdate => new EntityStateUpdatePdu(),
+                _ => null,
+            };
         }
     }
 }

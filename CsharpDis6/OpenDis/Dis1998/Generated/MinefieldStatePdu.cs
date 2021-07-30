@@ -62,71 +62,11 @@ namespace OpenDis.Dis1998
     public partial class MinefieldStatePdu : MinefieldFamilyPdu, IEquatable<MinefieldStatePdu>
     {
         /// <summary>
-        /// Minefield ID
-        /// </summary>
-        private EntityID _minefieldID = new EntityID();
-
-        /// <summary>
-        /// Minefield sequence
-        /// </summary>
-        private ushort _minefieldSequence;
-
-        /// <summary>
-        /// force ID
-        /// </summary>
-        private byte _forceID;
-
-        /// <summary>
-        /// Number of permieter points
-        /// </summary>
-        private byte _numberOfPerimeterPoints;
-
-        /// <summary>
-        /// type of minefield
-        /// </summary>
-        private EntityType _minefieldType = new EntityType();
-
-        /// <summary>
-        /// how many mine types
-        /// </summary>
-        private ushort _numberOfMineTypes;
-
-        /// <summary>
-        /// location of minefield in world coords
-        /// </summary>
-        private Vector3Double _minefieldLocation = new Vector3Double();
-
-        /// <summary>
-        /// orientation of minefield
-        /// </summary>
-        private Orientation _minefieldOrientation = new Orientation();
-
-        /// <summary>
-        /// appearance bitflags
-        /// </summary>
-        private ushort _appearance;
-
-        /// <summary>
-        /// protocolMode
-        /// </summary>
-        private ushort _protocolMode;
-
-        /// <summary>
-        /// perimeter points for the minefield
-        /// </summary>
-        private List<Point> _perimeterPoints = new List<Point>();
-
-        /// <summary>
-        /// Type of mines
-        /// </summary>
-        private List<EntityType> _mineType = new List<EntityType>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="MinefieldStatePdu"/> class.
         /// </summary>
         public MinefieldStatePdu()
         {
-            PduType = (byte)37;
+            PduType = 37;
         }
 
         /// <summary>
@@ -135,12 +75,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(MinefieldStatePdu left, MinefieldStatePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(MinefieldStatePdu left, MinefieldStatePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -148,47 +85,33 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(MinefieldStatePdu left, MinefieldStatePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._minefieldID.GetMarshalledSize();  // this._minefieldID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += MinefieldID.GetMarshalledSize();  // this._minefieldID
             marshalSize += 2;  // this._minefieldSequence
             marshalSize += 1;  // this._forceID
             marshalSize += 1;  // this._numberOfPerimeterPoints
-            marshalSize += this._minefieldType.GetMarshalledSize();  // this._minefieldType
+            marshalSize += MinefieldType.GetMarshalledSize();  // this._minefieldType
             marshalSize += 2;  // this._numberOfMineTypes
-            marshalSize += this._minefieldLocation.GetMarshalledSize();  // this._minefieldLocation
-            marshalSize += this._minefieldOrientation.GetMarshalledSize();  // this._minefieldOrientation
+            marshalSize += MinefieldLocation.GetMarshalledSize();  // this._minefieldLocation
+            marshalSize += MinefieldOrientation.GetMarshalledSize();  // this._minefieldOrientation
             marshalSize += 2;  // this._appearance
             marshalSize += 2;  // this._protocolMode
-            for (int idx = 0; idx < this._perimeterPoints.Count; idx++)
+            for (int idx = 0; idx < PerimeterPoints.Count; idx++)
             {
-                Point listElement = (Point)this._perimeterPoints[idx];
+                var listElement = PerimeterPoints[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
-            for (int idx = 0; idx < this._mineType.Count; idx++)
+            for (int idx = 0; idx < MineType.Count; idx++)
             {
-                EntityType listElement = (EntityType)this._mineType[idx];
+                var listElement = MineType[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -199,221 +122,95 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Minefield ID
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "minefieldID")]
-        public EntityID MinefieldID
-        {
-            get
-            {
-                return this._minefieldID;
-            }
-
-            set
-            {
-                this._minefieldID = value;
-            }
-        }
+        public EntityID MinefieldID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Minefield sequence
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "minefieldSequence")]
-        public ushort MinefieldSequence
-        {
-            get
-            {
-                return this._minefieldSequence;
-            }
-
-            set
-            {
-                this._minefieldSequence = value;
-            }
-        }
+        public ushort MinefieldSequence { get; set; }
 
         /// <summary>
         /// Gets or sets the force ID
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "forceID")]
-        public byte ForceID
-        {
-            get
-            {
-                return this._forceID;
-            }
-
-            set
-            {
-                this._forceID = value;
-            }
-        }
+        public byte ForceID { get; set; }
 
         /// <summary>
         /// Gets or sets the Number of permieter points
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfPerimeterPoints method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfPerimeterPoints method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfPerimeterPoints")]
-        public byte NumberOfPerimeterPoints
-        {
-            get
-            {
-                return this._numberOfPerimeterPoints;
-            }
-
-            set
-            {
-                this._numberOfPerimeterPoints = value;
-            }
-        }
+        public byte NumberOfPerimeterPoints { get; set; }
 
         /// <summary>
         /// Gets or sets the type of minefield
         /// </summary>
         [XmlElement(Type = typeof(EntityType), ElementName = "minefieldType")]
-        public EntityType MinefieldType
-        {
-            get
-            {
-                return this._minefieldType;
-            }
-
-            set
-            {
-                this._minefieldType = value;
-            }
-        }
+        public EntityType MinefieldType { get; set; } = new EntityType();
 
         /// <summary>
         /// Gets or sets the how many mine types
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfMineTypes method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfMineTypes method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfMineTypes")]
-        public ushort NumberOfMineTypes
-        {
-            get
-            {
-                return this._numberOfMineTypes;
-            }
-
-            set
-            {
-                this._numberOfMineTypes = value;
-            }
-        }
+        public ushort NumberOfMineTypes { get; set; }
 
         /// <summary>
         /// Gets or sets the location of minefield in world coords
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "minefieldLocation")]
-        public Vector3Double MinefieldLocation
-        {
-            get
-            {
-                return this._minefieldLocation;
-            }
-
-            set
-            {
-                this._minefieldLocation = value;
-            }
-        }
+        public Vector3Double MinefieldLocation { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the orientation of minefield
         /// </summary>
         [XmlElement(Type = typeof(Orientation), ElementName = "minefieldOrientation")]
-        public Orientation MinefieldOrientation
-        {
-            get
-            {
-                return this._minefieldOrientation;
-            }
-
-            set
-            {
-                this._minefieldOrientation = value;
-            }
-        }
+        public Orientation MinefieldOrientation { get; set; } = new Orientation();
 
         /// <summary>
         /// Gets or sets the appearance bitflags
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "appearance")]
-        public ushort Appearance
-        {
-            get
-            {
-                return this._appearance;
-            }
-
-            set
-            {
-                this._appearance = value;
-            }
-        }
+        public ushort Appearance { get; set; }
 
         /// <summary>
         /// Gets or sets the protocolMode
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "protocolMode")]
-        public ushort ProtocolMode
-        {
-            get
-            {
-                return this._protocolMode;
-            }
-
-            set
-            {
-                this._protocolMode = value;
-            }
-        }
+        public ushort ProtocolMode { get; set; }
 
         /// <summary>
         /// Gets the perimeter points for the minefield
         /// </summary>
         [XmlElement(ElementName = "perimeterPointsList", Type = typeof(List<Point>))]
-        public List<Point> PerimeterPoints
-        {
-            get
-            {
-                return this._perimeterPoints;
-            }
-        }
+        public List<Point> PerimeterPoints { get; } = new();
 
         /// <summary>
         /// Gets the Type of mines
         /// </summary>
         [XmlElement(ElementName = "mineTypeList", Type = typeof(List<EntityType>))]
-        public List<EntityType> MineType
-        {
-            get
-            {
-                return this._mineType;
-            }
-        }
+        public List<EntityType> MineType { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -422,42 +219,42 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._minefieldID.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._minefieldSequence);
-                    dos.WriteUnsignedByte((byte)this._forceID);
-                    dos.WriteUnsignedByte((byte)this._perimeterPoints.Count);
-                    this._minefieldType.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._mineType.Count);
-                    this._minefieldLocation.Marshal(dos);
-                    this._minefieldOrientation.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._appearance);
-                    dos.WriteUnsignedShort((ushort)this._protocolMode);
+                    MinefieldID.Marshal(dos);
+                    dos.WriteUnsignedShort(MinefieldSequence);
+                    dos.WriteUnsignedByte(ForceID);
+                    dos.WriteUnsignedByte((byte)PerimeterPoints.Count);
+                    MinefieldType.Marshal(dos);
+                    dos.WriteUnsignedShort((ushort)MineType.Count);
+                    MinefieldLocation.Marshal(dos);
+                    MinefieldOrientation.Marshal(dos);
+                    dos.WriteUnsignedShort(Appearance);
+                    dos.WriteUnsignedShort(ProtocolMode);
 
-                    for (int idx = 0; idx < this._perimeterPoints.Count; idx++)
+                    for (int idx = 0; idx < PerimeterPoints.Count; idx++)
                     {
-                        Point aPoint = (Point)this._perimeterPoints[idx];
+                        var aPoint = PerimeterPoints[idx];
                         aPoint.Marshal(dos);
                     }
 
-                    for (int idx = 0; idx < this._mineType.Count; idx++)
+                    for (int idx = 0; idx < MineType.Count; idx++)
                     {
-                        EntityType aEntityType = (EntityType)this._mineType[idx];
+                        var aEntityType = MineType[idx];
                         aEntityType.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -472,57 +269,50 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._minefieldID.Unmarshal(dis);
-                    this._minefieldSequence = dis.ReadUnsignedShort();
-                    this._forceID = dis.ReadUnsignedByte();
-                    this._numberOfPerimeterPoints = dis.ReadUnsignedByte();
-                    this._minefieldType.Unmarshal(dis);
-                    this._numberOfMineTypes = dis.ReadUnsignedShort();
-                    this._minefieldLocation.Unmarshal(dis);
-                    this._minefieldOrientation.Unmarshal(dis);
-                    this._appearance = dis.ReadUnsignedShort();
-                    this._protocolMode = dis.ReadUnsignedShort();
+                    MinefieldID.Unmarshal(dis);
+                    MinefieldSequence = dis.ReadUnsignedShort();
+                    ForceID = dis.ReadUnsignedByte();
+                    NumberOfPerimeterPoints = dis.ReadUnsignedByte();
+                    MinefieldType.Unmarshal(dis);
+                    NumberOfMineTypes = dis.ReadUnsignedShort();
+                    MinefieldLocation.Unmarshal(dis);
+                    MinefieldOrientation.Unmarshal(dis);
+                    Appearance = dis.ReadUnsignedShort();
+                    ProtocolMode = dis.ReadUnsignedShort();
 
-                    for (int idx = 0; idx < this.NumberOfPerimeterPoints; idx++)
+                    for (int idx = 0; idx < NumberOfPerimeterPoints; idx++)
                     {
-                        Point anX = new Point();
+                        var anX = new Point();
                         anX.Unmarshal(dis);
-                        this._perimeterPoints.Add(anX);
+                        PerimeterPoints.Add(anX);
                     }
 
-                    for (int idx = 0; idx < this.NumberOfMineTypes; idx++)
+                    for (int idx = 0; idx < NumberOfMineTypes; idx++)
                     {
-                        EntityType anX = new EntityType();
+                        var anX = new EntityType();
                         anX.Unmarshal(dis);
-                        this._mineType.Add(anX);
+                        MineType.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -531,35 +321,35 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<minefieldID>");
-                this._minefieldID.Reflection(sb);
+                MinefieldID.Reflection(sb);
                 sb.AppendLine("</minefieldID>");
-                sb.AppendLine("<minefieldSequence type=\"ushort\">" + this._minefieldSequence.ToString(CultureInfo.InvariantCulture) + "</minefieldSequence>");
-                sb.AppendLine("<forceID type=\"byte\">" + this._forceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
-                sb.AppendLine("<perimeterPoints type=\"byte\">" + this._perimeterPoints.Count.ToString(CultureInfo.InvariantCulture) + "</perimeterPoints>");
+                sb.AppendLine("<minefieldSequence type=\"ushort\">" + MinefieldSequence.ToString(CultureInfo.InvariantCulture) + "</minefieldSequence>");
+                sb.AppendLine("<forceID type=\"byte\">" + ForceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
+                sb.AppendLine("<perimeterPoints type=\"byte\">" + PerimeterPoints.Count.ToString(CultureInfo.InvariantCulture) + "</perimeterPoints>");
                 sb.AppendLine("<minefieldType>");
-                this._minefieldType.Reflection(sb);
+                MinefieldType.Reflection(sb);
                 sb.AppendLine("</minefieldType>");
-                sb.AppendLine("<mineType type=\"ushort\">" + this._mineType.Count.ToString(CultureInfo.InvariantCulture) + "</mineType>");
+                sb.AppendLine("<mineType type=\"ushort\">" + MineType.Count.ToString(CultureInfo.InvariantCulture) + "</mineType>");
                 sb.AppendLine("<minefieldLocation>");
-                this._minefieldLocation.Reflection(sb);
+                MinefieldLocation.Reflection(sb);
                 sb.AppendLine("</minefieldLocation>");
                 sb.AppendLine("<minefieldOrientation>");
-                this._minefieldOrientation.Reflection(sb);
+                MinefieldOrientation.Reflection(sb);
                 sb.AppendLine("</minefieldOrientation>");
-                sb.AppendLine("<appearance type=\"ushort\">" + this._appearance.ToString(CultureInfo.InvariantCulture) + "</appearance>");
-                sb.AppendLine("<protocolMode type=\"ushort\">" + this._protocolMode.ToString(CultureInfo.InvariantCulture) + "</protocolMode>");
-                for (int idx = 0; idx < this._perimeterPoints.Count; idx++)
+                sb.AppendLine("<appearance type=\"ushort\">" + Appearance.ToString(CultureInfo.InvariantCulture) + "</appearance>");
+                sb.AppendLine("<protocolMode type=\"ushort\">" + ProtocolMode.ToString(CultureInfo.InvariantCulture) + "</protocolMode>");
+                for (int idx = 0; idx < PerimeterPoints.Count; idx++)
                 {
                     sb.AppendLine("<perimeterPoints" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"Point\">");
-                    Point aPoint = (Point)this._perimeterPoints[idx];
+                    var aPoint = PerimeterPoints[idx];
                     aPoint.Reflection(sb);
                     sb.AppendLine("</perimeterPoints" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                for (int idx = 0; idx < this._mineType.Count; idx++)
+                for (int idx = 0; idx < MineType.Count; idx++)
                 {
                     sb.AppendLine("<mineType" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"EntityType\">");
-                    EntityType aEntityType = (EntityType)this._mineType[idx];
+                    var aEntityType = MineType[idx];
                     aEntityType.Reflection(sb);
                     sb.AppendLine("</mineType" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -568,127 +358,109 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as MinefieldStatePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as MinefieldStatePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(MinefieldStatePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._minefieldID.Equals(obj._minefieldID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!MinefieldID.Equals(obj.MinefieldID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._minefieldSequence != obj._minefieldSequence)
+            if (MinefieldSequence != obj.MinefieldSequence)
             {
                 ivarsEqual = false;
             }
 
-            if (this._forceID != obj._forceID)
+            if (ForceID != obj.ForceID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfPerimeterPoints != obj._numberOfPerimeterPoints)
+            if (NumberOfPerimeterPoints != obj.NumberOfPerimeterPoints)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._minefieldType.Equals(obj._minefieldType))
+            if (!MinefieldType.Equals(obj.MinefieldType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfMineTypes != obj._numberOfMineTypes)
+            if (NumberOfMineTypes != obj.NumberOfMineTypes)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._minefieldLocation.Equals(obj._minefieldLocation))
+            if (!MinefieldLocation.Equals(obj.MinefieldLocation))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._minefieldOrientation.Equals(obj._minefieldOrientation))
+            if (!MinefieldOrientation.Equals(obj.MinefieldOrientation))
             {
                 ivarsEqual = false;
             }
 
-            if (this._appearance != obj._appearance)
+            if (Appearance != obj.Appearance)
             {
                 ivarsEqual = false;
             }
 
-            if (this._protocolMode != obj._protocolMode)
+            if (ProtocolMode != obj.ProtocolMode)
             {
                 ivarsEqual = false;
             }
 
-            if (this._perimeterPoints.Count != obj._perimeterPoints.Count)
+            if (PerimeterPoints.Count != obj.PerimeterPoints.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._perimeterPoints.Count; idx++)
+                for (int idx = 0; idx < PerimeterPoints.Count; idx++)
                 {
-                    if (!this._perimeterPoints[idx].Equals(obj._perimeterPoints[idx]))
+                    if (!PerimeterPoints[idx].Equals(obj.PerimeterPoints[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._mineType.Count != obj._mineType.Count)
+            if (MineType.Count != obj.MineType.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._mineType.Count; idx++)
+                for (int idx = 0; idx < MineType.Count; idx++)
                 {
-                    if (!this._mineType[idx].Equals(obj._mineType[idx]))
+                    if (!MineType[idx].Equals(obj.MineType[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -703,46 +475,39 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._minefieldID.GetHashCode();
-            result = GenerateHash(result) ^ this._minefieldSequence.GetHashCode();
-            result = GenerateHash(result) ^ this._forceID.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfPerimeterPoints.GetHashCode();
-            result = GenerateHash(result) ^ this._minefieldType.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfMineTypes.GetHashCode();
-            result = GenerateHash(result) ^ this._minefieldLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._minefieldOrientation.GetHashCode();
-            result = GenerateHash(result) ^ this._appearance.GetHashCode();
-            result = GenerateHash(result) ^ this._protocolMode.GetHashCode();
+            result = GenerateHash(result) ^ MinefieldID.GetHashCode();
+            result = GenerateHash(result) ^ MinefieldSequence.GetHashCode();
+            result = GenerateHash(result) ^ ForceID.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfPerimeterPoints.GetHashCode();
+            result = GenerateHash(result) ^ MinefieldType.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfMineTypes.GetHashCode();
+            result = GenerateHash(result) ^ MinefieldLocation.GetHashCode();
+            result = GenerateHash(result) ^ MinefieldOrientation.GetHashCode();
+            result = GenerateHash(result) ^ Appearance.GetHashCode();
+            result = GenerateHash(result) ^ ProtocolMode.GetHashCode();
 
-            if (this._perimeterPoints.Count > 0)
+            if (PerimeterPoints.Count > 0)
             {
-                for (int idx = 0; idx < this._perimeterPoints.Count; idx++)
+                for (int idx = 0; idx < PerimeterPoints.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._perimeterPoints[idx].GetHashCode();
+                    result = GenerateHash(result) ^ PerimeterPoints[idx].GetHashCode();
                 }
             }
 
-            if (this._mineType.Count > 0)
+            if (MineType.Count > 0)
             {
-                for (int idx = 0; idx < this._mineType.Count; idx++)
+                for (int idx = 0; idx < MineType.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._mineType[idx].GetHashCode();
+                    result = GenerateHash(result) ^ MineType[idx].GetHashCode();
                 }
             }
 

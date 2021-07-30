@@ -57,26 +57,6 @@ namespace OpenDis.Dis1998
     public partial class GridAxisRecordRepresentation1 : GridAxisRecord, IEquatable<GridAxisRecordRepresentation1>
     {
         /// <summary>
-        /// constant scale factor
-        /// </summary>
-        private float _fieldScale;
-
-        /// <summary>
-        /// constant offset used to scale grid data
-        /// </summary>
-        private float _fieldOffset;
-
-        /// <summary>
-        /// Number of data values
-        /// </summary>
-        private ushort _numberOfValues;
-
-        /// <summary>
-        /// variable length list of data parameters ^^^this is wrong--need padding as well
-        /// </summary>
-        private List<TwoByteChunk> _dataValues = new List<TwoByteChunk>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="GridAxisRecordRepresentation1"/> class.
         /// </summary>
         public GridAxisRecordRepresentation1()
@@ -89,12 +69,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(GridAxisRecordRepresentation1 left, GridAxisRecordRepresentation1 right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(GridAxisRecordRepresentation1 left, GridAxisRecordRepresentation1 right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -102,34 +79,20 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(GridAxisRecordRepresentation1 left, GridAxisRecordRepresentation1 right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
+            int marshalSize = base.GetMarshalledSize();
             marshalSize += 4;  // this._fieldScale
             marshalSize += 4;  // this._fieldOffset
             marshalSize += 2;  // this._numberOfValues
-            for (int idx = 0; idx < this._dataValues.Count; idx++)
+            for (int idx = 0; idx < DataValues.Count; idx++)
             {
-                TwoByteChunk listElement = (TwoByteChunk)this._dataValues[idx];
+                var listElement = DataValues[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -140,74 +103,33 @@ namespace OpenDis.Dis1998
         /// Gets or sets the constant scale factor
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "fieldScale")]
-        public float FieldScale
-        {
-            get
-            {
-                return this._fieldScale;
-            }
-
-            set
-            {
-                this._fieldScale = value;
-            }
-        }
+        public float FieldScale { get; set; }
 
         /// <summary>
         /// Gets or sets the constant offset used to scale grid data
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "fieldOffset")]
-        public float FieldOffset
-        {
-            get
-            {
-                return this._fieldOffset;
-            }
-
-            set
-            {
-                this._fieldOffset = value;
-            }
-        }
+        public float FieldOffset { get; set; }
 
         /// <summary>
         /// Gets or sets the Number of data values
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfValues method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfValues method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfValues")]
-        public ushort NumberOfValues
-        {
-            get
-            {
-                return this._numberOfValues;
-            }
-
-            set
-            {
-                this._numberOfValues = value;
-            }
-        }
+        public ushort NumberOfValues { get; set; }
 
         /// <summary>
         /// Gets the variable length list of data parameters ^^^this is wrong--need padding as well
         /// </summary>
         [XmlElement(ElementName = "dataValuesList", Type = typeof(List<TwoByteChunk>))]
-        public List<TwoByteChunk> DataValues
-        {
-            get
-            {
-                return this._dataValues;
-            }
-        }
+        public List<TwoByteChunk> DataValues { get; } = new();
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -216,13 +138,13 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteFloat((float)this._fieldScale);
-                    dos.WriteFloat((float)this._fieldOffset);
-                    dos.WriteUnsignedShort((ushort)this._dataValues.Count);
+                    dos.WriteFloat((float)FieldScale);
+                    dos.WriteFloat((float)FieldOffset);
+                    dos.WriteUnsignedShort((ushort)DataValues.Count);
 
-                    for (int idx = 0; idx < this._dataValues.Count; idx++)
+                    for (int idx = 0; idx < DataValues.Count; idx++)
                     {
-                        TwoByteChunk aTwoByteChunk = (TwoByteChunk)this._dataValues[idx];
+                        var aTwoByteChunk = DataValues[idx];
                         aTwoByteChunk.Marshal(dos);
                     }
                 }
@@ -234,11 +156,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -253,15 +175,15 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._fieldScale = dis.ReadFloat();
-                    this._fieldOffset = dis.ReadFloat();
-                    this._numberOfValues = dis.ReadUnsignedShort();
+                    FieldScale = dis.ReadFloat();
+                    FieldOffset = dis.ReadFloat();
+                    NumberOfValues = dis.ReadUnsignedShort();
 
-                    for (int idx = 0; idx < this.NumberOfValues; idx++)
+                    for (int idx = 0; idx < NumberOfValues; idx++)
                     {
-                        TwoByteChunk anX = new TwoByteChunk();
+                        var anX = new TwoByteChunk();
                         anX.Unmarshal(dis);
-                        this._dataValues.Add(anX);
+                        DataValues.Add(anX);
                     }
                 }
                 catch (Exception e)
@@ -272,24 +194,17 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -297,13 +212,13 @@ namespace OpenDis.Dis1998
             base.Reflection(sb);
             try
             {
-                sb.AppendLine("<fieldScale type=\"float\">" + this._fieldScale.ToString(CultureInfo.InvariantCulture) + "</fieldScale>");
-                sb.AppendLine("<fieldOffset type=\"float\">" + this._fieldOffset.ToString(CultureInfo.InvariantCulture) + "</fieldOffset>");
-                sb.AppendLine("<dataValues type=\"ushort\">" + this._dataValues.Count.ToString(CultureInfo.InvariantCulture) + "</dataValues>");
-                for (int idx = 0; idx < this._dataValues.Count; idx++)
+                sb.AppendLine("<fieldScale type=\"float\">" + FieldScale.ToString(CultureInfo.InvariantCulture) + "</fieldScale>");
+                sb.AppendLine("<fieldOffset type=\"float\">" + FieldOffset.ToString(CultureInfo.InvariantCulture) + "</fieldOffset>");
+                sb.AppendLine("<dataValues type=\"ushort\">" + DataValues.Count.ToString(CultureInfo.InvariantCulture) + "</dataValues>");
+                for (int idx = 0; idx < DataValues.Count; idx++)
                 {
                     sb.AppendLine("<dataValues" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"TwoByteChunk\">");
-                    TwoByteChunk aTwoByteChunk = (TwoByteChunk)this._dataValues[idx];
+                    var aTwoByteChunk = DataValues[idx];
                     aTwoByteChunk.Reflection(sb);
                     sb.AppendLine("</dataValues" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -312,76 +227,58 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as GridAxisRecordRepresentation1;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as GridAxisRecordRepresentation1;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(GridAxisRecordRepresentation1 obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (this._fieldScale != obj._fieldScale)
+            bool ivarsEqual = base.Equals(obj);
+            if (FieldScale != obj.FieldScale)
             {
                 ivarsEqual = false;
             }
 
-            if (this._fieldOffset != obj._fieldOffset)
+            if (FieldOffset != obj.FieldOffset)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfValues != obj._numberOfValues)
+            if (NumberOfValues != obj.NumberOfValues)
             {
                 ivarsEqual = false;
             }
 
-            if (this._dataValues.Count != obj._dataValues.Count)
+            if (DataValues.Count != obj.DataValues.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._dataValues.Count; idx++)
+                for (int idx = 0; idx < DataValues.Count; idx++)
                 {
-                    if (!this._dataValues[idx].Equals(obj._dataValues[idx]))
+                    if (!DataValues[idx].Equals(obj.DataValues[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -396,31 +293,24 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._fieldScale.GetHashCode();
-            result = GenerateHash(result) ^ this._fieldOffset.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfValues.GetHashCode();
+            result = GenerateHash(result) ^ FieldScale.GetHashCode();
+            result = GenerateHash(result) ^ FieldOffset.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfValues.GetHashCode();
 
-            if (this._dataValues.Count > 0)
+            if (DataValues.Count > 0)
             {
-                for (int idx = 0; idx < this._dataValues.Count; idx++)
+                for (int idx = 0; idx < DataValues.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._dataValues[idx].GetHashCode();
+                    result = GenerateHash(result) ^ DataValues[idx].GetHashCode();
                 }
             }
 

@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.SimulationManagement
 {
     /// <summary>
-    /// Enumeration values for DatumSpecificationRecord (simman.datumid, Datum Specification record, 
+    /// Enumeration values for DatumSpecificationRecord (simman.datumid, Datum Specification record,
     /// section 7.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -57,7 +56,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Concatenated = 11100,
 
         /// <summary>
-        /// Kind.  type: Unsigned Integer.  length: 8.
+        /// Kind. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -67,7 +66,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Kind = 11110,
 
         /// <summary>
-        /// Domain.  type: Unsigned Integer.  length: 8.
+        /// Domain. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -77,7 +76,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Domain = 11120,
 
         /// <summary>
-        /// Country.  type: Unsigned Integer.  length: 16.
+        /// Country. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -87,7 +86,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Country = 11130,
 
         /// <summary>
-        /// Category.  type: Unsigned Integer.  length: 8.
+        /// Category. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -97,7 +96,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Category = 11140,
 
         /// <summary>
-        /// Subcategory.  type: Unsigned Integer.  length: 8.
+        /// Subcategory. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -107,7 +106,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Subcategory = 11150,
 
         /// <summary>
-        /// Specific.  type: Unsigned Integer.  length: 8.
+        /// Specific. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -117,7 +116,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Specific = 11160,
 
         /// <summary>
-        /// Extra.  type: Unsigned Integer.  length: 8.
+        /// Extra. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -127,7 +126,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Extra = 11170,
 
         /// <summary>
-        /// Force ID.  type: Unsigned Integer.  length: 8.
+        /// Force ID. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -157,7 +156,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityType = 12000,
 
         /// <summary>
-        /// Kind.  type: Unsigned Integer.  length: 8.
+        /// Kind. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -167,7 +166,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Kind_12110 = 12110,
 
         /// <summary>
-        /// Domain.  type: Unsigned Integer.  length: 8.
+        /// Domain. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -177,7 +176,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Domain_12120 = 12120,
 
         /// <summary>
-        /// Country.  type: Unsigned Integer.  length: 16.
+        /// Country. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -187,7 +186,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Country_12130 = 12130,
 
         /// <summary>
-        /// Category.  type: Unsigned Integer.  length: 8.
+        /// Category. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -197,7 +196,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Category_12140 = 12140,
 
         /// <summary>
-        /// Subcategory.  type: Unsigned Integer.  length: 8.
+        /// Subcategory. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -207,7 +206,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Subcategory_12150 = 12150,
 
         /// <summary>
-        /// Specific.  type: Unsigned Integer.  length: 8.
+        /// Specific. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -217,7 +216,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Specific_12160 = 12160,
 
         /// <summary>
-        /// Extra.  type: Unsigned Integer.  length: 8.
+        /// Extra. type: Unsigned Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -247,7 +246,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityMarking = 13000,
 
         /// <summary>
-        /// Entity Marking Characters.  type: String.  length: 80.
+        /// Entity Marking Characters. type: String.  length: 80.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -257,7 +256,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityMarkingCharacters = 13100,
 
         /// <summary>
-        /// Crew ID.  type: String.  length: 80.
+        /// Crew ID. type: String.  length: 80.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -277,7 +276,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TaskOrganization = 14000,
 
         /// <summary>
-        /// Regiment Name.  type: String.
+        /// Regiment Name. type: String.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -287,7 +286,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RegimentName = 14200,
 
         /// <summary>
-        /// Battalion Name.  type: String.
+        /// Battalion Name. type: String.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -297,7 +296,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BattalionName = 14300,
 
         /// <summary>
-        /// Company Name.  type: String.
+        /// Company Name. type: String.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -407,7 +406,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DISEntityID = 15300,
 
         /// <summary>
-        /// Mount Intent.  type: Datum Specification Sub-record.  length: 544.
+        /// Mount Intent. type: Datum Specification Sub-record.  length: 544.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -417,7 +416,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MountIntent = 15400,
 
         /// <summary>
-        /// Tether-Unthether Command ID.  type: Unsigned Integer.  length: 32.
+        /// Tether-Unthether Command ID. type: Unsigned Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -427,7 +426,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TetherUnthetherCommandID = 15500,
 
         /// <summary>
-        /// Teleport Entity Data Record.  type: Variable record.
+        /// Teleport Entity Data Record. type: Variable record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -437,7 +436,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         TeleportEntityDataRecord = 15510,
 
         /// <summary>
-        /// DIS Aggregate ID (Set if communication to aggregate).  type: Unsigned Integer.  length: 32.  range: Integer Aggregate ID.
+        /// DIS Aggregate ID (Set if communication to aggregate). type: Unsigned Integer.  length: 32.  range: Integer Aggregate
+        /// ID.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -487,7 +487,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Health = 21200,
 
         /// <summary>
-        /// Job Assignment.  type: String.
+        /// Job Assignment. type: String.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -507,7 +507,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Fuel = 23000,
 
         /// <summary>
-        /// Quantity.  units: Liters.
+        /// Quantity. units: Liters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -517,7 +517,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Quantity = 23100,
 
         /// <summary>
-        /// Quantity.  units: Gallons.
+        /// Quantity. units: Gallons.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -537,7 +537,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Ammunition = 24000,
 
         /// <summary>
-        /// 120-mm HEAT, quantity.  units: Rounds.
+        /// 120-mm HEAT, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -547,7 +547,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _120MmHEATQuantity = 24001,
 
         /// <summary>
-        /// 120-mm SABOT, quantity.  units: Rounds.
+        /// 120-mm SABOT, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -557,7 +557,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _120MmSABOTQuantity = 24002,
 
         /// <summary>
-        /// 12.7-mm M8, quantity.  units: Rounds.
+        /// 12.7-mm M8, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -567,7 +567,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _127MmM8Quantity = 24003,
 
         /// <summary>
-        /// 12.7-mm M20, quantity.  units: Rounds.
+        /// 12.7-mm M20, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -577,7 +577,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _127MmM20Quantity = 24004,
 
         /// <summary>
-        /// 7.62-mm M62, quantity.  units: Rounds.
+        /// 7.62-mm M62, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -587,7 +587,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _762MmM62Quantity = 24005,
 
         /// <summary>
-        /// M250 UKL8A1, quantity.  units: Grenades.
+        /// M250 UKL8A1, quantity. units: Grenades.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -597,7 +597,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         M250UKL8A1Quantity = 24006,
 
         /// <summary>
-        /// M250 UKL8A3, quantity.  units: Grenades.
+        /// M250 UKL8A3, quantity. units: Grenades.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -607,7 +607,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         M250UKL8A3Quantity = 24007,
 
         /// <summary>
-        /// 7.62-mm M80, quantity.  units: Rounds.
+        /// 7.62-mm M80, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -617,7 +617,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _762MmM80Quantity = 24008,
 
         /// <summary>
-        /// 12.7-mm, quantity.  units: Rounds.
+        /// 12.7-mm, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -627,7 +627,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _127MmQuantity = 24009,
 
         /// <summary>
-        /// 7.62-mm, quantity.  units: Rounds.
+        /// 7.62-mm, quantity. units: Rounds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -637,7 +637,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         _762MmQuantity = 24010,
 
         /// <summary>
-        /// Mines, quantity.  units: Mines.
+        /// Mines, quantity. units: Mines.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -737,7 +737,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Cargo = 25000,
 
         /// <summary>
-        /// Vehicle Mass.  type: Unsigned Integer.  length: 32.  units: Kilograms.
+        /// Vehicle Mass. type: Unsigned Integer.  length: 32.  units: Kilograms.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -757,7 +757,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SupplyQuantity = 27000,
 
         /// <summary>
-        /// Armament.  type: Boolean.
+        /// Armament. type: Boolean.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -777,7 +777,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Status = 30000,
 
         /// <summary>
-        /// Activate entity.  type: Integer.  length: 32.  range: 0 Unspecified, 1 Activate platform.
+        /// Activate entity. type: Integer.  length: 32.  range: 0 Unspecified, 1 Activate platform.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -787,7 +787,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ActivateEntity = 30010,
 
         /// <summary>
-        /// Subscription State.  type: Enumeration.  length: 8.
+        /// Subscription State. type: Enumeration.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -797,7 +797,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SubscriptionState = 30100,
 
         /// <summary>
-        /// Round trip time delay.  type: Unsigned Integer.  length: 32 bits.  units: milliseconds.
+        /// Round trip time delay. type: Unsigned Integer.  length: 32 bits.  units: milliseconds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -807,7 +807,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RoundTripTimeDelay = 30300,
 
         /// <summary>
-        /// TADIL J message count (label 0).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 0). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -817,7 +817,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel0 = 30400,
 
         /// <summary>
-        /// TADIL J message count (label 1).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 1). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -827,7 +827,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel1 = 30401,
 
         /// <summary>
-        /// TADIL J message count (label 2).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 2). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -837,7 +837,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel2 = 30402,
 
         /// <summary>
-        /// TADIL J message count (label 3).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 3). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -847,7 +847,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel3 = 30403,
 
         /// <summary>
-        /// TADIL J message count (label 4).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 4). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -857,7 +857,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel4 = 30404,
 
         /// <summary>
-        /// TADIL J message count (label 5).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 5). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -867,7 +867,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel5 = 30405,
 
         /// <summary>
-        /// TADIL J message count (label 6).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 6). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -877,7 +877,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel6 = 30406,
 
         /// <summary>
-        /// TADIL J message count (label 7).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 7). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -887,7 +887,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel7 = 30407,
 
         /// <summary>
-        /// TADIL J message count (label 8).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 8). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -897,7 +897,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel8 = 30408,
 
         /// <summary>
-        /// TADIL J message count (label 9).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 9). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -907,7 +907,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel9 = 30409,
 
         /// <summary>
-        /// TADIL J message count (label 10).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 10). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -917,7 +917,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel10 = 30410,
 
         /// <summary>
-        /// TADIL J message count (label 11).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 11). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -927,7 +927,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel11 = 30411,
 
         /// <summary>
-        /// TADIL J message count (label 12).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 12). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -937,7 +937,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel12 = 30412,
 
         /// <summary>
-        /// TADIL J message count (label 13).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 13). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -947,7 +947,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel13 = 30413,
 
         /// <summary>
-        /// TADIL J message count (label 14).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 14). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -957,7 +957,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel14 = 30414,
 
         /// <summary>
-        /// TADIL J message count (label 15).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 15). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -967,7 +967,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel15 = 30415,
 
         /// <summary>
-        /// TADIL J message count (label 16).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 16). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -977,7 +977,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel16 = 30416,
 
         /// <summary>
-        /// TADIL J message count (label 17).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 17). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -987,7 +987,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel17 = 30417,
 
         /// <summary>
-        /// TADIL J message count (label 18).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 18). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -997,7 +997,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel18 = 30418,
 
         /// <summary>
-        /// TADIL J message count (label 19).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 19). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1007,7 +1007,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel19 = 30419,
 
         /// <summary>
-        /// TADIL J message count (label 20).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 20). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1017,7 +1017,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel20 = 30420,
 
         /// <summary>
-        /// TADIL J message count (label 21).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 21). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1027,7 +1027,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel21 = 30421,
 
         /// <summary>
-        /// TADIL J message count (label 22).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 22). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1037,7 +1037,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel22 = 30422,
 
         /// <summary>
-        /// TADIL J message count (label 23).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 23). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1047,7 +1047,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel23 = 30423,
 
         /// <summary>
-        /// TADIL J message count (label 24).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 24). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1057,7 +1057,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel24 = 30424,
 
         /// <summary>
-        /// TADIL J message count (label 25).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 25). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1067,7 +1067,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel25 = 30425,
 
         /// <summary>
-        /// TADIL J message count (label 26).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 26). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1077,7 +1077,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel26 = 30426,
 
         /// <summary>
-        /// TADIL J message count (label 27).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 27). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1087,7 +1087,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel27 = 30427,
 
         /// <summary>
-        /// TADIL J message count (label 28).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 28). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1097,7 +1097,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel28 = 30428,
 
         /// <summary>
-        /// TADIL J message count (label 29).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 29). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1107,7 +1107,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel29 = 30429,
 
         /// <summary>
-        /// TADIL J message count (label 30).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 30). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1117,7 +1117,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJMessageCountLabel30 = 30430,
 
         /// <summary>
-        /// TADIL J message count (label 31).  type: Unsigned Integer.  length: 32 bits.
+        /// TADIL J message count (label 31). type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1137,7 +1137,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Position = 31000,
 
         /// <summary>
-        /// Route (Waypoint) type.  type: Integer.  length: 32.  range: 0 Default, 1 Orbit.
+        /// Route (Waypoint) type. type: Integer.  length: 32.  range: 0 Default, 1 Orbit.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1167,7 +1167,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         GeocentricCoordinates = 31200,
 
         /// <summary>
-        /// X.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// X. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1177,7 +1177,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         X = 31210,
 
         /// <summary>
-        /// Y.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// Y. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1187,7 +1187,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Y = 31220,
 
         /// <summary>
-        /// Z.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// Z. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1197,7 +1197,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Z = 31230,
 
         /// <summary>
-        /// Latitude.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Latitude. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1207,7 +1207,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Latitude = 31300,
 
         /// <summary>
-        /// Longitude.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Longitude. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1227,7 +1227,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LineOfSight = 31500,
 
         /// <summary>
-        /// X.  type: Unsigned Integer.  length: 32.  units: meters.
+        /// X. type: Unsigned Integer.  length: 32.  units: meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1237,7 +1237,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         X_31510 = 31510,
 
         /// <summary>
-        /// Y.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// Y. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1247,7 +1247,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Y_31520 = 31520,
 
         /// <summary>
-        /// Z.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// Z. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1257,7 +1257,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Z_31530 = 31530,
 
         /// <summary>
-        /// Altitude.  type: Integer.  length: 32.  units: Meters.
+        /// Altitude. type: Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1267,7 +1267,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Altitude = 31600,
 
         /// <summary>
-        /// Destination Latitude.  type: Integer.  length: 32.  units: (10000th) Degrees.
+        /// Destination Latitude. type: Integer.  length: 32.  units: (10000th) Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1277,7 +1277,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DestinationLatitude = 31700,
 
         /// <summary>
-        /// Destination Longitude.  type: Integer.  length: 32.  units: (10000th) Degrees.
+        /// Destination Longitude. type: Integer.  length: 32.  units: (10000th) Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1287,7 +1287,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DestinationLongitude = 31800,
 
         /// <summary>
-        /// Destination Altitude.  type: Integer.  length: 32.  units: Meters.
+        /// Destination Altitude. type: Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1297,7 +1297,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DestinationAltitude = 31900,
 
         /// <summary>
-        /// Orientation.  type: Variable Datum.  length: 96.  units: Radians.  range: 3-32bit Floating Point.
+        /// Orientation. type: Variable Datum.  length: 96.  units: Radians.  range: 3-32bit Floating Point.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1307,7 +1307,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Orientation = 32000,
 
         /// <summary>
-        /// Hull Heading Angle.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Hull Heading Angle. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1317,7 +1317,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         HullHeadingAngle = 32100,
 
         /// <summary>
-        /// Hull Pitch Angle.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Hull Pitch Angle. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1327,7 +1327,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         HullPitchAngle = 32200,
 
         /// <summary>
-        /// Roll Angle.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Roll Angle. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1337,7 +1337,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RollAngle = 32300,
 
         /// <summary>
-        /// X.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// X. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1347,7 +1347,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         X_32500 = 32500,
 
         /// <summary>
-        /// Y.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Y. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1357,7 +1357,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Y_32600 = 32600,
 
         /// <summary>
-        /// Z.  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Z. type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1467,7 +1467,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MineRollersAttached = 33720,
 
         /// <summary>
-        /// Tank Turret Azimuth.  units: Degrees Rel 2 lon.
+        /// Tank Turret Azimuth. units: Degrees Rel 2 lon.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1487,7 +1487,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         FailuresAndMalfunctions = 34000,
 
         /// <summary>
-        /// Age.  units: Miles.
+        /// Age. units: Miles.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1567,7 +1567,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Velocity = 36000,
 
         /// <summary>
-        /// X-velocity.  units: Meters/second.
+        /// X-velocity. units: Meters/second.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1577,7 +1577,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         XVelocity = 36100,
 
         /// <summary>
-        /// Y-velocity.  units: Meters/second.
+        /// Y-velocity. units: Meters/second.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1587,7 +1587,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         YVelocity = 36200,
 
         /// <summary>
-        /// Z-velocity.  units: Meters/second.
+        /// Z-velocity. units: Meters/second.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1597,7 +1597,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ZVelocity = 36300,
 
         /// <summary>
-        /// Speed.  type: Floating Point.  length: 32.  units: Meters/second.
+        /// Speed. type: Floating Point.  length: 32.  units: Meters/second.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1657,7 +1657,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EngineStatus = 38100,
 
         /// <summary>
-        /// Primary Target Line (PTL).  type: Unsigned Integer.  length: 32.  units: Degrees.
+        /// Primary Target Line (PTL). type: Unsigned Integer.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1677,7 +1677,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Exercise = 40000,
 
         /// <summary>
-        /// Exercise State.  type: Variable Record.  length: 64.
+        /// Exercise State. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1687,7 +1687,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseState = 40010,
 
         /// <summary>
-        /// Restart/Refresh.  type: Unsigned Integer.  length: 32.  range: 0 Undefined, 1 Restart.
+        /// Restart/Refresh. type: Unsigned Integer.  length: 32.  range: 0 Undefined, 1 Restart.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1697,7 +1697,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RestartRefresh = 40015,
 
         /// <summary>
-        /// AFATDS File Name.  type: Variable Record.  range: 1..40 ASCII Characters.
+        /// AFATDS File Name. type: Variable Record.  range: 1..40 ASCII Characters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1707,7 +1707,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AFATDSFileName = 40020,
 
         /// <summary>
-        /// Terrain Database.  type: Unsigned Integer.  length: 32.
+        /// Terrain Database. type: Unsigned Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1717,7 +1717,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TerrainDatabase = 41000,
 
         /// <summary>
-        /// 41001.  type: 41001.  length: 41001.  units: 41001.  range: 41001.
+        /// 41001. type: 41001.  length: 41001.  units: 41001.  range: 41001.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1767,7 +1767,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MissionRequestTimeStamp = 42300,
 
         /// <summary>
-        /// Exercise Description.  type: String.
+        /// Exercise Description. type: String.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1777,7 +1777,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseDescription = 43000,
 
         /// <summary>
-        /// Name.  type: String.
+        /// Name. type: String.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1787,7 +1787,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Name = 43100,
 
         /// <summary>
-        /// Entities.  type: Integer.
+        /// Entities. type: Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1807,7 +1807,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Version = 43300,
 
         /// <summary>
-        /// Guise Mode.  type: Unsigned Integer.  length: 32.
+        /// Guise Mode. type: Unsigned Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1817,7 +1817,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         GuiseMode = 43410,
 
         /// <summary>
-        /// Simulation Application Active Status.  type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
+        /// Simulation Application Active Status. type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1827,7 +1827,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationApplicationActiveStatus = 43420,
 
         /// <summary>
-        /// Simulation Application Role Record.  type: Variable Record.  length: 64.
+        /// Simulation Application Role Record. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1837,7 +1837,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationApplicationRoleRecord = 43430,
 
         /// <summary>
-        /// Simulation Application State.  type: Variable Record.  length: 64.
+        /// Simulation Application State. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1857,7 +1857,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VisualOutputMode = 44000,
 
         /// <summary>
-        /// Simulation Manager Role.  type: Variable Record.
+        /// Simulation Manager Role. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1867,7 +1867,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationManagerRole = 44100,
 
         /// <summary>
-        /// Simulation Manager Site ID.  type: Unsigned Integer.  length: 16.
+        /// Simulation Manager Site ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1877,7 +1877,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationManagerSiteID = 44110,
 
         /// <summary>
-        /// Simulation Manager Applic. ID.  type: Unsigned Integer.  length: 16.
+        /// Simulation Manager Applic. ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1887,7 +1887,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationManagerApplicID = 44120,
 
         /// <summary>
-        /// Simulation Manager Entity ID.  type: Unsigned Integer.  length: 16.
+        /// Simulation Manager Entity ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1897,7 +1897,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationManagerEntityID = 44130,
 
         /// <summary>
-        /// Simulation Manager Active Status.  type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
+        /// Simulation Manager Active Status. type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1907,7 +1907,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationManagerActiveStatus = 44140,
 
         /// <summary>
-        /// After Active Review Role.  type: Variable Record.
+        /// After Active Review Role. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1917,7 +1917,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AfterActiveReviewRole = 44200,
 
         /// <summary>
-        /// After Active Review Site ID.  type: Unsigned Integer.  length: 16.
+        /// After Active Review Site ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1927,7 +1927,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AfterActiveReviewSiteID = 44210,
 
         /// <summary>
-        /// After Active Applic. ID.  type: Unsigned Integer.  length: 16.
+        /// After Active Applic. ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1937,7 +1937,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AfterActiveApplicID = 44220,
 
         /// <summary>
-        /// After Active Review Entity ID.  type: Unsigned Integer.  length: 16.
+        /// After Active Review Entity ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1947,7 +1947,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AfterActiveReviewEntityID = 44230,
 
         /// <summary>
-        /// After Active Review Active Status.  type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
+        /// After Active Review Active Status. type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1957,7 +1957,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AfterActiveReviewActiveStatus = 44240,
 
         /// <summary>
-        /// Exercise Logger Role.  type: Variable Record.
+        /// Exercise Logger Role. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1967,7 +1967,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseLoggerRole = 44300,
 
         /// <summary>
-        /// Exercise Logger Site ID.  type: Unsigned Integer.  length: 16.
+        /// Exercise Logger Site ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1977,7 +1977,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseLoggerSiteID = 44310,
 
         /// <summary>
-        /// Exercise Logger Applic. ID.  type: Unsigned Integer.  length: 16.
+        /// Exercise Logger Applic. ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1987,7 +1987,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseLoggerApplicID = 44320,
 
         /// <summary>
-        /// Exercise Entity ID.  type: Unsigned Integer.  length: 16.
+        /// Exercise Entity ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -1997,7 +1997,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseEntityID = 44330,
 
         /// <summary>
-        /// Exercise Logger Active Status.  type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
+        /// Exercise Logger Active Status. type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2007,7 +2007,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseLoggerActiveStatus = 44340,
 
         /// <summary>
-        /// Synthetic Environment Manager Role.  type: Variable Record.
+        /// Synthetic Environment Manager Role. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2017,7 +2017,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SyntheticEnvironmentManagerRole = 44400,
 
         /// <summary>
-        /// Synthetic Environment Manager Site ID.  type: Unsigned Integer.  length: 16.
+        /// Synthetic Environment Manager Site ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2027,7 +2027,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SyntheticEnvironmentManagerSiteID = 44410,
 
         /// <summary>
-        /// Synthetic Environment Manager Applic. ID.  type: Unsigned Integer.  length: 16.
+        /// Synthetic Environment Manager Applic. ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2037,7 +2037,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SyntheticEnvironmentManagerApplicID = 44420,
 
         /// <summary>
-        /// Synthetic Environment Manager Entity ID.  type: Unsigned Integer.  length: 16.
+        /// Synthetic Environment Manager Entity ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2047,7 +2047,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SyntheticEnvironmentManagerEntityID = 44430,
 
         /// <summary>
-        /// Synthetic Environment Manager Active Status.  type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
+        /// Synthetic Environment Manager Active Status. type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2057,7 +2057,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SyntheticEnvironmentManagerActiveStatus = 44440,
 
         /// <summary>
-        /// SIMNET-DIS Translator Role.  type: Variable Record.
+        /// SIMNET-DIS Translator Role. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2067,7 +2067,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SIMNETDISTranslatorRole = 44500,
 
         /// <summary>
-        /// SIMNET-DIS Translator Site ID.  type: Unsigned Integer.  length: 16.
+        /// SIMNET-DIS Translator Site ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2077,7 +2077,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SIMNETDISTranslatorSiteID = 44510,
 
         /// <summary>
-        /// SIMNET-DIS Translator Applic. ID.  type: Unsigned Integer.  length: 16.
+        /// SIMNET-DIS Translator Applic. ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2087,7 +2087,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SIMNETDISTranslatorApplicID = 44520,
 
         /// <summary>
-        /// SIMNET-DIS Translator Entity ID.  type: Unsigned Integer.  length: 16.
+        /// SIMNET-DIS Translator Entity ID. type: Unsigned Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2097,7 +2097,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SIMNETDISTranslatorEntityID = 44530,
 
         /// <summary>
-        /// SIMNET-DIS Translator Active Status.  type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
+        /// SIMNET-DIS Translator Active Status. type: Unsigned Integer.  length: 16.  range: 0 Backup, 1 Primary.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2107,7 +2107,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SIMNETDISTranslatorActiveStatus = 44540,
 
         /// <summary>
-        /// Application Rate.  type: Floating point.  length: 32.
+        /// Application Rate. type: Floating point.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2117,7 +2117,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ApplicationRate = 45000,
 
         /// <summary>
-        /// Application Time.  type: Clock Time Record.  length: 64.  range: See IEEE Std1278.1-1995 section 5.2.8.
+        /// Application Time. type: Clock Time Record.  length: 64.  range: See IEEE Std1278.1-1995 section 5.2.8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2127,7 +2127,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ApplicationTime = 45005,
 
         /// <summary>
-        /// Application Timestep.  type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
+        /// Application Timestep. type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2137,7 +2137,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ApplicationTimestep = 45010,
 
         /// <summary>
-        /// Feedback Time.  type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
+        /// Feedback Time. type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2147,7 +2147,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         FeedbackTime = 45020,
 
         /// <summary>
-        /// Simulation Rate.  type: Floating Point.  length: 32.
+        /// Simulation Rate. type: Floating Point.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2157,7 +2157,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationRate = 45030,
 
         /// <summary>
-        /// Simulation Time.  type: Clock Time Record.  length: 64.  range: See IEEE Std 1278.1-1995 section 5.2.8.
+        /// Simulation Time. type: Clock Time Record.  length: 64.  range: See IEEE Std 1278.1-1995 section 5.2.8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2167,7 +2167,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationTime = 45040,
 
         /// <summary>
-        /// Simulation Timestep.  type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
+        /// Simulation Timestep. type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2177,7 +2177,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SimulationTimestep = 45050,
 
         /// <summary>
-        /// Time Interval.  type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
+        /// Time Interval. type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2187,7 +2187,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TimeInterval = 45060,
 
         /// <summary>
-        /// Time Latency.  type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
+        /// Time Latency. type: Timestamp.  length: 32.  range: See IEEE Std 1278.1-1995 section 5.2.31.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2197,7 +2197,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TimeLatency = 45070,
 
         /// <summary>
-        /// Time Scheme.  type: Unsigned Integer.  length: 32.  range: 1 Real time, 2 Scaled time, 3 Scaled and stepped time.
+        /// Time Scheme. type: Unsigned Integer.  length: 32.  range: 1 Real time, 2 Scaled time, 3 Scaled and stepped time.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2207,7 +2207,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         TimeScheme = 45080,
 
         /// <summary>
-        /// Exercise Elapsed Time.  type: Unsigned integer.  length: 32.  units: Seconds.  range: Time since exercise started (takes into account exercise pauses and scaled exercise time).
+        /// Exercise Elapsed Time. type: Unsigned integer.  length: 32.  units: Seconds.  range: Time since exercise started
+        /// (takes into account exercise pauses and scaled exercise time).
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2217,7 +2218,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         ExerciseElapsedTime = 46000,
 
         /// <summary>
-        /// Elapsed Time.  type: Unsigned integer.  length: 32.  units: Seconds.  range: Time since exercise started (real time, does not take into account exercise pauses and scaled exercise time).
+        /// Elapsed Time. type: Unsigned integer.  length: 32.  units: Seconds.  range: Time since exercise started (real time,
+        /// does not take into account exercise pauses and scaled exercise time).
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2247,7 +2249,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         Weather = 51000,
 
         /// <summary>
-        /// Weather Condition.  type: Unsigned Integer.  length: 32.  units: N/A.  range: 0 = Clear, 1 = Cloudy, 2 = Overcast, 3 = Foggy, 4 = Raining.
+        /// Weather Condition. type: Unsigned Integer.  length: 32.  units: N/A.  range: 0 = Clear, 1 = Cloudy, 2 = Overcast,
+        /// 3 = Foggy, 4 = Raining.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2267,7 +2270,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ThermalCondition = 51100,
 
         /// <summary>
-        /// Thermal Visibility.  type: Floating Point.  length: 32.  units: Meters.
+        /// Thermal Visibility. type: Floating Point.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2277,7 +2280,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ThermalVisibility = 51110,
 
         /// <summary>
-        /// Thermal Visibility.  type: Unsigned integer.  length: 32.  units: Meters.
+        /// Thermal Visibility. type: Unsigned integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2297,7 +2300,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Time = 52000,
 
         /// <summary>
-        /// Time.  type: String.  length: 56.  range: Format HHMMSS.
+        /// Time. type: String.  length: 56.  range: Format HHMMSS.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2407,7 +2410,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TimeZone = 52360,
 
         /// <summary>
-        /// Time Rate.  type: Integer.  length: 32.  range: 1000 * Ratio (Simulation Time / Wall Clock Time).
+        /// Time Rate. type: Integer.  length: 32.  range: 1000 * Ratio (Simulation Time / Wall Clock Time).
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2417,7 +2420,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         TimeRate = 52370,
 
         /// <summary>
-        /// The number of simulation seconds since the start of the exercise (simulation time).  type: Integer.  length: 32.  units: Seconds.
+        /// The number of simulation seconds since the start of the exercise (simulation time). type: Integer.  length: 32.
+        ///  units: Seconds.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2527,7 +2531,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SunsetSecond = 52530,
 
         /// <summary>
-        /// 52531.  type: 52531.  length: 52531.  units: 52531.  range: 52531.
+        /// 52531. type: 52531.  length: 52531.  units: 52531.  range: 52531.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2547,7 +2551,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Date = 52600,
 
         /// <summary>
-        /// Date (European).  type: String.  length: 72.  range: Format DDMMYYYY.
+        /// Date (European). type: String.  length: 72.  range: Format DDMMYYYY.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2557,7 +2561,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DateEuropean = 52601,
 
         /// <summary>
-        /// Date (US).  type: String.  length: 72.  range: Format MMDDYYYY.
+        /// Date (US). type: String.  length: 72.  range: Format MMDDYYYY.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2637,7 +2641,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Visibility = 53100,
 
         /// <summary>
-        /// Base Altitude.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// Base Altitude. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2647,7 +2651,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BaseAltitude = 53200,
 
         /// <summary>
-        /// Base Altitude.  units: Feet.
+        /// Base Altitude. units: Feet.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2657,7 +2661,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BaseAltitude_53250 = 53250,
 
         /// <summary>
-        /// Ceiling.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// Ceiling. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2667,7 +2671,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Ceiling = 53300,
 
         /// <summary>
-        /// Ceiling.  units: Feet.
+        /// Ceiling. units: Feet.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2687,7 +2691,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Characteristics = 53400,
 
         /// <summary>
-        /// Concentration Length.  type: Floating Point.  length: 32.  units: milligrams/meterCaret2.
+        /// Concentration Length. type: Floating Point.  length: 32.  units: milligrams/meterCaret2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2697,7 +2701,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ConcentrationLength = 53410,
 
         /// <summary>
-        /// Transmittance.  type: Floating Point.  length: 32.
+        /// Transmittance. type: Floating Point.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2707,7 +2711,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Transmittance = 53420,
 
         /// <summary>
-        /// Radiance.  type: Floating Point.  length: 32.  units: microwatts/ centimeterCaret2/ steradian.
+        /// Radiance. type: Floating Point.  length: 32.  units: microwatts/ centimeterCaret2/ steradian.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2717,7 +2721,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Radiance = 53430,
 
         /// <summary>
-        /// Precipitation.  type: Boolean.  length: 32.
+        /// Precipitation. type: Boolean.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2727,7 +2731,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Precipitation = 54000,
 
         /// <summary>
-        /// Rain.  type: Boolean.
+        /// Rain. type: Boolean.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2737,7 +2741,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Rain = 54100,
 
         /// <summary>
-        /// Fog.  type: Boolean.
+        /// Fog. type: Boolean.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2747,7 +2751,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Fog = 55000,
 
         /// <summary>
-        /// Visibility.  units: Meters.
+        /// Visibility. units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2757,7 +2761,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Visibility_55100 = 55100,
 
         /// <summary>
-        /// Visibility.  type: Unsigned integer.  length: 32.  units: Meters.
+        /// Visibility. type: Unsigned integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2767,7 +2771,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Visibility_55101 = 55101,
 
         /// <summary>
-        /// Visibility.  units: Miles.
+        /// Visibility. units: Miles.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2817,7 +2821,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TransitionRange = 55410,
 
         /// <summary>
-        /// Bottom.  units: Meters.
+        /// Bottom. units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2827,7 +2831,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Bottom = 55420,
 
         /// <summary>
-        /// Bottom.  units: Feet.
+        /// Bottom. units: Feet.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2837,7 +2841,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Bottom_55425 = 55425,
 
         /// <summary>
-        /// Ceiling.  units: Meters.
+        /// Ceiling. units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2847,7 +2851,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Ceiling_55430 = 55430,
 
         /// <summary>
-        /// Ceiling.  units: Feet.
+        /// Ceiling. units: Feet.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2877,7 +2881,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Sun = 56100,
 
         /// <summary>
-        /// Sun Visible.  type: Unsigned integer.  length: 32.  units: N/A.  range: 0 Not visible, 1 Visible.
+        /// Sun Visible. type: Unsigned integer.  length: 32.  units: N/A.  range: 0 Not visible, 1 Visible.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2897,7 +2901,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Position_56110 = 56110,
 
         /// <summary>
-        /// Sun Position Elevation, Degrees.  type: Floating Point.  length: 32.  units: Degrees.
+        /// Sun Position Elevation, Degrees. type: Floating Point.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2917,7 +2921,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PositionAzimuth = 56120,
 
         /// <summary>
-        /// Sun Position Azimuth, Degrees.  type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
+        /// Sun Position Azimuth, Degrees. type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2957,7 +2961,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Moon = 56200,
 
         /// <summary>
-        /// Moon Visible.  type: Unsigned integer.  length: 32.  units: N/A.  range: 0 Not visible, 1 Visible.
+        /// Moon Visible. type: Unsigned integer.  length: 32.  units: N/A.  range: 0 Not visible, 1 Visible.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -2987,7 +2991,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PositionAzimuth_56220 = 56220,
 
         /// <summary>
-        /// Moon Position Azimuth, Degrees.  type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
+        /// Moon Position Azimuth, Degrees. type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3007,7 +3011,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PositionElevation_56230 = 56230,
 
         /// <summary>
-        /// Moon Position Elevation, Degrees.  type: Floating Point.  length: 32.  units: Degrees.
+        /// Moon Position Elevation, Degrees. type: Floating Point.  length: 32.  units: Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3117,7 +3121,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Speed_57410 = 57410,
 
         /// <summary>
-        /// Wind Speed, Knots.  type: Floating Point.  length: 32.  units: Knots.
+        /// Wind Speed, Knots. type: Floating Point.  length: 32.  units: Knots.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3127,7 +3131,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WindSpeedKnots = 57411,
 
         /// <summary>
-        /// Wind Direction.  type: Floating Point.  length: 32.  units: Radians.  range: Relative to True North.
+        /// Wind Direction. type: Floating Point.  length: 32.  units: Radians.  range: Relative to True North.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3137,7 +3141,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WindDirection = 57420,
 
         /// <summary>
-        /// Wind Direction, Degrees.  type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
+        /// Wind Direction, Degrees. type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3157,7 +3161,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Rainsoak = 57500,
 
         /// <summary>
-        /// Tide Speed.  type: Floating Point.  length: 32.  units: Meters/second.
+        /// Tide Speed. type: Floating Point.  length: 32.  units: Meters/second.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3167,7 +3171,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TideSpeed = 57610,
 
         /// <summary>
-        /// Tide Speed, Knots.  type: Floating Point.  length: 32.  units: Knots.
+        /// Tide Speed, Knots. type: Floating Point.  length: 32.  units: Knots.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3177,7 +3181,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TideSpeedKnots = 57611,
 
         /// <summary>
-        /// Tide Direction.  type: Floating Point.  length: 32.  units: Radians.  range: Relative to True North.
+        /// Tide Direction. type: Floating Point.  length: 32.  units: Radians.  range: Relative to True North.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3187,7 +3191,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TideDirection = 57620,
 
         /// <summary>
-        /// Tide Direction, Degrees.  type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
+        /// Tide Direction, Degrees. type: Floating Point.  length: 32.  units: Degrees.  range: Relative to True North.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3197,7 +3201,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TideDirectionDegrees = 57621,
 
         /// <summary>
-        /// Haze.  type: Boolean.
+        /// Haze. type: Boolean.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3207,7 +3211,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Haze = 58000,
 
         /// <summary>
-        /// Visibility.  units: Meters.
+        /// Visibility. units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3217,7 +3221,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Visibility_58100 = 58100,
 
         /// <summary>
-        /// Visibility.  units: Miles.
+        /// Visibility. units: Miles.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3237,7 +3241,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Density_58200 = 58200,
 
         /// <summary>
-        /// Ceiling.  units: Meters.
+        /// Ceiling. units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3247,7 +3251,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Ceiling_58430 = 58430,
 
         /// <summary>
-        /// Ceiling.  units: Feet.
+        /// Ceiling. units: Feet.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3267,7 +3271,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ContaminantsAndObscurants = 59000,
 
         /// <summary>
-        /// Contaminant/Obscurant Type.  type: Unsigned Integer.  length: 32.
+        /// Contaminant/Obscurant Type. type: Unsigned Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3277,7 +3281,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ContaminantObscurantType = 59100,
 
         /// <summary>
-        /// Persistence.  type: Enumeration.  length: 8.  range: 0 Neat, 1 Dry, 2 Thickened.
+        /// Persistence. type: Enumeration.  length: 8.  range: 0 Neat, 1 Dry, 2 Thickened.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3287,7 +3291,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Persistence = 59110,
 
         /// <summary>
-        /// Chemical Dosage.  type: Floating Point.  length: 32.  units: milligrams/meter?/minute.
+        /// Chemical Dosage. type: Floating Point.  length: 32.  units: milligrams/meter?/minute.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3297,7 +3301,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ChemicalDosage = 59115,
 
         /// <summary>
-        /// Chemical Air Concentration.  type: Floating Point.  length: 32.  units: milligrams/meter?.
+        /// Chemical Air Concentration. type: Floating Point.  length: 32.  units: milligrams/meter?.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3307,7 +3311,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ChemicalAirConcentration = 59120,
 
         /// <summary>
-        /// Chemical Ground Deposition.  type: Floating Point.  length: 32.  units: milligrams/meterCaret2.
+        /// Chemical Ground Deposition. type: Floating Point.  length: 32.  units: milligrams/meterCaret2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3317,7 +3321,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ChemicalGroundDeposition = 59125,
 
         /// <summary>
-        /// Chemical Maximum Ground Deposition.  type: Floating Point.  length: 32.  units: milligrams/meterCaret2.
+        /// Chemical Maximum Ground Deposition. type: Floating Point.  length: 32.  units: milligrams/meterCaret2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3327,7 +3331,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ChemicalMaximumGroundDeposition = 59130,
 
         /// <summary>
-        /// Chemical Dosage Threshold.  type: Floating Point.  length: 32.  units: milligram/meter?/minute.
+        /// Chemical Dosage Threshold. type: Floating Point.  length: 32.  units: milligram/meter?/minute.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3337,7 +3341,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ChemicalDosageThreshold = 59135,
 
         /// <summary>
-        /// Biological Dosage.  type: Floating Point.  length: 32.  units: particles/liter of air/minute.
+        /// Biological Dosage. type: Floating Point.  length: 32.  units: particles/liter of air/minute.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3347,7 +3351,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BiologicalDosage = 59140,
 
         /// <summary>
-        /// Biological Air Concentration.  type: Floating Point.  length: 32.  units: particles/liter of air.
+        /// Biological Air Concentration. type: Floating Point.  length: 32.  units: particles/liter of air.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3357,7 +3361,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BiologicalAirConcentration = 59145,
 
         /// <summary>
-        /// Biological Dosage Threshold.  type: Floating Point.  length: 32.  units: particles/liter of air/minute.
+        /// Biological Dosage Threshold. type: Floating Point.  length: 32.  units: particles/liter of air/minute.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3367,7 +3371,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         BiologicalDosageThreshold = 59150,
 
         /// <summary>
-        /// Biological Binned Particle Count.  type: Enumeration.  length: 8.  range: 1 Low (.5-2), 2 Detection (2-.10), 3 High (10-15).
+        /// Biological Binned Particle Count. type: Enumeration.  length: 8.  range: 1 Low (.5-2), 2 Detection (2-.10), 3 High
+        /// (10-15).
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3377,7 +3382,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BiologicalBinnedParticleCount = 59155,
 
         /// <summary>
-        /// Radiological Dosage.  type: Floating Point.  length: 32.
+        /// Radiological Dosage. type: Floating Point.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3437,7 +3442,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlphaIdentification = 61300,
 
         /// <summary>
-        /// 61301.  type: 61301.  length: 61301.  units: 61301.  range: 61301.
+        /// 61301. type: 61301.  length: 61301.  units: 61301.  range: 61301.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3457,7 +3462,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioIdentification = 61400,
 
         /// <summary>
-        /// 61401.  type: 61401.  length: 61401.  units: 61401.  range: 61401.
+        /// 61401. type: 61401.  length: 61401.  units: 61401.  range: 61401.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3507,7 +3512,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioCommunicationsStatus = 62100,
 
         /// <summary>
-        /// Stationary Radio Transmitters Default Time.  type: Unsigned Integer.
+        /// Stationary Radio Transmitters Default Time. type: Unsigned Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3517,7 +3522,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         StationaryRadioTransmittersDefaultTime = 62200,
 
         /// <summary>
-        /// Moving Radio Transmitters Default Time.  type: Unsigned Integer.
+        /// Moving Radio Transmitters Default Time. type: Unsigned Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3547,7 +3552,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MovingRadioSignalDefaultTime = 62500,
 
         /// <summary>
-        /// Radio Initialization Transec Security Key.  type: Variable Record.
+        /// Radio Initialization Transec Security Key. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3557,7 +3562,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationTransecSecurityKey = 63101,
 
         /// <summary>
-        /// Radio Initialization Internal Noise Level.  type: Variable Record.
+        /// Radio Initialization Internal Noise Level. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3567,7 +3572,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationInternalNoiseLevel = 63102,
 
         /// <summary>
-        /// Radio Initialization Squelch Threshold.  type: Variable Record.
+        /// Radio Initialization Squelch Threshold. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3577,7 +3582,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationSquelchThreshold = 63103,
 
         /// <summary>
-        /// Radio Initialization Antenna Location.  type: Variable Record.
+        /// Radio Initialization Antenna Location. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3587,7 +3592,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationAntennaLocation = 63104,
 
         /// <summary>
-        /// Radio Initialization Antenna Pattern Type.  type: Variable Record.
+        /// Radio Initialization Antenna Pattern Type. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3597,7 +3602,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationAntennaPatternType = 63105,
 
         /// <summary>
-        /// Radio Initialization Antenna Pattern Length.  type: Variable Record.
+        /// Radio Initialization Antenna Pattern Length. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3607,7 +3612,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationAntennaPatternLength = 63106,
 
         /// <summary>
-        /// Radio Initialization Beam Definition.  type: Variable Record.
+        /// Radio Initialization Beam Definition. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3617,7 +3622,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationBeamDefinition = 63107,
 
         /// <summary>
-        /// Radio Initialization Transmit Heartbeat Time.  type: Variable Record.
+        /// Radio Initialization Transmit Heartbeat Time. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3637,7 +3642,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioInitializationTransmitDistanceThresholdVariableRecord = 63109,
 
         /// <summary>
-        /// Radio Channel Initialization Lockout ID.  type: Variable Record.
+        /// Radio Channel Initialization Lockout ID. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3647,7 +3652,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioChannelInitializationLockoutID = 63110,
 
         /// <summary>
-        /// Radio Channel Initialization Hopset ID.  type: Variable Record.
+        /// Radio Channel Initialization Hopset ID. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3657,7 +3662,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioChannelInitializationHopsetID = 63111,
 
         /// <summary>
-        /// Radio Channel Initialization Preset Frequency.  type: Variable Record.
+        /// Radio Channel Initialization Preset Frequency. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3667,7 +3672,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioChannelInitializationPresetFrequency = 63112,
 
         /// <summary>
-        /// Radio Channel Initialization Frequency Sync Time.  type: Variable Record.
+        /// Radio Channel Initialization Frequency Sync Time. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3677,7 +3682,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioChannelInitializationFrequencySyncTime = 63113,
 
         /// <summary>
-        /// Radio Channel Initialization Comsec Key.  type: Variable Record.
+        /// Radio Channel Initialization Comsec Key. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3687,7 +3692,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioChannelInitializationComsecKey = 63114,
 
         /// <summary>
-        /// Radio Channel Initialization Alpha.  type: Variable Record.
+        /// Radio Channel Initialization Alpha. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3717,7 +3722,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningAlgorithmDRA = 71000,
 
         /// <summary>
-        /// DRA Location Threshold.  type: Unsigned Integer.  length: 32.
+        /// DRA Location Threshold. type: Unsigned Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3797,7 +3802,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         InteroperabilityMode = 73000,
 
         /// <summary>
-        /// SIMNET Data Collection.  type: Variable Record.
+        /// SIMNET Data Collection. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -3847,7 +3852,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ArticulatedParts = 90000,
 
         /// <summary>
-        /// 90001.  type: 90001.  length: 90001.  units: 90001.  range: 90001.
+        /// 90001. type: 90001.  length: 90001.  units: 90001.  range: 90001.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4167,7 +4172,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TimeOfDayScene = 100058,
 
         /// <summary>
-        /// Latitude-North (Location of weather cell).  type: Unsigned Integer.
+        /// Latitude-North (Location of weather cell). type: Unsigned Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4177,7 +4182,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LatitudeNorthLocationOfWeatherCell = 100061,
 
         /// <summary>
-        /// Longitude-East (Location of weather cell).  type: Unsigned integer.
+        /// Longitude-East (Location of weather cell). type: Unsigned integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4187,7 +4192,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LongitudeEastLocationOfWeatherCell = 100063,
 
         /// <summary>
-        /// Tactical Driver Status.  type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
+        /// Tactical Driver Status. type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4207,7 +4212,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SonarSystemStatus = 100100,
 
         /// <summary>
-        /// Upper latitude.  type: float.  length: 32 bits.  units: radians.  range: -pi/2, +p1/2.
+        /// Upper latitude. type: float.  length: 32 bits.  units: radians.  range: -pi/2, +p1/2.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4217,7 +4222,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         UpperLatitude = 100161,
 
         /// <summary>
-        /// Latitude-South (Location of weather cell).  type: Unsigned Integer.
+        /// Latitude-South (Location of weather cell). type: Unsigned Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4227,7 +4232,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LatitudeSouthLocationOfWeatherCell = 100162,
 
         /// <summary>
-        /// Western longitude.  type: float.  length: 32 bits.  units: radians.  range: -pi, +pi.
+        /// Western longitude. type: float.  length: 32 bits.  units: radians.  range: -pi, +pi.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4237,7 +4242,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WesternLongitude = 100163,
 
         /// <summary>
-        /// Longitude-West (location of weather cell).  type: Unsigned Integer.
+        /// Longitude-West (location of weather cell). type: Unsigned Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4247,7 +4252,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LongitudeWestLocationOfWeatherCell = 100164,
 
         /// <summary>
-        /// Accomplished accept.  type: Boolean.  range: 0 Accept, 1 Non-accept.
+        /// Accomplished accept. type: Boolean.  range: 0 Accept, 1 Non-accept.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4257,7 +4262,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AccomplishedAccept = 100165,
 
         /// <summary>
-        /// CD ROM Number (Disk ID for terrain).  type: Integer.
+        /// CD ROM Number (Disk ID for terrain). type: Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4267,7 +4272,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CDROMNumberDiskIDForTerrain = 100165,
 
         /// <summary>
-        /// DTED disk ID.  type: Unsigned Integer.  length: 32 bits.
+        /// DTED disk ID. type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4277,7 +4282,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DTEDDiskID = 100166,
 
         /// <summary>
-        /// Altitude.  type: Floating point.
+        /// Altitude. type: Floating point.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4287,7 +4292,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Altitude_100167 = 100167,
 
         /// <summary>
-        /// Tactical System Status.  type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
+        /// Tactical System Status. type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4297,7 +4302,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TacticalSystemStatus = 100169,
 
         /// <summary>
-        /// JTIDS Status.  type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
+        /// JTIDS Status. type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4307,7 +4312,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         JTIDSStatus = 100170,
 
         /// <summary>
-        /// TADIL-J Status.  type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
+        /// TADIL-J Status. type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4317,7 +4322,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TADILJStatus = 100171,
 
         /// <summary>
-        /// DSDD Status.  type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
+        /// DSDD Status. type: Unsigned Integer.  range: 0 Operational, 1 Non-operational, 2 Unknown, 3 Not available.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4337,7 +4342,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponSystemStatus = 100200,
 
         /// <summary>
-        /// Subsystem status.  type: Boolean.  length: 32 bits.
+        /// Subsystem status. type: Boolean.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4347,7 +4352,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SubsystemStatus = 100205,
 
         /// <summary>
-        /// Number of interceptors fired.  type: Unsigned Integer.  length: 32 bits.
+        /// Number of interceptors fired. type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4357,7 +4362,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NumberOfInterceptorsFired = 100206,
 
         /// <summary>
-        /// Number of interceptor detonations.  type: Unsigned Integer.  length: 32 bits.
+        /// Number of interceptor detonations. type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4367,7 +4372,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NumberOfInterceptorDetonations = 100207,
 
         /// <summary>
-        /// Number of message buffers dropped.  type: Unsigned Integer.  length: 32 bits.
+        /// Number of message buffers dropped. type: Unsigned Integer.  length: 32 bits.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4377,7 +4382,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         NumberOfMessageBuffersDropped = 100208,
 
         /// <summary>
-        /// Satellite sensor background (year, day).  type: Unsigned Integer, Unsigned Integer.  length: 16 bits, 16 bits.  units: years, Julian days.  range: 1-366.
+        /// Satellite sensor background (year, day). type: Unsigned Integer, Unsigned Integer.  length: 16 bits, 16 bits.
+        /// units: years, Julian days.  range: 1-366.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4387,7 +4393,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         SatelliteSensorBackgroundYearDay = 100213,
 
         /// <summary>
-        /// Satellite sensor background (hour, minute).  type: Unsigned Integer, Unsigned Integer.  length: 16 bits, 16 bits.  units: hours, minutes.  range: 0-23,0-59.
+        /// Satellite sensor background (hour, minute). type: Unsigned Integer, Unsigned Integer.  length: 16 bits, 16 bits.
+        ///  units: hours, minutes.  range: 0-23,0-59.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4397,7 +4404,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SatelliteSensorBackgroundHourMinute = 100214,
 
         /// <summary>
-        /// Script Number.  type: Integer.  length: 32.
+        /// Script Number. type: Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4437,7 +4444,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTrackIdentityData = 100500,
 
         /// <summary>
-        /// Entity for Track Event.  type: Variable.  length: 48.  range: Entity being tracked.
+        /// Entity for Track Event. type: Variable.  length: 48.  range: Entity being tracked.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4447,7 +4454,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityForTrackEvent = 100510,
 
         /// <summary>
-        /// IFF (Friend-Foe) status.  type: Unsigned Integer.  length: 32.  range: 0 Unidentified / Unknown, 1 Perceived Friendly, 2 Perceived Hostile.
+        /// IFF (Friend-Foe) status. type: Unsigned Integer.  length: 32.  range: 0 Unidentified / Unknown, 1 Perceived Friendly,
+        /// 2 Perceived Hostile.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4467,7 +4475,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EngagementData = 100600,
 
         /// <summary>
-        /// Target Latitude.  type: Integer.  length: 32.  units: (10000th) Degrees.
+        /// Target Latitude. type: Integer.  length: 32.  units: (10000th) Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4477,7 +4485,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TargetLatitude = 100610,
 
         /// <summary>
-        /// Target Longitude.  type: Integer.  length: 32.  units: (10000th) Degrees.
+        /// Target Longitude. type: Integer.  length: 32.  units: (10000th) Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4487,7 +4495,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TargetLongitude = 100620,
 
         /// <summary>
-        /// Area of Interest (Ground Impact Circle) Center Latitude.  type: Integer.  length: 32.  units: (10000th) Degrees.
+        /// Area of Interest (Ground Impact Circle) Center Latitude. type: Integer.  length: 32.  units: (10000th) Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4497,7 +4505,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AreaOfInterestGroundImpactCircleCenterLatitude = 100631,
 
         /// <summary>
-        /// Area of Interest (Ground Impact Circle) Center Longitude.  type: Integer.  length: 32.  units: (10000th) Degrees.
+        /// Area of Interest (Ground Impact Circle) Center Longitude. type: Integer.  length: 32.  units: (10000th) Degrees.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4507,7 +4515,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AreaOfInterestGroundImpactCircleCenterLongitude = 100632,
 
         /// <summary>
-        /// Area of Interest (Ground Impact Circle) Radius.  type: Unsigned Integer.  length: 32.  units: Meters.
+        /// Area of Interest (Ground Impact Circle) Radius. type: Unsigned Integer.  length: 32.  units: Meters.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4517,7 +4525,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AreaOfInterestGroundImpactCircleRadius = 100633,
 
         /// <summary>
-        /// Area of Interest Type.  type: Unsigned Integer.  length: 32.  range: 0 Unspecified, 1 TBM Defense.
+        /// Area of Interest Type. type: Unsigned Integer.  length: 32.  range: 0 Unspecified, 1 TBM Defense.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4527,7 +4535,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AreaOfInterestType = 100634,
 
         /// <summary>
-        /// Target Aggregate ID.  type: Variable.  length: 48.
+        /// Target Aggregate ID. type: Variable.  length: 48.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4537,7 +4545,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TargetAggregateID = 100640,
 
         /// <summary>
-        /// GIC Identification Number.  type: Unsigned Integer.  length: 32.
+        /// GIC Identification Number. type: Unsigned Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4547,7 +4555,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         GICIdentificationNumber = 100650,
 
         /// <summary>
-        /// Estimated Time of Flight to TBM Impact.  type: Floating Point.  length: 32.  range: Seconds from time in PDU header.
+        /// Estimated Time of Flight to TBM Impact. type: Floating Point.  length: 32.  range: Seconds from time in PDU header.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4557,7 +4565,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EstimatedTimeOfFlightToTBMImpact = 100660,
 
         /// <summary>
-        /// Estimated Intercept Time.  type: Floating Point.  length: 32.  range: Seconds from time in PDU header.
+        /// Estimated Intercept Time. type: Floating Point.  length: 32.  range: Seconds from time in PDU header.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4567,7 +4575,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         EstimatedInterceptTime = 100661,
 
         /// <summary>
-        /// Estimated Time of Flight to Next Waypoint.  type: Floating Point.  length: 32.  range: Seconds from time in PDU header.
+        /// Estimated Time of Flight to Next Waypoint. type: Floating Point.  length: 32.  range: Seconds from time in PDU
+        /// header.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4647,7 +4656,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         OperatorActionData = 101300,
 
         /// <summary>
-        /// ADA Engagement Mode.  type: Unsigned Integer.  length: 32.  range: 0 Air, 1 ATBM.
+        /// ADA Engagement Mode. type: Unsigned Integer.  length: 32.  range: 0 Air, 1 ATBM.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4657,7 +4666,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ADAEngagementMode = 101310,
 
         /// <summary>
-        /// ADA Shooting Status.  type: Unsigned Integer.  length: 32.  range: 0 Can not engage, 1 Can engage,.
+        /// ADA Shooting Status. type: Unsigned Integer.  length: 32.  range: 0 Can not engage, 1 Can engage,.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4667,7 +4676,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ADAShootingStatus = 101320,
 
         /// <summary>
-        /// ADA Mode.  type: Unsigned Integer.  length: 32.  range: 0 Shut down, 1 Active.
+        /// ADA Mode. type: Unsigned Integer.  length: 32.  range: 0 Shut down, 1 Active.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4677,7 +4686,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ADAMode = 101321,
 
         /// <summary>
-        /// ADA Radar Status.  type: Unsigned Integer.  length: 32.  range: 0 Off, 1 On, 2 Momentary On.
+        /// ADA Radar Status. type: Unsigned Integer.  length: 32.  range: 0 Off, 1 On, 2 Momentary On.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4687,7 +4696,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ADARadarStatus = 101330,
 
         /// <summary>
-        /// Shoot Command.  type: Unsigned Integer.  length: 32.  range: 0 Undefined, Greater than 0 Number of Shots to take.
+        /// Shoot Command. type: Unsigned Integer.  length: 32.  range: 0 Undefined, Greater than 0 Number of Shots to take.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4697,7 +4706,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ShootCommand = 101340,
 
         /// <summary>
-        /// ADA Weapon Status.  type: Unsigned Integer.  length: 32.  range: 0 None, 1 Free, 2 Tight, 3 Hold.
+        /// ADA Weapon Status. type: Unsigned Integer.  length: 32.  range: 0 None, 1 Free, 2 Tight, 3 Hold.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4707,7 +4716,8 @@ namespace OpenDis.Enumerations.SimulationManagement
         ADAWeaponStatus = 101350,
 
         /// <summary>
-        /// ADA Firing Disciple.  type: Unsigned Integer.  length: 32.  range: 0 SLS_ABT, 1 Shoot 2_ABT, 2 Lash Mode, 3 SLS_TM, 4 Shoot2_TM, 5 Default.
+        /// ADA Firing Disciple. type: Unsigned Integer.  length: 32.  range: 0 SLS_ABT, 1 Shoot 2_ABT, 2 Lash Mode, 3 SLS_TM,
+        /// 4 Shoot2_TM, 5 Default.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4717,7 +4727,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ADAFiringDisciple = 101360,
 
         /// <summary>
-        /// Order Status.  type: Unsigned Integer.  length: 32.  range: 0 Cancel Engagement, 1 Engage Assignment.
+        /// Order Status. type: Unsigned Integer.  length: 32.  range: 0 Cancel Engagement, 1 Engage Assignment.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4747,7 +4757,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TomahawkData = 101500,
 
         /// <summary>
-        /// Number of Detonations.  type: Unsigned Integer.
+        /// Number of Detonations. type: Unsigned Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4757,7 +4767,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NumberOfDetonations = 102100,
 
         /// <summary>
-        /// Number of Intercepts.  type: Unsigned Integer.
+        /// Number of Intercepts. type: Unsigned Integer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4767,7 +4777,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NumberOfIntercepts = 102200,
 
         /// <summary>
-        /// OBT Control MT-201.  type: Variable Record.  length: 64.
+        /// OBT Control MT-201. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4777,7 +4787,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         OBTControlMT201 = 200201,
 
         /// <summary>
-        /// Sensor Data MT-202.  type: Variable Record.  length: 64.
+        /// Sensor Data MT-202. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4787,7 +4797,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SensorDataMT202 = 200202,
 
         /// <summary>
-        /// Environmental Data MT-203.  type: Variable Record.  length: 64.
+        /// Environmental Data MT-203. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4797,7 +4807,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EnvironmentalDataMT203 = 200203,
 
         /// <summary>
-        /// Ownship Data MT-204.  type: Variable Record.  length: 128.
+        /// Ownship Data MT-204. type: Variable Record.  length: 128.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4807,7 +4817,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         OwnshipDataMT204 = 200204,
 
         /// <summary>
-        /// Acoustic Contact Data MT-205.  type: Variable Record.  length: 288.
+        /// Acoustic Contact Data MT-205. type: Variable Record.  length: 288.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4817,7 +4827,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AcousticContactDataMT205 = 200205,
 
         /// <summary>
-        /// Sonobuoy Data MT-207.  type: Variable Record.  length: 64.
+        /// Sonobuoy Data MT-207. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4827,7 +4837,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SonobuoyDataMT207 = 200207,
 
         /// <summary>
-        /// Sonobuoy Contact Data MT-210.  type: Variable Record.  length: 64.
+        /// Sonobuoy Contact Data MT-210. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4837,7 +4847,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SonobuoyContactDataMT210 = 200210,
 
         /// <summary>
-        /// Helo Control MT-211.  type: Variable Record.  length: 64.
+        /// Helo Control MT-211. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4847,7 +4857,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         HeloControlMT211 = 200211,
 
         /// <summary>
-        /// ESM Control Data.  type: Variable Record.  length: 96.
+        /// ESM Control Data. type: Variable Record.  length: 96.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4857,7 +4867,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ESMControlData = 200213,
 
         /// <summary>
-        /// ESM Contact Data MT-214.  type: Variable Record.  length: 192.
+        /// ESM Contact Data MT-214. type: Variable Record.  length: 192.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4867,7 +4877,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ESMContactDataMT214 = 200214,
 
         /// <summary>
-        /// ESM Emitter Data MT-215.  type: Variable Record.  length: 64.
+        /// ESM Emitter Data MT-215. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4877,7 +4887,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ESMEmitterDataMT215 = 200215,
 
         /// <summary>
-        /// Weapon Definition Data MT-217.  type: Variable Record.  length: 224.
+        /// Weapon Definition Data MT-217. type: Variable Record.  length: 224.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4887,7 +4897,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponDefinitionDataMT217 = 200216,
 
         /// <summary>
-        /// Weapon Preset Data MT-217.  type: Variable Record.  length: 256.
+        /// Weapon Preset Data MT-217. type: Variable Record.  length: 256.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4897,7 +4907,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponPresetDataMT217 = 200217,
 
         /// <summary>
-        /// OBT Control MT-301.  type: Variable Record.  length: 64.
+        /// OBT Control MT-301. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4907,7 +4917,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         OBTControlMT301 = 200301,
 
         /// <summary>
-        /// Sensor Data MT-302.  type: Variable Record.  length: 64.
+        /// Sensor Data MT-302. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4917,7 +4927,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SensorDataMT302 = 200302,
 
         /// <summary>
-        /// Environmental Data MT-303m.  type: Variable Record.  length: 64.
+        /// Environmental Data MT-303m. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4927,7 +4937,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EnvironmentalDataMT303m = 200303,
 
         /// <summary>
-        /// Ownship Data MT-304.  type: Variable Record.  length: 64.
+        /// Ownship Data MT-304. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4937,7 +4947,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         OwnshipDataMT304 = 200304,
 
         /// <summary>
-        /// Acoustic Contact Data MT-305.  type: Variable Record.  length: 288.
+        /// Acoustic Contact Data MT-305. type: Variable Record.  length: 288.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4947,7 +4957,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AcousticContactDataMT305 = 200305,
 
         /// <summary>
-        /// Sonobuoy Data MT-307.  type: Variable Record.  length: 128.
+        /// Sonobuoy Data MT-307. type: Variable Record.  length: 128.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4957,7 +4967,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SonobuoyDataMT307 = 200307,
 
         /// <summary>
-        /// Sonobuoy Contact Data MT-310.  type: Variable Record.  length: 64.
+        /// Sonobuoy Contact Data MT-310. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4967,7 +4977,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SonobuoyContactDataMT310 = 200310,
 
         /// <summary>
-        /// Helo Scenario / Equipment Status.  type: Variable Record.  length: 224.
+        /// Helo Scenario / Equipment Status. type: Variable Record.  length: 224.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4977,7 +4987,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         HeloScenarioEquipmentStatus = 200311,
 
         /// <summary>
-        /// ESM Control Data MT-313.  type: Variable Record.  length: 96.
+        /// ESM Control Data MT-313. type: Variable Record.  length: 96.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4987,7 +4997,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ESMControlDataMT313 = 200313,
 
         /// <summary>
-        /// ESM Contact Data MT-314.  type: Variable Record.  length: 192.
+        /// ESM Contact Data MT-314. type: Variable Record.  length: 192.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -4997,7 +5007,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ESMContactDataMT314 = 200314,
 
         /// <summary>
-        /// ESM Emitter Data MT-315.  type: Variable Record.  length: 64.
+        /// ESM Emitter Data MT-315. type: Variable Record.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5007,7 +5017,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ESMEmitterDataMT315 = 200315,
 
         /// <summary>
-        /// Weapon Definition Data MT-316.  type: Variable Record.  length: 256.
+        /// Weapon Definition Data MT-316. type: Variable Record.  length: 256.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5017,7 +5027,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponDefinitionDataMT316 = 200316,
 
         /// <summary>
-        /// Weapon Preset Data MT-317.  type: Variable Record.  length: 256.
+        /// Weapon Preset Data MT-317. type: Variable Record.  length: 256.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5027,7 +5037,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponPresetDataMT317 = 200317,
 
         /// <summary>
-        /// Pairing/Association (eMT-56).  type: Variable Record.
+        /// Pairing/Association (eMT-56). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5037,7 +5047,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PairingAssociationEMT56 = 200400,
 
         /// <summary>
-        /// Pointer (eMT-57).  type: Variable Record.
+        /// Pointer (eMT-57). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5047,7 +5057,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PointerEMT57 = 200401,
 
         /// <summary>
-        /// Reporting Responsibility (eMT-58).  type: Variable Record.
+        /// Reporting Responsibility (eMT-58). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5057,7 +5067,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ReportingResponsibilityEMT58 = 200402,
 
         /// <summary>
-        /// Track Number (eMT-59).  type: Variable Record.
+        /// Track Number (eMT-59). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5067,7 +5077,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TrackNumberEMT59 = 200403,
 
         /// <summary>
-        /// ID for Link-11 Reporting (eMT-60).  type: Variable Record.
+        /// ID for Link-11 Reporting (eMT-60). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5077,7 +5087,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         IDForLink11ReportingEMT60 = 200404,
 
         /// <summary>
-        /// Remote Track (eMT-62).  type: Variable Record.
+        /// Remote Track (eMT-62). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5087,7 +5097,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RemoteTrackEMT62 = 200405,
 
         /// <summary>
-        /// Link-11 Error Rate (eMT-63).  type: Variable Record.
+        /// Link-11 Error Rate (eMT-63). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5097,7 +5107,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Link11ErrorRateEMT63 = 200406,
 
         /// <summary>
-        /// Track Quality (eMT-64).  type: Variable Record.
+        /// Track Quality (eMT-64). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5107,7 +5117,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TrackQualityEMT64 = 200407,
 
         /// <summary>
-        /// Gridlock (eMT-65).  type: Variable Record.
+        /// Gridlock (eMT-65). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5117,7 +5127,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         GridlockEMT65 = 200408,
 
         /// <summary>
-        /// Kill (eMT-66).  type: Variable Record.
+        /// Kill (eMT-66). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5127,7 +5137,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         KillEMT66 = 200409,
 
         /// <summary>
-        /// Track ID Change / Resolution (eMT-68).  type: Variable Record.
+        /// Track ID Change / Resolution (eMT-68). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5137,7 +5147,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TrackIDChangeResolutionEMT68 = 200410,
 
         /// <summary>
-        /// Weapons Status (eMT-69).  type: Variable Record.
+        /// Weapons Status (eMT-69). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5147,7 +5157,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponsStatusEMT69 = 200411,
 
         /// <summary>
-        /// Link-11 Operator (eMT-70).  type: Variable Record.
+        /// Link-11 Operator (eMT-70). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5157,7 +5167,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Link11OperatorEMT70 = 200412,
 
         /// <summary>
-        /// Force Training Transmit (eMT-71).  type: Variable Record.
+        /// Force Training Transmit (eMT-71). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5167,7 +5177,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ForceTrainingTransmitEMT71 = 200413,
 
         /// <summary>
-        /// Force Training Receive (eMT-72).  type: Variable Record.
+        /// Force Training Receive (eMT-72). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5177,7 +5187,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ForceTrainingReceiveEMT72 = 200414,
 
         /// <summary>
-        /// Interceptor Amplification (eMT-75).  type: Variable Record.
+        /// Interceptor Amplification (eMT-75). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5187,7 +5197,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         InterceptorAmplificationEMT75 = 200415,
 
         /// <summary>
-        /// Consumables (eMT-78).  type: Variable Record.
+        /// Consumables (eMT-78). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5197,7 +5207,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ConsumablesEMT78 = 200416,
 
         /// <summary>
-        /// Link-11 Local Track Quality (eMT-95).  type: Variable Record.
+        /// Link-11 Local Track Quality (eMT-95). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5207,7 +5217,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Link11LocalTrackQualityEMT95 = 200417,
 
         /// <summary>
-        /// DLRP (eMT-19).  type: Variable Record.
+        /// DLRP (eMT-19). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5217,7 +5227,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DLRPEMT19 = 200418,
 
         /// <summary>
-        /// Force Order (eMT-52).  type: Variable Record.
+        /// Force Order (eMT-52). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5227,7 +5237,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ForceOrderEMT52 = 200419,
 
         /// <summary>
-        /// Wilco / Cantco (eMT-53).  type: Variable Record.
+        /// Wilco / Cantco (eMT-53). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5237,7 +5247,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WilcoCantcoEMT53 = 200420,
 
         /// <summary>
-        /// EMC Bearing (eMT-54).  type: Variable Record.
+        /// EMC Bearing (eMT-54). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5247,7 +5257,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EMCBearingEMT54 = 200421,
 
         /// <summary>
-        /// Change Track Eligibility (eMT-55).  type: Variable Record.
+        /// Change Track Eligibility (eMT-55). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5257,7 +5267,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ChangeTrackEligibilityEMT55 = 200422,
 
         /// <summary>
-        /// Land Mass Reference Point.  type: Variable Record.
+        /// Land Mass Reference Point. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5267,7 +5277,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LandMassReferencePoint = 200423,
 
         /// <summary>
-        /// System Reference Point.  type: Variable Record.
+        /// System Reference Point. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5277,7 +5287,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SystemReferencePoint = 200424,
 
         /// <summary>
-        /// PU Amplification.  type: Variable Record.
+        /// PU Amplification. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5287,7 +5297,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PUAmplification = 200425,
 
         /// <summary>
-        /// Set/Drift.  type: Variable Record.
+        /// Set/Drift. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5297,7 +5307,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SetDrift = 200426,
 
         /// <summary>
-        /// Begin Initialization (MT-1).  type: Variable Record.
+        /// Begin Initialization (MT-1). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5307,7 +5317,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BeginInitializationMT1 = 200427,
 
         /// <summary>
-        /// Status and Control (MT-3).  type: Variable Record.
+        /// Status and Control (MT-3). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5317,7 +5327,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         StatusAndControlMT3 = 200428,
 
         /// <summary>
-        /// Scintillation Change (MT-39).  type: Variable Record.
+        /// Scintillation Change (MT-39). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5327,7 +5337,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ScintillationChangeMT39 = 200429,
 
         /// <summary>
-        /// Link 11 ID Control (MT-61).  type: Variable Record.
+        /// Link 11 ID Control (MT-61). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5337,7 +5347,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Link11IDControlMT61 = 200430,
 
         /// <summary>
-        /// PU Guard List.  type: Variable Record.
+        /// PU Guard List. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5347,7 +5357,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PUGuardList = 200431,
 
         /// <summary>
-        /// Winds Aloft (MT-14).  type: Variable Record.
+        /// Winds Aloft (MT-14). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5357,7 +5367,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WindsAloftMT14 = 200432,
 
         /// <summary>
-        /// Surface Winds (MT-15).  type: Variable Record.
+        /// Surface Winds (MT-15). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5367,7 +5377,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SurfaceWindsMT15 = 200433,
 
         /// <summary>
-        /// Sea State (MT-17).  type: Variable Record.
+        /// Sea State (MT-17). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5377,7 +5387,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SeaStateMT17 = 200434,
 
         /// <summary>
-        /// Magnetic Variation (MT-37).  type: Variable Record.
+        /// Magnetic Variation (MT-37). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5387,7 +5397,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MagneticVariationMT37 = 200435,
 
         /// <summary>
-        /// Track Eligibility (MT-29).  type: Variable Record.
+        /// Track Eligibility (MT-29). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5397,7 +5407,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TrackEligibilityMT29 = 200436,
 
         /// <summary>
-        /// Training Track Notification.  type: Variable Record.
+        /// Training Track Notification. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5407,7 +5417,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TrainingTrackNotification = 200437,
 
         /// <summary>
-        /// Tacan Data (MT-32).  type: Variable Record.
+        /// Tacan Data (MT-32). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5417,7 +5427,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TacanDataMT32 = 200501,
 
         /// <summary>
-        /// Interceptor Amplification (MT-75).  type: Variable Record.
+        /// Interceptor Amplification (MT-75). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5427,7 +5437,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         InterceptorAmplificationMT75 = 200502,
 
         /// <summary>
-        /// Tacan Assignment (MT-76).  type: Variable Record.
+        /// Tacan Assignment (MT-76). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5437,7 +5447,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TacanAssignmentMT76 = 200503,
 
         /// <summary>
-        /// Autopilot Status (MT-77).  type: Variable Record.
+        /// Autopilot Status (MT-77). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5447,7 +5457,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AutopilotStatusMT77 = 200504,
 
         /// <summary>
-        /// Consumables (MT-78).  type: Variable Record.
+        /// Consumables (MT-78). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5457,7 +5467,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ConsumablesMT78 = 200505,
 
         /// <summary>
-        /// Downlink (MT-79).  type: Variable Record.
+        /// Downlink (MT-79). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5467,7 +5477,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DownlinkMT79 = 200506,
 
         /// <summary>
-        /// TIN Report (MT-80).  type: Variable Record.
+        /// TIN Report (MT-80). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5477,7 +5487,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TINReportMT80 = 200507,
 
         /// <summary>
-        /// Special Point Control (MT-81).  type: Variable Record.
+        /// Special Point Control (MT-81). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5487,7 +5497,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SpecialPointControlMT81 = 200508,
 
         /// <summary>
-        /// Control Discretes (MT-82).  type: Variable Record.
+        /// Control Discretes (MT-82). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5497,7 +5507,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ControlDiscretesMT82 = 200509,
 
         /// <summary>
-        /// Request Target Discretes(MT-83).  type: Variable Record.
+        /// Request Target Discretes(MT-83). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5507,7 +5517,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RequestTargetDiscretesMT83 = 200510,
 
         /// <summary>
-        /// Target Discretes (MT-84).  type: Variable Record.
+        /// Target Discretes (MT-84). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5517,7 +5527,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TargetDiscretesMT84 = 200511,
 
         /// <summary>
-        /// Reply Discretes (MT-85).  type: Variable Record.
+        /// Reply Discretes (MT-85). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5527,7 +5537,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ReplyDiscretesMT85 = 200512,
 
         /// <summary>
-        /// Command Maneuvers (MT-86).  type: Variable Record.
+        /// Command Maneuvers (MT-86). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5537,7 +5547,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CommandManeuversMT86 = 200513,
 
         /// <summary>
-        /// Target Data (MT-87).  type: Variable Record.
+        /// Target Data (MT-87). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5547,7 +5557,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TargetDataMT87 = 200514,
 
         /// <summary>
-        /// Target Pointer (MT-88).  type: Variable Record.
+        /// Target Pointer (MT-88). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5557,7 +5567,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TargetPointerMT88 = 200515,
 
         /// <summary>
-        /// Intercept Data (MT-89).  type: Variable Record.
+        /// Intercept Data (MT-89). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5567,7 +5577,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         InterceptDataMT89 = 200516,
 
         /// <summary>
-        /// Decrement Missile Inventory (MT-90).  type: Variable Record.
+        /// Decrement Missile Inventory (MT-90). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5577,7 +5587,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DecrementMissileInventoryMT90 = 200517,
 
         /// <summary>
-        /// Link-4A Alert (MT-91).  type: Variable Record.
+        /// Link-4A Alert (MT-91). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5587,7 +5597,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Link4AAlertMT91 = 200518,
 
         /// <summary>
-        /// Strike Control (MT-92).  type: Variable Record.
+        /// Strike Control (MT-92). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5597,7 +5607,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         StrikeControlMT92 = 200519,
 
         /// <summary>
-        /// Speed Change (MT-25).  type: Variable Record.
+        /// Speed Change (MT-25). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5607,7 +5617,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SpeedChangeMT25 = 200521,
 
         /// <summary>
-        /// Course Change (MT-26).  type: Variable Record.
+        /// Course Change (MT-26). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5617,7 +5627,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CourseChangeMT26 = 200522,
 
         /// <summary>
-        /// Altitude Change (MT-27).  type: Variable Record.
+        /// Altitude Change (MT-27). type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5627,7 +5637,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AltitudeChangeMT27 = 200523,
 
         /// <summary>
-        /// ACLS AN/SPN-46 Status.  type: Variable Record.
+        /// ACLS AN/SPN-46 Status. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5637,7 +5647,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ACLSANSPN46Status = 200524,
 
         /// <summary>
-        /// ACLS Aircraft Report.  type: Variable Record.
+        /// ACLS Aircraft Report. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5647,7 +5657,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ACLSAircraftReport = 200525,
 
         /// <summary>
-        /// SPS-67 Radar Operator Functions.  type: Variable Record.
+        /// SPS-67 Radar Operator Functions. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5657,7 +5667,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SPS67RadarOperatorFunctions = 200600,
 
         /// <summary>
-        /// SPS-55 Radar Operator Functions.  type: Variable Record.
+        /// SPS-55 Radar Operator Functions. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5667,7 +5677,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SPS55RadarOperatorFunctions = 200601,
 
         /// <summary>
-        /// SPQ-9A Radar Operator Functions.  length: Variable Record.
+        /// SPQ-9A Radar Operator Functions. length: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5677,7 +5687,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SPQ9ARadarOperatorFunctions = 200602,
 
         /// <summary>
-        /// SPS-49 Radar Operator Functions.  type: Variable Record.
+        /// SPS-49 Radar Operator Functions. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5687,7 +5697,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SPS49RadarOperatorFunctions = 200603,
 
         /// <summary>
-        /// MK-23 Radar Operator Functions.  type: Variable Record.
+        /// MK-23 Radar Operator Functions. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5697,7 +5707,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MK23RadarOperatorFunctions = 200604,
 
         /// <summary>
-        /// SPS-48 Radar Operator Functions.  type: Variable Record.
+        /// SPS-48 Radar Operator Functions. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5707,7 +5717,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SPS48RadarOperatorFunctions = 200605,
 
         /// <summary>
-        /// SPS-40 Radar Operator Functions.  type: Variable Record.
+        /// SPS-40 Radar Operator Functions. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5717,7 +5727,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         SPS40RadarOperatorFunctions = 200606,
 
         /// <summary>
-        /// MK-95 Radar Operator Functions.  type: Variable Record.
+        /// MK-95 Radar Operator Functions. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5727,7 +5737,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MK95RadarOperatorFunctions = 200607,
 
         /// <summary>
-        /// Kill/No Kill.  type: Unsigned Integer.  length: 32.  range: 0 No kill, 1 Kill.
+        /// Kill/No Kill. type: Unsigned Integer.  length: 32.  range: 0 No kill, 1 Kill.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5737,7 +5747,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         KillNoKill = 200608,
 
         /// <summary>
-        /// CMT pc.  type: Unsigned Integer.  length: 32.
+        /// CMT pc. type: Unsigned Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5747,7 +5757,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CMTPc = 200609,
 
         /// <summary>
-        /// CMC4AirGlobalData.  type: Variable Recoed.
+        /// CMC4AirGlobalData. type: Variable Recoed.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5757,7 +5767,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CMC4AirGlobalData = 200610,
 
         /// <summary>
-        /// CMC4GlobalData.  type: Variable Record.
+        /// CMC4GlobalData. type: Variable Record.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5767,7 +5777,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CMC4GlobalData = 200611,
 
         /// <summary>
-        /// LINKSIM_COMMENT_PDU.  type: Integer.  length: 32.
+        /// LINKSIM_COMMENT_PDU. type: Integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5777,7 +5787,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LINKSIMCOMMENTPDU = 200612,
 
         /// <summary>
-        /// NSST Ownship Control.  type: Integer.  length: 64.
+        /// NSST Ownship Control. type: Integer.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5787,7 +5797,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NSSTOwnshipControl = 200613,
 
         /// <summary>
-        /// Other.  type: Integer.  length: 00.
+        /// Other. type: Integer.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5797,7 +5807,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Other = 240000,
 
         /// <summary>
-        /// Mass Of The Vehicle.  type: real.  length: 32.
+        /// Mass Of The Vehicle. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5807,7 +5817,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MassOfTheVehicle = 240001,
 
         /// <summary>
-        /// Force ID.  type: Integer.  length: 8.
+        /// Force ID. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5817,7 +5827,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ForceID_240002 = 240002,
 
         /// <summary>
-        /// Entity Type Kind.  type: Integer.  length: 8.
+        /// Entity Type Kind. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5827,7 +5837,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTypeKind = 240003,
 
         /// <summary>
-        /// Entity Type Domain.  type: Integer.  length: 8.
+        /// Entity Type Domain. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5837,7 +5847,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTypeDomain = 240004,
 
         /// <summary>
-        /// Entity Type Country.  type: Integer.  length: 16.
+        /// Entity Type Country. type: Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5847,7 +5857,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTypeCountry = 240005,
 
         /// <summary>
-        /// Entity Type Category.  type: Integer.  length: 8.
+        /// Entity Type Category. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5857,7 +5867,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTypeCategory = 240006,
 
         /// <summary>
-        /// Entity Type Sub Category.  type: Integer.  length: 8.
+        /// Entity Type Sub Category. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5867,7 +5877,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTypeSubCategory = 240007,
 
         /// <summary>
-        /// Entity Type Specific.  type: Integer.  length: 8.
+        /// Entity Type Specific. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5877,7 +5887,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTypeSpecific = 240008,
 
         /// <summary>
-        /// Entity Type Extra.  type: Integer.  length: 8.
+        /// Entity Type Extra. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5887,7 +5897,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityTypeExtra = 240009,
 
         /// <summary>
-        /// Alternative Entity Type Kind.  type: Integer.  length: 8.
+        /// Alternative Entity Type Kind. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5897,7 +5907,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityTypeKind = 240010,
 
         /// <summary>
-        /// Alternative Entity Type Domain.  type: Integer.  length: 8.
+        /// Alternative Entity Type Domain. type: Integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5907,7 +5917,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityTypeDomain = 240011,
 
         /// <summary>
-        /// Alternative Entity Type Country.  type: Integer.  length: 16.
+        /// Alternative Entity Type Country. type: Integer.  length: 16.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5917,7 +5927,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityTypeCountry = 240012,
 
         /// <summary>
-        /// Alternative Entity Type Category.  type: integer.  length: 8.
+        /// Alternative Entity Type Category. type: integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5927,7 +5937,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityTypeCategory = 240013,
 
         /// <summary>
-        /// Alternative Entity Type Sub Category.  type: integer.  length: 8.
+        /// Alternative Entity Type Sub Category. type: integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5937,7 +5947,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityTypeSubCategory = 240014,
 
         /// <summary>
-        /// Alternative Entity Type Specific.  type: integer.  length: 8.
+        /// Alternative Entity Type Specific. type: integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5947,7 +5957,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityTypeSpecific = 240015,
 
         /// <summary>
-        /// Alternative Entity Type Extra.  type: integer.  length: 8.
+        /// Alternative Entity Type Extra. type: integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5957,7 +5967,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityTypeExtra = 240016,
 
         /// <summary>
-        /// Entity Location X.  type: real.  length: 64.
+        /// Entity Location X. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5967,7 +5977,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLocationX = 240017,
 
         /// <summary>
-        /// Entity Location Y.  type: real.  length: 64.
+        /// Entity Location Y. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5977,7 +5987,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLocationY = 240018,
 
         /// <summary>
-        /// Entity Location Z.  type: real.  length: 64.
+        /// Entity Location Z. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5987,7 +5997,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLocationZ = 240019,
 
         /// <summary>
-        /// Entity Linear Velocity X.  type: real.  length: 32.
+        /// Entity Linear Velocity X. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -5997,7 +6007,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLinearVelocityX = 240020,
 
         /// <summary>
-        /// Entity Linear Velocity Y.  type: real.  length: 32.
+        /// Entity Linear Velocity Y. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6007,7 +6017,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLinearVelocityY = 240021,
 
         /// <summary>
-        /// Entity Linear Velocity Z.  type: real.  length: 32.
+        /// Entity Linear Velocity Z. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6017,7 +6027,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLinearVelocityZ = 240022,
 
         /// <summary>
-        /// Entity Orientation Psi.  type: real.  length: 32.
+        /// Entity Orientation Psi. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6027,7 +6037,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityOrientationPsi = 240023,
 
         /// <summary>
-        /// Entity Orientation Theta.  type: real.  length: 32.
+        /// Entity Orientation Theta. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6037,7 +6047,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityOrientationTheta = 240024,
 
         /// <summary>
-        /// Entity Orientation Phi.  type: real.  length: 32.
+        /// Entity Orientation Phi. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6047,7 +6057,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityOrientationPhi = 240025,
 
         /// <summary>
-        /// Dead Reckoning Algorithm.  type: integer.  length: 8.
+        /// Dead Reckoning Algorithm. type: integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6057,7 +6067,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningAlgorithm = 240026,
 
         /// <summary>
-        /// Dead Reckoning Linear Acceleration X.  type: real.  length: 32.
+        /// Dead Reckoning Linear Acceleration X. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6067,7 +6077,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningLinearAccelerationX = 240027,
 
         /// <summary>
-        /// Dead Reckoning Linear Acceleration Y.  type: real.  length: 32.
+        /// Dead Reckoning Linear Acceleration Y. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6077,7 +6087,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningLinearAccelerationY = 240028,
 
         /// <summary>
-        /// Dead Reckoning Linear Acceleration Z.  type: real.  length: 32.
+        /// Dead Reckoning Linear Acceleration Z. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6087,7 +6097,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningLinearAccelerationZ = 240029,
 
         /// <summary>
-        /// Dead Reckoning Angular Velocity X.  type: real.  length: 32.
+        /// Dead Reckoning Angular Velocity X. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6097,7 +6107,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningAngularVelocityX = 240030,
 
         /// <summary>
-        /// Dead Reckoning Angular Velocity Y.  type: real.  length: 32.
+        /// Dead Reckoning Angular Velocity Y. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6107,7 +6117,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningAngularVelocityY = 240031,
 
         /// <summary>
-        /// Dead Reckoning Angular Velocity Z.  type: real.  length: 32.
+        /// Dead Reckoning Angular Velocity Z. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6117,7 +6127,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoningAngularVelocityZ = 240032,
 
         /// <summary>
-        /// Entity Appearance.  type: integer.  length: 32.
+        /// Entity Appearance. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6127,7 +6137,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityAppearance = 240033,
 
         /// <summary>
-        /// Entity Marking Character Set.  type: integer.  length: 8.
+        /// Entity Marking Character Set. type: integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6137,7 +6147,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityMarkingCharacterSet = 240034,
 
         /// <summary>
-        /// Entity Marking 11 Bytes.  type: character.  length: 88.
+        /// Entity Marking 11 Bytes. type: character.  length: 88.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6147,7 +6157,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityMarking11Bytes = 240035,
 
         /// <summary>
-        /// Capability.  type: integer.  length: 32.
+        /// Capability. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6157,7 +6167,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Capability = 240036,
 
         /// <summary>
-        /// Number Articulation Parameters.  type: integer.  length: 8.
+        /// Number Articulation Parameters. type: integer.  length: 8.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6167,7 +6177,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NumberArticulationParameters = 240037,
 
         /// <summary>
-        /// Articulation Parameter ID.  type: integer.  length: 32.
+        /// Articulation Parameter ID. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6177,7 +6187,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ArticulationParameterID = 240038,
 
         /// <summary>
-        /// Articulation Parameter Type.  type: integer.  length: 32.
+        /// Articulation Parameter Type. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6187,7 +6197,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ArticulationParameterType_240039 = 240039,
 
         /// <summary>
-        /// Articulation Parameter Value.  type: real.  length: 64.
+        /// Articulation Parameter Value. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6197,7 +6207,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ArticulationParameterValue_240040 = 240040,
 
         /// <summary>
-        /// Type Of Stores.  type: integer.  length: 32.
+        /// Type Of Stores. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6207,7 +6217,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TypeOfStores = 240041,
 
         /// <summary>
-        /// Quantity Of Stores.  type: integer.  length: 32.
+        /// Quantity Of Stores. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6217,7 +6227,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         QuantityOfStores = 240042,
 
         /// <summary>
-        /// Fuel Quantity.  type: real.  length: 32.
+        /// Fuel Quantity. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6227,7 +6237,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         FuelQuantity = 240043,
 
         /// <summary>
-        /// Radar System Status.  type: integer.  length: 32.
+        /// Radar System Status. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6237,7 +6247,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadarSystemStatus = 240044,
 
         /// <summary>
-        /// Radio Communication System Status.  type: integer.  length: 32.
+        /// Radio Communication System Status. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6247,7 +6257,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadioCommunicationSystemStatus = 240045,
 
         /// <summary>
-        /// Default Time For Radio Transmission For Stationary Transmitters.  type: integer.  length: 32.
+        /// Default Time For Radio Transmission For Stationary Transmitters. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6257,7 +6267,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DefaultTimeForRadioTransmissionForStationaryTransmitters = 240046,
 
         /// <summary>
-        /// Default Time For Radio Transmission For Moving Transmitters.  type: integer.  length: 32.
+        /// Default Time For Radio Transmission For Moving Transmitters. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6267,7 +6277,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DefaultTimeForRadioTransmissionForMovingTransmitters = 240047,
 
         /// <summary>
-        /// Body Part Damaged Ratio.  type: real.  length: 32.
+        /// Body Part Damaged Ratio. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6277,7 +6287,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BodyPartDamagedRatio = 240048,
 
         /// <summary>
-        /// Name Of The Terrain Database File.  type: character.  length: 00.
+        /// Name Of The Terrain Database File. type: character.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6287,7 +6297,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NameOfTheTerrainDatabaseFile = 240049,
 
         /// <summary>
-        /// Name Of Local File.  type: character.  length: 00.
+        /// Name Of Local File. type: character.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6297,7 +6307,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NameOfLocalFile = 240050,
 
         /// <summary>
-        /// Aimpoint Bearing.  type: real.  length: 32.
+        /// Aimpoint Bearing. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6307,7 +6317,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AimpointBearing = 240051,
 
         /// <summary>
-        /// Aimpoint Elevation.  type: real.  length: 32.
+        /// Aimpoint Elevation. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6317,7 +6327,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AimpointElevation = 240052,
 
         /// <summary>
-        /// Aimpoint Range.  type: real.  length: 32.
+        /// Aimpoint Range. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6327,7 +6337,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AimpointRange = 240053,
 
         /// <summary>
-        /// Air Speed.  type: real.  length: 32.
+        /// Air Speed. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6337,7 +6347,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AirSpeed = 240054,
 
         /// <summary>
-        /// Altitude.  type: real.  length: 32.
+        /// Altitude. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6347,7 +6357,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Altitude_240055 = 240055,
 
         /// <summary>
-        /// Application Status.  type: structure.  length: 32.
+        /// Application Status. type: structure.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6357,7 +6367,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ApplicationStatus = 240056,
 
         /// <summary>
-        /// Auto Iff.  type: integer.  length: 32.
+        /// Auto Iff. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6367,7 +6377,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AutoIff = 240057,
 
         /// <summary>
-        /// Beacon Delay.  type: real.  length: 32.
+        /// Beacon Delay. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6377,7 +6387,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BeaconDelay = 240058,
 
         /// <summary>
-        /// Bingo Fuel Setting.  type: real.  length: 32.
+        /// Bingo Fuel Setting. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6387,7 +6397,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         BingoFuelSetting = 240059,
 
         /// <summary>
-        /// Cloud Bottom.  type: real.  length: 32.
+        /// Cloud Bottom. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6397,7 +6407,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CloudBottom = 240060,
 
         /// <summary>
-        /// Cloud Top.  type: real.  length: 32.
+        /// Cloud Top. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6407,7 +6417,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CloudTop = 240061,
 
         /// <summary>
-        /// Direction.  type: real.  length: 32.
+        /// Direction. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6417,7 +6427,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Direction = 240062,
 
         /// <summary>
-        /// End Action.  type: integer.  length: 32.
+        /// End Action. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6427,7 +6437,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EndAction = 240063,
 
         /// <summary>
-        /// Frequency.  type: real.  length: 32.
+        /// Frequency. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6437,7 +6447,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Frequency = 240064,
 
         /// <summary>
-        /// Freeze.  type: integer.  length: 32.
+        /// Freeze. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6447,7 +6457,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Freeze = 240065,
 
         /// <summary>
-        /// Heading.  type: real.  length: 32.
+        /// Heading. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6457,7 +6467,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Heading = 240066,
 
         /// <summary>
-        /// Identification.  type: integer.  length: 32.
+        /// Identification. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6467,7 +6477,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Identification_240067 = 240067,
 
         /// <summary>
-        /// Initial Point Data.  type: integer.  length: 32.
+        /// Initial Point Data. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6477,7 +6487,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         InitialPointData = 240068,
 
         /// <summary>
-        /// Latitude.  type: real.  length: 64.
+        /// Latitude. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6487,7 +6497,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Latitude_240069 = 240069,
 
         /// <summary>
-        /// Lights.  type: integer.  length: 32.
+        /// Lights. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6497,7 +6507,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Lights_240070 = 240070,
 
         /// <summary>
-        /// Linear.  type: integer.  length: 32.
+        /// Linear. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6507,7 +6517,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Linear = 240071,
 
         /// <summary>
-        /// Longitude.  type: real.  length: 64.
+        /// Longitude. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6517,7 +6527,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Longitude_240072 = 240072,
 
         /// <summary>
-        /// Low Altitude.  type: real.  length: 32.
+        /// Low Altitude. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6527,7 +6537,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LowAltitude = 240073,
 
         /// <summary>
-        /// Mfd Formats.  type: integer.  length: 32.
+        /// Mfd Formats. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6537,7 +6547,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MfdFormats = 240074,
 
         /// <summary>
-        /// Nctr.  type: integer.  length: 32.
+        /// Nctr. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6547,7 +6557,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Nctr = 240075,
 
         /// <summary>
-        /// Number Projectiles.  type: integer.  length: 32.
+        /// Number Projectiles. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6557,7 +6567,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         NumberProjectiles = 240076,
 
         /// <summary>
-        /// Operation Code.  type: integer.  length: 32.
+        /// Operation Code. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6567,7 +6577,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         OperationCode = 240077,
 
         /// <summary>
-        /// Pitch.  type: real.  length: 32.
+        /// Pitch. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6577,7 +6587,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Pitch = 240078,
 
         /// <summary>
-        /// Profiles.  type: integer.  length: 32.
+        /// Profiles. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6587,7 +6597,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Profiles = 240079,
 
         /// <summary>
-        /// Quantity.  type: integer.  length: 32.
+        /// Quantity. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6597,7 +6607,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Quantity_240080 = 240080,
 
         /// <summary>
-        /// Radar Modes.  type: integer.  length: 32.
+        /// Radar Modes. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6607,7 +6617,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadarModes = 240081,
 
         /// <summary>
-        /// Radar Search Volume.  type: real.  length: 32.
+        /// Radar Search Volume. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6617,7 +6627,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RadarSearchVolume = 240082,
 
         /// <summary>
-        /// Roll.  type: real.  length: 32.
+        /// Roll. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6627,7 +6637,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Roll = 240083,
 
         /// <summary>
-        /// Rotation.  type: real.  length: 32.
+        /// Rotation. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6637,7 +6647,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Rotation_240084 = 240084,
 
         /// <summary>
-        /// Scale Factor X.  type: real.  length: 32.
+        /// Scale Factor X. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6647,7 +6657,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ScaleFactorX = 240085,
 
         /// <summary>
-        /// Scale Factor Y.  type: real.  length: 32.
+        /// Scale Factor Y. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6657,7 +6667,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ScaleFactorY = 240086,
 
         /// <summary>
-        /// Shields.  type: integer.  length: 32.
+        /// Shields. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6667,7 +6677,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Shields = 240087,
 
         /// <summary>
-        /// Steerpoint.  type: structure.  length: 192.
+        /// Steerpoint. type: structure.  length: 192.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6677,7 +6687,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Steerpoint = 240088,
 
         /// <summary>
-        /// Spare1.  type: real.  length: 64.
+        /// Spare1. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6687,7 +6697,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Spare1 = 240089,
 
         /// <summary>
-        /// Spare2.  type: real.  length: 64.
+        /// Spare2. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6697,7 +6707,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Spare2 = 240090,
 
         /// <summary>
-        /// Team.  type: integer.  length: 32.
+        /// Team. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6707,7 +6717,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Team = 240091,
 
         /// <summary>
-        /// Text.  type: character.  length: 00.
+        /// Text. type: character.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6717,7 +6727,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Text = 240092,
 
         /// <summary>
-        /// Time Of Day.  type: integer.  length: 32.
+        /// Time Of Day. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6727,7 +6737,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TimeOfDay = 240093,
 
         /// <summary>
-        /// Trail Flag.  type: integer.  length: 32.
+        /// Trail Flag. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6737,7 +6747,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TrailFlag = 240094,
 
         /// <summary>
-        /// Trail Size.  type: real.  length: 32.
+        /// Trail Size. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6747,7 +6757,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TrailSize = 240095,
 
         /// <summary>
-        /// Type Of Projectile.  type: integer.  length: 32.
+        /// Type Of Projectile. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6757,7 +6767,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TypeOfProjectile = 240096,
 
         /// <summary>
-        /// Type Of Target.  type: integer.  length: 32.
+        /// Type Of Target. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6767,7 +6777,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TypeOfTarget = 240097,
 
         /// <summary>
-        /// Type Of Threat.  type: integer.  length: 32.
+        /// Type Of Threat. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6777,7 +6787,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TypeOfThreat = 240098,
 
         /// <summary>
-        /// Uhf Frequency.  type: real.  length: 32.
+        /// Uhf Frequency. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6787,7 +6797,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         UhfFrequency = 240099,
 
         /// <summary>
-        /// Utm Altitude.  type: real.  length: 32.
+        /// Utm Altitude. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6797,7 +6807,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         UtmAltitude = 240100,
 
         /// <summary>
-        /// Utm Latitude.  type: real.  length: 64.
+        /// Utm Latitude. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6807,7 +6817,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         UtmLatitude = 240101,
 
         /// <summary>
-        /// Utm Longitude.  type: real.  length: 64.
+        /// Utm Longitude. type: real.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6817,7 +6827,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         UtmLongitude = 240102,
 
         /// <summary>
-        /// Vhf Frequency.  type: real.  length: 32.
+        /// Vhf Frequency. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6827,7 +6837,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VhfFrequency = 240103,
 
         /// <summary>
-        /// Visibility Range.  type: real.  length: 32.
+        /// Visibility Range. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6837,7 +6847,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VisibilityRange = 240104,
 
         /// <summary>
-        /// Void Aaa Hit.  type: integer.  length: 32.
+        /// Void Aaa Hit. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6847,7 +6857,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VoidAaaHit = 240105,
 
         /// <summary>
-        /// Void Collision.  type: integer.  length: 32.
+        /// Void Collision. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6857,7 +6867,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VoidCollision = 240106,
 
         /// <summary>
-        /// Void Earth Hit.  type: integer.  length: 32.
+        /// Void Earth Hit. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6867,7 +6877,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VoidEarthHit = 240107,
 
         /// <summary>
-        /// Void Friendly.  type: integer.  length: 32.
+        /// Void Friendly. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6877,7 +6887,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VoidFriendly = 240108,
 
         /// <summary>
-        /// Void Gun Hit.  type: integer.  length: 32.
+        /// Void Gun Hit. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6887,7 +6897,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VoidGunHit = 240109,
 
         /// <summary>
-        /// Void Rocket Hit.  type: integer.  length: 32.
+        /// Void Rocket Hit. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6897,7 +6907,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VoidRocketHit = 240110,
 
         /// <summary>
-        /// Void Sam Hit.  type: integer.  length: 32.
+        /// Void Sam Hit. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6907,7 +6917,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VoidSamHit = 240111,
 
         /// <summary>
-        /// Weapon Data.  type: integer.  length: 32.
+        /// Weapon Data. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6917,7 +6927,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponData = 240112,
 
         /// <summary>
-        /// Weapon Type.  type: integer.  length: 32.
+        /// Weapon Type. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6927,7 +6937,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WeaponType = 240113,
 
         /// <summary>
-        /// Weather.  type: integer.  length: 32.
+        /// Weather. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6937,7 +6947,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Weather_240114 = 240114,
 
         /// <summary>
-        /// Wind Direction.  type: real.  length: 32.
+        /// Wind Direction. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6947,7 +6957,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WindDirection_240115 = 240115,
 
         /// <summary>
-        /// Wind Speed.  type: real.  length: 32.
+        /// Wind Speed. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6957,7 +6967,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WindSpeed = 240116,
 
         /// <summary>
-        /// Wing Station.  type: integer.  length: 32.
+        /// Wing Station. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6967,7 +6977,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         WingStation = 240117,
 
         /// <summary>
-        /// Yaw.  type: real.  length: 32.
+        /// Yaw. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6977,7 +6987,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Yaw = 240118,
 
         /// <summary>
-        /// Memory Offset.  type: integer.  length: 32.
+        /// Memory Offset. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6987,7 +6997,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MemoryOffset = 240119,
 
         /// <summary>
-        /// Memory Data.  type: integer.  length: 00.
+        /// Memory Data. type: integer.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -6997,7 +7007,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MemoryData = 240120,
 
         /// <summary>
-        /// VASI.  type: integer.  length: 32.
+        /// VASI. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7007,7 +7017,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         VASI = 240121,
 
         /// <summary>
-        /// Beacon.  type: integer.  length: 32.
+        /// Beacon. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7017,7 +7027,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Beacon = 240122,
 
         /// <summary>
-        /// Strobe.  type: integer.  length: 32.
+        /// Strobe. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7027,7 +7037,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Strobe = 240123,
 
         /// <summary>
-        /// Culture.  type: integer.  length: 32.
+        /// Culture. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7037,7 +7047,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Culture = 240124,
 
         /// <summary>
-        /// Approach.  type: integer.  length: 32.
+        /// Approach. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7047,7 +7057,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Approach = 240125,
 
         /// <summary>
-        /// Runway End.  type: integer.  length: 32.
+        /// Runway End. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7057,7 +7067,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RunwayEnd = 240126,
 
         /// <summary>
-        /// Obstruction.  type: integer.  length: 32.
+        /// Obstruction. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7067,7 +7077,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Obstruction = 240127,
 
         /// <summary>
-        /// Runway Edge.  type: integer.  length: 32.
+        /// Runway Edge. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7077,7 +7087,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RunwayEdge = 240128,
 
         /// <summary>
-        /// Ramp Taxiway.  type: integer.  length: 32.
+        /// Ramp Taxiway. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7087,7 +7097,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RampTaxiway = 240129,
 
         /// <summary>
-        /// Laser Bomb Code.  type: integer.  length: 32.
+        /// Laser Bomb Code. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7097,7 +7107,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         LaserBombCode = 240130,
 
         /// <summary>
-        /// Rack Type.  type: integer.  length: 32.
+        /// Rack Type. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7107,7 +7117,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RackType = 240131,
 
         /// <summary>
-        /// HUD.  type: structure.  length: 00.
+        /// HUD. type: structure.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7117,7 +7127,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         HUD = 240132,
 
         /// <summary>
-        /// RoleFileName.  type: character.  length: 00.
+        /// RoleFileName. type: character.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7127,7 +7137,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RoleFileName = 240133,
 
         /// <summary>
-        /// PilotName.  type: character.  length: 00.
+        /// PilotName. type: character.  length: 00.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7137,7 +7147,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PilotName = 240134,
 
         /// <summary>
-        /// PilotDesignation.  type: integer.  length: 32.
+        /// PilotDesignation. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7147,7 +7157,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         PilotDesignation = 240135,
 
         /// <summary>
-        /// Model Type.  type: integer.  length: 32.
+        /// Model Type. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7157,7 +7167,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         ModelType = 240136,
 
         /// <summary>
-        /// DIS Type.  type: integer.  length: 64.
+        /// DIS Type. type: integer.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7167,7 +7177,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DISType = 240137,
 
         /// <summary>
-        /// Class.  type: integer.  length: 32.
+        /// Class. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7177,7 +7187,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Class = 240138,
 
         /// <summary>
-        /// Channel.  type: integer.  length: 32.
+        /// Channel. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7187,7 +7197,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         Channel = 240139,
 
         /// <summary>
-        /// Entity Type.  type: structure.  length: 64.
+        /// Entity Type. type: structure.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7197,7 +7207,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityType_240140 = 240140,
 
         /// <summary>
-        /// Alternative Entity Type.  type: structure.  length: 64.
+        /// Alternative Entity Type. type: structure.  length: 64.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7207,7 +7217,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AlternativeEntityType_240141 = 240141,
 
         /// <summary>
-        /// Entity Location.  type: structure.  length: 192.
+        /// Entity Location. type: structure.  length: 192.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7217,7 +7227,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLocation = 240142,
 
         /// <summary>
-        /// Entity Linear Velocity.  type: structure.  length: 96.
+        /// Entity Linear Velocity. type: structure.  length: 96.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7227,7 +7237,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityLinearVelocity = 240143,
 
         /// <summary>
-        /// Entity Orientation.  type: structure.  length: 96.
+        /// Entity Orientation. type: structure.  length: 96.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7237,7 +7247,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         EntityOrientation = 240144,
 
         /// <summary>
-        /// Dead Reckoning.  type: structure.  length: 320.
+        /// Dead Reckoning. type: structure.  length: 320.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7247,7 +7257,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         DeadReckoning = 240145,
 
         /// <summary>
-        /// Failure Symptom.  type: integer.  length: 32.  range: 1=LimitSpeed, 2 =LimitGLoad, 3=Both.
+        /// Failure Symptom. type: integer.  length: 32.  range: 1=LimitSpeed, 2 =LimitGLoad, 3=Both.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7257,7 +7267,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         FailureSymptom = 240146,
 
         /// <summary>
-        /// Max Fuel.  type: real.  length: 32.
+        /// Max Fuel. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7267,7 +7277,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         MaxFuel = 240147,
 
         /// <summary>
-        /// Refueling Boom Connect.  type: integer.  length: 32.
+        /// Refueling Boom Connect. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7277,7 +7287,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         RefuelingBoomConnect = 240148,
 
         /// <summary>
-        /// Altitude AGL.  type: real.  length: 32.
+        /// Altitude AGL. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7287,7 +7297,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         AltitudeAGL = 240149,
 
         /// <summary>
-        /// Calibrated Airspeed.  type: real.  length: 32.
+        /// Calibrated Airspeed. type: real.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7297,7 +7307,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         CalibratedAirspeed = 240150,
 
         /// <summary>
-        /// TACAN Channel.  type: integer.  length: 32.
+        /// TACAN Channel. type: integer.  length: 32.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7307,7 +7317,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TACANChannel = 240151,
 
         /// <summary>
-        /// TACAN Band.  type: integer.  length: 32.  range: 0 = x, 1 = y.
+        /// TACAN Band. type: integer.  length: 32.  range: 0 = x, 1 = y.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -7317,7 +7327,7 @@ namespace OpenDis.Enumerations.SimulationManagement
         TACANBand = 240152,
 
         /// <summary>
-        /// TACAN Mode.  type: integer.  length: 32.  range: 0 = off, 1 = rec, 2 = t/r, 3 = aa rec, 4 = aa t/r.
+        /// TACAN Mode. type: integer.  length: 32.  range: 0 = off, 1 = rec, 2 = t/r, 3 = aa rec, 4 = aa t/r.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]

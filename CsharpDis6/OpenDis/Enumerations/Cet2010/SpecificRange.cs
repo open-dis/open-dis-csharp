@@ -7,39 +7,36 @@ using System.Xml.Serialization;
 
 namespace OpenDis.Enumerations.Cet2010
 {
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class SpecificRange : GenericEntryRange, ISpecificOrSpecificRange
     {
-		#region Fields (3) 
+        #region Fields (3) 
 
         private List<GenericEntryDescription> items1Field;
 
         private ulong uid;
         private string uidField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Properties (3) 
+        #region Properties (3) 
 
         [XmlElement("extra", typeof(Extra), Form = XmlSchemaForm.Unqualified)]
         [XmlElement("extra_range", typeof(ExtraRange), Form = XmlSchemaForm.Unqualified)]
         public List<GenericEntryDescription> Extras
         {
-            get
-            {
-                return this.items1Field;
-            }
+            get => items1Field;
 
             set
             {
-                if (this.items1Field == value)
+                if (items1Field == value)
                 {
                     return;
                 }
 
-                this.items1Field = value;
-                this.RaisePropertyChanged("Extras");
+                items1Field = value;
+                RaisePropertyChanged(nameof(Extras));
             }
         }
 
@@ -50,21 +47,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "uid", DataType = "nonNegativeInteger")]
         public string RawUId
         {
-            get
-            {
-                return this.uidField;
-            }
+            get => uidField;
 
             set
             {
-                if (this.uidField == value)
+                if (uidField == value)
                 {
                     return;
                 }
 
-                this.uidField = value;
-                this.uid = ulong.Parse(value, CultureInfo.InvariantCulture);
-                this.RaisePropertyChanged("RawUId");
+                uidField = value;
+                uid = ulong.Parse(value, CultureInfo.InvariantCulture);
+                RaisePropertyChanged(nameof(RawUId));
             }
         }
 
@@ -75,21 +69,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public ulong UId
         {
-            get
-            {
-                return this.uid;
-            }
+            get => uid;
 
             set
             {
-                if (this.uid != value)
+                if (uid != value)
                 {
-                    this.RawUId = ((byte)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("UId");
+                    RawUId = ((byte)value).ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(UId));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }

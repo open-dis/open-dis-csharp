@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.3.1. Represents the postion and state of one entity in the world. This is identical in function to entity state pdu, but generates less garbage to collect in the Java world. COMPLETE
+    /// Section 5.3.3.1. Represents the postion and state of one entity in the world. This is identical in function to
+    /// entity state pdu, but generates less garbage to collect in the Java world. COMPLETE
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -57,196 +58,11 @@ namespace OpenDis.Dis1998
     public partial class FastEntityStatePdu : EntityInformationFamilyPdu, IEquatable<FastEntityStatePdu>
     {
         /// <summary>
-        /// The site ID
-        /// </summary>
-        private ushort _site;
-
-        /// <summary>
-        /// The application ID
-        /// </summary>
-        private ushort _application;
-
-        /// <summary>
-        /// the entity ID
-        /// </summary>
-        private ushort _entity;
-
-        /// <summary>
-        /// what force this entity is affiliated with, eg red, blue, neutral, etc
-        /// </summary>
-        private byte _forceId;
-
-        /// <summary>
-        /// How many articulation parameters are in the variable length list
-        /// </summary>
-        private byte _numberOfArticulationParameters;
-
-        /// <summary>
-        /// Kind of entity
-        /// </summary>
-        private byte _entityKind;
-
-        /// <summary>
-        /// Domain of entity (air, surface, subsurface, space, etc)
-        /// </summary>
-        private byte _domain;
-
-        /// <summary>
-        /// country to which the design of the entity is attributed
-        /// </summary>
-        private ushort _country;
-
-        /// <summary>
-        /// category of entity
-        /// </summary>
-        private byte _category;
-
-        /// <summary>
-        /// subcategory of entity
-        /// </summary>
-        private byte _subcategory;
-
-        /// <summary>
-        /// specific info based on subcategory field
-        /// </summary>
-        private byte _specific;
-
-        private byte _extra;
-
-        /// <summary>
-        /// Kind of entity
-        /// </summary>
-        private byte _altEntityKind;
-
-        /// <summary>
-        /// Domain of entity (air, surface, subsurface, space, etc)
-        /// </summary>
-        private byte _altDomain;
-
-        /// <summary>
-        /// country to which the design of the entity is attributed
-        /// </summary>
-        private ushort _altCountry;
-
-        /// <summary>
-        /// category of entity
-        /// </summary>
-        private byte _altCategory;
-
-        /// <summary>
-        /// subcategory of entity
-        /// </summary>
-        private byte _altSubcategory;
-
-        /// <summary>
-        /// specific info based on subcategory field
-        /// </summary>
-        private byte _altSpecific;
-
-        private byte _altExtra;
-
-        /// <summary>
-        /// X velo
-        /// </summary>
-        private float _xVelocity;
-
-        /// <summary>
-        /// y Value
-        /// </summary>
-        private float _yVelocity;
-
-        /// <summary>
-        /// Z value
-        /// </summary>
-        private float _zVelocity;
-
-        /// <summary>
-        /// X value
-        /// </summary>
-        private double _xLocation;
-
-        /// <summary>
-        /// y Value
-        /// </summary>
-        private double _yLocation;
-
-        /// <summary>
-        /// Z value
-        /// </summary>
-        private double _zLocation;
-
-        private float _psi;
-
-        private float _theta;
-
-        private float _phi;
-
-        /// <summary>
-        /// a series of bit flags that are used to help draw the entity, such as smoking, on fire, etc.
-        /// </summary>
-        private int _entityAppearance;
-
-        /// <summary>
-        /// enumeration of what dead reckoning algorighm to use
-        /// </summary>
-        private byte _deadReckoningAlgorithm;
-
-        /// <summary>
-        /// other parameters to use in the dead reckoning algorithm
-        /// </summary>
-        private byte[] _otherParameters = new byte[15];
-
-        /// <summary>
-        /// X value
-        /// </summary>
-        private float _xAcceleration;
-
-        /// <summary>
-        /// y Value
-        /// </summary>
-        private float _yAcceleration;
-
-        /// <summary>
-        /// Z value
-        /// </summary>
-        private float _zAcceleration;
-
-        /// <summary>
-        /// X value
-        /// </summary>
-        private float _xAngularVelocity;
-
-        /// <summary>
-        /// y Value
-        /// </summary>
-        private float _yAngularVelocity;
-
-        /// <summary>
-        /// Z value
-        /// </summary>
-        private float _zAngularVelocity;
-
-        /// <summary>
-        /// characters that can be used for debugging, or to draw unique strings on the side of entities in the world
-        /// </summary>
-        private byte[] _marking = new byte[12];
-
-        /// <summary>
-        /// a series of bit flags
-        /// </summary>
-        private int _capabilities;
-
-        /// <summary>
-        /// variable length list of articulation parameters
-        /// </summary>
-        private List<ArticulationParameter> _articulationParameters = new List<ArticulationParameter>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="FastEntityStatePdu"/> class.
         /// </summary>
         public FastEntityStatePdu()
         {
-            PduType = (byte)1;
+            PduType = 1;
         }
 
         /// <summary>
@@ -255,12 +71,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(FastEntityStatePdu left, FastEntityStatePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(FastEntityStatePdu left, FastEntityStatePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -268,28 +81,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(FastEntityStatePdu left, FastEntityStatePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
+            int marshalSize = base.GetMarshalledSize();
             marshalSize += 2;  // this._site
             marshalSize += 2;  // this._application
             marshalSize += 2;  // this._entity
@@ -329,9 +128,9 @@ namespace OpenDis.Dis1998
             marshalSize += 4;  // this._zAngularVelocity
             marshalSize += 12 * 1;  // _marking
             marshalSize += 4;  // this._capabilities
-            for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+            for (int idx = 0; idx < ArticulationParameters.Count; idx++)
             {
-                ArticulationParameter listElement = (ArticulationParameter)this._articulationParameters[idx];
+                var listElement = ArticulationParameters[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -339,700 +138,261 @@ namespace OpenDis.Dis1998
         }
 
         /// <summary>
-        /// Gets or sets the The site ID
+        /// Gets or sets the site ID
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "site")]
-        public ushort Site
-        {
-            get
-            {
-                return this._site;
-            }
-
-            set
-            {
-                this._site = value;
-            }
-        }
+        public ushort Site { get; set; }
 
         /// <summary>
-        /// Gets or sets the The application ID
+        /// Gets or sets the application ID
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "application")]
-        public ushort Application
-        {
-            get
-            {
-                return this._application;
-            }
-
-            set
-            {
-                this._application = value;
-            }
-        }
+        public ushort Application { get; set; }
 
         /// <summary>
-        /// Gets or sets the the entity ID
+        /// Gets or sets the entity ID
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "entity")]
-        public ushort Entity
-        {
-            get
-            {
-                return this._entity;
-            }
-
-            set
-            {
-                this._entity = value;
-            }
-        }
+        public ushort Entity { get; set; }
 
         /// <summary>
         /// Gets or sets the what force this entity is affiliated with, eg red, blue, neutral, etc
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "forceId")]
-        public byte ForceId
-        {
-            get
-            {
-                return this._forceId;
-            }
-
-            set
-            {
-                this._forceId = value;
-            }
-        }
+        public byte ForceId { get; set; }
 
         /// <summary>
         /// Gets or sets the How many articulation parameters are in the variable length list
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfArticulationParameters method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfArticulationParameters method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfArticulationParameters")]
-        public byte NumberOfArticulationParameters
-        {
-            get
-            {
-                return this._numberOfArticulationParameters;
-            }
-
-            set
-            {
-                this._numberOfArticulationParameters = value;
-            }
-        }
+        public byte NumberOfArticulationParameters { get; set; }
 
         /// <summary>
         /// Gets or sets the Kind of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "entityKind")]
-        public byte EntityKind
-        {
-            get
-            {
-                return this._entityKind;
-            }
-
-            set
-            {
-                this._entityKind = value;
-            }
-        }
+        public byte EntityKind { get; set; }
 
         /// <summary>
         /// Gets or sets the Domain of entity (air, surface, subsurface, space, etc)
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "domain")]
-        public byte Domain
-        {
-            get
-            {
-                return this._domain;
-            }
-
-            set
-            {
-                this._domain = value;
-            }
-        }
+        public byte Domain { get; set; }
 
         /// <summary>
         /// Gets or sets the country to which the design of the entity is attributed
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "country")]
-        public ushort Country
-        {
-            get
-            {
-                return this._country;
-            }
-
-            set
-            {
-                this._country = value;
-            }
-        }
+        public ushort Country { get; set; }
 
         /// <summary>
         /// Gets or sets the category of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "category")]
-        public byte Category
-        {
-            get
-            {
-                return this._category;
-            }
-
-            set
-            {
-                this._category = value;
-            }
-        }
+        public byte Category { get; set; }
 
         /// <summary>
         /// Gets or sets the subcategory of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "subcategory")]
-        public byte Subcategory
-        {
-            get
-            {
-                return this._subcategory;
-            }
-
-            set
-            {
-                this._subcategory = value;
-            }
-        }
+        public byte Subcategory { get; set; }
 
         /// <summary>
         /// Gets or sets the specific info based on subcategory field
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "specific")]
-        public byte Specific
-        {
-            get
-            {
-                return this._specific;
-            }
-
-            set
-            {
-                this._specific = value;
-            }
-        }
+        public byte Specific { get; set; }
 
         /// <summary>
         /// Gets or sets the extra
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "extra")]
-        public byte Extra
-        {
-            get
-            {
-                return this._extra;
-            }
-
-            set
-            {
-                this._extra = value;
-            }
-        }
+        public byte Extra { get; set; }
 
         /// <summary>
         /// Gets or sets the Kind of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "altEntityKind")]
-        public byte AltEntityKind
-        {
-            get
-            {
-                return this._altEntityKind;
-            }
-
-            set
-            {
-                this._altEntityKind = value;
-            }
-        }
+        public byte AltEntityKind { get; set; }
 
         /// <summary>
         /// Gets or sets the Domain of entity (air, surface, subsurface, space, etc)
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "altDomain")]
-        public byte AltDomain
-        {
-            get
-            {
-                return this._altDomain;
-            }
-
-            set
-            {
-                this._altDomain = value;
-            }
-        }
+        public byte AltDomain { get; set; }
 
         /// <summary>
         /// Gets or sets the country to which the design of the entity is attributed
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "altCountry")]
-        public ushort AltCountry
-        {
-            get
-            {
-                return this._altCountry;
-            }
-
-            set
-            {
-                this._altCountry = value;
-            }
-        }
+        public ushort AltCountry { get; set; }
 
         /// <summary>
         /// Gets or sets the category of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "altCategory")]
-        public byte AltCategory
-        {
-            get
-            {
-                return this._altCategory;
-            }
-
-            set
-            {
-                this._altCategory = value;
-            }
-        }
+        public byte AltCategory { get; set; }
 
         /// <summary>
         /// Gets or sets the subcategory of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "altSubcategory")]
-        public byte AltSubcategory
-        {
-            get
-            {
-                return this._altSubcategory;
-            }
-
-            set
-            {
-                this._altSubcategory = value;
-            }
-        }
+        public byte AltSubcategory { get; set; }
 
         /// <summary>
         /// Gets or sets the specific info based on subcategory field
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "altSpecific")]
-        public byte AltSpecific
-        {
-            get
-            {
-                return this._altSpecific;
-            }
-
-            set
-            {
-                this._altSpecific = value;
-            }
-        }
+        public byte AltSpecific { get; set; }
 
         /// <summary>
         /// Gets or sets the altExtra
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "altExtra")]
-        public byte AltExtra
-        {
-            get
-            {
-                return this._altExtra;
-            }
-
-            set
-            {
-                this._altExtra = value;
-            }
-        }
+        public byte AltExtra { get; set; }
 
         /// <summary>
         /// Gets or sets the X velo
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "xVelocity")]
-        public float XVelocity
-        {
-            get
-            {
-                return this._xVelocity;
-            }
-
-            set
-            {
-                this._xVelocity = value;
-            }
-        }
+        public float XVelocity { get; set; }
 
         /// <summary>
         /// Gets or sets the y Value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "yVelocity")]
-        public float YVelocity
-        {
-            get
-            {
-                return this._yVelocity;
-            }
-
-            set
-            {
-                this._yVelocity = value;
-            }
-        }
+        public float YVelocity { get; set; }
 
         /// <summary>
         /// Gets or sets the Z value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "zVelocity")]
-        public float ZVelocity
-        {
-            get
-            {
-                return this._zVelocity;
-            }
-
-            set
-            {
-                this._zVelocity = value;
-            }
-        }
+        public float ZVelocity { get; set; }
 
         /// <summary>
         /// Gets or sets the X value
         /// </summary>
         [XmlElement(Type = typeof(double), ElementName = "xLocation")]
-        public double XLocation
-        {
-            get
-            {
-                return this._xLocation;
-            }
-
-            set
-            {
-                this._xLocation = value;
-            }
-        }
+        public double XLocation { get; set; }
 
         /// <summary>
         /// Gets or sets the y Value
         /// </summary>
         [XmlElement(Type = typeof(double), ElementName = "yLocation")]
-        public double YLocation
-        {
-            get
-            {
-                return this._yLocation;
-            }
-
-            set
-            {
-                this._yLocation = value;
-            }
-        }
+        public double YLocation { get; set; }
 
         /// <summary>
         /// Gets or sets the Z value
         /// </summary>
         [XmlElement(Type = typeof(double), ElementName = "zLocation")]
-        public double ZLocation
-        {
-            get
-            {
-                return this._zLocation;
-            }
-
-            set
-            {
-                this._zLocation = value;
-            }
-        }
+        public double ZLocation { get; set; }
 
         /// <summary>
         /// Gets or sets the psi
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "psi")]
-        public float Psi
-        {
-            get
-            {
-                return this._psi;
-            }
-
-            set
-            {
-                this._psi = value;
-            }
-        }
+        public float Psi { get; set; }
 
         /// <summary>
-        /// Gets or sets the theta
+        /// Gets or sets theta
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "theta")]
-        public float Theta
-        {
-            get
-            {
-                return this._theta;
-            }
-
-            set
-            {
-                this._theta = value;
-            }
-        }
+        public float Theta { get; set; }
 
         /// <summary>
         /// Gets or sets the phi
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "phi")]
-        public float Phi
-        {
-            get
-            {
-                return this._phi;
-            }
-
-            set
-            {
-                this._phi = value;
-            }
-        }
+        public float Phi { get; set; }
 
         /// <summary>
         /// Gets or sets the a series of bit flags that are used to help draw the entity, such as smoking, on fire, etc.
         /// </summary>
         [XmlElement(Type = typeof(int), ElementName = "entityAppearance")]
-        public int EntityAppearance
-        {
-            get
-            {
-                return this._entityAppearance;
-            }
-
-            set
-            {
-                this._entityAppearance = value;
-            }
-        }
+        public int EntityAppearance { get; set; }
 
         /// <summary>
         /// Gets or sets the enumeration of what dead reckoning algorighm to use
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "deadReckoningAlgorithm")]
-        public byte DeadReckoningAlgorithm
-        {
-            get
-            {
-                return this._deadReckoningAlgorithm;
-            }
-
-            set
-            {
-                this._deadReckoningAlgorithm = value;
-            }
-        }
+        public byte DeadReckoningAlgorithm { get; set; }
 
         /// <summary>
         /// Gets or sets the other parameters to use in the dead reckoning algorithm
         /// </summary>
         [XmlArray(ElementName = "otherParameters")]
-        public byte[] OtherParameters
-        {
-            get
-            {
-                return this._otherParameters;
-            }
-
-            set
-            {
-                this._otherParameters = value;
-            }
-}
+        public byte[] OtherParameters { get; set; } = new byte[15];
 
         /// <summary>
         /// Gets or sets the X value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "xAcceleration")]
-        public float XAcceleration
-        {
-            get
-            {
-                return this._xAcceleration;
-            }
-
-            set
-            {
-                this._xAcceleration = value;
-            }
-        }
+        public float XAcceleration { get; set; }
 
         /// <summary>
         /// Gets or sets the y Value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "yAcceleration")]
-        public float YAcceleration
-        {
-            get
-            {
-                return this._yAcceleration;
-            }
-
-            set
-            {
-                this._yAcceleration = value;
-            }
-        }
+        public float YAcceleration { get; set; }
 
         /// <summary>
         /// Gets or sets the Z value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "zAcceleration")]
-        public float ZAcceleration
-        {
-            get
-            {
-                return this._zAcceleration;
-            }
-
-            set
-            {
-                this._zAcceleration = value;
-            }
-        }
+        public float ZAcceleration { get; set; }
 
         /// <summary>
         /// Gets or sets the X value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "xAngularVelocity")]
-        public float XAngularVelocity
-        {
-            get
-            {
-                return this._xAngularVelocity;
-            }
-
-            set
-            {
-                this._xAngularVelocity = value;
-            }
-        }
+        public float XAngularVelocity { get; set; }
 
         /// <summary>
         /// Gets or sets the y Value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "yAngularVelocity")]
-        public float YAngularVelocity
-        {
-            get
-            {
-                return this._yAngularVelocity;
-            }
-
-            set
-            {
-                this._yAngularVelocity = value;
-            }
-        }
+        public float YAngularVelocity { get; set; }
 
         /// <summary>
         /// Gets or sets the Z value
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "zAngularVelocity")]
-        public float ZAngularVelocity
-        {
-            get
-            {
-                return this._zAngularVelocity;
-            }
-
-            set
-            {
-                this._zAngularVelocity = value;
-            }
-        }
+        public float ZAngularVelocity { get; set; }
 
         /// <summary>
-        /// Gets or sets the characters that can be used for debugging, or to draw unique strings on the side of entities in the world
+        /// Gets or sets the characters that can be used for debugging, or to draw unique strings on the side of entities in
+        /// the world
         /// </summary>
         [XmlArray(ElementName = "marking")]
-        public byte[] Marking
-        {
-            get
-            {
-                return this._marking;
-            }
-
-            set
-            {
-                this._marking = value;
-            }
-}
+        public byte[] Marking { get; set; } = new byte[12];
 
         /// <summary>
         /// Gets or sets the a series of bit flags
         /// </summary>
         [XmlElement(Type = typeof(int), ElementName = "capabilities")]
-        public int Capabilities
-        {
-            get
-            {
-                return this._capabilities;
-            }
-
-            set
-            {
-                this._capabilities = value;
-            }
-        }
+        public int Capabilities { get; set; }
 
         /// <summary>
         /// Gets the variable length list of articulation parameters
         /// </summary>
         [XmlElement(ElementName = "articulationParametersList", Type = typeof(List<ArticulationParameter>))]
-        public List<ArticulationParameter> ArticulationParameters
-        {
-            get
-            {
-                return this._articulationParameters;
-            }
-        }
+        public List<ArticulationParameter> ArticulationParameters { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -1041,75 +401,75 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedShort((ushort)this._site);
-                    dos.WriteUnsignedShort((ushort)this._application);
-                    dos.WriteUnsignedShort((ushort)this._entity);
-                    dos.WriteUnsignedByte((byte)this._forceId);
-                    dos.WriteByte((byte)this._articulationParameters.Count);
-                    dos.WriteUnsignedByte((byte)this._entityKind);
-                    dos.WriteUnsignedByte((byte)this._domain);
-                    dos.WriteUnsignedShort((ushort)this._country);
-                    dos.WriteUnsignedByte((byte)this._category);
-                    dos.WriteUnsignedByte((byte)this._subcategory);
-                    dos.WriteUnsignedByte((byte)this._specific);
-                    dos.WriteUnsignedByte((byte)this._extra);
-                    dos.WriteUnsignedByte((byte)this._altEntityKind);
-                    dos.WriteUnsignedByte((byte)this._altDomain);
-                    dos.WriteUnsignedShort((ushort)this._altCountry);
-                    dos.WriteUnsignedByte((byte)this._altCategory);
-                    dos.WriteUnsignedByte((byte)this._altSubcategory);
-                    dos.WriteUnsignedByte((byte)this._altSpecific);
-                    dos.WriteUnsignedByte((byte)this._altExtra);
-                    dos.WriteFloat((float)this._xVelocity);
-                    dos.WriteFloat((float)this._yVelocity);
-                    dos.WriteFloat((float)this._zVelocity);
-                    dos.WriteDouble((double)this._xLocation);
-                    dos.WriteDouble((double)this._yLocation);
-                    dos.WriteDouble((double)this._zLocation);
-                    dos.WriteFloat((float)this._psi);
-                    dos.WriteFloat((float)this._theta);
-                    dos.WriteFloat((float)this._phi);
-                    dos.WriteInt((int)this._entityAppearance);
-                    dos.WriteUnsignedByte((byte)this._deadReckoningAlgorithm);
+                    dos.WriteUnsignedShort(Site);
+                    dos.WriteUnsignedShort(Application);
+                    dos.WriteUnsignedShort(Entity);
+                    dos.WriteUnsignedByte(ForceId);
+                    dos.WriteByte((byte)ArticulationParameters.Count);
+                    dos.WriteUnsignedByte(EntityKind);
+                    dos.WriteUnsignedByte(Domain);
+                    dos.WriteUnsignedShort(Country);
+                    dos.WriteUnsignedByte(Category);
+                    dos.WriteUnsignedByte(Subcategory);
+                    dos.WriteUnsignedByte(Specific);
+                    dos.WriteUnsignedByte(Extra);
+                    dos.WriteUnsignedByte(AltEntityKind);
+                    dos.WriteUnsignedByte(AltDomain);
+                    dos.WriteUnsignedShort(AltCountry);
+                    dos.WriteUnsignedByte(AltCategory);
+                    dos.WriteUnsignedByte(AltSubcategory);
+                    dos.WriteUnsignedByte(AltSpecific);
+                    dos.WriteUnsignedByte(AltExtra);
+                    dos.WriteFloat((float)XVelocity);
+                    dos.WriteFloat((float)YVelocity);
+                    dos.WriteFloat((float)ZVelocity);
+                    dos.WriteDouble((double)XLocation);
+                    dos.WriteDouble((double)YLocation);
+                    dos.WriteDouble(ZLocation);
+                    dos.WriteFloat((float)Psi);
+                    dos.WriteFloat((float)Theta);
+                    dos.WriteFloat(Phi);
+                    dos.WriteInt(EntityAppearance);
+                    dos.WriteUnsignedByte(DeadReckoningAlgorithm);
 
-                    for (int idx = 0; idx < this._otherParameters.Length; idx++)
+                    for (int idx = 0; idx < OtherParameters.Length; idx++)
                     {
-                        dos.WriteByte(this._otherParameters[idx]);
+                        dos.WriteByte(OtherParameters[idx]);
                     }
 
-                    dos.WriteFloat((float)this._xAcceleration);
-                    dos.WriteFloat((float)this._yAcceleration);
-                    dos.WriteFloat((float)this._zAcceleration);
-                    dos.WriteFloat((float)this._xAngularVelocity);
-                    dos.WriteFloat((float)this._yAngularVelocity);
-                    dos.WriteFloat((float)this._zAngularVelocity);
+                    dos.WriteFloat((float)XAcceleration);
+                    dos.WriteFloat((float)YAcceleration);
+                    dos.WriteFloat((float)ZAcceleration);
+                    dos.WriteFloat((float)XAngularVelocity);
+                    dos.WriteFloat((float)YAngularVelocity);
+                    dos.WriteFloat((float)ZAngularVelocity);
 
-                    for (int idx = 0; idx < this._marking.Length; idx++)
+                    for (int idx = 0; idx < Marking.Length; idx++)
                     {
-                        dos.WriteByte(this._marking[idx]);
+                        dos.WriteByte(Marking[idx]);
                     }
 
-                    dos.WriteInt((int)this._capabilities);
+                    dos.WriteInt(Capabilities);
 
-                    for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                    for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                     {
-                        ArticulationParameter aArticulationParameter = (ArticulationParameter)this._articulationParameters[idx];
+                        var aArticulationParameter = ArticulationParameters[idx];
                         aArticulationParameter.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -1124,89 +484,82 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._site = dis.ReadUnsignedShort();
-                    this._application = dis.ReadUnsignedShort();
-                    this._entity = dis.ReadUnsignedShort();
-                    this._forceId = dis.ReadUnsignedByte();
-                    this._numberOfArticulationParameters = dis.ReadByte();
-                    this._entityKind = dis.ReadUnsignedByte();
-                    this._domain = dis.ReadUnsignedByte();
-                    this._country = dis.ReadUnsignedShort();
-                    this._category = dis.ReadUnsignedByte();
-                    this._subcategory = dis.ReadUnsignedByte();
-                    this._specific = dis.ReadUnsignedByte();
-                    this._extra = dis.ReadUnsignedByte();
-                    this._altEntityKind = dis.ReadUnsignedByte();
-                    this._altDomain = dis.ReadUnsignedByte();
-                    this._altCountry = dis.ReadUnsignedShort();
-                    this._altCategory = dis.ReadUnsignedByte();
-                    this._altSubcategory = dis.ReadUnsignedByte();
-                    this._altSpecific = dis.ReadUnsignedByte();
-                    this._altExtra = dis.ReadUnsignedByte();
-                    this._xVelocity = dis.ReadFloat();
-                    this._yVelocity = dis.ReadFloat();
-                    this._zVelocity = dis.ReadFloat();
-                    this._xLocation = dis.ReadDouble();
-                    this._yLocation = dis.ReadDouble();
-                    this._zLocation = dis.ReadDouble();
-                    this._psi = dis.ReadFloat();
-                    this._theta = dis.ReadFloat();
-                    this._phi = dis.ReadFloat();
-                    this._entityAppearance = dis.ReadInt();
-                    this._deadReckoningAlgorithm = dis.ReadUnsignedByte();
+                    Site = dis.ReadUnsignedShort();
+                    Application = dis.ReadUnsignedShort();
+                    Entity = dis.ReadUnsignedShort();
+                    ForceId = dis.ReadUnsignedByte();
+                    NumberOfArticulationParameters = dis.ReadByte();
+                    EntityKind = dis.ReadUnsignedByte();
+                    Domain = dis.ReadUnsignedByte();
+                    Country = dis.ReadUnsignedShort();
+                    Category = dis.ReadUnsignedByte();
+                    Subcategory = dis.ReadUnsignedByte();
+                    Specific = dis.ReadUnsignedByte();
+                    Extra = dis.ReadUnsignedByte();
+                    AltEntityKind = dis.ReadUnsignedByte();
+                    AltDomain = dis.ReadUnsignedByte();
+                    AltCountry = dis.ReadUnsignedShort();
+                    AltCategory = dis.ReadUnsignedByte();
+                    AltSubcategory = dis.ReadUnsignedByte();
+                    AltSpecific = dis.ReadUnsignedByte();
+                    AltExtra = dis.ReadUnsignedByte();
+                    XVelocity = dis.ReadFloat();
+                    YVelocity = dis.ReadFloat();
+                    ZVelocity = dis.ReadFloat();
+                    XLocation = dis.ReadDouble();
+                    YLocation = dis.ReadDouble();
+                    ZLocation = dis.ReadDouble();
+                    Psi = dis.ReadFloat();
+                    Theta = dis.ReadFloat();
+                    Phi = dis.ReadFloat();
+                    EntityAppearance = dis.ReadInt();
+                    DeadReckoningAlgorithm = dis.ReadUnsignedByte();
 
-                    for (int idx = 0; idx < this._otherParameters.Length; idx++)
+                    for (int idx = 0; idx < OtherParameters.Length; idx++)
                     {
-                        this._otherParameters[idx] = dis.ReadByte();
+                        OtherParameters[idx] = dis.ReadByte();
                     }
 
-                    this._xAcceleration = dis.ReadFloat();
-                    this._yAcceleration = dis.ReadFloat();
-                    this._zAcceleration = dis.ReadFloat();
-                    this._xAngularVelocity = dis.ReadFloat();
-                    this._yAngularVelocity = dis.ReadFloat();
-                    this._zAngularVelocity = dis.ReadFloat();
+                    XAcceleration = dis.ReadFloat();
+                    YAcceleration = dis.ReadFloat();
+                    ZAcceleration = dis.ReadFloat();
+                    XAngularVelocity = dis.ReadFloat();
+                    YAngularVelocity = dis.ReadFloat();
+                    ZAngularVelocity = dis.ReadFloat();
 
-                    for (int idx = 0; idx < this._marking.Length; idx++)
+                    for (int idx = 0; idx < Marking.Length; idx++)
                     {
-                        this._marking[idx] = dis.ReadByte();
+                        Marking[idx] = dis.ReadByte();
                     }
 
-                    this._capabilities = dis.ReadInt();
+                    Capabilities = dis.ReadInt();
 
-                    for (int idx = 0; idx < this.NumberOfArticulationParameters; idx++)
+                    for (int idx = 0; idx < NumberOfArticulationParameters; idx++)
                     {
-                        ArticulationParameter anX = new ArticulationParameter();
+                        var anX = new ArticulationParameter();
                         anX.Unmarshal(dis);
-                        this._articulationParameters.Add(anX);
+                        ArticulationParameters.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -1214,57 +567,57 @@ namespace OpenDis.Dis1998
             base.Reflection(sb);
             try
             {
-                sb.AppendLine("<site type=\"ushort\">" + this._site.ToString(CultureInfo.InvariantCulture) + "</site>");
-                sb.AppendLine("<application type=\"ushort\">" + this._application.ToString(CultureInfo.InvariantCulture) + "</application>");
-                sb.AppendLine("<entity type=\"ushort\">" + this._entity.ToString(CultureInfo.InvariantCulture) + "</entity>");
-                sb.AppendLine("<forceId type=\"byte\">" + this._forceId.ToString(CultureInfo.InvariantCulture) + "</forceId>");
-                sb.AppendLine("<articulationParameters type=\"byte\">" + this._articulationParameters.Count.ToString(CultureInfo.InvariantCulture) + "</articulationParameters>");
-                sb.AppendLine("<entityKind type=\"byte\">" + this._entityKind.ToString(CultureInfo.InvariantCulture) + "</entityKind>");
-                sb.AppendLine("<domain type=\"byte\">" + this._domain.ToString(CultureInfo.InvariantCulture) + "</domain>");
-                sb.AppendLine("<country type=\"ushort\">" + this._country.ToString(CultureInfo.InvariantCulture) + "</country>");
-                sb.AppendLine("<category type=\"byte\">" + this._category.ToString(CultureInfo.InvariantCulture) + "</category>");
-                sb.AppendLine("<subcategory type=\"byte\">" + this._subcategory.ToString(CultureInfo.InvariantCulture) + "</subcategory>");
-                sb.AppendLine("<specific type=\"byte\">" + this._specific.ToString(CultureInfo.InvariantCulture) + "</specific>");
-                sb.AppendLine("<extra type=\"byte\">" + this._extra.ToString(CultureInfo.InvariantCulture) + "</extra>");
-                sb.AppendLine("<altEntityKind type=\"byte\">" + this._altEntityKind.ToString(CultureInfo.InvariantCulture) + "</altEntityKind>");
-                sb.AppendLine("<altDomain type=\"byte\">" + this._altDomain.ToString(CultureInfo.InvariantCulture) + "</altDomain>");
-                sb.AppendLine("<altCountry type=\"ushort\">" + this._altCountry.ToString(CultureInfo.InvariantCulture) + "</altCountry>");
-                sb.AppendLine("<altCategory type=\"byte\">" + this._altCategory.ToString(CultureInfo.InvariantCulture) + "</altCategory>");
-                sb.AppendLine("<altSubcategory type=\"byte\">" + this._altSubcategory.ToString(CultureInfo.InvariantCulture) + "</altSubcategory>");
-                sb.AppendLine("<altSpecific type=\"byte\">" + this._altSpecific.ToString(CultureInfo.InvariantCulture) + "</altSpecific>");
-                sb.AppendLine("<altExtra type=\"byte\">" + this._altExtra.ToString(CultureInfo.InvariantCulture) + "</altExtra>");
-                sb.AppendLine("<xVelocity type=\"float\">" + this._xVelocity.ToString(CultureInfo.InvariantCulture) + "</xVelocity>");
-                sb.AppendLine("<yVelocity type=\"float\">" + this._yVelocity.ToString(CultureInfo.InvariantCulture) + "</yVelocity>");
-                sb.AppendLine("<zVelocity type=\"float\">" + this._zVelocity.ToString(CultureInfo.InvariantCulture) + "</zVelocity>");
-                sb.AppendLine("<xLocation type=\"double\">" + this._xLocation.ToString(CultureInfo.InvariantCulture) + "</xLocation>");
-                sb.AppendLine("<yLocation type=\"double\">" + this._yLocation.ToString(CultureInfo.InvariantCulture) + "</yLocation>");
-                sb.AppendLine("<zLocation type=\"double\">" + this._zLocation.ToString(CultureInfo.InvariantCulture) + "</zLocation>");
-                sb.AppendLine("<psi type=\"float\">" + this._psi.ToString(CultureInfo.InvariantCulture) + "</psi>");
-                sb.AppendLine("<theta type=\"float\">" + this._theta.ToString(CultureInfo.InvariantCulture) + "</theta>");
-                sb.AppendLine("<phi type=\"float\">" + this._phi.ToString(CultureInfo.InvariantCulture) + "</phi>");
-                sb.AppendLine("<entityAppearance type=\"int\">" + this._entityAppearance.ToString(CultureInfo.InvariantCulture) + "</entityAppearance>");
-                sb.AppendLine("<deadReckoningAlgorithm type=\"byte\">" + this._deadReckoningAlgorithm.ToString(CultureInfo.InvariantCulture) + "</deadReckoningAlgorithm>");
-                for (int idx = 0; idx < this._otherParameters.Length; idx++)
+                sb.AppendLine("<site type=\"ushort\">" + Site.ToString(CultureInfo.InvariantCulture) + "</site>");
+                sb.AppendLine("<application type=\"ushort\">" + Application.ToString(CultureInfo.InvariantCulture) + "</application>");
+                sb.AppendLine("<entity type=\"ushort\">" + Entity.ToString(CultureInfo.InvariantCulture) + "</entity>");
+                sb.AppendLine("<forceId type=\"byte\">" + ForceId.ToString(CultureInfo.InvariantCulture) + "</forceId>");
+                sb.AppendLine("<articulationParameters type=\"byte\">" + ArticulationParameters.Count.ToString(CultureInfo.InvariantCulture) + "</articulationParameters>");
+                sb.AppendLine("<entityKind type=\"byte\">" + EntityKind.ToString(CultureInfo.InvariantCulture) + "</entityKind>");
+                sb.AppendLine("<domain type=\"byte\">" + Domain.ToString(CultureInfo.InvariantCulture) + "</domain>");
+                sb.AppendLine("<country type=\"ushort\">" + Country.ToString(CultureInfo.InvariantCulture) + "</country>");
+                sb.AppendLine("<category type=\"byte\">" + Category.ToString(CultureInfo.InvariantCulture) + "</category>");
+                sb.AppendLine("<subcategory type=\"byte\">" + Subcategory.ToString(CultureInfo.InvariantCulture) + "</subcategory>");
+                sb.AppendLine("<specific type=\"byte\">" + Specific.ToString(CultureInfo.InvariantCulture) + "</specific>");
+                sb.AppendLine("<extra type=\"byte\">" + Extra.ToString(CultureInfo.InvariantCulture) + "</extra>");
+                sb.AppendLine("<altEntityKind type=\"byte\">" + AltEntityKind.ToString(CultureInfo.InvariantCulture) + "</altEntityKind>");
+                sb.AppendLine("<altDomain type=\"byte\">" + AltDomain.ToString(CultureInfo.InvariantCulture) + "</altDomain>");
+                sb.AppendLine("<altCountry type=\"ushort\">" + AltCountry.ToString(CultureInfo.InvariantCulture) + "</altCountry>");
+                sb.AppendLine("<altCategory type=\"byte\">" + AltCategory.ToString(CultureInfo.InvariantCulture) + "</altCategory>");
+                sb.AppendLine("<altSubcategory type=\"byte\">" + AltSubcategory.ToString(CultureInfo.InvariantCulture) + "</altSubcategory>");
+                sb.AppendLine("<altSpecific type=\"byte\">" + AltSpecific.ToString(CultureInfo.InvariantCulture) + "</altSpecific>");
+                sb.AppendLine("<altExtra type=\"byte\">" + AltExtra.ToString(CultureInfo.InvariantCulture) + "</altExtra>");
+                sb.AppendLine("<xVelocity type=\"float\">" + XVelocity.ToString(CultureInfo.InvariantCulture) + "</xVelocity>");
+                sb.AppendLine("<yVelocity type=\"float\">" + YVelocity.ToString(CultureInfo.InvariantCulture) + "</yVelocity>");
+                sb.AppendLine("<zVelocity type=\"float\">" + ZVelocity.ToString(CultureInfo.InvariantCulture) + "</zVelocity>");
+                sb.AppendLine("<xLocation type=\"double\">" + XLocation.ToString(CultureInfo.InvariantCulture) + "</xLocation>");
+                sb.AppendLine("<yLocation type=\"double\">" + YLocation.ToString(CultureInfo.InvariantCulture) + "</yLocation>");
+                sb.AppendLine("<zLocation type=\"double\">" + ZLocation.ToString(CultureInfo.InvariantCulture) + "</zLocation>");
+                sb.AppendLine("<psi type=\"float\">" + Psi.ToString(CultureInfo.InvariantCulture) + "</psi>");
+                sb.AppendLine("<theta type=\"float\">" + Theta.ToString(CultureInfo.InvariantCulture) + "</theta>");
+                sb.AppendLine("<phi type=\"float\">" + Phi.ToString(CultureInfo.InvariantCulture) + "</phi>");
+                sb.AppendLine("<entityAppearance type=\"int\">" + EntityAppearance.ToString(CultureInfo.InvariantCulture) + "</entityAppearance>");
+                sb.AppendLine("<deadReckoningAlgorithm type=\"byte\">" + DeadReckoningAlgorithm.ToString(CultureInfo.InvariantCulture) + "</deadReckoningAlgorithm>");
+                for (int idx = 0; idx < OtherParameters.Length; idx++)
                 {
-                    sb.AppendLine("<otherParameters" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"byte\">" + this._otherParameters[idx] + "</otherParameters" + idx.ToString(CultureInfo.InvariantCulture) + ">");
-            }
+                    sb.AppendLine("<otherParameters" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"byte\">" + OtherParameters[idx] + "</otherParameters" + idx.ToString(CultureInfo.InvariantCulture) + ">");
+                }
 
-                sb.AppendLine("<xAcceleration type=\"float\">" + this._xAcceleration.ToString(CultureInfo.InvariantCulture) + "</xAcceleration>");
-                sb.AppendLine("<yAcceleration type=\"float\">" + this._yAcceleration.ToString(CultureInfo.InvariantCulture) + "</yAcceleration>");
-                sb.AppendLine("<zAcceleration type=\"float\">" + this._zAcceleration.ToString(CultureInfo.InvariantCulture) + "</zAcceleration>");
-                sb.AppendLine("<xAngularVelocity type=\"float\">" + this._xAngularVelocity.ToString(CultureInfo.InvariantCulture) + "</xAngularVelocity>");
-                sb.AppendLine("<yAngularVelocity type=\"float\">" + this._yAngularVelocity.ToString(CultureInfo.InvariantCulture) + "</yAngularVelocity>");
-                sb.AppendLine("<zAngularVelocity type=\"float\">" + this._zAngularVelocity.ToString(CultureInfo.InvariantCulture) + "</zAngularVelocity>");
-                for (int idx = 0; idx < this._marking.Length; idx++)
+                sb.AppendLine("<xAcceleration type=\"float\">" + XAcceleration.ToString(CultureInfo.InvariantCulture) + "</xAcceleration>");
+                sb.AppendLine("<yAcceleration type=\"float\">" + YAcceleration.ToString(CultureInfo.InvariantCulture) + "</yAcceleration>");
+                sb.AppendLine("<zAcceleration type=\"float\">" + ZAcceleration.ToString(CultureInfo.InvariantCulture) + "</zAcceleration>");
+                sb.AppendLine("<xAngularVelocity type=\"float\">" + XAngularVelocity.ToString(CultureInfo.InvariantCulture) + "</xAngularVelocity>");
+                sb.AppendLine("<yAngularVelocity type=\"float\">" + YAngularVelocity.ToString(CultureInfo.InvariantCulture) + "</yAngularVelocity>");
+                sb.AppendLine("<zAngularVelocity type=\"float\">" + ZAngularVelocity.ToString(CultureInfo.InvariantCulture) + "</zAngularVelocity>");
+                for (int idx = 0; idx < Marking.Length; idx++)
                 {
-                    sb.AppendLine("<marking" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"byte\">" + this._marking[idx] + "</marking" + idx.ToString(CultureInfo.InvariantCulture) + ">");
-            }
+                    sb.AppendLine("<marking" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"byte\">" + Marking[idx] + "</marking" + idx.ToString(CultureInfo.InvariantCulture) + ">");
+                }
 
-                sb.AppendLine("<capabilities type=\"int\">" + this._capabilities.ToString(CultureInfo.InvariantCulture) + "</capabilities>");
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                sb.AppendLine("<capabilities type=\"int\">" + Capabilities.ToString(CultureInfo.InvariantCulture) + "</capabilities>");
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
                     sb.AppendLine("<articulationParameters" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"ArticulationParameter\">");
-                    ArticulationParameter aArticulationParameter = (ArticulationParameter)this._articulationParameters[idx];
+                    var aArticulationParameter = ArticulationParameters[idx];
                     aArticulationParameter.Reflection(sb);
                     sb.AppendLine("</articulationParameters" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -1273,202 +626,184 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as FastEntityStatePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as FastEntityStatePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(FastEntityStatePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (this._site != obj._site)
+            bool ivarsEqual = base.Equals(obj);
+            if (Site != obj.Site)
             {
                 ivarsEqual = false;
             }
 
-            if (this._application != obj._application)
+            if (Application != obj.Application)
             {
                 ivarsEqual = false;
             }
 
-            if (this._entity != obj._entity)
+            if (Entity != obj.Entity)
             {
                 ivarsEqual = false;
             }
 
-            if (this._forceId != obj._forceId)
+            if (ForceId != obj.ForceId)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfArticulationParameters != obj._numberOfArticulationParameters)
+            if (NumberOfArticulationParameters != obj.NumberOfArticulationParameters)
             {
                 ivarsEqual = false;
             }
 
-            if (this._entityKind != obj._entityKind)
+            if (EntityKind != obj.EntityKind)
             {
                 ivarsEqual = false;
             }
 
-            if (this._domain != obj._domain)
+            if (Domain != obj.Domain)
             {
                 ivarsEqual = false;
             }
 
-            if (this._country != obj._country)
+            if (Country != obj.Country)
             {
                 ivarsEqual = false;
             }
 
-            if (this._category != obj._category)
+            if (Category != obj.Category)
             {
                 ivarsEqual = false;
             }
 
-            if (this._subcategory != obj._subcategory)
+            if (Subcategory != obj.Subcategory)
             {
                 ivarsEqual = false;
             }
 
-            if (this._specific != obj._specific)
+            if (Specific != obj.Specific)
             {
                 ivarsEqual = false;
             }
 
-            if (this._extra != obj._extra)
+            if (Extra != obj.Extra)
             {
                 ivarsEqual = false;
             }
 
-            if (this._altEntityKind != obj._altEntityKind)
+            if (AltEntityKind != obj.AltEntityKind)
             {
                 ivarsEqual = false;
             }
 
-            if (this._altDomain != obj._altDomain)
+            if (AltDomain != obj.AltDomain)
             {
                 ivarsEqual = false;
             }
 
-            if (this._altCountry != obj._altCountry)
+            if (AltCountry != obj.AltCountry)
             {
                 ivarsEqual = false;
             }
 
-            if (this._altCategory != obj._altCategory)
+            if (AltCategory != obj.AltCategory)
             {
                 ivarsEqual = false;
             }
 
-            if (this._altSubcategory != obj._altSubcategory)
+            if (AltSubcategory != obj.AltSubcategory)
             {
                 ivarsEqual = false;
             }
 
-            if (this._altSpecific != obj._altSpecific)
+            if (AltSpecific != obj.AltSpecific)
             {
                 ivarsEqual = false;
             }
 
-            if (this._altExtra != obj._altExtra)
+            if (AltExtra != obj.AltExtra)
             {
                 ivarsEqual = false;
             }
 
-            if (this._xVelocity != obj._xVelocity)
+            if (XVelocity != obj.XVelocity)
             {
                 ivarsEqual = false;
             }
 
-            if (this._yVelocity != obj._yVelocity)
+            if (YVelocity != obj.YVelocity)
             {
                 ivarsEqual = false;
             }
 
-            if (this._zVelocity != obj._zVelocity)
+            if (ZVelocity != obj.ZVelocity)
             {
                 ivarsEqual = false;
             }
 
-            if (this._xLocation != obj._xLocation)
+            if (XLocation != obj.XLocation)
             {
                 ivarsEqual = false;
             }
 
-            if (this._yLocation != obj._yLocation)
+            if (YLocation != obj.YLocation)
             {
                 ivarsEqual = false;
             }
 
-            if (this._zLocation != obj._zLocation)
+            if (ZLocation != obj.ZLocation)
             {
                 ivarsEqual = false;
             }
 
-            if (this._psi != obj._psi)
+            if (Psi != obj.Psi)
             {
                 ivarsEqual = false;
             }
 
-            if (this._theta != obj._theta)
+            if (Theta != obj.Theta)
             {
                 ivarsEqual = false;
             }
 
-            if (this._phi != obj._phi)
+            if (Phi != obj.Phi)
             {
                 ivarsEqual = false;
             }
 
-            if (this._entityAppearance != obj._entityAppearance)
+            if (EntityAppearance != obj.EntityAppearance)
             {
                 ivarsEqual = false;
             }
 
-            if (this._deadReckoningAlgorithm != obj._deadReckoningAlgorithm)
+            if (DeadReckoningAlgorithm != obj.DeadReckoningAlgorithm)
             {
                 ivarsEqual = false;
             }
 
-            if (obj._otherParameters.Length != 15) 
+            if (obj.OtherParameters.Length != 15)
             {
                 ivarsEqual = false;
             }
@@ -1477,44 +812,44 @@ namespace OpenDis.Dis1998
             {
                 for (int idx = 0; idx < 15; idx++)
                 {
-                    if (this._otherParameters[idx] != obj._otherParameters[idx])
+                    if (OtherParameters[idx] != obj.OtherParameters[idx])
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._xAcceleration != obj._xAcceleration)
+            if (XAcceleration != obj.XAcceleration)
             {
                 ivarsEqual = false;
             }
 
-            if (this._yAcceleration != obj._yAcceleration)
+            if (YAcceleration != obj.YAcceleration)
             {
                 ivarsEqual = false;
             }
 
-            if (this._zAcceleration != obj._zAcceleration)
+            if (ZAcceleration != obj.ZAcceleration)
             {
                 ivarsEqual = false;
             }
 
-            if (this._xAngularVelocity != obj._xAngularVelocity)
+            if (XAngularVelocity != obj.XAngularVelocity)
             {
                 ivarsEqual = false;
             }
 
-            if (this._yAngularVelocity != obj._yAngularVelocity)
+            if (YAngularVelocity != obj.YAngularVelocity)
             {
                 ivarsEqual = false;
             }
 
-            if (this._zAngularVelocity != obj._zAngularVelocity)
+            if (ZAngularVelocity != obj.ZAngularVelocity)
             {
                 ivarsEqual = false;
             }
 
-            if (obj._marking.Length != 12) 
+            if (obj.Marking.Length != 12)
             {
                 ivarsEqual = false;
             }
@@ -1523,28 +858,28 @@ namespace OpenDis.Dis1998
             {
                 for (int idx = 0; idx < 12; idx++)
                 {
-                    if (this._marking[idx] != obj._marking[idx])
+                    if (Marking[idx] != obj.Marking[idx])
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._capabilities != obj._capabilities)
+            if (Capabilities != obj.Capabilities)
             {
                 ivarsEqual = false;
             }
 
-            if (this._articulationParameters.Count != obj._articulationParameters.Count)
+            if (ArticulationParameters.Count != obj.ArticulationParameters.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
-                    if (!this._articulationParameters[idx].Equals(obj._articulationParameters[idx]))
+                    if (!ArticulationParameters[idx].Equals(obj.ArticulationParameters[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -1559,77 +894,70 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._site.GetHashCode();
-            result = GenerateHash(result) ^ this._application.GetHashCode();
-            result = GenerateHash(result) ^ this._entity.GetHashCode();
-            result = GenerateHash(result) ^ this._forceId.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfArticulationParameters.GetHashCode();
-            result = GenerateHash(result) ^ this._entityKind.GetHashCode();
-            result = GenerateHash(result) ^ this._domain.GetHashCode();
-            result = GenerateHash(result) ^ this._country.GetHashCode();
-            result = GenerateHash(result) ^ this._category.GetHashCode();
-            result = GenerateHash(result) ^ this._subcategory.GetHashCode();
-            result = GenerateHash(result) ^ this._specific.GetHashCode();
-            result = GenerateHash(result) ^ this._extra.GetHashCode();
-            result = GenerateHash(result) ^ this._altEntityKind.GetHashCode();
-            result = GenerateHash(result) ^ this._altDomain.GetHashCode();
-            result = GenerateHash(result) ^ this._altCountry.GetHashCode();
-            result = GenerateHash(result) ^ this._altCategory.GetHashCode();
-            result = GenerateHash(result) ^ this._altSubcategory.GetHashCode();
-            result = GenerateHash(result) ^ this._altSpecific.GetHashCode();
-            result = GenerateHash(result) ^ this._altExtra.GetHashCode();
-            result = GenerateHash(result) ^ this._xVelocity.GetHashCode();
-            result = GenerateHash(result) ^ this._yVelocity.GetHashCode();
-            result = GenerateHash(result) ^ this._zVelocity.GetHashCode();
-            result = GenerateHash(result) ^ this._xLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._yLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._zLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._psi.GetHashCode();
-            result = GenerateHash(result) ^ this._theta.GetHashCode();
-            result = GenerateHash(result) ^ this._phi.GetHashCode();
-            result = GenerateHash(result) ^ this._entityAppearance.GetHashCode();
-            result = GenerateHash(result) ^ this._deadReckoningAlgorithm.GetHashCode();
+            result = GenerateHash(result) ^ Site.GetHashCode();
+            result = GenerateHash(result) ^ Application.GetHashCode();
+            result = GenerateHash(result) ^ Entity.GetHashCode();
+            result = GenerateHash(result) ^ ForceId.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfArticulationParameters.GetHashCode();
+            result = GenerateHash(result) ^ EntityKind.GetHashCode();
+            result = GenerateHash(result) ^ Domain.GetHashCode();
+            result = GenerateHash(result) ^ Country.GetHashCode();
+            result = GenerateHash(result) ^ Category.GetHashCode();
+            result = GenerateHash(result) ^ Subcategory.GetHashCode();
+            result = GenerateHash(result) ^ Specific.GetHashCode();
+            result = GenerateHash(result) ^ Extra.GetHashCode();
+            result = GenerateHash(result) ^ AltEntityKind.GetHashCode();
+            result = GenerateHash(result) ^ AltDomain.GetHashCode();
+            result = GenerateHash(result) ^ AltCountry.GetHashCode();
+            result = GenerateHash(result) ^ AltCategory.GetHashCode();
+            result = GenerateHash(result) ^ AltSubcategory.GetHashCode();
+            result = GenerateHash(result) ^ AltSpecific.GetHashCode();
+            result = GenerateHash(result) ^ AltExtra.GetHashCode();
+            result = GenerateHash(result) ^ XVelocity.GetHashCode();
+            result = GenerateHash(result) ^ YVelocity.GetHashCode();
+            result = GenerateHash(result) ^ ZVelocity.GetHashCode();
+            result = GenerateHash(result) ^ XLocation.GetHashCode();
+            result = GenerateHash(result) ^ YLocation.GetHashCode();
+            result = GenerateHash(result) ^ ZLocation.GetHashCode();
+            result = GenerateHash(result) ^ Psi.GetHashCode();
+            result = GenerateHash(result) ^ Theta.GetHashCode();
+            result = GenerateHash(result) ^ Phi.GetHashCode();
+            result = GenerateHash(result) ^ EntityAppearance.GetHashCode();
+            result = GenerateHash(result) ^ DeadReckoningAlgorithm.GetHashCode();
 
             for (int idx = 0; idx < 15; idx++)
             {
-                result = GenerateHash(result) ^ this._otherParameters[idx].GetHashCode();
+                result = GenerateHash(result) ^ OtherParameters[idx].GetHashCode();
             }
 
-            result = GenerateHash(result) ^ this._xAcceleration.GetHashCode();
-            result = GenerateHash(result) ^ this._yAcceleration.GetHashCode();
-            result = GenerateHash(result) ^ this._zAcceleration.GetHashCode();
-            result = GenerateHash(result) ^ this._xAngularVelocity.GetHashCode();
-            result = GenerateHash(result) ^ this._yAngularVelocity.GetHashCode();
-            result = GenerateHash(result) ^ this._zAngularVelocity.GetHashCode();
+            result = GenerateHash(result) ^ XAcceleration.GetHashCode();
+            result = GenerateHash(result) ^ YAcceleration.GetHashCode();
+            result = GenerateHash(result) ^ ZAcceleration.GetHashCode();
+            result = GenerateHash(result) ^ XAngularVelocity.GetHashCode();
+            result = GenerateHash(result) ^ YAngularVelocity.GetHashCode();
+            result = GenerateHash(result) ^ ZAngularVelocity.GetHashCode();
 
             for (int idx = 0; idx < 12; idx++)
             {
-                result = GenerateHash(result) ^ this._marking[idx].GetHashCode();
+                result = GenerateHash(result) ^ Marking[idx].GetHashCode();
             }
 
-            result = GenerateHash(result) ^ this._capabilities.GetHashCode();
+            result = GenerateHash(result) ^ Capabilities.GetHashCode();
 
-            if (this._articulationParameters.Count > 0)
+            if (ArticulationParameters.Count > 0)
             {
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._articulationParameters[idx].GetHashCode();
+                    result = GenerateHash(result) ^ ArticulationParameters[idx].GetHashCode();
                 }
             }
 

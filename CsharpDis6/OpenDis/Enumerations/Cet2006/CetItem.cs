@@ -6,7 +6,7 @@ namespace OpenDis.Enumerations.Cet2006
 {
     public class CetItem : ICetItem
     {
-		#region Properties (10) 
+        #region Properties (10) 
 
         public Country Country { get; set; }
 
@@ -26,9 +26,9 @@ namespace OpenDis.Enumerations.Cet2006
 
         public string Description { get; set; }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (2) 
+        #region Methods (2) 
 
         public int CompareTo(ICetItem other)
         {
@@ -38,33 +38,33 @@ namespace OpenDis.Enumerations.Cet2006
                 return 1;
             }
 
-            int countryCompare = this.Country.ToString().CompareTo(other.Country.ToString());
+            int countryCompare = Country.ToString().CompareTo(other.Country.ToString());
             if (countryCompare != 0)
             {
                 return countryCompare;
             }
 
-            int domainCompare = this.Domain.CompareTo(other.Domain);
+            int domainCompare = Domain.CompareTo(other.Domain);
             if (domainCompare != 0)
             {
                 return domainCompare;
             }
 
-            int kindCompare = this.Kind.ToString().CompareTo(other.Kind.ToString());
+            int kindCompare = Kind.ToString().CompareTo(other.Kind.ToString());
             if (kindCompare != 0)
             {
                 return kindCompare;
             }
 
-            int categoryCompare = this.Category.CompareTo(other.Category);
+            int categoryCompare = Category.CompareTo(other.Category);
             if (categoryCompare != 0)
             {
                 return categoryCompare;
             }
 
-            if (this.Subcategory != null)
+            if (Subcategory != null)
             {
-                int subcategoryCompare = ((byte)this.Subcategory).CompareTo(other.Subcategory);
+                int subcategoryCompare = ((byte)Subcategory).CompareTo(other.Subcategory);
                 if (subcategoryCompare != 0)
                 {
                     return subcategoryCompare;
@@ -72,19 +72,12 @@ namespace OpenDis.Enumerations.Cet2006
             }
             else
             {
-                if (other.Subcategory != null)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
+                return other.Subcategory != null ? -1 : 0;
             }
 
-            if (this.Specific != null)
+            if (Specific != null)
             {
-                int specificCompare = ((byte)this.Specific).CompareTo(other.Specific);
+                int specificCompare = ((byte)Specific).CompareTo(other.Specific);
                 if (specificCompare != 0)
                 {
                     return specificCompare;
@@ -92,19 +85,12 @@ namespace OpenDis.Enumerations.Cet2006
             }
             else
             {
-                if (other.Specific != null)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
+                return other.Specific != null ? -1 : 0;
             }
 
-            if (this.Extra != null)
+            if (Extra != null)
             {
-                int extraCompare = ((byte)this.Extra).CompareTo(other.Extra);
+                int extraCompare = ((byte)Extra).CompareTo(other.Extra);
                 if (extraCompare != 0)
                 {
                     return extraCompare;
@@ -112,38 +98,14 @@ namespace OpenDis.Enumerations.Cet2006
             }
             else
             {
-                if (other.Extra != null)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return 0;
-                }
+                return other.Extra != null ? -1 : 0;
             }
 
-            if (!string.IsNullOrEmpty(this.Description))
-            {
-                return this.Description.CompareTo(other.Description);
-            }
-            else
-            {
-                return 0;
-            }
+            return !string.IsNullOrEmpty(Description) ? Description.CompareTo(other.Description) : 0;
         }
 
-        public int CompareTo(object obj)
-        {
-            if (obj is CetItem)
-            {
-                return this.CompareTo((CetItem)obj);
-            }
-            else
-            {
-                throw new ArgumentException("Object is not of type CetItem.");
-            }
-        }
+        public int CompareTo(object obj) => obj is CetItem item ? CompareTo(item) : throw new ArgumentException("Object is not of type CetItem.");
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

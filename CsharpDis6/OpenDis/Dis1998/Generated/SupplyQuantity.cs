@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -54,18 +53,8 @@ namespace OpenDis.Dis1998
     [Serializable]
     [XmlRoot]
     [XmlInclude(typeof(EntityType))]
-    public partial class SupplyQuantity
+    public partial class SupplyQuantity : IEquatable<SupplyQuantity>, IReflectable
     {
-        /// <summary>
-        /// Type of supply
-        /// </summary>
-        private EntityType _supplyType = new EntityType();
-
-        /// <summary>
-        /// quantity to be supplied
-        /// </summary>
-        private byte _quantity;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SupplyQuantity"/> class.
         /// </summary>
@@ -79,12 +68,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(SupplyQuantity left, SupplyQuantity right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(SupplyQuantity left, SupplyQuantity right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -92,28 +78,16 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(SupplyQuantity left, SupplyQuantity right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
-            marshalSize += this._supplyType.GetMarshalledSize();  // this._supplyType
+            marshalSize += SupplyType.GetMarshalledSize();  // this._supplyType
             marshalSize += 1;  // this._quantity
             return marshalSize;
         }
@@ -122,35 +96,13 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Type of supply
         /// </summary>
         [XmlElement(Type = typeof(EntityType), ElementName = "supplyType")]
-        public EntityType SupplyType
-        {
-            get
-            {
-                return this._supplyType;
-            }
-
-            set
-            {
-                this._supplyType = value;
-            }
-        }
+        public EntityType SupplyType { get; set; } = new EntityType();
 
         /// <summary>
         /// Gets or sets the quantity to be supplied
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "quantity")]
-        public byte Quantity
-        {
-            get
-            {
-                return this._quantity;
-            }
-
-            set
-            {
-                this._quantity = value;
-            }
-        }
+        public byte Quantity { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -163,14 +115,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -180,8 +132,8 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._supplyType.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._quantity);
+                    SupplyType.Marshal(dos);
+                    dos.WriteUnsignedByte(Quantity);
                 }
                 catch (Exception e)
                 {
@@ -191,11 +143,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -208,8 +160,8 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._supplyType.Unmarshal(dis);
-                    this._quantity = dis.ReadUnsignedByte();
+                    SupplyType.Unmarshal(dis);
+                    Quantity = dis.ReadUnsignedByte();
                 }
                 catch (Exception e)
                 {
@@ -219,24 +171,17 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
@@ -244,62 +189,47 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<supplyType>");
-                this._supplyType.Reflection(sb);
+                SupplyType.Reflection(sb);
                 sb.AppendLine("</supplyType>");
-                sb.AppendLine("<quantity type=\"byte\">" + this._quantity.ToString(CultureInfo.InvariantCulture) + "</quantity>");
+                sb.AppendLine("<quantity type=\"byte\">" + Quantity.ToString(CultureInfo.InvariantCulture) + "</quantity>");
                 sb.AppendLine("</SupplyQuantity>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as SupplyQuantity;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as SupplyQuantity;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(SupplyQuantity obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (!this._supplyType.Equals(obj._supplyType))
+            if (!SupplyType.Equals(obj.SupplyType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._quantity != obj._quantity)
+            if (Quantity != obj.Quantity)
             {
                 ivarsEqual = false;
             }
@@ -312,22 +242,15 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._supplyType.GetHashCode();
-            result = GenerateHash(result) ^ this._quantity.GetHashCode();
+            result = GenerateHash(result) ^ SupplyType.GetHashCode();
+            result = GenerateHash(result) ^ Quantity.GetHashCode();
 
             return result;
         }

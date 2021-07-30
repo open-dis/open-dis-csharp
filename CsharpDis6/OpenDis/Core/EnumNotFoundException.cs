@@ -36,15 +36,13 @@
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Text;
 
 namespace OpenDis.Core
 {
     public class EnumNotFoundException : Exception
     {
-		#region Constructors (5) 
+        #region Constructors (5) 
 
         public EnumNotFoundException(string message, Exception exception)
             : base(message, exception)
@@ -59,7 +57,7 @@ namespace OpenDis.Core
         public EnumNotFoundException(string message, Type enumType)
             : base(message)
         {
-            this.EnumType = enumType;
+            EnumType = enumType;
         }
 
         public EnumNotFoundException(string message)
@@ -71,12 +69,12 @@ namespace OpenDis.Core
         {
         }
 
-		#endregion Constructors 
+        #endregion Constructors 
 
-		#region Properties (1) 
+        #region Properties (1) 
 
-        public Type EnumType { get; private set; }
+        public Type EnumType { get; }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }
