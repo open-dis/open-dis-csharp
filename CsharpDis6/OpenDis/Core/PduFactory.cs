@@ -21,6 +21,7 @@ namespace OpenDis.Core
         /// Creates the PDU. Supported protocol versions are IEEE 1278.1-1995 and IEEE 1278.1A-1998.
         /// </summary>
         /// <param name="type">The type of PDU to be created.</param>
+        /// <param name="version">The version of the PDU to be created</param>
         /// <returns>
         /// Returns the corresponding PDU instance or null if PduType.Other is specified.
         /// </returns>

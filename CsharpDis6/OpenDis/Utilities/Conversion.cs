@@ -41,10 +41,10 @@ namespace OpenDis.Core
     {
         #region Fields (2) 
 
-         /// <summary>
-         /// The mask that will leave only the type metric from an
-         /// integer representing the Articulation Parameter's parameter type.
-         /// This mask is based on the IEEE Std 1278.1-1995
+        /// <summary>
+        /// The mask that will leave only the type metric from an
+        /// integer representing the Articulation Parameter's parameter type.
+        /// This mask is based on the IEEE Std 1278.1-1995
         /// </summary>
         public const int ARTICULATION_PARAMETER_TYPE_METRIC_MASK = 0x001F;
 
@@ -81,6 +81,7 @@ namespace OpenDis.Core
 
         /// <summary>
         /// Make the value needed for the ArticulationParameter's Parameter Type.
+        /// </summary>
         /// <param name="typeclass">The enumeration for the articulated part.
         /// This must have less precision than ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS.</param>
         /// <param name="typemetric">The enumeration for the motion description.

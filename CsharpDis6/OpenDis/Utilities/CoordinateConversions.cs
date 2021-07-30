@@ -39,30 +39,24 @@ namespace OpenDis.Core
             eSquared = ((a * a) - (b * b)) / (a * a);
             ePrimeSquared = ((a * a) - (b * b)) / (b * b);
 
-            /// <summary>
-            /// Get the longitude.
-            /// </summary>
+            // Get the longitude.
             answer[1] = x >= 0 ? Math.Atan(y / x)
              : x < 0 && y >= 0 ? Math.Atan(y / x) + Math.PI
                                : Math.Atan(y / x) - Math.PI;
 
-            /// <summary>
-            /// Longitude calculation done. Now calculate latitude.
-            /// NOTE: The handbook mentions using the calculated phi (latitude) value to recalculate B
-            /// using tan B = (1-f) tan phi and then performing the entire calculation again to get more accurate values.
-            /// However, for terrestrial applications, one iteration is accurate to .1 millimeter on the surface of the
-            /// earth (Rapp, 1984, p.124), so one iteration is enough for our purposes
-            /// </summary>
+            // Longitude calculation done. Now calculate latitude.
+            // NOTE: The handbook mentions using the calculated phi (latitude) value to recalculate B
+            // using tan B = (1-f) tan phi and then performing the entire calculation again to get more accurate values.
+            // However, for terrestrial applications, one iteration is accurate to .1 millimeter on the surface of the
+            // earth (Rapp, 1984, p.124), so one iteration is enough for our purposes
             double tanBZero = a * z / (b * W);
             double BZero = Math.Atan(tanBZero);
             double tanPhi = (z + (ePrimeSquared * b * Math.Pow(Math.Sin(BZero), 3))) / (W - (a * eSquared * Math.Pow(Math.Cos(BZero), 3)));
             double phi = Math.Atan(tanPhi);
             answer[0] = phi;
-            /// <summary>
-            /// Latitude done, now get the elevation. Note: The handbook states that near the poles, it is preferable to use
-            /// h = (Z / sin phi ) - rSubN + (eSquared * rSubN). Our applications are never near the poles, so this formula
-            /// was left unimplemented.
-            /// </summary>
+            // Latitude done, now get the elevation. Note: The handbook states that near the poles, it is preferable to use
+            // h = (Z / sin phi ) - rSubN + (eSquared * rSubN). Our applications are never near the poles, so this formula
+            // was left unimplemented.
             rSubN = a * a / Math.Sqrt((a * a * (Math.Cos(phi) * Math.Cos(phi))) + (b * b * (Math.Sin(phi) * Math.Sin(phi))));
 
             answer[2] = (W / Math.Cos(phi)) - rSubN;

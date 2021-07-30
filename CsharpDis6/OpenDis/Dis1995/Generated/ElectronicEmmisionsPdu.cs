@@ -142,8 +142,7 @@ namespace OpenDis.Dis1995
 
         /// <summary>
         /// Gets or sets the This field shall specify the length of this emitter system’s data (including beam data and its
-        ///
-        /// track/jam information) in 32-bit words. The length shall include the System  Data Length field.
+        /// track/jam information) in 32-bit words. The length shall include the System Data Length field.
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "systemDataLength")]
         public byte SystemDataLength { get; set; }

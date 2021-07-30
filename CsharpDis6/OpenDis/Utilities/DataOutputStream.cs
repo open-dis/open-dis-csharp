@@ -44,7 +44,7 @@ namespace OpenDis.Core
     /// </summary>
     public class DataOutputStream
     {
-#region Fields (1) 
+        #region Fields (1) 
 
         #endregion Fields 
 
@@ -66,7 +66,6 @@ namespace OpenDis.Core
         /// Initializes a new instance of the DataOutputStream class and
         /// with Endian set to Little.
         /// </summary>
-        /// <param name="endian">The endian to be used.</param>
         public DataOutputStream()
             : this(Endian.Little)
         {

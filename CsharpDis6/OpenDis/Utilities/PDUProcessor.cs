@@ -140,7 +140,7 @@ namespace OpenDis.Core
         /// <summary>
         /// Provides a means of processing PDU data
         /// </summary>
-        /// <param name="buf">byte array containing the pdu data to process</param>
+        /// <param name="buffer">byte array containing the pdu data to process</param>
         /// <param name="endian">format of value types</param>
         /// <remarks>Added to support passing back just the byte array.</remarks>
         /// <returns>Collection of Raw byte[] PDUs</returns>
@@ -153,7 +153,7 @@ namespace OpenDis.Core
         /// <summary>
         /// Provides a means of processing PDU data
         /// </summary>
-        /// <param name="buf">byte array containing the pdu data to process</param>
+        /// <param name="buffer">byte array containing the pdu data to process</param>
         /// <param name="endian">format of value types</param>
         /// <param name="dataQueue">Returns raw packets to a referenced Queue</param>
         /// <remarks>Added to support passing back just the byte array into a Queue.</remarks>
@@ -562,7 +562,7 @@ namespace OpenDis.Core
         /// Used to unmarshal data back into the correct PDU type.
         /// </summary>
         /// <param name="pduType">PDU type</param>
-        /// <param name="rawPDU">byte array containing the raw packets</param>
+        /// <param name="rawPdu">byte array containing the raw packets</param>
         /// <param name="endian">Endian type</param>
         /// <remarks>Added by PES to work with Mobile.</remarks>
         /// <returns>The PDU instance</returns>
@@ -576,7 +576,7 @@ namespace OpenDis.Core
         /// Used to unmarshal data back into the correct PDU type.
         /// </summary>
         /// <param name="pduType">PDU type</param>
-        /// <param name="rawPDU">byte array containing the raw packets</param>
+        /// <param name="rawPdu">byte array containing the raw packets</param>
         /// <param name="endian">Endian type</param>
         /// <remarks>Added by PES to work with Mobile.</remarks>
         /// <returns>The PDU instance.</returns>
@@ -662,7 +662,7 @@ namespace OpenDis.Core
         /// Process a received PDU. Note that a datastream can contain multiple PDUs.  Therefore a
         /// List is used to hold one or more after decoding.
         /// </summary>
-        /// <param name="buf">byte array of PDU(s)</param>
+        /// <param name="buffer">byte array of PDU(s)</param>
         /// <returns>Collection of all PDU(s) decoded</returns>
         protected virtual List<object> ProcessPdu(byte[] buffer)
         {
@@ -750,7 +750,7 @@ namespace OpenDis.Core
         /// List is used to hold one or more after decoding.
         /// </summary>
         /// <remarks>Added by PES to support passing back just the byte array.</remarks>
-        /// <param name="buf">byte array of PDU(s)</param>
+        /// <param name="buffer">byte array of PDU(s)</param>
         /// <returns>Collection of all PDU(s) in raw byte format</returns>
         protected virtual List<byte[]> ProcessRawPdu(byte[] buffer)
         {
@@ -807,7 +807,7 @@ namespace OpenDis.Core
         /// Returns an instance of the PDU based upon the pdu type passed in. Note PDU will be represented as an Object for
         /// simplicity.
         /// </summary>
-        /// <param name="pdu_version">Version of IEEE standard</param>
+        /// <param name="pduVersion">Version of IEEE standard</param>
         /// <param name="pduType">Type of PDU</param>
         /// <param name="ds">PDU byte array containing the data</param>
         /// <returns>PDU instance.</returns>
@@ -845,9 +845,8 @@ namespace OpenDis.Core
         /// Extracts length of PDU without altering byte array/stream so that future access to this field is still valid
         /// </summary>
         /// <param name="buf">Byte array holding PDU data.</param>
-        /// <param name="position">Position of 'length' field. generally at pos 8, but if this byte array holds more than one
-        /// PDU</param>
         /// <param name="endian">The Endian type used for conversion.</param>
+        /// <param name="pos">Position of 'length' field. generally at pos 8, but if this byte array holds more than one PDU</param>
         /// <returns>length</returns>
         private static ushort pduLength(byte[] buf, Endian endian, uint pos = PDU_LENGTH_POSITION)
         {
@@ -869,11 +868,11 @@ namespace OpenDis.Core
 
         /// <summary>
         /// Unmarshal all data into the pdu object. This method calls the all the base unmarshals.
-        /// Deprecated: This method used Reflection, use <see cref="UnmarshallRawPdu"/> method instead.
+        /// Deprecated: This method used Reflection, use <see cref="UnmarshalRawPdu(byte, DataInputStream)"/> method instead.
         /// </summary>
         /// <param name="pdu">object where the unmarshalled data will be stored</param>
         /// <param name="dStream">location of where the unmarshalled data is located</param>
-        [Obsolete("This method used Reflection which is slow, new method 'UnmarshallRawPdu' should be used instead.")]
+        [Obsolete("This method used Reflection which is slow, new method 'UnmarshalRawPdu' should be used instead.")]
         private static void ReturnUnmarshalledPdu(object pdu, DataInputStream dStream) =>
             // Unmarshal is the method name found in each of the PDU classes
             pdu.GetType().InvokeMember("Unmarshal", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { dStream }, CultureInfo.InvariantCulture);

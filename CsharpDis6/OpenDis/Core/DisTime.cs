@@ -58,128 +58,130 @@ namespace OpenDis.Core
     /// </para>
     /// </summary>
     public static class DisTime
-{
-    private const uint ABSOLUTE_TIMESTAMP_MASK = 0x00000001;
-    private const uint RELATIVE_TIMESTAMP_MASK = 0xfffffffe;
-
-    /// <summary>
-    /// Returns the number of DIS time units since the top of the hour. there are 2^31-1 DIS time
-    /// units per hour. </summary>
-    /// <returns> integer DIS time units since the start of the hour. </returns>
-    private static int DisTimeUnitsSinceTopOfHour
     {
-        get
+        private const uint ABSOLUTE_TIMESTAMP_MASK = 0x00000001;
+        private const uint RELATIVE_TIMESTAMP_MASK = 0xfffffffe;
+
+        /// <summary>
+        /// Returns the number of DIS time units since the top of the hour. there are 2^31-1 DIS time
+        /// units per hour. </summary>
+        /// <returns> integer DIS time units since the start of the hour. </returns>
+        private static int DisTimeUnitsSinceTopOfHour
         {
-            // set cal object to current time
-            //long currentTime = DateTimeHelperClass.CurrentUnixTimeMillis(); // UTC milliseconds since 1970
-            //cal.TimeInMillis = currentTime;
+            get
+            {
+                // set cal object to current time
+                //long currentTime = DateTimeHelperClass.CurrentUnixTimeMillis(); // UTC milliseconds since 1970
+                //cal.TimeInMillis = currentTime;
 
-            var current = DateTime.Now;
-            var currentHour = current;
+                var current = DateTime.Now;
+                var currentHour = current;
 
-            //Add methods do not change objects value.  They return new modified object
-            currentHour = currentHour.AddMilliseconds(0 - current.Millisecond);
-            currentHour = currentHour.AddMinutes(0 - current.Minute);
-            currentHour = currentHour.AddSeconds(0 - current.Second);
+                //Add methods do not change objects value.  They return new modified object
+                currentHour = currentHour.AddMilliseconds(0 - current.Millisecond);
+                currentHour = currentHour.AddMinutes(0 - current.Minute);
+                currentHour = currentHour.AddSeconds(0 - current.Second);
 
-            var diffSpan = current.Subtract(currentHour);
-            double diff = diffSpan.TotalMilliseconds;
+                var diffSpan = current.Subtract(currentHour);
+                double diff = diffSpan.TotalMilliseconds;
 
-            // It turns out that Integer.MAX_VALUE is 2^31-1, which is the time unit value, ie there are
-            // 2^31-1 DIS time units in an hour. 3600 sec/hr X 1000 msec/sec divided into the number of
-            // msec since the start of the hour gives the percentage of DIS time units in the hour, times
-            // the number of DIS time units per hour, equals the time value
-            double val = diff / (3600.0 * 1000.0) * int.MaxValue;
+                // It turns out that Integer.MAX_VALUE is 2^31-1, which is the time unit value, ie there are
+                // 2^31-1 DIS time units in an hour. 3600 sec/hr X 1000 msec/sec divided into the number of
+                // msec since the start of the hour gives the percentage of DIS time units in the hour, times
+                // the number of DIS time units per hour, equals the time value
+                double val = diff / (3600.0 * 1000.0) * int.MaxValue;
 
-            return Convert.ToInt32(val);
+                return Convert.ToInt32(val);
+            }
         }
-    }
 
-    /// <summary>
-    /// Returns the absolute timestamp (31 bits of time + 1 bit set on indicating absolute),
-    /// assuminng that this host is sync'd to NTP.
-    /// Fix to bitshift by mvormelch. </summary>
-    /// <returns> DIS time units, get absolute timestamp </returns>
-    public static uint DisAbsoluteTimestamp
-    {
-        get
+        /// <summary>
+        /// Returns the absolute timestamp (31 bits of time + 1 bit set on indicating absolute),
+        /// assuminng that this host is sync'd to NTP.
+        /// Fix to bitshift by mvormelch. </summary>
+        /// <returns> DIS time units, get absolute timestamp </returns>
+        public static uint DisAbsoluteTimestamp
         {
+            get
+            {
                 uint val = Convert.ToUInt32(DisTimeUnitsSinceTopOfHour);
                 // always flip the lsb to 1
                 return (val << 1) | ABSOLUTE_TIMESTAMP_MASK;
             }
-    }
+        }
 
-    /// <summary>
-    /// Returns the DIS standard relative timestamp (31 bits of time + 1 bit set off indicating relative),
-    /// which should be used if this host
-    /// is not slaved to NTP. Fix to bitshift by mvormelch </summary>
-    /// <returns> DIS time units, relative </returns>
-    public static uint DisRelativeTimestamp
-    {
-        get
+        /// <summary>
+        /// Returns the DIS standard relative timestamp (31 bits of time + 1 bit set off indicating relative),
+        /// which should be used if this host
+        /// is not slaved to NTP. Fix to bitshift by mvormelch </summary>
+        /// <returns> DIS time units, relative </returns>
+        public static uint DisRelativeTimestamp
         {
+            get
+            {
                 uint val = Convert.ToUInt32(DisTimeUnitsSinceTopOfHour);
                 // always flip the lsb to 0
                 return (val << 1) & RELATIVE_TIMESTAMP_MASK;
             }
-    }
+        }
 
-    /// <summary>
-    /// Returns a useful timestamp, hundredths of a second since the start of the year.
-    /// This effectively eliminates the need for receivers to handle timestamp rollover,
-    /// as long as you're not working on New Year's Eve. </summary>
-    /// <returns> a timestamp in hundredths of a second since the start of the year </returns>
-    public static uint NpsTimestamp
-    {
-        get
+        /// <summary>
+        /// Returns a useful timestamp, hundredths of a second since the start of the year.
+        /// This effectively eliminates the need for receivers to handle timestamp rollover,
+        /// as long as you're not working on New Year's Eve. </summary>
+        /// <returns> a timestamp in hundredths of a second since the start of the year </returns>
+        public static uint NpsTimestamp
         {
-            var current = DateTime.Now;
-            var currentYear = current;
+            get
+            {
+                var current = DateTime.Now;
+                var currentYear = current;
 
-            //Add methods do not change objects value.  They return new modified object
-            currentYear = currentYear.AddMilliseconds(0 - current.Millisecond);
-            currentYear = currentYear.AddMinutes(0 - current.Minute);
-            currentYear = currentYear.AddSeconds(0 - current.Second);
-            currentYear = currentYear.AddDays(1 - current.DayOfYear);  //Days are 1-366 (366 if leap)
+                //Add methods do not change objects value.  They return new modified object
+                currentYear = currentYear.AddMilliseconds(0 - current.Millisecond);
+                currentYear = currentYear.AddMinutes(0 - current.Minute);
+                currentYear = currentYear.AddSeconds(0 - current.Second);
+                currentYear = currentYear.AddDays(1 - current.DayOfYear);  //Days are 1-366 (366 if leap)
 
-            // Milliseconds since the top of the year
-            var diffSpan = current.Subtract(currentYear);
-            double diff = diffSpan.TotalMilliseconds;
+                // Milliseconds since the top of the year
+                var diffSpan = current.Subtract(currentYear);
+                double diff = diffSpan.TotalMilliseconds;
 
-            // 100ths of sec since beggining of year
-            diff /= 10; // milliseconds to hundredths of a second
+                // 100ths of sec since beggining of year
+                diff /= 10; // milliseconds to hundredths of a second
 
-            return Convert.ToUInt32(diff);
+                return Convert.ToUInt32(diff);
+            }
+        }
+
+        /// <summary>
+        /// Another option for marshalling with the timestamp field set automatically. The UNIX
+        /// time is conventionally seconds since January 1, 1970. UTC time is used, and leap seconds
+        /// are excluded. This approach is popular in the wild, but the time resolution is not very
+        /// good for high frequency updates, such as aircraft. An entity updating at 30 PDUs/second
+        /// would see 30 PDUs sent out with the same timestamp, and have 29 of them discarded as
+        /// duplicate packets.
+        /// <para/>
+        /// Note that there are other "Unix times", such milliseconds since 1/1/1970, saved in a long.
+        /// This cannot be used, since the value is saved in a long. Java's System.getCurrentTimeMillis()
+        /// uses this value.
+        /// <para/>
+        /// Unix time (in seconds) rolls over in 2038.
+        /// <para/>
+        /// See the wikipedia page on Unix time for gory details.
+        /// <para/>
+        /// </summary>
+        /// <returns> seconds since 1970 </returns>
+        public static uint UnixTimestamp
+        {
+            get
+            {
+                var current = DateTime.UtcNow;
+                var unixStart = new DateTime(1970, 1, 1);
+
+                var diffSpan = current.Subtract(unixStart);
+                return Convert.ToUInt32(diffSpan.TotalSeconds);
+            }
         }
     }
-
-    /// <summary>
-    /// Another option for marshalling with the timestamp field set automatically. The UNIX
-    /// time is conventionally seconds since January 1, 1970. UTC time is used, and leap seconds
-    /// are excluded. This approach is popular in the wild, but the time resolution is not very
-    /// good for high frequency updates, such as aircraft. An entity updating at 30 PDUs/second
-    /// would see 30 PDUs sent out with the same timestamp, and have 29 of them discarded as
-    /// duplicate packets.
-    ///
-    /// Note that there are other "Unix times", such milliseconds since 1/1/1970, saved in a long.
-    /// This cannot be used, since the value is saved in a long. Java's System.getCurrentTimeMillis()
-    /// uses this value.
-    ///
-    /// Unix time (in seconds) rolls over in 2038.
-    ///
-    /// See the wikipedia page on Unix time for gory details. </summary>
-    /// <returns> seconds since 1970 </returns>
-    public static uint UnixTimestamp
-    {
-        get
-        {
-            var current = DateTime.UtcNow;
-            var unixStart = new DateTime(1970, 1, 1);
-
-            var diffSpan = current.Subtract(unixStart);
-            return Convert.ToUInt32(diffSpan.TotalSeconds);
-        }
-    }
-}
 }
