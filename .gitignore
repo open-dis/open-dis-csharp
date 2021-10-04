@@ -1,0 +1,7 @@
+obj/
+bin/
+x86/
+v16/
+Release/
+*.cache
+*.i.cs
