@@ -2,8 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>OpenDis_std</RootNamespace>
+    <RootNamespace>OpenDis</RootNamespace>
     <Version>6.0.0</Version>
   </PropertyGroup>
+
+ <ItemGroup>
+    <EmbeddedResource Include="Enumerations\Cet2006\AggregateTypes.xml" />
+    <EmbeddedResource Include="Enumerations\Cet2006\EntityTypes.xml" />
+    <EmbeddedResource Include="Enumerations\Cet2010\AggregateTypes.xml" />
+    <EmbeddedResource Include="Enumerations\Cet2010\EntityTypes.xml" />
+  </ItemGroup>
 
 </Project>
