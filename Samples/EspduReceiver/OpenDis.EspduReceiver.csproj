@@ -3,7 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>EspduReceiver</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Version>6.0.0</Version>
+    <ApplicationIcon />
+    <StartupObject>EspduReceiver.EspduReceiver</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
