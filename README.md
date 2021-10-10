@@ -8,6 +8,8 @@ Many of the classes were initially generated with [XMLPG](http://github.com/open
 
 - Install .NET SDK 5.0 from : https://dotnet.microsoft.com/download/dotnet/5.0
 - Depending on your OS, call build.ps1 or build.sh
+-- To compile in release : build --configuration release
+-- To compile in debug : build
 
 The available commands are :
 - Restore : Restore all dependencies from Nuget
