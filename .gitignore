@@ -5,3 +5,4 @@ v16/
 Release/
 *.cache
 *.i.cs
+.vs/
