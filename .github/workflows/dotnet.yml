@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ master ]
 
+
+variables:
+    fetch-depth: '1'
+
 jobs:
   build:
 

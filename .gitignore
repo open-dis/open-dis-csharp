@@ -6,3 +6,5 @@ Release/
 *.cache
 *.i.cs
 .vs/
+
+.nuke/temp/build-attempt.log
