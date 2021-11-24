@@ -7,8 +7,7 @@ on:
     branches: [ master ]
 
 
-variables:
-    fetch-depth: '1'
+
 
 jobs:
   build:
@@ -22,9 +21,13 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
+      variables:
+        fetch-depth: '1'
       shell: bash
       run: ./build.sh --target Restore --verbosity verbose
     - name: Build with Nuke
+      variables:
+        fetch-depth: '1'  
       shell: bash
       run: ./build.sh --target Compile --configuration release --verbosity verbose
    
