@@ -5,18 +5,18 @@ using System.Xml.Serialization;
 
 namespace OpenDis.Enumerations.Cet2010
 {
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class ExtraRange : GenericEntryRange, IExtraOrExtraRange
     {
-		#region Fields (2) 
+        #region Fields (2) 
 
         private ulong uid;
         private string uidField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Properties (2) 
+        #region Properties (2) 
 
         /// <summary>
         /// Gets or sets the unique numeric identifer - RAW value.
@@ -25,21 +25,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "uid", DataType = "nonNegativeInteger")]
         public string RawUId
         {
-            get
-            {
-                return this.uidField;
-            }
+            get => uidField;
 
             set
             {
-                if (this.uidField == value)
+                if (uidField == value)
                 {
                     return;
                 }
 
-                this.uidField = value;
-                this.uid = ulong.Parse(value, CultureInfo.InvariantCulture);
-                this.RaisePropertyChanged("RawUId");
+                uidField = value;
+                uid = ulong.Parse(value, CultureInfo.InvariantCulture);
+                RaisePropertyChanged(nameof(RawUId));
             }
         }
 
@@ -50,21 +47,18 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlIgnore]
         public ulong UId
         {
-            get
-            {
-                return this.uid;
-            }
+            get => uid;
 
             set
             {
-                if (this.uid != value)
+                if (uid != value)
                 {
-                    this.RawUId = ((ulong)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("UId");
+                    RawUId = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(UId));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }

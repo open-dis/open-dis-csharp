@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Appearance
 {
     /// <summary>
-    /// Enumeration values for AirPlatformAppearance (es.appear.platform.air, Platforms of the Air Domain, 
+    /// Enumeration values for AirPlatformAppearance (es.appear.platform.air, Platforms of the Air Domain,
     /// section 4.3.1.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.EntityState.Appearance
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct AirPlatformAppearance
+    public struct AirPlatformAppearance : IHashable<AirPlatformAppearance>
     {
         /// <summary>
         /// Describes the paint scheme of an entity
@@ -318,7 +317,8 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             NotFrozen = 0,
 
             /// <summary>
-            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
+            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location
+            /// even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
             /// </summary>
             FrozenFrozenEntitiesShouldNotBeDeadReckonedIETheyShouldBeDisplayedAsFixedAtTheCurrentLocationEvenIfNonzeroVelocityAccelerationOrRotationDataIsReceivedFromTheFrozenEntity = 1
         }
@@ -428,36 +428,15 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             On = 1
         }
 
-        private AirPlatformAppearance.PaintSchemeValue paintScheme;
-        private AirPlatformAppearance.PropulsionValue propulsion;
-        private AirPlatformAppearance.DamageValue damage;
-        private AirPlatformAppearance.SmokeValue smoke;
-        private AirPlatformAppearance.TrailingEffectsValue trailingEffects;
-        private AirPlatformAppearance.CanopyValue canopy;
-        private AirPlatformAppearance.LandingLightsValue landingLights;
-        private AirPlatformAppearance.NavigationLightsValue navigationLights;
-        private AirPlatformAppearance.AntiCollisionLightsValue antiCollisionLights;
-        private AirPlatformAppearance.FlamingValue flaming;
-        private AirPlatformAppearance.AfterburnerValue afterburner;
-        private AirPlatformAppearance.FrozenStatusValue frozenStatus;
-        private AirPlatformAppearance.PowerPlantStatusValue powerPlantStatus;
-        private AirPlatformAppearance.StateValue state;
-        private AirPlatformAppearance.FormationLightsValue formationLights;
-        private AirPlatformAppearance.SpotLightsValue spotLights;
-        private AirPlatformAppearance.InteriorLightsValue interiorLights;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AirPlatformAppearance left, AirPlatformAppearance right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AirPlatformAppearance left, AirPlatformAppearance right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -465,162 +444,138 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AirPlatformAppearance left, AirPlatformAppearance right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> to <see cref="System.UInt32"/>.
+        /// Performs an explicit conversion from <see cref="AirPlatformAppearance"/> to <see cref="uint"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="AirPlatformAppearance"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator uint(AirPlatformAppearance obj)
-        {
-            return obj.ToUInt32();
-        }
+        public static explicit operator uint(AirPlatformAppearance obj) => obj.ToUInt32();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/>.
+        /// Performs an explicit conversion from <see cref="uint"/> to <see cref="AirPlatformAppearance"/>.
         /// </summary>
         /// <param name="value">The uint value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator AirPlatformAppearance(uint value)
-        {
-            return AirPlatformAppearance.FromUInt32(value);
-        }
+        public static explicit operator AirPlatformAppearance(uint value) => FromUInt32(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance from the byte array.
+        /// Creates the <see cref="AirPlatformAppearance"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="AirPlatformAppearance"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="AirPlatformAppearance"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static AirPlatformAppearance FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 4 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromUInt32(BitConverter.ToUInt32(array, index));
+                index + 4 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromUInt32(BitConverter.ToUInt32(array, index));
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance from the uint value.
+        /// Creates the <see cref="AirPlatformAppearance"/> instance from the uint value.
         /// </summary>
-        /// <param name="value">The uint value which represents the <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance, represented by the uint value.</returns>
+        /// <param name="value">The uint value which represents the <see cref="AirPlatformAppearance"/> instance.</param>
+        /// <returns>The <see cref="AirPlatformAppearance"/> instance, represented by the uint value.</returns>
         public static AirPlatformAppearance FromUInt32(uint value)
         {
-            AirPlatformAppearance ps = new AirPlatformAppearance();
+            var ps = new AirPlatformAppearance();
 
-            uint mask0 = 0x0001;
-            byte shift0 = 0;
+            const uint mask0 = 0x0001;
+            const byte shift0 = 0;
             uint newValue0 = (value & mask0) >> shift0;
-            ps.PaintScheme = (AirPlatformAppearance.PaintSchemeValue)newValue0;
+            ps.PaintScheme = (PaintSchemeValue)newValue0;
 
-            uint mask1 = 0x0002;
-            byte shift1 = 1;
+            const uint mask1 = 0x0002;
+            const byte shift1 = 1;
             uint newValue1 = (value & mask1) >> shift1;
-            ps.Propulsion = (AirPlatformAppearance.PropulsionValue)newValue1;
+            ps.Propulsion = (PropulsionValue)newValue1;
 
-            uint mask3 = 0x0018;
-            byte shift3 = 3;
+            const uint mask3 = 0x0018;
+            const byte shift3 = 3;
             uint newValue3 = (value & mask3) >> shift3;
-            ps.Damage = (AirPlatformAppearance.DamageValue)newValue3;
+            ps.Damage = (DamageValue)newValue3;
 
-            uint mask4 = 0x0060;
-            byte shift4 = 5;
+            const uint mask4 = 0x0060;
+            const byte shift4 = 5;
             uint newValue4 = (value & mask4) >> shift4;
-            ps.Smoke = (AirPlatformAppearance.SmokeValue)newValue4;
+            ps.Smoke = (SmokeValue)newValue4;
 
-            uint mask5 = 0x0180;
-            byte shift5 = 7;
+            const uint mask5 = 0x0180;
+            const byte shift5 = 7;
             uint newValue5 = (value & mask5) >> shift5;
-            ps.TrailingEffects = (AirPlatformAppearance.TrailingEffectsValue)newValue5;
+            ps.TrailingEffects = (TrailingEffectsValue)newValue5;
 
-            uint mask6 = 0x0e00;
-            byte shift6 = 9;
+            const uint mask6 = 0x0e00;
+            const byte shift6 = 9;
             uint newValue6 = (value & mask6) >> shift6;
-            ps.Canopy = (AirPlatformAppearance.CanopyValue)newValue6;
+            ps.Canopy = (CanopyValue)newValue6;
 
-            uint mask7 = 0x1000;
-            byte shift7 = 12;
+            const uint mask7 = 0x1000;
+            const byte shift7 = 12;
             uint newValue7 = (value & mask7) >> shift7;
-            ps.LandingLights = (AirPlatformAppearance.LandingLightsValue)newValue7;
+            ps.LandingLights = (LandingLightsValue)newValue7;
 
-            uint mask8 = 0x2000;
-            byte shift8 = 13;
+            const uint mask8 = 0x2000;
+            const byte shift8 = 13;
             uint newValue8 = (value & mask8) >> shift8;
-            ps.NavigationLights = (AirPlatformAppearance.NavigationLightsValue)newValue8;
+            ps.NavigationLights = (NavigationLightsValue)newValue8;
 
-            uint mask9 = 0x4000;
-            byte shift9 = 14;
+            const uint mask9 = 0x4000;
+            const byte shift9 = 14;
             uint newValue9 = (value & mask9) >> shift9;
-            ps.AntiCollisionLights = (AirPlatformAppearance.AntiCollisionLightsValue)newValue9;
+            ps.AntiCollisionLights = (AntiCollisionLightsValue)newValue9;
 
-            uint mask10 = 0x8000;
-            byte shift10 = 15;
+            const uint mask10 = 0x8000;
+            const byte shift10 = 15;
             uint newValue10 = (value & mask10) >> shift10;
-            ps.Flaming = (AirPlatformAppearance.FlamingValue)newValue10;
+            ps.Flaming = (FlamingValue)newValue10;
 
-            uint mask11 = 0x10000;
-            byte shift11 = 16;
+            const uint mask11 = 0x10000;
+            const byte shift11 = 16;
             uint newValue11 = (value & mask11) >> shift11;
-            ps.Afterburner = (AirPlatformAppearance.AfterburnerValue)newValue11;
+            ps.Afterburner = (AfterburnerValue)newValue11;
 
-            uint mask13 = 0x200000;
-            byte shift13 = 21;
+            const uint mask13 = 0x200000;
+            const byte shift13 = 21;
             uint newValue13 = (value & mask13) >> shift13;
-            ps.FrozenStatus = (AirPlatformAppearance.FrozenStatusValue)newValue13;
+            ps.FrozenStatus = (FrozenStatusValue)newValue13;
 
-            uint mask14 = 0x400000;
-            byte shift14 = 22;
+            const uint mask14 = 0x400000;
+            const byte shift14 = 22;
             uint newValue14 = (value & mask14) >> shift14;
-            ps.PowerPlantStatus = (AirPlatformAppearance.PowerPlantStatusValue)newValue14;
+            ps.PowerPlantStatus = (PowerPlantStatusValue)newValue14;
 
-            uint mask15 = 0x800000;
-            byte shift15 = 23;
+            const uint mask15 = 0x800000;
+            const byte shift15 = 23;
             uint newValue15 = (value & mask15) >> shift15;
-            ps.State = (AirPlatformAppearance.StateValue)newValue15;
+            ps.State = (StateValue)newValue15;
 
-            uint mask16 = 0x1000000;
-            byte shift16 = 24;
+            const uint mask16 = 0x1000000;
+            const byte shift16 = 24;
             uint newValue16 = (value & mask16) >> shift16;
-            ps.FormationLights = (AirPlatformAppearance.FormationLightsValue)newValue16;
+            ps.FormationLights = (FormationLightsValue)newValue16;
 
-            uint mask18 = 0x10000000;
-            byte shift18 = 28;
+            const uint mask18 = 0x10000000;
+            const byte shift18 = 28;
             uint newValue18 = (value & mask18) >> shift18;
-            ps.SpotLights = (AirPlatformAppearance.SpotLightsValue)newValue18;
+            ps.SpotLights = (SpotLightsValue)newValue18;
 
-            uint mask19 = 0x20000000;
-            byte shift19 = 29;
+            const uint mask19 = 0x20000000;
+            const byte shift19 = 29;
             uint newValue19 = (value & mask19) >> shift19;
-            ps.InteriorLights = (AirPlatformAppearance.InteriorLightsValue)newValue19;
+            ps.InteriorLights = (InteriorLightsValue)newValue19;
 
             return ps;
         }
@@ -629,273 +584,173 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// Gets or sets the paintscheme.
         /// </summary>
         /// <value>The paintscheme.</value>
-        public AirPlatformAppearance.PaintSchemeValue PaintScheme
-        {
-            get { return this.paintScheme; }
-            set { this.paintScheme = value; }
-        }
+        public PaintSchemeValue PaintScheme { get; set; }
 
         /// <summary>
         /// Gets or sets the propulsion.
         /// </summary>
         /// <value>The propulsion.</value>
-        public AirPlatformAppearance.PropulsionValue Propulsion
-        {
-            get { return this.propulsion; }
-            set { this.propulsion = value; }
-        }
+        public PropulsionValue Propulsion { get; set; }
 
         /// <summary>
         /// Gets or sets the damage.
         /// </summary>
         /// <value>The damage.</value>
-        public AirPlatformAppearance.DamageValue Damage
-        {
-            get { return this.damage; }
-            set { this.damage = value; }
-        }
+        public DamageValue Damage { get; set; }
 
         /// <summary>
         /// Gets or sets the smoke.
         /// </summary>
         /// <value>The smoke.</value>
-        public AirPlatformAppearance.SmokeValue Smoke
-        {
-            get { return this.smoke; }
-            set { this.smoke = value; }
-        }
+        public SmokeValue Smoke { get; set; }
 
         /// <summary>
         /// Gets or sets the trailingeffects.
         /// </summary>
         /// <value>The trailingeffects.</value>
-        public AirPlatformAppearance.TrailingEffectsValue TrailingEffects
-        {
-            get { return this.trailingEffects; }
-            set { this.trailingEffects = value; }
-        }
+        public TrailingEffectsValue TrailingEffects { get; set; }
 
         /// <summary>
         /// Gets or sets the canopy.
         /// </summary>
         /// <value>The canopy.</value>
-        public AirPlatformAppearance.CanopyValue Canopy
-        {
-            get { return this.canopy; }
-            set { this.canopy = value; }
-        }
+        public CanopyValue Canopy { get; set; }
 
         /// <summary>
         /// Gets or sets the landinglights.
         /// </summary>
         /// <value>The landinglights.</value>
-        public AirPlatformAppearance.LandingLightsValue LandingLights
-        {
-            get { return this.landingLights; }
-            set { this.landingLights = value; }
-        }
+        public LandingLightsValue LandingLights { get; set; }
 
         /// <summary>
         /// Gets or sets the navigationlights.
         /// </summary>
         /// <value>The navigationlights.</value>
-        public AirPlatformAppearance.NavigationLightsValue NavigationLights
-        {
-            get { return this.navigationLights; }
-            set { this.navigationLights = value; }
-        }
+        public NavigationLightsValue NavigationLights { get; set; }
 
         /// <summary>
         /// Gets or sets the anticollisionlights.
         /// </summary>
         /// <value>The anticollisionlights.</value>
-        public AirPlatformAppearance.AntiCollisionLightsValue AntiCollisionLights
-        {
-            get { return this.antiCollisionLights; }
-            set { this.antiCollisionLights = value; }
-        }
+        public AntiCollisionLightsValue AntiCollisionLights { get; set; }
 
         /// <summary>
         /// Gets or sets the flaming.
         /// </summary>
         /// <value>The flaming.</value>
-        public AirPlatformAppearance.FlamingValue Flaming
-        {
-            get { return this.flaming; }
-            set { this.flaming = value; }
-        }
+        public FlamingValue Flaming { get; set; }
 
         /// <summary>
         /// Gets or sets the afterburner.
         /// </summary>
         /// <value>The afterburner.</value>
-        public AirPlatformAppearance.AfterburnerValue Afterburner
-        {
-            get { return this.afterburner; }
-            set { this.afterburner = value; }
-        }
+        public AfterburnerValue Afterburner { get; set; }
 
         /// <summary>
         /// Gets or sets the frozenstatus.
         /// </summary>
         /// <value>The frozenstatus.</value>
-        public AirPlatformAppearance.FrozenStatusValue FrozenStatus
-        {
-            get { return this.frozenStatus; }
-            set { this.frozenStatus = value; }
-        }
+        public FrozenStatusValue FrozenStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the powerplantstatus.
         /// </summary>
         /// <value>The powerplantstatus.</value>
-        public AirPlatformAppearance.PowerPlantStatusValue PowerPlantStatus
-        {
-            get { return this.powerPlantStatus; }
-            set { this.powerPlantStatus = value; }
-        }
+        public PowerPlantStatusValue PowerPlantStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the state.
         /// </summary>
         /// <value>The state.</value>
-        public AirPlatformAppearance.StateValue State
-        {
-            get { return this.state; }
-            set { this.state = value; }
-        }
+        public StateValue State { get; set; }
 
         /// <summary>
         /// Gets or sets the formationlights.
         /// </summary>
         /// <value>The formationlights.</value>
-        public AirPlatformAppearance.FormationLightsValue FormationLights
-        {
-            get { return this.formationLights; }
-            set { this.formationLights = value; }
-        }
+        public FormationLightsValue FormationLights { get; set; }
 
         /// <summary>
         /// Gets or sets the spotlights.
         /// </summary>
         /// <value>The spotlights.</value>
-        public AirPlatformAppearance.SpotLightsValue SpotLights
-        {
-            get { return this.spotLights; }
-            set { this.spotLights = value; }
-        }
+        public SpotLightsValue SpotLights { get; set; }
 
         /// <summary>
         /// Gets or sets the interiorlights.
         /// </summary>
         /// <value>The interiorlights.</value>
-        public AirPlatformAppearance.InteriorLightsValue InteriorLights
-        {
-            get { return this.interiorLights; }
-            set { this.interiorLights = value; }
-        }
+        public InteriorLightsValue InteriorLights { get; set; }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
+        /// <inheritdoc/>
         public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is AirPlatformAppearance))
-            {
-                return false;
-            }
-
-            return this.Equals((AirPlatformAppearance)obj);
-        }
+            => obj is AirPlatformAppearance other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance is equal to this instance.
+        /// Determines whether the specified <see cref="AirPlatformAppearance"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance to compare with this instance.</param>
+        /// <param name="other">The <see cref="AirPlatformAppearance"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="AirPlatformAppearance"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(AirPlatformAppearance other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.PaintScheme == other.PaintScheme &&
-                this.Propulsion == other.Propulsion &&
-                this.Damage == other.Damage &&
-                this.Smoke == other.Smoke &&
-                this.TrailingEffects == other.TrailingEffects &&
-                this.Canopy == other.Canopy &&
-                this.LandingLights == other.LandingLights &&
-                this.NavigationLights == other.NavigationLights &&
-                this.AntiCollisionLights == other.AntiCollisionLights &&
-                this.Flaming == other.Flaming &&
-                this.Afterburner == other.Afterburner &&
-                this.FrozenStatus == other.FrozenStatus &&
-                this.PowerPlantStatus == other.PowerPlantStatus &&
-                this.State == other.State &&
-                this.FormationLights == other.FormationLights &&
-                this.SpotLights == other.SpotLights &&
-                this.InteriorLights == other.InteriorLights;
+            return PaintScheme == other.PaintScheme &&
+                Propulsion == other.Propulsion &&
+                Damage == other.Damage &&
+                Smoke == other.Smoke &&
+                TrailingEffects == other.TrailingEffects &&
+                Canopy == other.Canopy &&
+                LandingLights == other.LandingLights &&
+                NavigationLights == other.NavigationLights &&
+                AntiCollisionLights == other.AntiCollisionLights &&
+                Flaming == other.Flaming &&
+                Afterburner == other.Afterburner &&
+                FrozenStatus == other.FrozenStatus &&
+                PowerPlantStatus == other.PowerPlantStatus &&
+                State == other.State &&
+                FormationLights == other.FormationLights &&
+                SpotLights == other.SpotLights &&
+                InteriorLights == other.InteriorLights;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> to the byte array.
+        /// Converts the instance of <see cref="AirPlatformAppearance"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToUInt32());
-        }
+        /// <returns>The byte array representing the current <see cref="AirPlatformAppearance"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToUInt32());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> to the uint value.
+        /// Converts the instance of <see cref="AirPlatformAppearance"/> to the uint value.
         /// </summary>
-        /// <returns>The uint value representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.AirPlatformAppearance"/> instance.</returns>
+        /// <returns>The uint value representing the current <see cref="AirPlatformAppearance"/> instance.</returns>
         public uint ToUInt32()
         {
             uint val = 0;
 
-            val |= (uint)((uint)this.PaintScheme << 0);
-            val |= (uint)((uint)this.Propulsion << 1);
-            val |= (uint)((uint)this.Damage << 3);
-            val |= (uint)((uint)this.Smoke << 5);
-            val |= (uint)((uint)this.TrailingEffects << 7);
-            val |= (uint)((uint)this.Canopy << 9);
-            val |= (uint)((uint)this.LandingLights << 12);
-            val |= (uint)((uint)this.NavigationLights << 13);
-            val |= (uint)((uint)this.AntiCollisionLights << 14);
-            val |= (uint)((uint)this.Flaming << 15);
-            val |= (uint)((uint)this.Afterburner << 16);
-            val |= (uint)((uint)this.FrozenStatus << 21);
-            val |= (uint)((uint)this.PowerPlantStatus << 22);
-            val |= (uint)((uint)this.State << 23);
-            val |= (uint)((uint)this.FormationLights << 24);
-            val |= (uint)((uint)this.SpotLights << 28);
-            val |= (uint)((uint)this.InteriorLights << 29);
+            val |= (uint)PaintScheme << 0;
+            val |= (uint)Propulsion << 1;
+            val |= (uint)Damage << 3;
+            val |= (uint)Smoke << 5;
+            val |= (uint)TrailingEffects << 7;
+            val |= (uint)Canopy << 9;
+            val |= (uint)LandingLights << 12;
+            val |= (uint)NavigationLights << 13;
+            val |= (uint)AntiCollisionLights << 14;
+            val |= (uint)Flaming << 15;
+            val |= (uint)Afterburner << 16;
+            val |= (uint)FrozenStatus << 21;
+            val |= (uint)PowerPlantStatus << 22;
+            val |= (uint)State << 23;
+            val |= (uint)FormationLights << 24;
+            val |= (uint)SpotLights << 28;
+            val |= (uint)InteriorLights << 29;
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -903,23 +758,23 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.PaintScheme.GetHashCode();
-                hash = (hash * 29) + this.Propulsion.GetHashCode();
-                hash = (hash * 29) + this.Damage.GetHashCode();
-                hash = (hash * 29) + this.Smoke.GetHashCode();
-                hash = (hash * 29) + this.TrailingEffects.GetHashCode();
-                hash = (hash * 29) + this.Canopy.GetHashCode();
-                hash = (hash * 29) + this.LandingLights.GetHashCode();
-                hash = (hash * 29) + this.NavigationLights.GetHashCode();
-                hash = (hash * 29) + this.AntiCollisionLights.GetHashCode();
-                hash = (hash * 29) + this.Flaming.GetHashCode();
-                hash = (hash * 29) + this.Afterburner.GetHashCode();
-                hash = (hash * 29) + this.FrozenStatus.GetHashCode();
-                hash = (hash * 29) + this.PowerPlantStatus.GetHashCode();
-                hash = (hash * 29) + this.State.GetHashCode();
-                hash = (hash * 29) + this.FormationLights.GetHashCode();
-                hash = (hash * 29) + this.SpotLights.GetHashCode();
-                hash = (hash * 29) + this.InteriorLights.GetHashCode();
+                hash = (hash * 29) + PaintScheme.GetHashCode();
+                hash = (hash * 29) + Propulsion.GetHashCode();
+                hash = (hash * 29) + Damage.GetHashCode();
+                hash = (hash * 29) + Smoke.GetHashCode();
+                hash = (hash * 29) + TrailingEffects.GetHashCode();
+                hash = (hash * 29) + Canopy.GetHashCode();
+                hash = (hash * 29) + LandingLights.GetHashCode();
+                hash = (hash * 29) + NavigationLights.GetHashCode();
+                hash = (hash * 29) + AntiCollisionLights.GetHashCode();
+                hash = (hash * 29) + Flaming.GetHashCode();
+                hash = (hash * 29) + Afterburner.GetHashCode();
+                hash = (hash * 29) + FrozenStatus.GetHashCode();
+                hash = (hash * 29) + PowerPlantStatus.GetHashCode();
+                hash = (hash * 29) + State.GetHashCode();
+                hash = (hash * 29) + FormationLights.GetHashCode();
+                hash = (hash * 29) + SpotLights.GetHashCode();
+                hash = (hash * 29) + InteriorLights.GetHashCode();
             }
 
             return hash;

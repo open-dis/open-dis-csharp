@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission
 {
     /// <summary>
-    /// Enumeration values for TankEnginePower (der.sees.power.tanks, Tanks, 
+    /// Enumeration values for TankEnginePower (der.sees.power.tanks, Tanks,
     /// section 8.5.1.3)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

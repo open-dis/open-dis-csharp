@@ -9,12 +9,12 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Radio.Transmitter
 {
     /// <summary>
-    /// Enumeration values for DetailedModulationForAngleModulation (radio.tx.mod.major.3.detail, Detailed modulation for angle modulation, 
+    /// Enumeration values for DetailedModulationForAngleModulation (radio.tx.mod.major.3.detail, Detailed modulation for
+    /// angle modulation,
     /// section 9.1.1.3.3)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

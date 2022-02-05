@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.11.4: Information abut the addition or modification of a synthecic enviroment object that      is anchored to the terrain with a single point and has size or orientation. COMPLETE
+    /// Section 5.3.11.4: Information abut the addition or modification of a synthecic enviroment object that     is anchored
+    /// to the terrain with a single point and has size or orientation. COMPLETE
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -60,56 +61,11 @@ namespace OpenDis.Dis1998
     public partial class LinearObjectStatePdu : SyntheticEnvironmentFamilyPdu, IEquatable<LinearObjectStatePdu>
     {
         /// <summary>
-        /// Object in synthetic environment
-        /// </summary>
-        private EntityID _objectID = new EntityID();
-
-        /// <summary>
-        /// Object with which this point object is associated
-        /// </summary>
-        private EntityID _referencedObjectID = new EntityID();
-
-        /// <summary>
-        /// unique update number of each state transition of an object
-        /// </summary>
-        private ushort _updateNumber;
-
-        /// <summary>
-        /// force ID
-        /// </summary>
-        private byte _forceID;
-
-        /// <summary>
-        /// number of linear segment parameters
-        /// </summary>
-        private byte _numberOfSegments;
-
-        /// <summary>
-        /// requesterID
-        /// </summary>
-        private SimulationAddress _requesterID = new SimulationAddress();
-
-        /// <summary>
-        /// receiver ID
-        /// </summary>
-        private SimulationAddress _receivingID = new SimulationAddress();
-
-        /// <summary>
-        /// Object type
-        /// </summary>
-        private ObjectType _objectType = new ObjectType();
-
-        /// <summary>
-        /// Linear segment parameters
-        /// </summary>
-        private List<LinearSegmentParameter> _linearSegmentParameters = new List<LinearSegmentParameter>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="LinearObjectStatePdu"/> class.
         /// </summary>
         public LinearObjectStatePdu()
         {
-            PduType = (byte)44;
+            PduType = 44;
         }
 
         /// <summary>
@@ -118,12 +74,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(LinearObjectStatePdu left, LinearObjectStatePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(LinearObjectStatePdu left, LinearObjectStatePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -131,39 +84,25 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(LinearObjectStatePdu left, LinearObjectStatePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._objectID.GetMarshalledSize();  // this._objectID
-            marshalSize += this._referencedObjectID.GetMarshalledSize();  // this._referencedObjectID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += ObjectID.GetMarshalledSize();  // this._objectID
+            marshalSize += ReferencedObjectID.GetMarshalledSize();  // this._referencedObjectID
             marshalSize += 2;  // this._updateNumber
             marshalSize += 1;  // this._forceID
             marshalSize += 1;  // this._numberOfSegments
-            marshalSize += this._requesterID.GetMarshalledSize();  // this._requesterID
-            marshalSize += this._receivingID.GetMarshalledSize();  // this._receivingID
-            marshalSize += this._objectType.GetMarshalledSize();  // this._objectType
-            for (int idx = 0; idx < this._linearSegmentParameters.Count; idx++)
+            marshalSize += RequesterID.GetMarshalledSize();  // this._requesterID
+            marshalSize += ReceivingID.GetMarshalledSize();  // this._receivingID
+            marshalSize += ObjectType.GetMarshalledSize();  // this._objectType
+            for (int idx = 0; idx < LinearSegmentParameters.Count; idx++)
             {
-                LinearSegmentParameter listElement = (LinearSegmentParameter)this._linearSegmentParameters[idx];
+                var listElement = LinearSegmentParameters[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -174,170 +113,71 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Object in synthetic environment
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "objectID")]
-        public EntityID ObjectID
-        {
-            get
-            {
-                return this._objectID;
-            }
-
-            set
-            {
-                this._objectID = value;
-            }
-        }
+        public EntityID ObjectID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Object with which this point object is associated
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "referencedObjectID")]
-        public EntityID ReferencedObjectID
-        {
-            get
-            {
-                return this._referencedObjectID;
-            }
-
-            set
-            {
-                this._referencedObjectID = value;
-            }
-        }
+        public EntityID ReferencedObjectID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the unique update number of each state transition of an object
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "updateNumber")]
-        public ushort UpdateNumber
-        {
-            get
-            {
-                return this._updateNumber;
-            }
-
-            set
-            {
-                this._updateNumber = value;
-            }
-        }
+        public ushort UpdateNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the force ID
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "forceID")]
-        public byte ForceID
-        {
-            get
-            {
-                return this._forceID;
-            }
-
-            set
-            {
-                this._forceID = value;
-            }
-        }
+        public byte ForceID { get; set; }
 
         /// <summary>
         /// Gets or sets the number of linear segment parameters
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfSegments method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfSegments method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfSegments")]
-        public byte NumberOfSegments
-        {
-            get
-            {
-                return this._numberOfSegments;
-            }
-
-            set
-            {
-                this._numberOfSegments = value;
-            }
-        }
+        public byte NumberOfSegments { get; set; }
 
         /// <summary>
         /// Gets or sets the requesterID
         /// </summary>
         [XmlElement(Type = typeof(SimulationAddress), ElementName = "requesterID")]
-        public SimulationAddress RequesterID
-        {
-            get
-            {
-                return this._requesterID;
-            }
-
-            set
-            {
-                this._requesterID = value;
-            }
-        }
+        public SimulationAddress RequesterID { get; set; } = new SimulationAddress();
 
         /// <summary>
         /// Gets or sets the receiver ID
         /// </summary>
         [XmlElement(Type = typeof(SimulationAddress), ElementName = "receivingID")]
-        public SimulationAddress ReceivingID
-        {
-            get
-            {
-                return this._receivingID;
-            }
-
-            set
-            {
-                this._receivingID = value;
-            }
-        }
+        public SimulationAddress ReceivingID { get; set; } = new SimulationAddress();
 
         /// <summary>
         /// Gets or sets the Object type
         /// </summary>
         [XmlElement(Type = typeof(ObjectType), ElementName = "objectType")]
-        public ObjectType ObjectType
-        {
-            get
-            {
-                return this._objectType;
-            }
-
-            set
-            {
-                this._objectType = value;
-            }
-        }
+        public ObjectType ObjectType { get; set; } = new ObjectType();
 
         /// <summary>
         /// Gets the Linear segment parameters
         /// </summary>
         [XmlElement(ElementName = "linearSegmentParametersList", Type = typeof(List<LinearSegmentParameter>))]
-        public List<LinearSegmentParameter> LinearSegmentParameters
-        {
-            get
-            {
-                return this._linearSegmentParameters;
-            }
-        }
+        public List<LinearSegmentParameter> LinearSegmentParameters { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -346,34 +186,34 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._objectID.Marshal(dos);
-                    this._referencedObjectID.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._updateNumber);
-                    dos.WriteUnsignedByte((byte)this._forceID);
-                    dos.WriteUnsignedByte((byte)this._linearSegmentParameters.Count);
-                    this._requesterID.Marshal(dos);
-                    this._receivingID.Marshal(dos);
-                    this._objectType.Marshal(dos);
+                    ObjectID.Marshal(dos);
+                    ReferencedObjectID.Marshal(dos);
+                    dos.WriteUnsignedShort(UpdateNumber);
+                    dos.WriteUnsignedByte(ForceID);
+                    dos.WriteUnsignedByte((byte)LinearSegmentParameters.Count);
+                    RequesterID.Marshal(dos);
+                    ReceivingID.Marshal(dos);
+                    ObjectType.Marshal(dos);
 
-                    for (int idx = 0; idx < this._linearSegmentParameters.Count; idx++)
+                    for (int idx = 0; idx < LinearSegmentParameters.Count; idx++)
                     {
-                        LinearSegmentParameter aLinearSegmentParameter = (LinearSegmentParameter)this._linearSegmentParameters[idx];
+                        var aLinearSegmentParameter = LinearSegmentParameters[idx];
                         aLinearSegmentParameter.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -388,48 +228,41 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._objectID.Unmarshal(dis);
-                    this._referencedObjectID.Unmarshal(dis);
-                    this._updateNumber = dis.ReadUnsignedShort();
-                    this._forceID = dis.ReadUnsignedByte();
-                    this._numberOfSegments = dis.ReadUnsignedByte();
-                    this._requesterID.Unmarshal(dis);
-                    this._receivingID.Unmarshal(dis);
-                    this._objectType.Unmarshal(dis);
+                    ObjectID.Unmarshal(dis);
+                    ReferencedObjectID.Unmarshal(dis);
+                    UpdateNumber = dis.ReadUnsignedShort();
+                    ForceID = dis.ReadUnsignedByte();
+                    NumberOfSegments = dis.ReadUnsignedByte();
+                    RequesterID.Unmarshal(dis);
+                    ReceivingID.Unmarshal(dis);
+                    ObjectType.Unmarshal(dis);
 
-                    for (int idx = 0; idx < this.NumberOfSegments; idx++)
+                    for (int idx = 0; idx < NumberOfSegments; idx++)
                     {
-                        LinearSegmentParameter anX = new LinearSegmentParameter();
+                        var anX = new LinearSegmentParameter();
                         anX.Unmarshal(dis);
-                        this._linearSegmentParameters.Add(anX);
+                        LinearSegmentParameters.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -438,27 +271,27 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<objectID>");
-                this._objectID.Reflection(sb);
+                ObjectID.Reflection(sb);
                 sb.AppendLine("</objectID>");
                 sb.AppendLine("<referencedObjectID>");
-                this._referencedObjectID.Reflection(sb);
+                ReferencedObjectID.Reflection(sb);
                 sb.AppendLine("</referencedObjectID>");
-                sb.AppendLine("<updateNumber type=\"ushort\">" + this._updateNumber.ToString(CultureInfo.InvariantCulture) + "</updateNumber>");
-                sb.AppendLine("<forceID type=\"byte\">" + this._forceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
-                sb.AppendLine("<linearSegmentParameters type=\"byte\">" + this._linearSegmentParameters.Count.ToString(CultureInfo.InvariantCulture) + "</linearSegmentParameters>");
+                sb.AppendLine("<updateNumber type=\"ushort\">" + UpdateNumber.ToString(CultureInfo.InvariantCulture) + "</updateNumber>");
+                sb.AppendLine("<forceID type=\"byte\">" + ForceID.ToString(CultureInfo.InvariantCulture) + "</forceID>");
+                sb.AppendLine("<linearSegmentParameters type=\"byte\">" + LinearSegmentParameters.Count.ToString(CultureInfo.InvariantCulture) + "</linearSegmentParameters>");
                 sb.AppendLine("<requesterID>");
-                this._requesterID.Reflection(sb);
+                RequesterID.Reflection(sb);
                 sb.AppendLine("</requesterID>");
                 sb.AppendLine("<receivingID>");
-                this._receivingID.Reflection(sb);
+                ReceivingID.Reflection(sb);
                 sb.AppendLine("</receivingID>");
                 sb.AppendLine("<objectType>");
-                this._objectType.Reflection(sb);
+                ObjectType.Reflection(sb);
                 sb.AppendLine("</objectType>");
-                for (int idx = 0; idx < this._linearSegmentParameters.Count; idx++)
+                for (int idx = 0; idx < LinearSegmentParameters.Count; idx++)
                 {
                     sb.AppendLine("<linearSegmentParameters" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"LinearSegmentParameter\">");
-                    LinearSegmentParameter aLinearSegmentParameter = (LinearSegmentParameter)this._linearSegmentParameters[idx];
+                    var aLinearSegmentParameter = LinearSegmentParameters[idx];
                     aLinearSegmentParameter.Reflection(sb);
                     sb.AppendLine("</linearSegmentParameters" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -467,101 +300,83 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as LinearObjectStatePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as LinearObjectStatePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(LinearObjectStatePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._objectID.Equals(obj._objectID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!ObjectID.Equals(obj.ObjectID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._referencedObjectID.Equals(obj._referencedObjectID))
+            if (!ReferencedObjectID.Equals(obj.ReferencedObjectID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._updateNumber != obj._updateNumber)
+            if (UpdateNumber != obj.UpdateNumber)
             {
                 ivarsEqual = false;
             }
 
-            if (this._forceID != obj._forceID)
+            if (ForceID != obj.ForceID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfSegments != obj._numberOfSegments)
+            if (NumberOfSegments != obj.NumberOfSegments)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._requesterID.Equals(obj._requesterID))
+            if (!RequesterID.Equals(obj.RequesterID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._receivingID.Equals(obj._receivingID))
+            if (!ReceivingID.Equals(obj.ReceivingID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._objectType.Equals(obj._objectType))
+            if (!ObjectType.Equals(obj.ObjectType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._linearSegmentParameters.Count != obj._linearSegmentParameters.Count)
+            if (LinearSegmentParameters.Count != obj.LinearSegmentParameters.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._linearSegmentParameters.Count; idx++)
+                for (int idx = 0; idx < LinearSegmentParameters.Count; idx++)
                 {
-                    if (!this._linearSegmentParameters[idx].Equals(obj._linearSegmentParameters[idx]))
+                    if (!LinearSegmentParameters[idx].Equals(obj.LinearSegmentParameters[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -576,36 +391,29 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._objectID.GetHashCode();
-            result = GenerateHash(result) ^ this._referencedObjectID.GetHashCode();
-            result = GenerateHash(result) ^ this._updateNumber.GetHashCode();
-            result = GenerateHash(result) ^ this._forceID.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfSegments.GetHashCode();
-            result = GenerateHash(result) ^ this._requesterID.GetHashCode();
-            result = GenerateHash(result) ^ this._receivingID.GetHashCode();
-            result = GenerateHash(result) ^ this._objectType.GetHashCode();
+            result = GenerateHash(result) ^ ObjectID.GetHashCode();
+            result = GenerateHash(result) ^ ReferencedObjectID.GetHashCode();
+            result = GenerateHash(result) ^ UpdateNumber.GetHashCode();
+            result = GenerateHash(result) ^ ForceID.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfSegments.GetHashCode();
+            result = GenerateHash(result) ^ RequesterID.GetHashCode();
+            result = GenerateHash(result) ^ ReceivingID.GetHashCode();
+            result = GenerateHash(result) ^ ObjectType.GetHashCode();
 
-            if (this._linearSegmentParameters.Count > 0)
+            if (LinearSegmentParameters.Count > 0)
             {
-                for (int idx = 0; idx < this._linearSegmentParameters.Count; idx++)
+                for (int idx = 0; idx < LinearSegmentParameters.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._linearSegmentParameters[idx].GetHashCode();
+                    result = GenerateHash(result) ^ LinearSegmentParameters[idx].GetHashCode();
                 }
             }
 

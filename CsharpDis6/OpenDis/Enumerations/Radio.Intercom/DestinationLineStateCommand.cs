@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Radio.Intercom
 {
     /// <summary>
-    /// Enumeration values for DestinationLineStateCommand (radio.ic.deststate, Destination Line State Command, 
+    /// Enumeration values for DestinationLineStateCommand (radio.ic.deststate, Destination Line State Command,
     /// section 9.3.5)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

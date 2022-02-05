@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Appearance
 {
     /// <summary>
-    /// Enumeration values for MunitionAppearance (es.appear.munition, Munition Kind, 
+    /// Enumeration values for MunitionAppearance (es.appear.munition, Munition Kind,
     /// section 4.3.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.EntityState.Appearance
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct MunitionAppearance
+    public struct MunitionAppearance : IHashable<MunitionAppearance>
     {
         /// <summary>
         /// Describes the damaged appearance of an entity
@@ -177,7 +176,8 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             NotFrozen = 0,
 
             /// <summary>
-            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
+            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location
+            /// even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
             /// </summary>
             FrozenFrozenEntitiesShouldNotBeDeadReckonedIETheyShouldBeDisplayedAsFixedAtTheCurrentLocationEvenIfNonzeroVelocityAccelerationOrRotationDataIsReceivedFromTheFrozenEntity = 1
         }
@@ -245,28 +245,15 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             MaskedCloaked = 1
         }
 
-        private MunitionAppearance.DamageValue damage;
-        private MunitionAppearance.SmokeValue smoke;
-        private MunitionAppearance.TrailingEffectsValue trailingEffects;
-        private MunitionAppearance.FlamingValue flaming;
-        private MunitionAppearance.LaunchFlashValue launchFlash;
-        private MunitionAppearance.FrozenStatusValue frozenStatus;
-        private MunitionAppearance.PowerPlantStatusValue powerPlantStatus;
-        private MunitionAppearance.StateValue state;
-        private MunitionAppearance.MaskedCloakedValue maskedCloaked;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(MunitionAppearance left, MunitionAppearance right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(MunitionAppearance left, MunitionAppearance right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -274,122 +261,98 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(MunitionAppearance left, MunitionAppearance right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> to <see cref="System.UInt32"/>.
+        /// Performs an explicit conversion from <see cref="MunitionAppearance"/> to <see cref="uint"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="MunitionAppearance"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator uint(MunitionAppearance obj)
-        {
-            return obj.ToUInt32();
-        }
+        public static explicit operator uint(MunitionAppearance obj) => obj.ToUInt32();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/>.
+        /// Performs an explicit conversion from <see cref="uint"/> to <see cref="MunitionAppearance"/>.
         /// </summary>
         /// <param name="value">The uint value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator MunitionAppearance(uint value)
-        {
-            return MunitionAppearance.FromUInt32(value);
-        }
+        public static explicit operator MunitionAppearance(uint value) => FromUInt32(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance from the byte array.
+        /// Creates the <see cref="MunitionAppearance"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="MunitionAppearance"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="MunitionAppearance"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static MunitionAppearance FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 4 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromUInt32(BitConverter.ToUInt32(array, index));
+                index + 4 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromUInt32(BitConverter.ToUInt32(array, index));
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance from the uint value.
+        /// Creates the <see cref="MunitionAppearance"/> instance from the uint value.
         /// </summary>
-        /// <param name="value">The uint value which represents the <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance, represented by the uint value.</returns>
+        /// <param name="value">The uint value which represents the <see cref="MunitionAppearance"/> instance.</param>
+        /// <returns>The <see cref="MunitionAppearance"/> instance, represented by the uint value.</returns>
         public static MunitionAppearance FromUInt32(uint value)
         {
-            MunitionAppearance ps = new MunitionAppearance();
+            var ps = new MunitionAppearance();
 
-            uint mask1 = 0x0018;
-            byte shift1 = 3;
+            const uint mask1 = 0x0018;
+            const byte shift1 = 3;
             uint newValue1 = (value & mask1) >> shift1;
-            ps.Damage = (MunitionAppearance.DamageValue)newValue1;
+            ps.Damage = (DamageValue)newValue1;
 
-            uint mask2 = 0x0060;
-            byte shift2 = 5;
+            const uint mask2 = 0x0060;
+            const byte shift2 = 5;
             uint newValue2 = (value & mask2) >> shift2;
-            ps.Smoke = (MunitionAppearance.SmokeValue)newValue2;
+            ps.Smoke = (SmokeValue)newValue2;
 
-            uint mask3 = 0x0180;
-            byte shift3 = 7;
+            const uint mask3 = 0x0180;
+            const byte shift3 = 7;
             uint newValue3 = (value & mask3) >> shift3;
-            ps.TrailingEffects = (MunitionAppearance.TrailingEffectsValue)newValue3;
+            ps.TrailingEffects = (TrailingEffectsValue)newValue3;
 
-            uint mask5 = 0x8000;
-            byte shift5 = 15;
+            const uint mask5 = 0x8000;
+            const byte shift5 = 15;
             uint newValue5 = (value & mask5) >> shift5;
-            ps.Flaming = (MunitionAppearance.FlamingValue)newValue5;
+            ps.Flaming = (FlamingValue)newValue5;
 
-            uint mask6 = 0x10000;
-            byte shift6 = 16;
+            const uint mask6 = 0x10000;
+            const byte shift6 = 16;
             uint newValue6 = (value & mask6) >> shift6;
-            ps.LaunchFlash = (MunitionAppearance.LaunchFlashValue)newValue6;
+            ps.LaunchFlash = (LaunchFlashValue)newValue6;
 
-            uint mask8 = 0x200000;
-            byte shift8 = 21;
+            const uint mask8 = 0x200000;
+            const byte shift8 = 21;
             uint newValue8 = (value & mask8) >> shift8;
-            ps.FrozenStatus = (MunitionAppearance.FrozenStatusValue)newValue8;
+            ps.FrozenStatus = (FrozenStatusValue)newValue8;
 
-            uint mask9 = 0x400000;
-            byte shift9 = 22;
+            const uint mask9 = 0x400000;
+            const byte shift9 = 22;
             uint newValue9 = (value & mask9) >> shift9;
-            ps.PowerPlantStatus = (MunitionAppearance.PowerPlantStatusValue)newValue9;
+            ps.PowerPlantStatus = (PowerPlantStatusValue)newValue9;
 
-            uint mask10 = 0x800000;
-            byte shift10 = 23;
+            const uint mask10 = 0x800000;
+            const byte shift10 = 23;
             uint newValue10 = (value & mask10) >> shift10;
-            ps.State = (MunitionAppearance.StateValue)newValue10;
+            ps.State = (StateValue)newValue10;
 
-            uint mask12 = 0x80000000;
-            byte shift12 = 31;
+            const uint mask12 = 0x80000000;
+            const byte shift12 = 31;
             uint newValue12 = (value & mask12) >> shift12;
-            ps.MaskedCloaked = (MunitionAppearance.MaskedCloakedValue)newValue12;
+            ps.MaskedCloaked = (MaskedCloakedValue)newValue12;
 
             return ps;
         }
@@ -398,177 +361,108 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// Gets or sets the damage.
         /// </summary>
         /// <value>The damage.</value>
-        public MunitionAppearance.DamageValue Damage
-        {
-            get { return this.damage; }
-            set { this.damage = value; }
-        }
+        public DamageValue Damage { get; set; }
 
         /// <summary>
         /// Gets or sets the smoke.
         /// </summary>
         /// <value>The smoke.</value>
-        public MunitionAppearance.SmokeValue Smoke
-        {
-            get { return this.smoke; }
-            set { this.smoke = value; }
-        }
+        public SmokeValue Smoke { get; set; }
 
         /// <summary>
         /// Gets or sets the trailingeffects.
         /// </summary>
         /// <value>The trailingeffects.</value>
-        public MunitionAppearance.TrailingEffectsValue TrailingEffects
-        {
-            get { return this.trailingEffects; }
-            set { this.trailingEffects = value; }
-        }
+        public TrailingEffectsValue TrailingEffects { get; set; }
 
         /// <summary>
         /// Gets or sets the flaming.
         /// </summary>
         /// <value>The flaming.</value>
-        public MunitionAppearance.FlamingValue Flaming
-        {
-            get { return this.flaming; }
-            set { this.flaming = value; }
-        }
+        public FlamingValue Flaming { get; set; }
 
         /// <summary>
         /// Gets or sets the launchflash.
         /// </summary>
         /// <value>The launchflash.</value>
-        public MunitionAppearance.LaunchFlashValue LaunchFlash
-        {
-            get { return this.launchFlash; }
-            set { this.launchFlash = value; }
-        }
+        public LaunchFlashValue LaunchFlash { get; set; }
 
         /// <summary>
         /// Gets or sets the frozenstatus.
         /// </summary>
         /// <value>The frozenstatus.</value>
-        public MunitionAppearance.FrozenStatusValue FrozenStatus
-        {
-            get { return this.frozenStatus; }
-            set { this.frozenStatus = value; }
-        }
+        public FrozenStatusValue FrozenStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the powerplantstatus.
         /// </summary>
         /// <value>The powerplantstatus.</value>
-        public MunitionAppearance.PowerPlantStatusValue PowerPlantStatus
-        {
-            get { return this.powerPlantStatus; }
-            set { this.powerPlantStatus = value; }
-        }
+        public PowerPlantStatusValue PowerPlantStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the state.
         /// </summary>
         /// <value>The state.</value>
-        public MunitionAppearance.StateValue State
-        {
-            get { return this.state; }
-            set { this.state = value; }
-        }
+        public StateValue State { get; set; }
 
         /// <summary>
         /// Gets or sets the maskedcloaked.
         /// </summary>
         /// <value>The maskedcloaked.</value>
-        public MunitionAppearance.MaskedCloakedValue MaskedCloaked
-        {
-            get { return this.maskedCloaked; }
-            set { this.maskedCloaked = value; }
-        }
+        public MaskedCloakedValue MaskedCloaked { get; set; }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is MunitionAppearance other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="MunitionAppearance"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="MunitionAppearance"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is MunitionAppearance))
-            {
-                return false;
-            }
-
-            return this.Equals((MunitionAppearance)obj);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="MunitionAppearance"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(MunitionAppearance other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.Damage == other.Damage &&
-                this.Smoke == other.Smoke &&
-                this.TrailingEffects == other.TrailingEffects &&
-                this.Flaming == other.Flaming &&
-                this.LaunchFlash == other.LaunchFlash &&
-                this.FrozenStatus == other.FrozenStatus &&
-                this.PowerPlantStatus == other.PowerPlantStatus &&
-                this.State == other.State &&
-                this.MaskedCloaked == other.MaskedCloaked;
+            return Damage == other.Damage &&
+                Smoke == other.Smoke &&
+                TrailingEffects == other.TrailingEffects &&
+                Flaming == other.Flaming &&
+                LaunchFlash == other.LaunchFlash &&
+                FrozenStatus == other.FrozenStatus &&
+                PowerPlantStatus == other.PowerPlantStatus &&
+                State == other.State &&
+                MaskedCloaked == other.MaskedCloaked;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> to the byte array.
+        /// Converts the instance of <see cref="MunitionAppearance"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToUInt32());
-        }
+        /// <returns>The byte array representing the current <see cref="MunitionAppearance"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToUInt32());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> to the uint value.
+        /// Converts the instance of <see cref="MunitionAppearance"/> to the uint value.
         /// </summary>
-        /// <returns>The uint value representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.MunitionAppearance"/> instance.</returns>
+        /// <returns>The uint value representing the current <see cref="MunitionAppearance"/> instance.</returns>
         public uint ToUInt32()
         {
             uint val = 0;
 
-            val |= (uint)((uint)this.Damage << 3);
-            val |= (uint)((uint)this.Smoke << 5);
-            val |= (uint)((uint)this.TrailingEffects << 7);
-            val |= (uint)((uint)this.Flaming << 15);
-            val |= (uint)((uint)this.LaunchFlash << 16);
-            val |= (uint)((uint)this.FrozenStatus << 21);
-            val |= (uint)((uint)this.PowerPlantStatus << 22);
-            val |= (uint)((uint)this.State << 23);
-            val |= (uint)((uint)this.MaskedCloaked << 31);
+            val |= (uint)Damage << 3;
+            val |= (uint)Smoke << 5;
+            val |= (uint)TrailingEffects << 7;
+            val |= (uint)Flaming << 15;
+            val |= (uint)LaunchFlash << 16;
+            val |= (uint)FrozenStatus << 21;
+            val |= (uint)PowerPlantStatus << 22;
+            val |= (uint)State << 23;
+            val |= (uint)MaskedCloaked << 31;
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -576,15 +470,15 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.Damage.GetHashCode();
-                hash = (hash * 29) + this.Smoke.GetHashCode();
-                hash = (hash * 29) + this.TrailingEffects.GetHashCode();
-                hash = (hash * 29) + this.Flaming.GetHashCode();
-                hash = (hash * 29) + this.LaunchFlash.GetHashCode();
-                hash = (hash * 29) + this.FrozenStatus.GetHashCode();
-                hash = (hash * 29) + this.PowerPlantStatus.GetHashCode();
-                hash = (hash * 29) + this.State.GetHashCode();
-                hash = (hash * 29) + this.MaskedCloaked.GetHashCode();
+                hash = (hash * 29) + Damage.GetHashCode();
+                hash = (hash * 29) + Smoke.GetHashCode();
+                hash = (hash * 29) + TrailingEffects.GetHashCode();
+                hash = (hash * 29) + Flaming.GetHashCode();
+                hash = (hash * 29) + LaunchFlash.GetHashCode();
+                hash = (hash * 29) + FrozenStatus.GetHashCode();
+                hash = (hash * 29) + PowerPlantStatus.GetHashCode();
+                hash = (hash * 29) + State.GetHashCode();
+                hash = (hash * 29) + MaskedCloaked.GetHashCode();
             }
 
             return hash;

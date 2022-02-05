@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -53,40 +52,8 @@ namespace OpenDis.Dis1995
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class RadioEntityType
+    public partial class RadioEntityType : IEquatable<RadioEntityType>, IReflectable
     {
-        /// <summary>
-        /// Kind of entity
-        /// </summary>
-        private byte _entityKind;
-
-        /// <summary>
-        /// Domain of entity (air, surface, subsurface, space, etc)
-        /// </summary>
-        private byte _domain;
-
-        /// <summary>
-        /// country to which the design of the entity is attributed
-        /// </summary>
-        private ushort _country;
-
-        /// <summary>
-        /// category of entity
-        /// </summary>
-        private byte _category;
-
-        /// <summary>
-        /// subcategory of entity
-        /// </summary>
-        private byte _subcategory;
-
-        /// <summary>
-        /// specific info based on subcategory field
-        /// </summary>
-        private byte _nomenclatureVersion;
-
-        private ushort _nomenclature;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="RadioEntityType"/> class.
         /// </summary>
@@ -100,12 +67,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(RadioEntityType left, RadioEntityType right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(RadioEntityType left, RadioEntityType right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -113,26 +77,14 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(RadioEntityType left, RadioEntityType right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 1;  // this._entityKind
             marshalSize += 1;  // this._domain
@@ -148,120 +100,43 @@ namespace OpenDis.Dis1995
         /// Gets or sets the Kind of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "entityKind")]
-        public byte EntityKind
-        {
-            get
-            {
-                return this._entityKind;
-            }
-
-            set
-            {
-                this._entityKind = value;
-            }
-        }
+        public byte EntityKind { get; set; }
 
         /// <summary>
         /// Gets or sets the Domain of entity (air, surface, subsurface, space, etc)
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "domain")]
-        public byte Domain
-        {
-            get
-            {
-                return this._domain;
-            }
-
-            set
-            {
-                this._domain = value;
-            }
-        }
+        public byte Domain { get; set; }
 
         /// <summary>
         /// Gets or sets the country to which the design of the entity is attributed
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "country")]
-        public ushort Country
-        {
-            get
-            {
-                return this._country;
-            }
-
-            set
-            {
-                this._country = value;
-            }
-        }
+        public ushort Country { get; set; }
 
         /// <summary>
         /// Gets or sets the category of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "category")]
-        public byte Category
-        {
-            get
-            {
-                return this._category;
-            }
-
-            set
-            {
-                this._category = value;
-            }
-        }
+        public byte Category { get; set; }
 
         /// <summary>
         /// Gets or sets the subcategory of entity
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "subcategory")]
-        public byte Subcategory
-        {
-            get
-            {
-                return this._subcategory;
-            }
-
-            set
-            {
-                this._subcategory = value;
-            }
-        }
+        public byte Subcategory { get; set; }
 
         /// <summary>
         /// Gets or sets the specific info based on subcategory field
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "nomenclatureVersion")]
-        public byte NomenclatureVersion
-        {
-            get
-            {
-                return this._nomenclatureVersion;
-            }
-
-            set
-            {
-                this._nomenclatureVersion = value;
-            }
-        }
+        public byte NomenclatureVersion { get; set; }
 
         /// <summary>
         /// Gets or sets the nomenclature
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "nomenclature")]
-        public ushort Nomenclature
-        {
-            get
-            {
-                return this._nomenclature;
-            }
-
-            set
-            {
-                this._nomenclature = value;
-            }
-        }
+        public ushort Nomenclature { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -274,14 +149,14 @@ namespace OpenDis.Dis1995
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -291,13 +166,13 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    dos.WriteUnsignedByte((byte)this._entityKind);
-                    dos.WriteUnsignedByte((byte)this._domain);
-                    dos.WriteUnsignedShort((ushort)this._country);
-                    dos.WriteUnsignedByte((byte)this._category);
-                    dos.WriteUnsignedByte((byte)this._subcategory);
-                    dos.WriteUnsignedByte((byte)this._nomenclatureVersion);
-                    dos.WriteUnsignedShort((ushort)this._nomenclature);
+                    dos.WriteUnsignedByte(EntityKind);
+                    dos.WriteUnsignedByte(Domain);
+                    dos.WriteUnsignedShort(Country);
+                    dos.WriteUnsignedByte(Category);
+                    dos.WriteUnsignedByte(Subcategory);
+                    dos.WriteUnsignedByte(NomenclatureVersion);
+                    dos.WriteUnsignedShort(Nomenclature);
                 }
                 catch (Exception e)
                 {
@@ -307,11 +182,11 @@ namespace OpenDis.Dis1995
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -324,13 +199,13 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._entityKind = dis.ReadUnsignedByte();
-                    this._domain = dis.ReadUnsignedByte();
-                    this._country = dis.ReadUnsignedShort();
-                    this._category = dis.ReadUnsignedByte();
-                    this._subcategory = dis.ReadUnsignedByte();
-                    this._nomenclatureVersion = dis.ReadUnsignedByte();
-                    this._nomenclature = dis.ReadUnsignedShort();
+                    EntityKind = dis.ReadUnsignedByte();
+                    Domain = dis.ReadUnsignedByte();
+                    Country = dis.ReadUnsignedShort();
+                    Category = dis.ReadUnsignedByte();
+                    Subcategory = dis.ReadUnsignedByte();
+                    NomenclatureVersion = dis.ReadUnsignedByte();
+                    Nomenclature = dis.ReadUnsignedShort();
                 }
                 catch (Exception e)
                 {
@@ -340,115 +215,93 @@ namespace OpenDis.Dis1995
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<RadioEntityType>");
             try
             {
-                sb.AppendLine("<entityKind type=\"byte\">" + this._entityKind.ToString(CultureInfo.InvariantCulture) + "</entityKind>");
-                sb.AppendLine("<domain type=\"byte\">" + this._domain.ToString(CultureInfo.InvariantCulture) + "</domain>");
-                sb.AppendLine("<country type=\"ushort\">" + this._country.ToString(CultureInfo.InvariantCulture) + "</country>");
-                sb.AppendLine("<category type=\"byte\">" + this._category.ToString(CultureInfo.InvariantCulture) + "</category>");
-                sb.AppendLine("<subcategory type=\"byte\">" + this._subcategory.ToString(CultureInfo.InvariantCulture) + "</subcategory>");
-                sb.AppendLine("<nomenclatureVersion type=\"byte\">" + this._nomenclatureVersion.ToString(CultureInfo.InvariantCulture) + "</nomenclatureVersion>");
-                sb.AppendLine("<nomenclature type=\"ushort\">" + this._nomenclature.ToString(CultureInfo.InvariantCulture) + "</nomenclature>");
+                sb.AppendLine("<entityKind type=\"byte\">" + EntityKind.ToString(CultureInfo.InvariantCulture) + "</entityKind>");
+                sb.AppendLine("<domain type=\"byte\">" + Domain.ToString(CultureInfo.InvariantCulture) + "</domain>");
+                sb.AppendLine("<country type=\"ushort\">" + Country.ToString(CultureInfo.InvariantCulture) + "</country>");
+                sb.AppendLine("<category type=\"byte\">" + Category.ToString(CultureInfo.InvariantCulture) + "</category>");
+                sb.AppendLine("<subcategory type=\"byte\">" + Subcategory.ToString(CultureInfo.InvariantCulture) + "</subcategory>");
+                sb.AppendLine("<nomenclatureVersion type=\"byte\">" + NomenclatureVersion.ToString(CultureInfo.InvariantCulture) + "</nomenclatureVersion>");
+                sb.AppendLine("<nomenclature type=\"ushort\">" + Nomenclature.ToString(CultureInfo.InvariantCulture) + "</nomenclature>");
                 sb.AppendLine("</RadioEntityType>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as RadioEntityType;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as RadioEntityType;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(RadioEntityType obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._entityKind != obj._entityKind)
+            if (EntityKind != obj.EntityKind)
             {
                 ivarsEqual = false;
             }
 
-            if (this._domain != obj._domain)
+            if (Domain != obj.Domain)
             {
                 ivarsEqual = false;
             }
 
-            if (this._country != obj._country)
+            if (Country != obj.Country)
             {
                 ivarsEqual = false;
             }
 
-            if (this._category != obj._category)
+            if (Category != obj.Category)
             {
                 ivarsEqual = false;
             }
 
-            if (this._subcategory != obj._subcategory)
+            if (Subcategory != obj.Subcategory)
             {
                 ivarsEqual = false;
             }
 
-            if (this._nomenclatureVersion != obj._nomenclatureVersion)
+            if (NomenclatureVersion != obj.NomenclatureVersion)
             {
                 ivarsEqual = false;
             }
 
-            if (this._nomenclature != obj._nomenclature)
+            if (Nomenclature != obj.Nomenclature)
             {
                 ivarsEqual = false;
             }
@@ -461,27 +314,20 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._entityKind.GetHashCode();
-            result = GenerateHash(result) ^ this._domain.GetHashCode();
-            result = GenerateHash(result) ^ this._country.GetHashCode();
-            result = GenerateHash(result) ^ this._category.GetHashCode();
-            result = GenerateHash(result) ^ this._subcategory.GetHashCode();
-            result = GenerateHash(result) ^ this._nomenclatureVersion.GetHashCode();
-            result = GenerateHash(result) ^ this._nomenclature.GetHashCode();
+            result = GenerateHash(result) ^ EntityKind.GetHashCode();
+            result = GenerateHash(result) ^ Domain.GetHashCode();
+            result = GenerateHash(result) ^ Country.GetHashCode();
+            result = GenerateHash(result) ^ Category.GetHashCode();
+            result = GenerateHash(result) ^ Subcategory.GetHashCode();
+            result = GenerateHash(result) ^ NomenclatureVersion.GetHashCode();
+            result = GenerateHash(result) ^ Nomenclature.GetHashCode();
 
             return result;
         }

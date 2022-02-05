@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// 5.3.3.4. Nonstatic information about a particular entity may be communicated by issuing an Entity State Update PDU. COMPLETE
+    /// 5.3.3.4. Nonstatic information about a particular entity may be communicated by issuing an Entity State Update
+    /// PDU. COMPLETE
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -61,49 +62,12 @@ namespace OpenDis.Dis1998
     public partial class EntityStateUpdatePdu : EntityInformationFamilyPdu, IEquatable<EntityStateUpdatePdu>
     {
         /// <summary>
-        /// This field shall identify the entity issuing the PDU
-        /// </summary>
-        private EntityID _entityID = new EntityID();
-
-        /// <summary>
-        /// Padding
-        /// </summary>
-        private byte _padding1;
-
-        /// <summary>
-        /// How many articulation parameters are in the variable length list
-        /// </summary>
-        private byte _numberOfArticulationParameters;
-
-        /// <summary>
-        /// Describes the speed of the entity in the world
-        /// </summary>
-        private Vector3Float _entityLinearVelocity = new Vector3Float();
-
-        /// <summary>
-        /// describes the location of the entity in the world
-        /// </summary>
-        private Vector3Double _entityLocation = new Vector3Double();
-
-        /// <summary>
-        /// describes the orientation of the entity, in euler angles
-        /// </summary>
-        private Orientation _entityOrientation = new Orientation();
-
-        /// <summary>
-        /// a series of bit flags that are used to help draw the entity, such as smoking, on fire, etc.
-        /// </summary>
-        private int _entityAppearance;
-
-        private List<ArticulationParameter> _articulationParameters = new List<ArticulationParameter>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EntityStateUpdatePdu"/> class.
         /// </summary>
         public EntityStateUpdatePdu()
         {
-            PduType = (byte)67;
-            ProtocolFamily = (byte)1;
+            PduType = 67;
+            ProtocolFamily = 1;
         }
 
         /// <summary>
@@ -112,12 +76,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(EntityStateUpdatePdu left, EntityStateUpdatePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(EntityStateUpdatePdu left, EntityStateUpdatePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -125,38 +86,24 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(EntityStateUpdatePdu left, EntityStateUpdatePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._entityID.GetMarshalledSize();  // this._entityID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += EntityID.GetMarshalledSize();  // this._entityID
             marshalSize += 1;  // this._padding1
             marshalSize += 1;  // this._numberOfArticulationParameters
-            marshalSize += this._entityLinearVelocity.GetMarshalledSize();  // this._entityLinearVelocity
-            marshalSize += this._entityLocation.GetMarshalledSize();  // this._entityLocation
-            marshalSize += this._entityOrientation.GetMarshalledSize();  // this._entityOrientation
+            marshalSize += EntityLinearVelocity.GetMarshalledSize();  // this._entityLinearVelocity
+            marshalSize += EntityLocation.GetMarshalledSize();  // this._entityLocation
+            marshalSize += EntityOrientation.GetMarshalledSize();  // this._entityOrientation
             marshalSize += 4;  // this._entityAppearance
-            for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+            for (int idx = 0; idx < ArticulationParameters.Count; idx++)
             {
-                ArticulationParameter listElement = (ArticulationParameter)this._articulationParameters[idx];
+                var listElement = ArticulationParameters[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -167,153 +114,65 @@ namespace OpenDis.Dis1998
         /// Gets or sets the This field shall identify the entity issuing the PDU
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "entityID")]
-        public EntityID EntityID
-        {
-            get
-            {
-                return this._entityID;
-            }
-
-            set
-            {
-                this._entityID = value;
-            }
-        }
+        public EntityID EntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Padding
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "padding1")]
-        public byte Padding1
-        {
-            get
-            {
-                return this._padding1;
-            }
-
-            set
-            {
-                this._padding1 = value;
-            }
-        }
+        public byte Padding1 { get; set; }
 
         /// <summary>
         /// Gets or sets the How many articulation parameters are in the variable length list
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfArticulationParameters method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfArticulationParameters method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfArticulationParameters")]
-        public byte NumberOfArticulationParameters
-        {
-            get
-            {
-                return this._numberOfArticulationParameters;
-            }
-
-            set
-            {
-                this._numberOfArticulationParameters = value;
-            }
-        }
+        public byte NumberOfArticulationParameters { get; set; }
 
         /// <summary>
         /// Gets or sets the Describes the speed of the entity in the world
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "entityLinearVelocity")]
-        public Vector3Float EntityLinearVelocity
-        {
-            get
-            {
-                return this._entityLinearVelocity;
-            }
-
-            set
-            {
-                this._entityLinearVelocity = value;
-            }
-        }
+        public Vector3Float EntityLinearVelocity { get; set; } = new Vector3Float();
 
         /// <summary>
         /// Gets or sets the describes the location of the entity in the world
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "entityLocation")]
-        public Vector3Double EntityLocation
-        {
-            get
-            {
-                return this._entityLocation;
-            }
-
-            set
-            {
-                this._entityLocation = value;
-            }
-        }
+        public Vector3Double EntityLocation { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the describes the orientation of the entity, in euler angles
         /// </summary>
         [XmlElement(Type = typeof(Orientation), ElementName = "entityOrientation")]
-        public Orientation EntityOrientation
-        {
-            get
-            {
-                return this._entityOrientation;
-            }
-
-            set
-            {
-                this._entityOrientation = value;
-            }
-        }
+        public Orientation EntityOrientation { get; set; } = new();
 
         /// <summary>
         /// Gets or sets the a series of bit flags that are used to help draw the entity, such as smoking, on fire, etc.
         /// </summary>
         [XmlElement(Type = typeof(int), ElementName = "entityAppearance")]
-        public int EntityAppearance
-        {
-            get
-            {
-                return this._entityAppearance;
-            }
-
-            set
-            {
-                this._entityAppearance = value;
-            }
-        }
+        public int EntityAppearance { get; set; }
 
         /// <summary>
         /// Gets the articulationParameters
         /// </summary>
         [XmlElement(ElementName = "articulationParametersList", Type = typeof(List<ArticulationParameter>))]
-        public List<ArticulationParameter> ArticulationParameters
-        {
-            get
-            {
-                return this._articulationParameters;
-            }
-        }
+        public List<ArticulationParameter> ArticulationParameters { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -322,33 +181,33 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._entityID.Marshal(dos);
-                    dos.WriteByte((byte)this._padding1);
-                    dos.WriteUnsignedByte((byte)this._articulationParameters.Count);
-                    this._entityLinearVelocity.Marshal(dos);
-                    this._entityLocation.Marshal(dos);
-                    this._entityOrientation.Marshal(dos);
-                    dos.WriteInt((int)this._entityAppearance);
+                    EntityID.Marshal(dos);
+                    dos.WriteByte(Padding1);
+                    dos.WriteUnsignedByte((byte)ArticulationParameters.Count);
+                    EntityLinearVelocity.Marshal(dos);
+                    EntityLocation.Marshal(dos);
+                    EntityOrientation.Marshal(dos);
+                    dos.WriteInt(EntityAppearance);
 
-                    for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                    for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                     {
-                        ArticulationParameter aArticulationParameter = (ArticulationParameter)this._articulationParameters[idx];
+                        var aArticulationParameter = ArticulationParameters[idx];
                         aArticulationParameter.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -363,47 +222,40 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._entityID.Unmarshal(dis);
-                    this._padding1 = dis.ReadByte();
-                    this._numberOfArticulationParameters = dis.ReadUnsignedByte();
-                    this._entityLinearVelocity.Unmarshal(dis);
-                    this._entityLocation.Unmarshal(dis);
-                    this._entityOrientation.Unmarshal(dis);
-                    this._entityAppearance = dis.ReadInt();
+                    EntityID.Unmarshal(dis);
+                    Padding1 = dis.ReadByte();
+                    NumberOfArticulationParameters = dis.ReadUnsignedByte();
+                    EntityLinearVelocity.Unmarshal(dis);
+                    EntityLocation.Unmarshal(dis);
+                    EntityOrientation.Unmarshal(dis);
+                    EntityAppearance = dis.ReadInt();
 
-                    for (int idx = 0; idx < this.NumberOfArticulationParameters; idx++)
+                    for (int idx = 0; idx < NumberOfArticulationParameters; idx++)
                     {
-                        ArticulationParameter anX = new ArticulationParameter();
+                        var anX = new ArticulationParameter();
                         anX.Unmarshal(dis);
-                        this._articulationParameters.Add(anX);
+                        ArticulationParameters.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -412,24 +264,24 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<entityID>");
-                this._entityID.Reflection(sb);
+                EntityID.Reflection(sb);
                 sb.AppendLine("</entityID>");
-                sb.AppendLine("<padding1 type=\"byte\">" + this._padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
-                sb.AppendLine("<articulationParameters type=\"byte\">" + this._articulationParameters.Count.ToString(CultureInfo.InvariantCulture) + "</articulationParameters>");
+                sb.AppendLine("<padding1 type=\"byte\">" + Padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
+                sb.AppendLine("<articulationParameters type=\"byte\">" + ArticulationParameters.Count.ToString(CultureInfo.InvariantCulture) + "</articulationParameters>");
                 sb.AppendLine("<entityLinearVelocity>");
-                this._entityLinearVelocity.Reflection(sb);
+                EntityLinearVelocity.Reflection(sb);
                 sb.AppendLine("</entityLinearVelocity>");
                 sb.AppendLine("<entityLocation>");
-                this._entityLocation.Reflection(sb);
+                EntityLocation.Reflection(sb);
                 sb.AppendLine("</entityLocation>");
                 sb.AppendLine("<entityOrientation>");
-                this._entityOrientation.Reflection(sb);
+                EntityOrientation.Reflection(sb);
                 sb.AppendLine("</entityOrientation>");
-                sb.AppendLine("<entityAppearance type=\"int\">" + this._entityAppearance.ToString(CultureInfo.InvariantCulture) + "</entityAppearance>");
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                sb.AppendLine("<entityAppearance type=\"int\">" + EntityAppearance.ToString(CultureInfo.InvariantCulture) + "</entityAppearance>");
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
                     sb.AppendLine("<articulationParameters" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"ArticulationParameter\">");
-                    ArticulationParameter aArticulationParameter = (ArticulationParameter)this._articulationParameters[idx];
+                    var aArticulationParameter = ArticulationParameters[idx];
                     aArticulationParameter.Reflection(sb);
                     sb.AppendLine("</articulationParameters" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -438,96 +290,78 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as EntityStateUpdatePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as EntityStateUpdatePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(EntityStateUpdatePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._entityID.Equals(obj._entityID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!EntityID.Equals(obj.EntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._padding1 != obj._padding1)
+            if (Padding1 != obj.Padding1)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfArticulationParameters != obj._numberOfArticulationParameters)
+            if (NumberOfArticulationParameters != obj.NumberOfArticulationParameters)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._entityLinearVelocity.Equals(obj._entityLinearVelocity))
+            if (!EntityLinearVelocity.Equals(obj.EntityLinearVelocity))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._entityLocation.Equals(obj._entityLocation))
+            if (!EntityLocation.Equals(obj.EntityLocation))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._entityOrientation.Equals(obj._entityOrientation))
+            if (!EntityOrientation.Equals(obj.EntityOrientation))
             {
                 ivarsEqual = false;
             }
 
-            if (this._entityAppearance != obj._entityAppearance)
+            if (EntityAppearance != obj.EntityAppearance)
             {
                 ivarsEqual = false;
             }
 
-            if (this._articulationParameters.Count != obj._articulationParameters.Count)
+            if (ArticulationParameters.Count != obj.ArticulationParameters.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
-                    if (!this._articulationParameters[idx].Equals(obj._articulationParameters[idx]))
+                    if (!ArticulationParameters[idx].Equals(obj.ArticulationParameters[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -542,35 +376,28 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._entityID.GetHashCode();
-            result = GenerateHash(result) ^ this._padding1.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfArticulationParameters.GetHashCode();
-            result = GenerateHash(result) ^ this._entityLinearVelocity.GetHashCode();
-            result = GenerateHash(result) ^ this._entityLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._entityOrientation.GetHashCode();
-            result = GenerateHash(result) ^ this._entityAppearance.GetHashCode();
+            result = GenerateHash(result) ^ EntityID.GetHashCode();
+            result = GenerateHash(result) ^ Padding1.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfArticulationParameters.GetHashCode();
+            result = GenerateHash(result) ^ EntityLinearVelocity.GetHashCode();
+            result = GenerateHash(result) ^ EntityLocation.GetHashCode();
+            result = GenerateHash(result) ^ EntityOrientation.GetHashCode();
+            result = GenerateHash(result) ^ EntityAppearance.GetHashCode();
 
-            if (this._articulationParameters.Count > 0)
+            if (ArticulationParameters.Count > 0)
             {
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._articulationParameters[idx].GetHashCode();
+                    result = GenerateHash(result) ^ ArticulationParameters[idx].GetHashCode();
                 }
             }
 

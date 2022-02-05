@@ -38,10 +38,8 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Text;
 using System.Xml.Serialization;
 using OpenDis.Core;
@@ -49,24 +47,14 @@ using OpenDis.Core;
 namespace OpenDis.Dis1995
 {
     /// <summary>
-    /// 5.2.3: location of the radiating portion of the antenna, specified in world coordinates and         entity coordinates.
+    /// 5.2.3: location of the radiating portion of the antenna, specified in world coordinates and        entity coordinates.
     /// </summary>
     [Serializable]
     [XmlRoot]
     [XmlInclude(typeof(Vector3Double))]
     [XmlInclude(typeof(Vector3Float))]
-    public partial class AntennaLocation
+    public partial class AntennaLocation : IEquatable<AntennaLocation>, IReflectable
     {
-        /// <summary>
-        /// Location of the radiating portion of the antenna in world    coordinates
-        /// </summary>
-        private Vector3Double _antennaLocation = new Vector3Double();
-
-        /// <summary>
-        /// Location of the radiating portion of the antenna     in entity coordinates
-        /// </summary>
-        private Vector3Float _relativeAntennaLocation = new Vector3Float();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AntennaLocation"/> class.
         /// </summary>
@@ -80,12 +68,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AntennaLocation left, AntennaLocation right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AntennaLocation left, AntennaLocation right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -93,65 +78,31 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AntennaLocation left, AntennaLocation right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
-            marshalSize += this._antennaLocation.GetMarshalledSize();  // this._antennaLocation
-            marshalSize += this._relativeAntennaLocation.GetMarshalledSize();  // this._relativeAntennaLocation
+            marshalSize += AntennaLocation_.GetMarshalledSize();  // this._antennaLocation
+            marshalSize += RelativeAntennaLocation.GetMarshalledSize();  // this._relativeAntennaLocation
             return marshalSize;
         }
 
         /// <summary>
-        /// Gets or sets the Location of the radiating portion of the antenna in world    coordinates
+        /// Gets or sets the Location of the radiating portion of the antenna in world   coordinates
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "antennaLocation")]
-        public Vector3Double AntennaLocation_
-        {
-            get
-            {
-                return this._antennaLocation;
-            }
-
-            set
-            {
-                this._antennaLocation = value;
-            }
-        }
+        public Vector3Double AntennaLocation_ { get; set; } = new Vector3Double();
 
         /// <summary>
-        /// Gets or sets the Location of the radiating portion of the antenna     in entity coordinates
+        /// Gets or sets the Location of the radiating portion of the antenna    in entity coordinates
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "relativeAntennaLocation")]
-        public Vector3Float RelativeAntennaLocation
-        {
-            get
-            {
-                return this._relativeAntennaLocation;
-            }
-
-            set
-            {
-                this._relativeAntennaLocation = value;
-            }
-        }
+        public Vector3Float RelativeAntennaLocation { get; set; } = new Vector3Float();
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -164,14 +115,14 @@ namespace OpenDis.Dis1995
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -181,8 +132,8 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._antennaLocation.Marshal(dos);
-                    this._relativeAntennaLocation.Marshal(dos);
+                    AntennaLocation_.Marshal(dos);
+                    RelativeAntennaLocation.Marshal(dos);
                 }
                 catch (Exception e)
                 {
@@ -192,11 +143,11 @@ namespace OpenDis.Dis1995
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -209,8 +160,8 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._antennaLocation.Unmarshal(dis);
-                    this._relativeAntennaLocation.Unmarshal(dis);
+                    AntennaLocation_.Unmarshal(dis);
+                    RelativeAntennaLocation.Unmarshal(dis);
                 }
                 catch (Exception e)
                 {
@@ -220,24 +171,17 @@ namespace OpenDis.Dis1995
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
@@ -245,64 +189,49 @@ namespace OpenDis.Dis1995
             try
             {
                 sb.AppendLine("<antennaLocation>");
-                this._antennaLocation.Reflection(sb);
+                AntennaLocation_.Reflection(sb);
                 sb.AppendLine("</antennaLocation>");
                 sb.AppendLine("<relativeAntennaLocation>");
-                this._relativeAntennaLocation.Reflection(sb);
+                RelativeAntennaLocation.Reflection(sb);
                 sb.AppendLine("</relativeAntennaLocation>");
                 sb.AppendLine("</AntennaLocation>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as AntennaLocation;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as AntennaLocation;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(AntennaLocation obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (!this._antennaLocation.Equals(obj._antennaLocation))
+            if (!AntennaLocation_.Equals(obj.AntennaLocation_))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._relativeAntennaLocation.Equals(obj._relativeAntennaLocation))
+            if (!RelativeAntennaLocation.Equals(obj.RelativeAntennaLocation))
             {
                 ivarsEqual = false;
             }
@@ -315,22 +244,15 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._antennaLocation.GetHashCode();
-            result = GenerateHash(result) ^ this._relativeAntennaLocation.GetHashCode();
+            result = GenerateHash(result) ^ AntennaLocation_.GetHashCode();
+            result = GenerateHash(result) ^ RelativeAntennaLocation.GetHashCode();
 
             return result;
         }

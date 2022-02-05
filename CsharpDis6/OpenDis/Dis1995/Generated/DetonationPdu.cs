@@ -62,53 +62,11 @@ namespace OpenDis.Dis1995
     public partial class DetonationPdu : Warfare, IEquatable<DetonationPdu>
     {
         /// <summary>
-        /// ID of muntion that was fired
-        /// </summary>
-        private EntityID _munitionID = new EntityID();
-
-        /// <summary>
-        /// ID firing event
-        /// </summary>
-        private EventID _eventID = new EventID();
-
-        /// <summary>
-        /// ID firing event
-        /// </summary>
-        private Vector3Float _velocity = new Vector3Float();
-
-        /// <summary>
-        /// where the detonation is, in world coordinates
-        /// </summary>
-        private Vector3Double _locationInWorldCoordinates = new Vector3Double();
-
-        /// <summary>
-        /// Describes munition used
-        /// </summary>
-        private BurstDescriptor _burstDescriptor = new BurstDescriptor();
-
-        /// <summary>
-        /// result of the explosion
-        /// </summary>
-        private byte _detonationResult;
-
-        /// <summary>
-        /// How many articulation parameters we have
-        /// </summary>
-        private byte _numberOfArticulationParameters;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private short _pad;
-
-        private List<ArticulationParameter> _articulationParameters = new List<ArticulationParameter>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DetonationPdu"/> class.
         /// </summary>
         public DetonationPdu()
         {
-            PduType = (byte)3;
+            PduType = 3;
         }
 
         /// <summary>
@@ -117,12 +75,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(DetonationPdu left, DetonationPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(DetonationPdu left, DetonationPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -130,39 +85,25 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(DetonationPdu left, DetonationPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._munitionID.GetMarshalledSize();  // this._munitionID
-            marshalSize += this._eventID.GetMarshalledSize();  // this._eventID
-            marshalSize += this._velocity.GetMarshalledSize();  // this._velocity
-            marshalSize += this._locationInWorldCoordinates.GetMarshalledSize();  // this._locationInWorldCoordinates
-            marshalSize += this._burstDescriptor.GetMarshalledSize();  // this._burstDescriptor
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += MunitionID.GetMarshalledSize();  // this._munitionID
+            marshalSize += EventID.GetMarshalledSize();  // this._eventID
+            marshalSize += Velocity.GetMarshalledSize();  // this._velocity
+            marshalSize += LocationInWorldCoordinates.GetMarshalledSize();  // this._locationInWorldCoordinates
+            marshalSize += BurstDescriptor.GetMarshalledSize();  // this._burstDescriptor
             marshalSize += 1;  // this._detonationResult
             marshalSize += 1;  // this._numberOfArticulationParameters
             marshalSize += 2;  // this._pad
-            for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+            for (int idx = 0; idx < ArticulationParameters.Count; idx++)
             {
-                ArticulationParameter listElement = (ArticulationParameter)this._articulationParameters[idx];
+                var listElement = ArticulationParameters[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -173,170 +114,71 @@ namespace OpenDis.Dis1995
         /// Gets or sets the ID of muntion that was fired
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "munitionID")]
-        public EntityID MunitionID
-        {
-            get
-            {
-                return this._munitionID;
-            }
-
-            set
-            {
-                this._munitionID = value;
-            }
-        }
+        public EntityID MunitionID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID firing event
         /// </summary>
         [XmlElement(Type = typeof(EventID), ElementName = "eventID")]
-        public EventID EventID
-        {
-            get
-            {
-                return this._eventID;
-            }
-
-            set
-            {
-                this._eventID = value;
-            }
-        }
+        public EventID EventID { get; set; } = new EventID();
 
         /// <summary>
         /// Gets or sets the ID firing event
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "velocity")]
-        public Vector3Float Velocity
-        {
-            get
-            {
-                return this._velocity;
-            }
-
-            set
-            {
-                this._velocity = value;
-            }
-        }
+        public Vector3Float Velocity { get; set; } = new();
 
         /// <summary>
         /// Gets or sets the where the detonation is, in world coordinates
         /// </summary>
         [XmlElement(Type = typeof(Vector3Double), ElementName = "locationInWorldCoordinates")]
-        public Vector3Double LocationInWorldCoordinates
-        {
-            get
-            {
-                return this._locationInWorldCoordinates;
-            }
-
-            set
-            {
-                this._locationInWorldCoordinates = value;
-            }
-        }
+        public Vector3Double LocationInWorldCoordinates { get; set; } = new Vector3Double();
 
         /// <summary>
         /// Gets or sets the Describes munition used
         /// </summary>
         [XmlElement(Type = typeof(BurstDescriptor), ElementName = "burstDescriptor")]
-        public BurstDescriptor BurstDescriptor
-        {
-            get
-            {
-                return this._burstDescriptor;
-            }
-
-            set
-            {
-                this._burstDescriptor = value;
-            }
-        }
+        public BurstDescriptor BurstDescriptor { get; set; } = new BurstDescriptor();
 
         /// <summary>
         /// Gets or sets the result of the explosion
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "detonationResult")]
-        public byte DetonationResult
-        {
-            get
-            {
-                return this._detonationResult;
-            }
-
-            set
-            {
-                this._detonationResult = value;
-            }
-        }
+        public byte DetonationResult { get; set; }
 
         /// <summary>
         /// Gets or sets the How many articulation parameters we have
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfArticulationParameters method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfArticulationParameters method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfArticulationParameters")]
-        public byte NumberOfArticulationParameters
-        {
-            get
-            {
-                return this._numberOfArticulationParameters;
-            }
-
-            set
-            {
-                this._numberOfArticulationParameters = value;
-            }
-        }
+        public byte NumberOfArticulationParameters { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(short), ElementName = "pad")]
-        public short Pad
-        {
-            get
-            {
-                return this._pad;
-            }
-
-            set
-            {
-                this._pad = value;
-            }
-        }
+        public short Pad { get; set; }
 
         /// <summary>
         /// Gets the articulationParameters
         /// </summary>
         [XmlElement(ElementName = "articulationParametersList", Type = typeof(List<ArticulationParameter>))]
-        public List<ArticulationParameter> ArticulationParameters
-        {
-            get
-            {
-                return this._articulationParameters;
-            }
-        }
+        public List<ArticulationParameter> ArticulationParameters { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -345,34 +187,34 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._munitionID.Marshal(dos);
-                    this._eventID.Marshal(dos);
-                    this._velocity.Marshal(dos);
-                    this._locationInWorldCoordinates.Marshal(dos);
-                    this._burstDescriptor.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._detonationResult);
-                    dos.WriteUnsignedByte((byte)this._articulationParameters.Count);
-                    dos.WriteShort((short)this._pad);
+                    MunitionID.Marshal(dos);
+                    EventID.Marshal(dos);
+                    Velocity.Marshal(dos);
+                    LocationInWorldCoordinates.Marshal(dos);
+                    BurstDescriptor.Marshal(dos);
+                    dos.WriteUnsignedByte(DetonationResult);
+                    dos.WriteUnsignedByte((byte)ArticulationParameters.Count);
+                    dos.WriteShort(Pad);
 
-                    for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                    for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                     {
-                        ArticulationParameter aArticulationParameter = (ArticulationParameter)this._articulationParameters[idx];
+                        var aArticulationParameter = ArticulationParameters[idx];
                         aArticulationParameter.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -387,48 +229,41 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._munitionID.Unmarshal(dis);
-                    this._eventID.Unmarshal(dis);
-                    this._velocity.Unmarshal(dis);
-                    this._locationInWorldCoordinates.Unmarshal(dis);
-                    this._burstDescriptor.Unmarshal(dis);
-                    this._detonationResult = dis.ReadUnsignedByte();
-                    this._numberOfArticulationParameters = dis.ReadUnsignedByte();
-                    this._pad = dis.ReadShort();
+                    MunitionID.Unmarshal(dis);
+                    EventID.Unmarshal(dis);
+                    Velocity.Unmarshal(dis);
+                    LocationInWorldCoordinates.Unmarshal(dis);
+                    BurstDescriptor.Unmarshal(dis);
+                    DetonationResult = dis.ReadUnsignedByte();
+                    NumberOfArticulationParameters = dis.ReadUnsignedByte();
+                    Pad = dis.ReadShort();
 
-                    for (int idx = 0; idx < this.NumberOfArticulationParameters; idx++)
+                    for (int idx = 0; idx < NumberOfArticulationParameters; idx++)
                     {
-                        ArticulationParameter anX = new ArticulationParameter();
+                        var anX = new ArticulationParameter();
                         anX.Unmarshal(dis);
-                        this._articulationParameters.Add(anX);
+                        ArticulationParameters.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -437,27 +272,27 @@ namespace OpenDis.Dis1995
             try
             {
                 sb.AppendLine("<munitionID>");
-                this._munitionID.Reflection(sb);
+                MunitionID.Reflection(sb);
                 sb.AppendLine("</munitionID>");
                 sb.AppendLine("<eventID>");
-                this._eventID.Reflection(sb);
+                EventID.Reflection(sb);
                 sb.AppendLine("</eventID>");
                 sb.AppendLine("<velocity>");
-                this._velocity.Reflection(sb);
+                Velocity.Reflection(sb);
                 sb.AppendLine("</velocity>");
                 sb.AppendLine("<locationInWorldCoordinates>");
-                this._locationInWorldCoordinates.Reflection(sb);
+                LocationInWorldCoordinates.Reflection(sb);
                 sb.AppendLine("</locationInWorldCoordinates>");
                 sb.AppendLine("<burstDescriptor>");
-                this._burstDescriptor.Reflection(sb);
+                BurstDescriptor.Reflection(sb);
                 sb.AppendLine("</burstDescriptor>");
-                sb.AppendLine("<detonationResult type=\"byte\">" + this._detonationResult.ToString(CultureInfo.InvariantCulture) + "</detonationResult>");
-                sb.AppendLine("<articulationParameters type=\"byte\">" + this._articulationParameters.Count.ToString(CultureInfo.InvariantCulture) + "</articulationParameters>");
-                sb.AppendLine("<pad type=\"short\">" + this._pad.ToString(CultureInfo.InvariantCulture) + "</pad>");
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                sb.AppendLine("<detonationResult type=\"byte\">" + DetonationResult.ToString(CultureInfo.InvariantCulture) + "</detonationResult>");
+                sb.AppendLine("<articulationParameters type=\"byte\">" + ArticulationParameters.Count.ToString(CultureInfo.InvariantCulture) + "</articulationParameters>");
+                sb.AppendLine("<pad type=\"short\">" + Pad.ToString(CultureInfo.InvariantCulture) + "</pad>");
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
                     sb.AppendLine("<articulationParameters" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"ArticulationParameter\">");
-                    ArticulationParameter aArticulationParameter = (ArticulationParameter)this._articulationParameters[idx];
+                    var aArticulationParameter = ArticulationParameters[idx];
                     aArticulationParameter.Reflection(sb);
                     sb.AppendLine("</articulationParameters" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -466,101 +301,83 @@ namespace OpenDis.Dis1995
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as DetonationPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as DetonationPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(DetonationPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._munitionID.Equals(obj._munitionID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!MunitionID.Equals(obj.MunitionID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._eventID.Equals(obj._eventID))
+            if (!EventID.Equals(obj.EventID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._velocity.Equals(obj._velocity))
+            if (!Velocity.Equals(obj.Velocity))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._locationInWorldCoordinates.Equals(obj._locationInWorldCoordinates))
+            if (!LocationInWorldCoordinates.Equals(obj.LocationInWorldCoordinates))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._burstDescriptor.Equals(obj._burstDescriptor))
+            if (!BurstDescriptor.Equals(obj.BurstDescriptor))
             {
                 ivarsEqual = false;
             }
 
-            if (this._detonationResult != obj._detonationResult)
+            if (DetonationResult != obj.DetonationResult)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfArticulationParameters != obj._numberOfArticulationParameters)
+            if (NumberOfArticulationParameters != obj.NumberOfArticulationParameters)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad != obj._pad)
+            if (Pad != obj.Pad)
             {
                 ivarsEqual = false;
             }
 
-            if (this._articulationParameters.Count != obj._articulationParameters.Count)
+            if (ArticulationParameters.Count != obj.ArticulationParameters.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
-                    if (!this._articulationParameters[idx].Equals(obj._articulationParameters[idx]))
+                    if (!ArticulationParameters[idx].Equals(obj.ArticulationParameters[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -575,36 +392,29 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._munitionID.GetHashCode();
-            result = GenerateHash(result) ^ this._eventID.GetHashCode();
-            result = GenerateHash(result) ^ this._velocity.GetHashCode();
-            result = GenerateHash(result) ^ this._locationInWorldCoordinates.GetHashCode();
-            result = GenerateHash(result) ^ this._burstDescriptor.GetHashCode();
-            result = GenerateHash(result) ^ this._detonationResult.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfArticulationParameters.GetHashCode();
-            result = GenerateHash(result) ^ this._pad.GetHashCode();
+            result = GenerateHash(result) ^ MunitionID.GetHashCode();
+            result = GenerateHash(result) ^ EventID.GetHashCode();
+            result = GenerateHash(result) ^ Velocity.GetHashCode();
+            result = GenerateHash(result) ^ LocationInWorldCoordinates.GetHashCode();
+            result = GenerateHash(result) ^ BurstDescriptor.GetHashCode();
+            result = GenerateHash(result) ^ DetonationResult.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfArticulationParameters.GetHashCode();
+            result = GenerateHash(result) ^ Pad.GetHashCode();
 
-            if (this._articulationParameters.Count > 0)
+            if (ArticulationParameters.Count > 0)
             {
-                for (int idx = 0; idx < this._articulationParameters.Count; idx++)
+                for (int idx = 0; idx < ArticulationParameters.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._articulationParameters[idx].GetHashCode();
+                    result = GenerateHash(result) ^ ArticulationParameters[idx].GetHashCode();
                 }
             }
 

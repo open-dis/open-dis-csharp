@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Marking
 {
     /// <summary>
-    /// Enumeration values for DigitChevronMarkingCodes (es.markingtext.chevron.symbol, Digit / Chevron Codes, 
+    /// Enumeration values for DigitChevronMarkingCodes (es.markingtext.chevron.symbol, Digit / Chevron Codes,
     /// section 4.5.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

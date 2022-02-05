@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.SimulationManagement
 {
     /// <summary>
-    /// Enumeration values for FrozenBehavior (simman.stop.frozenbehavior, Frozen Behavior, 
+    /// Enumeration values for FrozenBehavior (simman.stop.frozenbehavior, Frozen Behavior,
     /// section 7.2.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

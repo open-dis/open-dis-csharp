@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -54,28 +53,8 @@ namespace OpenDis.Dis1998
     [Serializable]
     [XmlRoot]
     [XmlInclude(typeof(AcousticBeamFundamentalParameter))]
-    public partial class AcousticBeamData
+    public partial class AcousticBeamData : IEquatable<AcousticBeamData>, IReflectable
     {
-        /// <summary>
-        /// beam data length
-        /// </summary>
-        private ushort _beamDataLength;
-
-        /// <summary>
-        /// beamIDNumber
-        /// </summary>
-        private byte _beamIDNumber;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private ushort _pad2;
-
-        /// <summary>
-        /// fundamental data parameters
-        /// </summary>
-        private AcousticBeamFundamentalParameter _fundamentalDataParameters = new AcousticBeamFundamentalParameter();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AcousticBeamData"/> class.
         /// </summary>
@@ -89,12 +68,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AcousticBeamData left, AcousticBeamData right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AcousticBeamData left, AcousticBeamData right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -102,31 +78,19 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AcousticBeamData left, AcousticBeamData right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 2;  // this._beamDataLength
             marshalSize += 1;  // this._beamIDNumber
             marshalSize += 2;  // this._pad2
-            marshalSize += this._fundamentalDataParameters.GetMarshalledSize();  // this._fundamentalDataParameters
+            marshalSize += FundamentalDataParameters.GetMarshalledSize();  // this._fundamentalDataParameters
             return marshalSize;
         }
 
@@ -134,69 +98,25 @@ namespace OpenDis.Dis1998
         /// Gets or sets the beam data length
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "beamDataLength")]
-        public ushort BeamDataLength
-        {
-            get
-            {
-                return this._beamDataLength;
-            }
-
-            set
-            {
-                this._beamDataLength = value;
-            }
-        }
+        public ushort BeamDataLength { get; set; }
 
         /// <summary>
         /// Gets or sets the beamIDNumber
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "beamIDNumber")]
-        public byte BeamIDNumber
-        {
-            get
-            {
-                return this._beamIDNumber;
-            }
-
-            set
-            {
-                this._beamIDNumber = value;
-            }
-        }
+        public byte BeamIDNumber { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "pad2")]
-        public ushort Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
-
-            set
-            {
-                this._pad2 = value;
-            }
-        }
+        public ushort Pad2 { get; set; }
 
         /// <summary>
         /// Gets or sets the fundamental data parameters
         /// </summary>
         [XmlElement(Type = typeof(AcousticBeamFundamentalParameter), ElementName = "fundamentalDataParameters")]
-        public AcousticBeamFundamentalParameter FundamentalDataParameters
-        {
-            get
-            {
-                return this._fundamentalDataParameters;
-            }
-
-            set
-            {
-                this._fundamentalDataParameters = value;
-            }
-        }
+        public AcousticBeamFundamentalParameter FundamentalDataParameters { get; set; } = new AcousticBeamFundamentalParameter();
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -209,14 +129,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -226,10 +146,10 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedShort((ushort)this._beamDataLength);
-                    dos.WriteUnsignedByte((byte)this._beamIDNumber);
-                    dos.WriteUnsignedShort((ushort)this._pad2);
-                    this._fundamentalDataParameters.Marshal(dos);
+                    dos.WriteUnsignedShort(BeamDataLength);
+                    dos.WriteUnsignedByte(BeamIDNumber);
+                    dos.WriteUnsignedShort(Pad2);
+                    FundamentalDataParameters.Marshal(dos);
                 }
                 catch (Exception e)
                 {
@@ -239,11 +159,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -256,10 +176,10 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._beamDataLength = dis.ReadUnsignedShort();
-                    this._beamIDNumber = dis.ReadUnsignedByte();
-                    this._pad2 = dis.ReadUnsignedShort();
-                    this._fundamentalDataParameters.Unmarshal(dis);
+                    BeamDataLength = dis.ReadUnsignedShort();
+                    BeamIDNumber = dis.ReadUnsignedByte();
+                    Pad2 = dis.ReadUnsignedShort();
+                    FundamentalDataParameters.Unmarshal(dis);
                 }
                 catch (Exception e)
                 {
@@ -269,99 +189,77 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<AcousticBeamData>");
             try
             {
-                sb.AppendLine("<beamDataLength type=\"ushort\">" + this._beamDataLength.ToString(CultureInfo.InvariantCulture) + "</beamDataLength>");
-                sb.AppendLine("<beamIDNumber type=\"byte\">" + this._beamIDNumber.ToString(CultureInfo.InvariantCulture) + "</beamIDNumber>");
-                sb.AppendLine("<pad2 type=\"ushort\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                sb.AppendLine("<beamDataLength type=\"ushort\">" + BeamDataLength.ToString(CultureInfo.InvariantCulture) + "</beamDataLength>");
+                sb.AppendLine("<beamIDNumber type=\"byte\">" + BeamIDNumber.ToString(CultureInfo.InvariantCulture) + "</beamIDNumber>");
+                sb.AppendLine("<pad2 type=\"ushort\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
                 sb.AppendLine("<fundamentalDataParameters>");
-                this._fundamentalDataParameters.Reflection(sb);
+                FundamentalDataParameters.Reflection(sb);
                 sb.AppendLine("</fundamentalDataParameters>");
                 sb.AppendLine("</AcousticBeamData>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as AcousticBeamData;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as AcousticBeamData;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(AcousticBeamData obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._beamDataLength != obj._beamDataLength)
+            if (BeamDataLength != obj.BeamDataLength)
             {
                 ivarsEqual = false;
             }
 
-            if (this._beamIDNumber != obj._beamIDNumber)
+            if (BeamIDNumber != obj.BeamIDNumber)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._fundamentalDataParameters.Equals(obj._fundamentalDataParameters))
+            if (!FundamentalDataParameters.Equals(obj.FundamentalDataParameters))
             {
                 ivarsEqual = false;
             }
@@ -374,24 +272,17 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._beamDataLength.GetHashCode();
-            result = GenerateHash(result) ^ this._beamIDNumber.GetHashCode();
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
-            result = GenerateHash(result) ^ this._fundamentalDataParameters.GetHashCode();
+            result = GenerateHash(result) ^ BeamDataLength.GetHashCode();
+            result = GenerateHash(result) ^ BeamIDNumber.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
+            result = GenerateHash(result) ^ FundamentalDataParameters.GetHashCode();
 
             return result;
         }

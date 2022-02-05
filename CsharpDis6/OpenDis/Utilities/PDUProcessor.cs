@@ -42,7 +42,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using System.Xml;
 using System.Xml.Serialization;
 using OpenDis.Dis1998;
 using OpenDis.Enumerations;
@@ -51,47 +50,34 @@ namespace OpenDis.Core
 {
     public class PduProcessor
     {
-		#region Fields (5) 
+        #region Fields (5) 
 
         public const uint PDU_LENGTH_POSITION = 8;
         public const uint PDU_TYPE_POSITION = 2;
         public const uint PDU_VERSION_POSITION = 0;
+        private XmlSerializer xmlSerializedData;
 
-        private Endian endian;
-        private System.Xml.Serialization.XmlSerializer xmlSerializedData;
+        #endregion Fields 
 
-		#endregion Fields 
-
-		#region Constructors (1) 
+        #region Constructors (1) 
 
         public PduProcessor()
         {
-            this.endian = (BitConverter.IsLittleEndian ? Endian.Little : Endian.Big);
+            Endian = BitConverter.IsLittleEndian ? Endian.Little : Endian.Big;
         }
 
-		#endregion Constructors 
+        #endregion Constructors 
 
-		#region Properties (1) 
+        #region Properties (1) 
 
         /// <summary>
         /// Gets or sets the type of endian used to process the data
         /// </summary>
-        public Endian Endian
-        {
-            get
-            {
-                return this.endian;
-            }
+        public Endian Endian { get; set; }
 
-            set
-            {
-                this.endian = value;
-            }
-        }
+        #endregion Properties 
 
-		#endregion Properties 
-
-		#region Methods (18) 
+        #region Methods (18) 
 
         /// <summary>
         /// Converts a byte array into a DIS1998 PDU
@@ -100,34 +86,31 @@ namespace OpenDis.Core
         /// <param name="rawPdu">Byte array that hold raw 1998 PDU.</param>
         /// <param name="endian">The Endian type used for conversion.</param>
         /// <returns>PDU object</returns>
-        public static Pdu ConvertByteArrayToPdu1998(byte pduType, byte[] rawPdu, Endian endian)
-        {
-            return UnmarshalRawPdu(pduType, rawPdu, endian);
-        }
+        public static Pdu ConvertByteArrayToPdu1998(byte pduType, byte[] rawPdu, Endian endian) => UnmarshalRawPdu(pduType, rawPdu, endian);
 
         /// <summary>
-        /// Provided as a means to return a string representation of the underlining PDU data.  Note format is not yet optimized.
+        /// Provided as a means to return a string representation of the underlining PDU data. Note format is not yet optimized.
         /// </summary>
         /// <param name="pdu">The PDU to parse</param>
         /// <returns>StringBuilder that represents the state of the PDU</returns>
         public static StringBuilder DecodePdu(object pdu)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
             pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb }, CultureInfo.InvariantCulture);
 
             return sb;
         }
 
         /// <summary>
-        /// Provides a means of processing PDU data 
+        /// Provides a means of processing PDU data
         /// </summary>
         /// <param name="buffer">byte array containing the pdu data to process</param>
         /// <param name="endian">format of value types</param>
         /// <returns>Collection of PDUs which are represented in base object class</returns>
         public List<object> ProcessPdu(byte[] buffer, Endian endian)
         {
-            this.Endian = endian;
-            return this.ProcessPdu(buffer);
+            Endian = endian;
+            return ProcessPdu(buffer);
         }
 
         /// <summary>
@@ -138,8 +121,8 @@ namespace OpenDis.Core
         /// <returns>The PDU instance.</returns>
         public object ProcessPdu(Stream stream, Endian endian)
         {
-            this.Endian = endian;
-            return this.ProcessPdu(stream);
+            Endian = endian;
+            return ProcessPdu(stream);
         }
 
         /// <summary>
@@ -150,36 +133,36 @@ namespace OpenDis.Core
         /// <param name="rawPdu">The raw pdu.</param>
         public void ProcessPdu(Stream stream, Endian endian, out byte[] rawPdu)
         {
-            this.Endian = endian;
-            this.ProcessPdu(stream, out rawPdu);
+            Endian = endian;
+            ProcessPdu(stream, out rawPdu);
         }
 
         /// <summary>
-        /// Provides a means of processing PDU data 
+        /// Provides a means of processing PDU data
         /// </summary>
-        /// <param name="buf">byte array containing the pdu data to process</param>
+        /// <param name="buffer">byte array containing the pdu data to process</param>
         /// <param name="endian">format of value types</param>
         /// <remarks>Added to support passing back just the byte array.</remarks>
         /// <returns>Collection of Raw byte[] PDUs</returns>
         public List<byte[]> ProcessRawPdu(byte[] buffer, Endian endian)
         {
-            this.Endian = endian;
-            return this.ProcessRawPdu(buffer);
+            Endian = endian;
+            return ProcessRawPdu(buffer);
         }
 
         /// <summary>
-        /// Provides a means of processing PDU data 
+        /// Provides a means of processing PDU data
         /// </summary>
-        /// <param name="buf">byte array containing the pdu data to process</param>
+        /// <param name="buffer">byte array containing the pdu data to process</param>
         /// <param name="endian">format of value types</param>
         /// <param name="dataQueue">Returns raw packets to a referenced Queue</param>
         /// <remarks>Added to support passing back just the byte array into a Queue.</remarks>
         public void ProcessRawPdu(byte[] buffer, Endian endian, ref Queue<byte[]> dataQueue)
         {
-            this.Endian = endian;
+            Endian = endian;
 
             // Calling the method to get PDUs, increment through each in case more than one pdu in packet
-            foreach (byte[] pduRawByteArray in this.ProcessRawPdu(buffer))
+            foreach (byte[] pduRawByteArray in ProcessRawPdu(buffer))
             {
                 dataQueue.Enqueue(pduRawByteArray);
             }
@@ -192,10 +175,7 @@ namespace OpenDis.Core
         /// <param name="ds">Datastream which contains the raw packet and Endian Type</param>
         /// <remarks>Added by PES to work with Mobile.</remarks>
         /// <returns>The PDU instance.</returns>
-        public static Pdu UnmarshalRawPdu(byte pduType, DataInputStream ds)
-        {
-            return UnmarshalRawPdu((PduType)pduType, ds);
-        }
+        public static Pdu UnmarshalRawPdu(byte pduType, DataInputStream ds) => UnmarshalRawPdu((PduType)pduType, ds);
 
         /// <summary>
         /// Used to unmarshal data back into the correct PDU type.
@@ -206,7 +186,7 @@ namespace OpenDis.Core
         /// <returns>The PDU instance.</returns>
         public static Pdu UnmarshalRawPdu(PduType pduType, DataInputStream ds)
         {
-            Pdu pdu = new Pdu();
+            var pdu = new Pdu();
 
             switch (pduType)
             {
@@ -387,15 +367,15 @@ namespace OpenDis.Core
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.TSPI:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
                 case PduType.Appearance:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
                 case PduType.ArticulatedParts:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
                 case PduType.LEFire:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
                 case PduType.LEDetonation:
-                    throw new NotImplementedException();
+                    throw new NotSupportedException();
                 case PduType.CreateEntityR:
                     pdu = new CreateEntityReliablePdu();
                     pdu.Unmarshal(ds);
@@ -475,106 +455,106 @@ namespace OpenDis.Core
         /// <param name="pduType">PDU type</param>
         /// <param name="ds">Data stream that holds raw pdu data</param>
         /// <returns>Base PDU object that can be cast to specific PDU if needed</returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static OpenDis.Dis1995.Pdu UnmarshalRawPdu1995(PduType pduType, DataInputStream ds)
+        /// <exception cref="NotSupportedException"></exception>
+        public static Dis1995.Pdu UnmarshalRawPdu1995(PduType pduType, DataInputStream ds)
         {
-            var pdu = new OpenDis.Dis1995.Pdu();
+            var pdu = new Dis1995.Pdu();
             switch (pduType)
             {
                 case PduType.EntityState:
-                    pdu = new OpenDis.Dis1995.EntityStatePdu();
+                    pdu = new Dis1995.EntityStatePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.Fire:
-                    pdu = new OpenDis.Dis1995.FirePdu();
+                    pdu = new Dis1995.FirePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.Detonation:
-                    pdu = new OpenDis.Dis1995.DetonationPdu();
+                    pdu = new Dis1995.DetonationPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.Collision:
-                    pdu = new OpenDis.Dis1995.CollisionPdu();
+                    pdu = new Dis1995.CollisionPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.ServiceRequest:
-                    pdu = new OpenDis.Dis1995.ServiceRequestPdu();
+                    pdu = new Dis1995.ServiceRequestPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.ResupplyOffer:
-                    pdu = new OpenDis.Dis1995.ResupplyOfferPdu();
+                    pdu = new Dis1995.ResupplyOfferPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.ResupplyReceived:
-                    pdu = new OpenDis.Dis1995.ResupplyReceivedPdu();
+                    pdu = new Dis1995.ResupplyReceivedPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.ResupplyCancel:
-                    pdu = new OpenDis.Dis1995.ResupplyCancelPdu();
+                    pdu = new Dis1995.ResupplyCancelPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.RepairComplete:
-                    pdu = new OpenDis.Dis1995.RepairCompletePdu();
+                    pdu = new Dis1995.RepairCompletePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.RepairResponse:
-                    pdu = new OpenDis.Dis1995.RepairResponsePdu();
+                    pdu = new Dis1995.RepairResponsePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.CreateEntity:
-                    pdu = new OpenDis.Dis1995.CreateEntityPdu();
+                    pdu = new Dis1995.CreateEntityPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.RemoveEntity:
-                    pdu = new OpenDis.Dis1995.RemoveEntityPdu();
+                    pdu = new Dis1995.RemoveEntityPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.StartResume:
-                    pdu = new OpenDis.Dis1995.StartResumePdu();
+                    pdu = new Dis1995.StartResumePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.Acknowledge:
-                    pdu = new OpenDis.Dis1995.AcknowledgePdu();
+                    pdu = new Dis1995.AcknowledgePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.ActionRequest:
-                    pdu = new OpenDis.Dis1995.ActionRequestPdu();
+                    pdu = new Dis1995.ActionRequestPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.ActionResponse:
-                    pdu = new OpenDis.Dis1995.ActionResponsePdu();
+                    pdu = new Dis1995.ActionResponsePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.DataQuery:
-                    pdu = new OpenDis.Dis1995.DataQueryPdu();
+                    pdu = new Dis1995.DataQueryPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.SetData:
-                    pdu = new OpenDis.Dis1995.SetDataPdu();
+                    pdu = new Dis1995.SetDataPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.EventReport:
-                    pdu = new OpenDis.Dis1995.EventReportPdu();
+                    pdu = new Dis1995.EventReportPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.Comment:
-                    pdu = new OpenDis.Dis1995.CommentPdu();
+                    pdu = new Dis1995.CommentPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.StopFreeze:
-                    pdu = new OpenDis.Dis1995.StopFreezePdu();
+                    pdu = new Dis1995.StopFreezePdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.Signal:
-                    pdu = new OpenDis.Dis1995.SignalPdu();
+                    pdu = new Dis1995.SignalPdu();
                     pdu.Unmarshal(ds);
                     break;
                 case PduType.Transmitter:
-                    pdu = new OpenDis.Dis1995.TransmitterPdu();
+                    pdu = new Dis1995.TransmitterPdu();
                     pdu.Unmarshal(ds);
                     break;
             }
-            
+
             return pdu;
         }
 
@@ -582,13 +562,13 @@ namespace OpenDis.Core
         /// Used to unmarshal data back into the correct PDU type.
         /// </summary>
         /// <param name="pduType">PDU type</param>
-        /// <param name="rawPDU">byte array containing the raw packets</param>
+        /// <param name="rawPdu">byte array containing the raw packets</param>
         /// <param name="endian">Endian type</param>
         /// <remarks>Added by PES to work with Mobile.</remarks>
         /// <returns>The PDU instance</returns>
         public static Pdu UnmarshalRawPdu(byte pduType, byte[] rawPdu, Endian endian)
         {
-            DataInputStream ds = new DataInputStream(rawPdu, endian);
+            var ds = new DataInputStream(rawPdu, endian);
             return UnmarshalRawPdu((PduType)pduType, ds);
         }
 
@@ -596,13 +576,13 @@ namespace OpenDis.Core
         /// Used to unmarshal data back into the correct PDU type.
         /// </summary>
         /// <param name="pduType">PDU type</param>
-        /// <param name="rawPDU">byte array containing the raw packets</param>
+        /// <param name="rawPdu">byte array containing the raw packets</param>
         /// <param name="endian">Endian type</param>
         /// <remarks>Added by PES to work with Mobile.</remarks>
         /// <returns>The PDU instance.</returns>
         public static Pdu UnmarshalRawPdu(PduType pduType, byte[] rawPdu, Endian endian)
         {
-            DataInputStream ds = new DataInputStream(rawPdu, endian);
+            var ds = new DataInputStream(rawPdu, endian);
             return UnmarshalRawPdu(pduType, ds);
         }
 
@@ -613,15 +593,14 @@ namespace OpenDis.Core
         /// <returns>StringBuilder</returns>
         public StringBuilder XmlDecodePdu(object pdu)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            using (System.IO.StringWriter stringWriter = new System.IO.StringWriter(CultureInfo.InvariantCulture))
+            using (var stringWriter = new StringWriter(CultureInfo.InvariantCulture))
             {
                 try
                 {
-                    this.xmlSerializedData = new XmlSerializer(pdu.GetType());
-                    this.xmlSerializedData.Serialize(stringWriter, pdu);
-
+                    xmlSerializedData = new XmlSerializer(pdu.GetType());
+                    xmlSerializedData.Serialize(stringWriter, pdu);
                 }
                 catch
                 {
@@ -636,16 +615,13 @@ namespace OpenDis.Core
 
             return sb;
         }
-		// Protected Methods (5) 
+        // Protected Methods (5) 
 
         protected virtual object ProcessPdu(Stream stream)
         {
-            int upToPduLength = (int)PDU_LENGTH_POSITION + sizeof(ushort);
-            int pduLength = 0;
+            const int upToPduLength = (int)PDU_LENGTH_POSITION + sizeof(ushort);
             byte pduType;
             byte pdu_version;
-            object pdu = null;
-
             long startingPosition = stream.Position;
 
             byte[] buffer = new byte[upToPduLength];
@@ -653,10 +629,11 @@ namespace OpenDis.Core
             // Read in part of the stream up to the pdu length
             stream.Read(buffer, 0, upToPduLength);
 
+            object pdu;
             try
             {
-                pduLength = PduProcessor.pduLength(buffer, this.endian);
-                
+                int pduLength = PduProcessor.pduLength(buffer, Endian);
+
                 // Allocate space for the whole PDU
                 byte[] pduBufferStorage = new byte[pduLength];
 
@@ -670,8 +647,7 @@ namespace OpenDis.Core
 
                 pdu_version = pduBufferStorage[PDU_VERSION_POSITION];
 
-                pdu = this.SwitchOnType(pdu_version, pduType, pduBufferStorage);
-
+                pdu = SwitchOnType(pdu_version, pduType, pduBufferStorage);
             }
             catch
             {
@@ -683,14 +659,14 @@ namespace OpenDis.Core
         }
 
         /// <summary>
-        /// Process a received PDU.  Note that a datastream can contain multiple PDUs.  Therefore a
+        /// Process a received PDU. Note that a datastream can contain multiple PDUs.  Therefore a
         /// List is used to hold one or more after decoding.
         /// </summary>
-        /// <param name="buf">byte array of PDU(s)</param>
+        /// <param name="buffer">byte array of PDU(s)</param>
         /// <returns>Collection of all PDU(s) decoded</returns>
         protected virtual List<object> ProcessPdu(byte[] buffer)
         {
-            List<object> pduCollection = new List<object>();
+            var pduCollection = new List<object>();
 
             if (buffer.Length < 1)
             {
@@ -701,14 +677,13 @@ namespace OpenDis.Core
             byte pduType;
             byte pdu_version;
             int countBytes = 0;
-            uint pduLength = 0;
 
             //used to interate over all PDU(s) within the byte array
             while (countBytes < length)
             {
                 try
                 {
-                    pduLength = PduProcessor.pduLength(buffer, this.endian, (uint)(PDU_LENGTH_POSITION + countBytes));                    
+                    uint pduLength = PduProcessor.pduLength(buffer, Endian, (uint)(PDU_LENGTH_POSITION + countBytes));
 
                     // Must be at end of datastream
                     if (pduLength == 0)
@@ -729,7 +704,6 @@ namespace OpenDis.Core
                     pduCollection.Add(SwitchOnType(pdu_version, pduType, pduBufferStorage));
 
                     countBytes += (int)pduLength;
-
                 }
                 catch
                 {
@@ -743,9 +717,7 @@ namespace OpenDis.Core
 
         protected virtual void ProcessPdu(Stream stream, out byte[] rawData)
         {
-            int upToPduLength = (int)PDU_LENGTH_POSITION + sizeof(ushort);
-            int pduLength = 0;
-
+            const int upToPduLength = (int)PDU_LENGTH_POSITION + sizeof(ushort);
             long startingPosition = stream.Position;
 
             byte[] buffer = new byte[upToPduLength];
@@ -755,8 +727,8 @@ namespace OpenDis.Core
 
             try
             {
-                pduLength = PduProcessor.pduLength(buffer, this.endian);
-                
+                int pduLength = PduProcessor.pduLength(buffer, Endian);
+
                 // Allocate space for the whole PDU
                 rawData = new byte[pduLength];
 
@@ -774,15 +746,15 @@ namespace OpenDis.Core
         }
 
         /// <summary>
-        /// Process a received PDU.  Note that a datastream can contain multiple PDUs.  Therefore a
+        /// Process a received PDU. Note that a datastream can contain multiple PDUs.  Therefore a
         /// List is used to hold one or more after decoding.
         /// </summary>
         /// <remarks>Added by PES to support passing back just the byte array.</remarks>
-        /// <param name="buf">byte array of PDU(s)</param>
+        /// <param name="buffer">byte array of PDU(s)</param>
         /// <returns>Collection of all PDU(s) in raw byte format</returns>
         protected virtual List<byte[]> ProcessRawPdu(byte[] buffer)
         {
-            List<byte[]> pduCollection = new List<byte[]>();
+            var pduCollection = new List<byte[]>();
 
             if (buffer.Length < 1)
             {
@@ -793,15 +765,14 @@ namespace OpenDis.Core
             byte pduType;
             byte pduVersion;
             int countBytes = 0;
-            uint pduLength = 0;
 
             //used to interate over all PDU(s) within the byte array
             while (countBytes < length)
             {
                 try
                 {
-                    pduLength = PduProcessor.pduLength(buffer, this.endian);
-                    
+                    uint pduLength = PduProcessor.pduLength(buffer, Endian);
+
                     // Must be at end of datastream
                     if (pduLength == 0)
                     {
@@ -833,17 +804,18 @@ namespace OpenDis.Core
         }
 
         /// <summary>
-        /// Returns an instance of the PDU based upon the pdu type passed in.  Note PDU will be represented as an Object for simplicity.
+        /// Returns an instance of the PDU based upon the pdu type passed in. Note PDU will be represented as an Object for
+        /// simplicity.
         /// </summary>
-        /// <param name="pdu_version">Version of IEEE standard</param>
+        /// <param name="pduVersion">Version of IEEE standard</param>
         /// <param name="pduType">Type of PDU</param>
         /// <param name="ds">PDU byte array containing the data</param>
-        /// <returns>PDU instance.</returns>         
+        /// <returns>PDU instance.</returns>
         protected virtual object SwitchOnType(byte pduVersion, uint pduType, byte[] ds)
         {
             object pdu = null;
 
-            DataInputStream dStream = new DataInputStream(ds, this.Endian);
+            var dStream = new DataInputStream(ds, Endian);
 
             switch (pduVersion)
             {
@@ -869,48 +841,42 @@ namespace OpenDis.Core
             return pdu;
         }
 
-
         /// <summary>
         /// Extracts length of PDU without altering byte array/stream so that future access to this field is still valid
         /// </summary>
         /// <param name="buf">Byte array holding PDU data.</param>
-        /// <param name="position">Position of 'length' field.  generally at pos 8, but if this byte array holds more than one PDU</param>
         /// <param name="endian">The Endian type used for conversion.</param>
+        /// <param name="pos">Position of 'length' field. generally at pos 8, but if this byte array holds more than one PDU</param>
         /// <returns>length</returns>
-        private static UInt16 pduLength(byte[] buf, Endian endian, uint pos = PDU_LENGTH_POSITION)
+        private static ushort pduLength(byte[] buf, Endian endian, uint pos = PDU_LENGTH_POSITION)
         {
             byte[] temp = new byte[2];
 
             if (endian == Endian.Big)  //Reverse
             {
                 temp[0] = buf[pos + 1];
-                temp[1] = buf[pos]; 
+                temp[1] = buf[pos];
             }
             else  //Leave as is
             {
                 temp[0] = buf[pos];
                 temp[1] = buf[pos + 1];
             }
-            
-            return System.BitConverter.ToUInt16(temp, 0);
+
+            return BitConverter.ToUInt16(temp, 0);
         }
 
-                
         /// <summary>
-        /// Unmarshal all data into the pdu object.  This method calls the all the base unmarshals.
-        /// Deprecated:  This method used Reflection, use <see cref="UnmarshallRawPdu"/> method instead.
+        /// Unmarshal all data into the pdu object. This method calls the all the base unmarshals.
+        /// Deprecated: This method used Reflection, use <see cref="UnmarshalRawPdu(byte, DataInputStream)"/> method instead.
         /// </summary>
         /// <param name="pdu">object where the unmarshalled data will be stored</param>
         /// <param name="dStream">location of where the unmarshalled data is located</param>
-        [Obsolete("This method used Reflection which is slow, new method 'UnmarshallRawPdu' should be used instead.")]
-        private static void ReturnUnmarshalledPdu(object pdu, DataInputStream dStream)
-        {
+        [Obsolete("This method used Reflection which is slow, new method 'UnmarshalRawPdu' should be used instead.")]
+        private static void ReturnUnmarshalledPdu(object pdu, DataInputStream dStream) =>
             // Unmarshal is the method name found in each of the PDU classes
             pdu.GetType().InvokeMember("Unmarshal", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { dStream }, CultureInfo.InvariantCulture);
-        }
 
-
-
-		#endregion Methods 
+        #endregion Methods 
     }
 }

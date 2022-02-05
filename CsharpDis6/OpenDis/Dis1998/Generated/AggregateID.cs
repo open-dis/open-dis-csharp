@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -49,27 +48,13 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.2.36. Each agregate in a given simulation app is given an aggregate identifier number unique for all other aggregates in that app and in that exercise. The id is valid for the duration of the the exercise.
+    /// Section 5.2.36. Each agregate in a given simulation app is given an aggregate identifier number unique for all
+    /// other aggregates in that app and in that exercise. The id is valid for the duration of the exercise.
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class AggregateID
+    public partial class AggregateID : IEquatable<AggregateID>, IReflectable
     {
-        /// <summary>
-        /// The site ID
-        /// </summary>
-        private ushort _site;
-
-        /// <summary>
-        /// The application ID
-        /// </summary>
-        private ushort _application;
-
-        /// <summary>
-        /// the aggregate ID
-        /// </summary>
-        private ushort _aggregateID;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateID"/> class.
         /// </summary>
@@ -83,12 +68,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AggregateID left, AggregateID right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AggregateID left, AggregateID right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -96,26 +78,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AggregateID left, AggregateID right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 2;  // this._site
             marshalSize += 2;  // this._application
@@ -124,55 +94,22 @@ namespace OpenDis.Dis1998
         }
 
         /// <summary>
-        /// Gets or sets the The site ID
+        /// Gets or sets the site ID
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "site")]
-        public ushort Site
-        {
-            get
-            {
-                return this._site;
-            }
-
-            set
-            {
-                this._site = value;
-            }
-        }
+        public ushort Site { get; set; }
 
         /// <summary>
-        /// Gets or sets the The application ID
+        /// Gets or sets the application ID
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "application")]
-        public ushort Application
-        {
-            get
-            {
-                return this._application;
-            }
-
-            set
-            {
-                this._application = value;
-            }
-        }
+        public ushort Application { get; set; }
 
         /// <summary>
-        /// Gets or sets the the aggregate ID
+        /// Gets or sets the aggregate ID
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "aggregateID")]
-        public ushort AggregateID_
-        {
-            get
-            {
-                return this._aggregateID;
-            }
-
-            set
-            {
-                this._aggregateID = value;
-            }
-        }
+        public ushort AggregateID_ { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -185,14 +122,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -202,9 +139,9 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedShort((ushort)this._site);
-                    dos.WriteUnsignedShort((ushort)this._application);
-                    dos.WriteUnsignedShort((ushort)this._aggregateID);
+                    dos.WriteUnsignedShort(Site);
+                    dos.WriteUnsignedShort(Application);
+                    dos.WriteUnsignedShort(AggregateID_);
                 }
                 catch (Exception e)
                 {
@@ -214,11 +151,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -231,9 +168,9 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._site = dis.ReadUnsignedShort();
-                    this._application = dis.ReadUnsignedShort();
-                    this._aggregateID = dis.ReadUnsignedShort();
+                    Site = dis.ReadUnsignedShort();
+                    Application = dis.ReadUnsignedShort();
+                    AggregateID_ = dis.ReadUnsignedShort();
                 }
                 catch (Exception e)
                 {
@@ -243,91 +180,69 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<AggregateID>");
             try
             {
-                sb.AppendLine("<site type=\"ushort\">" + this._site.ToString(CultureInfo.InvariantCulture) + "</site>");
-                sb.AppendLine("<application type=\"ushort\">" + this._application.ToString(CultureInfo.InvariantCulture) + "</application>");
-                sb.AppendLine("<aggregateID type=\"ushort\">" + this._aggregateID.ToString(CultureInfo.InvariantCulture) + "</aggregateID>");
+                sb.AppendLine("<site type=\"ushort\">" + Site.ToString(CultureInfo.InvariantCulture) + "</site>");
+                sb.AppendLine("<application type=\"ushort\">" + Application.ToString(CultureInfo.InvariantCulture) + "</application>");
+                sb.AppendLine("<aggregateID type=\"ushort\">" + AggregateID_.ToString(CultureInfo.InvariantCulture) + "</aggregateID>");
                 sb.AppendLine("</AggregateID>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as AggregateID;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as AggregateID;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(AggregateID obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._site != obj._site)
+            if (Site != obj.Site)
             {
                 ivarsEqual = false;
             }
 
-            if (this._application != obj._application)
+            if (Application != obj.Application)
             {
                 ivarsEqual = false;
             }
 
-            if (this._aggregateID != obj._aggregateID)
+            if (AggregateID_ != obj.AggregateID_)
             {
                 ivarsEqual = false;
             }
@@ -340,23 +255,16 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._site.GetHashCode();
-            result = GenerateHash(result) ^ this._application.GetHashCode();
-            result = GenerateHash(result) ^ this._aggregateID.GetHashCode();
+            result = GenerateHash(result) ^ Site.GetHashCode();
+            result = GenerateHash(result) ^ Application.GetHashCode();
+            result = GenerateHash(result) ^ AggregateID_.GetHashCode();
 
             return result;
         }

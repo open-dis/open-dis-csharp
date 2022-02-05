@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -53,48 +52,8 @@ namespace OpenDis.Dis1998
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class FundamentalParameterDataIff
+    public partial class FundamentalParameterDataIff : IEquatable<FundamentalParameterDataIff>, IReflectable
     {
-        /// <summary>
-        /// ERP
-        /// </summary>
-        private float _erp;
-
-        /// <summary>
-        /// frequency
-        /// </summary>
-        private float _frequency;
-
-        /// <summary>
-        /// pgrf
-        /// </summary>
-        private float _pgrf;
-
-        /// <summary>
-        /// Pulse width
-        /// </summary>
-        private float _pulseWidth;
-
-        /// <summary>
-        /// Burst length
-        /// </summary>
-        private uint _burstLength;
-
-        /// <summary>
-        /// Applicable modes enumeration
-        /// </summary>
-        private byte _applicableModes;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private ushort _pad2;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private byte _pad3;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="FundamentalParameterDataIff"/> class.
         /// </summary>
@@ -108,12 +67,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(FundamentalParameterDataIff left, FundamentalParameterDataIff right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(FundamentalParameterDataIff left, FundamentalParameterDataIff right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -121,26 +77,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(FundamentalParameterDataIff left, FundamentalParameterDataIff right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 4;  // this._erp
             marshalSize += 4;  // this._frequency
@@ -157,137 +101,49 @@ namespace OpenDis.Dis1998
         /// Gets or sets the ERP
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "erp")]
-        public float Erp
-        {
-            get
-            {
-                return this._erp;
-            }
-
-            set
-            {
-                this._erp = value;
-            }
-        }
+        public float Erp { get; set; }
 
         /// <summary>
         /// Gets or sets the frequency
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "frequency")]
-        public float Frequency
-        {
-            get
-            {
-                return this._frequency;
-            }
-
-            set
-            {
-                this._frequency = value;
-            }
-        }
+        public float Frequency { get; set; }
 
         /// <summary>
         /// Gets or sets the pgrf
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "pgrf")]
-        public float Pgrf
-        {
-            get
-            {
-                return this._pgrf;
-            }
-
-            set
-            {
-                this._pgrf = value;
-            }
-        }
+        public float Pgrf { get; set; }
 
         /// <summary>
         /// Gets or sets the Pulse width
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "pulseWidth")]
-        public float PulseWidth
-        {
-            get
-            {
-                return this._pulseWidth;
-            }
-
-            set
-            {
-                this._pulseWidth = value;
-            }
-        }
+        public float PulseWidth { get; set; }
 
         /// <summary>
         /// Gets or sets the Burst length
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "burstLength")]
-        public uint BurstLength
-        {
-            get
-            {
-                return this._burstLength;
-            }
-
-            set
-            {
-                this._burstLength = value;
-            }
-        }
+        public uint BurstLength { get; set; }
 
         /// <summary>
         /// Gets or sets the Applicable modes enumeration
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "applicableModes")]
-        public byte ApplicableModes
-        {
-            get
-            {
-                return this._applicableModes;
-            }
-
-            set
-            {
-                this._applicableModes = value;
-            }
-        }
+        public byte ApplicableModes { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "pad2")]
-        public ushort Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
-
-            set
-            {
-                this._pad2 = value;
-            }
-        }
+        public ushort Pad2 { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad3")]
-        public byte Pad3
-        {
-            get
-            {
-                return this._pad3;
-            }
-
-            set
-            {
-                this._pad3 = value;
-            }
-        }
+        public byte Pad3 { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -300,14 +156,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -317,14 +173,14 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteFloat((float)this._erp);
-                    dos.WriteFloat((float)this._frequency);
-                    dos.WriteFloat((float)this._pgrf);
-                    dos.WriteFloat((float)this._pulseWidth);
-                    dos.WriteUnsignedInt((uint)this._burstLength);
-                    dos.WriteUnsignedByte((byte)this._applicableModes);
-                    dos.WriteUnsignedShort((ushort)this._pad2);
-                    dos.WriteUnsignedByte((byte)this._pad3);
+                    dos.WriteFloat((float)Erp);
+                    dos.WriteFloat((float)Frequency);
+                    dos.WriteFloat((float)Pgrf);
+                    dos.WriteFloat((float)PulseWidth);
+                    dos.WriteUnsignedInt(BurstLength);
+                    dos.WriteUnsignedByte(ApplicableModes);
+                    dos.WriteUnsignedShort(Pad2);
+                    dos.WriteUnsignedByte(Pad3);
                 }
                 catch (Exception e)
                 {
@@ -334,11 +190,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -351,14 +207,14 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._erp = dis.ReadFloat();
-                    this._frequency = dis.ReadFloat();
-                    this._pgrf = dis.ReadFloat();
-                    this._pulseWidth = dis.ReadFloat();
-                    this._burstLength = dis.ReadUnsignedInt();
-                    this._applicableModes = dis.ReadUnsignedByte();
-                    this._pad2 = dis.ReadUnsignedShort();
-                    this._pad3 = dis.ReadUnsignedByte();
+                    Erp = dis.ReadFloat();
+                    Frequency = dis.ReadFloat();
+                    Pgrf = dis.ReadFloat();
+                    PulseWidth = dis.ReadFloat();
+                    BurstLength = dis.ReadUnsignedInt();
+                    ApplicableModes = dis.ReadUnsignedByte();
+                    Pad2 = dis.ReadUnsignedShort();
+                    Pad3 = dis.ReadUnsignedByte();
                 }
                 catch (Exception e)
                 {
@@ -368,121 +224,99 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<FundamentalParameterDataIff>");
             try
             {
-                sb.AppendLine("<erp type=\"float\">" + this._erp.ToString(CultureInfo.InvariantCulture) + "</erp>");
-                sb.AppendLine("<frequency type=\"float\">" + this._frequency.ToString(CultureInfo.InvariantCulture) + "</frequency>");
-                sb.AppendLine("<pgrf type=\"float\">" + this._pgrf.ToString(CultureInfo.InvariantCulture) + "</pgrf>");
-                sb.AppendLine("<pulseWidth type=\"float\">" + this._pulseWidth.ToString(CultureInfo.InvariantCulture) + "</pulseWidth>");
-                sb.AppendLine("<burstLength type=\"uint\">" + this._burstLength.ToString(CultureInfo.InvariantCulture) + "</burstLength>");
-                sb.AppendLine("<applicableModes type=\"byte\">" + this._applicableModes.ToString(CultureInfo.InvariantCulture) + "</applicableModes>");
-                sb.AppendLine("<pad2 type=\"ushort\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
-                sb.AppendLine("<pad3 type=\"byte\">" + this._pad3.ToString(CultureInfo.InvariantCulture) + "</pad3>");
+                sb.AppendLine("<erp type=\"float\">" + Erp.ToString(CultureInfo.InvariantCulture) + "</erp>");
+                sb.AppendLine("<frequency type=\"float\">" + Frequency.ToString(CultureInfo.InvariantCulture) + "</frequency>");
+                sb.AppendLine("<pgrf type=\"float\">" + Pgrf.ToString(CultureInfo.InvariantCulture) + "</pgrf>");
+                sb.AppendLine("<pulseWidth type=\"float\">" + PulseWidth.ToString(CultureInfo.InvariantCulture) + "</pulseWidth>");
+                sb.AppendLine("<burstLength type=\"uint\">" + BurstLength.ToString(CultureInfo.InvariantCulture) + "</burstLength>");
+                sb.AppendLine("<applicableModes type=\"byte\">" + ApplicableModes.ToString(CultureInfo.InvariantCulture) + "</applicableModes>");
+                sb.AppendLine("<pad2 type=\"ushort\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                sb.AppendLine("<pad3 type=\"byte\">" + Pad3.ToString(CultureInfo.InvariantCulture) + "</pad3>");
                 sb.AppendLine("</FundamentalParameterDataIff>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as FundamentalParameterDataIff;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as FundamentalParameterDataIff;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(FundamentalParameterDataIff obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._erp != obj._erp)
+            if (Erp != obj.Erp)
             {
                 ivarsEqual = false;
             }
 
-            if (this._frequency != obj._frequency)
+            if (Frequency != obj.Frequency)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pgrf != obj._pgrf)
+            if (Pgrf != obj.Pgrf)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pulseWidth != obj._pulseWidth)
+            if (PulseWidth != obj.PulseWidth)
             {
                 ivarsEqual = false;
             }
 
-            if (this._burstLength != obj._burstLength)
+            if (BurstLength != obj.BurstLength)
             {
                 ivarsEqual = false;
             }
 
-            if (this._applicableModes != obj._applicableModes)
+            if (ApplicableModes != obj.ApplicableModes)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad3 != obj._pad3)
+            if (Pad3 != obj.Pad3)
             {
                 ivarsEqual = false;
             }
@@ -495,28 +329,21 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._erp.GetHashCode();
-            result = GenerateHash(result) ^ this._frequency.GetHashCode();
-            result = GenerateHash(result) ^ this._pgrf.GetHashCode();
-            result = GenerateHash(result) ^ this._pulseWidth.GetHashCode();
-            result = GenerateHash(result) ^ this._burstLength.GetHashCode();
-            result = GenerateHash(result) ^ this._applicableModes.GetHashCode();
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
-            result = GenerateHash(result) ^ this._pad3.GetHashCode();
+            result = GenerateHash(result) ^ Erp.GetHashCode();
+            result = GenerateHash(result) ^ Frequency.GetHashCode();
+            result = GenerateHash(result) ^ Pgrf.GetHashCode();
+            result = GenerateHash(result) ^ PulseWidth.GetHashCode();
+            result = GenerateHash(result) ^ BurstLength.GetHashCode();
+            result = GenerateHash(result) ^ ApplicableModes.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
+            result = GenerateHash(result) ^ Pad3.GetHashCode();
 
             return result;
         }

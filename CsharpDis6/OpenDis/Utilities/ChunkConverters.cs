@@ -47,7 +47,7 @@ namespace OpenDis.Core
     /// </summary>
     public static class DIS1998ChunkConverter
     {
-		#region Methods (9)  
+        #region Methods (9)  
 
         /// <summary>
         /// Method to convert a byte Array into Eigh tByte Chunks
@@ -63,11 +63,11 @@ namespace OpenDis.Core
             }
 
             // Used to get the length of the data
-            EightByteChunk byteChunkData = new EightByteChunk();
+            var byteChunkData = new EightByteChunk();
             int lengthByteChunkData = byteChunkData.OtherParameters.Length;
 
             // Calculate the size if not on the byte boundary then all 1 to make it so
-            int maxSize = System.Convert.ToInt32(Math.Ceiling((double)data.Length / (double)lengthByteChunkData)); //PES09182009 Modified so it would also work on Mobile
+            int maxSize = Convert.ToInt32(Math.Ceiling(data.Length / (double)lengthByteChunkData)); //PES09182009 Modified so it would also work on Mobile
 
             // Create buffer to hold the data passed in from the array
             byte[] chunkBuffer = new byte[maxSize * lengthByteChunkData];
@@ -75,7 +75,7 @@ namespace OpenDis.Core
             // Copy data to the buffer created above
             Buffer.BlockCopy(data, 0, chunkBuffer, 0, data.Length);
 
-            List<EightByteChunk> byteChunkList = new List<EightByteChunk>();
+            var byteChunkList = new List<EightByteChunk>();
 
             // Iterate over the buffer and grab the appropriate number of bytes, store into the List
             for (int i = 0; i < maxSize; i++)
@@ -101,16 +101,16 @@ namespace OpenDis.Core
                 return null;
             }
 
-            FourByteChunk byteChunkData = new FourByteChunk();
+            var byteChunkData = new FourByteChunk();
             int lengthByteChunkData = byteChunkData.OtherParameters.Length;
 
             // PES09182009 Modified so it would also work on Mobile
-            int maxSize = System.Convert.ToInt32(Math.Ceiling((double)data.Length / (double)lengthByteChunkData));
+            int maxSize = Convert.ToInt32(Math.Ceiling(data.Length / (double)lengthByteChunkData));
 
             byte[] chunkBuffer = new byte[maxSize * lengthByteChunkData];
             Buffer.BlockCopy(data, 0, chunkBuffer, 0, data.Length);
 
-            List<FourByteChunk> byteChunkList = new List<FourByteChunk>();
+            var byteChunkList = new List<FourByteChunk>();
 
             for (int i = 0; i < maxSize; i++)
             {
@@ -135,16 +135,16 @@ namespace OpenDis.Core
                 return null;
             }
 
-            TwoByteChunk byteChunkData = new TwoByteChunk();
+            var byteChunkData = new TwoByteChunk();
             int lengthByteChunkData = byteChunkData.OtherParameters.Length;
 
             // PES09182009 Modified so it would also work on Mobile
-            int maxSize = System.Convert.ToInt32(Math.Ceiling((double)data.Length / (double)lengthByteChunkData));
+            int maxSize = Convert.ToInt32(Math.Ceiling(data.Length / (double)lengthByteChunkData));
 
             byte[] chunkBuffer = new byte[maxSize * lengthByteChunkData];
             Buffer.BlockCopy(data, 0, chunkBuffer, 0, data.Length);
 
-            List<TwoByteChunk> byteChunkList = new List<TwoByteChunk>();
+            var byteChunkList = new List<TwoByteChunk>();
 
             for (int i = 0; i < maxSize; i++)
             {
@@ -164,7 +164,7 @@ namespace OpenDis.Core
         /// <returns>Byte array</returns>
         public static Array EightByteChunksToArray(List<EightByteChunk> chunkList)
         {
-            EightByteChunk byteChunkData = new EightByteChunk();
+            var byteChunkData = new EightByteChunk();
             int lengthByteChunkData = byteChunkData.OtherParameters.Length;
 
             //Data passed in does not exist.
@@ -182,7 +182,7 @@ namespace OpenDis.Core
                 Buffer.BlockCopy(chunkList[i].OtherParameters, 0, chunkBuffer, i * lengthByteChunkData, lengthByteChunkData);
             }
 
-            return (Array)chunkBuffer;
+            return chunkBuffer;
         }
 
         /// <summary>
@@ -192,7 +192,7 @@ namespace OpenDis.Core
         /// <returns>Byte array</returns>
         public static Array FourByteChunksToArray(List<FourByteChunk> chunkList)
         {
-            FourByteChunk byteChunkData = new FourByteChunk();
+            var byteChunkData = new FourByteChunk();
             int lengthByteChunkData = byteChunkData.OtherParameters.Length;
 
             // Data passed in does not exist.
@@ -208,11 +208,12 @@ namespace OpenDis.Core
                 Buffer.BlockCopy(chunkList[i].OtherParameters, 0, chunkBuffer, i * lengthByteChunkData, lengthByteChunkData);
             }
 
-            return (Array)chunkBuffer;
+            return chunkBuffer;
         }
 
         /// <summary>
-        /// Method to convert a string into Eight Byte Chunks into an Array.  This method was provided as a means to transport 'other'
+        /// Method to convert a string into Eight Byte Chunks into an Array. This method was provided as a means to transport
+        /// 'other'
         /// types of data via a PDU that uses variable or fixed Datum.
         /// </summary>
         /// <param name="data">String data to convert</param>
@@ -226,7 +227,7 @@ namespace OpenDis.Core
             }
 
             // Using standard ascii encoding
-            System.Text.ASCIIEncoding encoding = new ASCIIEncoding();
+            var encoding = new ASCIIEncoding();
 
             // Convert string into bytes
             Array dataArray = encoding.GetBytes(data);
@@ -235,7 +236,8 @@ namespace OpenDis.Core
         }
 
         /// <summary>
-        /// Method to convert a string into Four Byte Chunks into an Array.  This method was provided as a means to transport 'other'
+        /// Method to convert a string into Four Byte Chunks into an Array. This method was provided as a means to transport
+        /// 'other'
         /// types of data via a PDU that uses variable or fixed Datum.
         /// </summary>
         /// <param name="data">String data to convert</param>
@@ -247,14 +249,15 @@ namespace OpenDis.Core
                 return null;
             }
 
-            System.Text.ASCIIEncoding encoding = new ASCIIEncoding();
+            var encoding = new ASCIIEncoding();
             Array dataArray = encoding.GetBytes(data);
 
             return ArrayToFourByteChunks(dataArray);
         }
 
         /// <summary>
-        /// Method to convert a string into Two Byte Chunks into an Array.  This method was provided as a means to transport 'other'
+        /// Method to convert a string into Two Byte Chunks into an Array. This method was provided as a means to transport
+        /// 'other'
         /// types of data via a PDU that uses variable or fixed Datum.
         /// </summary>
         /// <param name="data">String data to convert</param>
@@ -266,7 +269,7 @@ namespace OpenDis.Core
                 return null;
             }
 
-            System.Text.ASCIIEncoding encoding = new ASCIIEncoding();
+            var encoding = new ASCIIEncoding();
             Array dataArray = encoding.GetBytes(data);
 
             return ArrayToTwoByteChunks(dataArray);
@@ -279,7 +282,7 @@ namespace OpenDis.Core
         /// <returns>Byte array</returns>
         public static Array TwoByteChunksToArray(List<TwoByteChunk> chunkList)
         {
-            TwoByteChunk byteChunkData = new TwoByteChunk();
+            var byteChunkData = new TwoByteChunk();
             int lengthByteChunkData = byteChunkData.OtherParameters.Length;
 
             // Data passed in does not exist.
@@ -295,14 +298,14 @@ namespace OpenDis.Core
                 Buffer.BlockCopy(chunkList[i].OtherParameters, 0, chunkBuffer, i * lengthByteChunkData, lengthByteChunkData);
             }
 
-            return (Array)chunkBuffer;
+            return chunkBuffer;
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 
     ///// <summary>
-    ///// Class originally created to provide chunk data using reflection.  The method below does work, however I could not find a way to
+    ///// Class originally created to provide chunk data using reflection. The method below does work, however I could not find a way to
     ///// use reflection going from an Array to the appropriate chunk type data (eg. EightByteChunk).
     ///// </summary>
     ///// <typeparam name="T">Type of Chunk data (eg. EightByteChunk)</typeparam>

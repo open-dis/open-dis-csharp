@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Appearance
 {
     /// <summary>
-    /// Enumeration values for SurfacePlatformAppearance (es.appear.platform.surface, Platforms of the Surface Domain, 
+    /// Enumeration values for SurfacePlatformAppearance (es.appear.platform.surface, Platforms of the Surface Domain,
     /// section 4.3.1.3)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.EntityState.Appearance
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct SurfacePlatformAppearance
+    public struct SurfacePlatformAppearance : IHashable<SurfacePlatformAppearance>
     {
         /// <summary>
         /// Describes the paint scheme of an entity
@@ -219,7 +218,8 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             NotFrozen = 0,
 
             /// <summary>
-            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
+            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location
+            /// even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
             /// </summary>
             FrozenFrozenEntitiesShouldNotBeDeadReckonedIETheyShouldBeDisplayedAsFixedAtTheCurrentLocationEvenIfNonzeroVelocityAccelerationOrRotationDataIsReceivedFromTheFrozenEntity = 1
         }
@@ -308,31 +308,15 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             On = 1
         }
 
-        private SurfacePlatformAppearance.PaintSchemeValue paintScheme;
-        private SurfacePlatformAppearance.MobilityValue mobility;
-        private SurfacePlatformAppearance.DamageValue damage;
-        private SurfacePlatformAppearance.SmokeValue smoke;
-        private SurfacePlatformAppearance.TrailingEffectsValue trailingEffects;
-        private SurfacePlatformAppearance.RunningLightsValue runningLights;
-        private SurfacePlatformAppearance.FlamingValue flaming;
-        private SurfacePlatformAppearance.FrozenStatusValue frozenStatus;
-        private SurfacePlatformAppearance.PowerPlantStatusValue powerPlantStatus;
-        private SurfacePlatformAppearance.StateValue state;
-        private SurfacePlatformAppearance.SpotLightsValue spotLights;
-        private SurfacePlatformAppearance.InteriorLightsValue interiorLights;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(SurfacePlatformAppearance left, SurfacePlatformAppearance right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(SurfacePlatformAppearance left, SurfacePlatformAppearance right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -340,137 +324,113 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(SurfacePlatformAppearance left, SurfacePlatformAppearance right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> to <see cref="System.UInt32"/>.
+        /// Performs an explicit conversion from <see cref="SurfacePlatformAppearance"/> to <see cref="uint"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="SurfacePlatformAppearance"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator uint(SurfacePlatformAppearance obj)
-        {
-            return obj.ToUInt32();
-        }
+        public static explicit operator uint(SurfacePlatformAppearance obj) => obj.ToUInt32();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/>.
+        /// Performs an explicit conversion from <see cref="uint"/> to <see cref="SurfacePlatformAppearance"/>.
         /// </summary>
         /// <param name="value">The uint value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator SurfacePlatformAppearance(uint value)
-        {
-            return SurfacePlatformAppearance.FromUInt32(value);
-        }
+        public static explicit operator SurfacePlatformAppearance(uint value) => FromUInt32(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance from the byte array.
+        /// Creates the <see cref="SurfacePlatformAppearance"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="SurfacePlatformAppearance"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="SurfacePlatformAppearance"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static SurfacePlatformAppearance FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 4 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromUInt32(BitConverter.ToUInt32(array, index));
+                index + 4 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromUInt32(BitConverter.ToUInt32(array, index));
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance from the uint value.
+        /// Creates the <see cref="SurfacePlatformAppearance"/> instance from the uint value.
         /// </summary>
-        /// <param name="value">The uint value which represents the <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance, represented by the uint value.</returns>
+        /// <param name="value">The uint value which represents the <see cref="SurfacePlatformAppearance"/> instance.</param>
+        /// <returns>The <see cref="SurfacePlatformAppearance"/> instance, represented by the uint value.</returns>
         public static SurfacePlatformAppearance FromUInt32(uint value)
         {
-            SurfacePlatformAppearance ps = new SurfacePlatformAppearance();
+            var ps = new SurfacePlatformAppearance();
 
-            uint mask0 = 0x0001;
-            byte shift0 = 0;
+            const uint mask0 = 0x0001;
+            const byte shift0 = 0;
             uint newValue0 = (value & mask0) >> shift0;
-            ps.PaintScheme = (SurfacePlatformAppearance.PaintSchemeValue)newValue0;
+            ps.PaintScheme = (PaintSchemeValue)newValue0;
 
-            uint mask1 = 0x0002;
-            byte shift1 = 1;
+            const uint mask1 = 0x0002;
+            const byte shift1 = 1;
             uint newValue1 = (value & mask1) >> shift1;
-            ps.Mobility = (SurfacePlatformAppearance.MobilityValue)newValue1;
+            ps.Mobility = (MobilityValue)newValue1;
 
-            uint mask3 = 0x0018;
-            byte shift3 = 3;
+            const uint mask3 = 0x0018;
+            const byte shift3 = 3;
             uint newValue3 = (value & mask3) >> shift3;
-            ps.Damage = (SurfacePlatformAppearance.DamageValue)newValue3;
+            ps.Damage = (DamageValue)newValue3;
 
-            uint mask4 = 0x0060;
-            byte shift4 = 5;
+            const uint mask4 = 0x0060;
+            const byte shift4 = 5;
             uint newValue4 = (value & mask4) >> shift4;
-            ps.Smoke = (SurfacePlatformAppearance.SmokeValue)newValue4;
+            ps.Smoke = (SmokeValue)newValue4;
 
-            uint mask5 = 0x0180;
-            byte shift5 = 7;
+            const uint mask5 = 0x0180;
+            const byte shift5 = 7;
             uint newValue5 = (value & mask5) >> shift5;
-            ps.TrailingEffects = (SurfacePlatformAppearance.TrailingEffectsValue)newValue5;
+            ps.TrailingEffects = (TrailingEffectsValue)newValue5;
 
-            uint mask7 = 0x1000;
-            byte shift7 = 12;
+            const uint mask7 = 0x1000;
+            const byte shift7 = 12;
             uint newValue7 = (value & mask7) >> shift7;
-            ps.RunningLights = (SurfacePlatformAppearance.RunningLightsValue)newValue7;
+            ps.RunningLights = (RunningLightsValue)newValue7;
 
-            uint mask9 = 0x8000;
-            byte shift9 = 15;
+            const uint mask9 = 0x8000;
+            const byte shift9 = 15;
             uint newValue9 = (value & mask9) >> shift9;
-            ps.Flaming = (SurfacePlatformAppearance.FlamingValue)newValue9;
+            ps.Flaming = (FlamingValue)newValue9;
 
-            uint mask11 = 0x200000;
-            byte shift11 = 21;
+            const uint mask11 = 0x200000;
+            const byte shift11 = 21;
             uint newValue11 = (value & mask11) >> shift11;
-            ps.FrozenStatus = (SurfacePlatformAppearance.FrozenStatusValue)newValue11;
+            ps.FrozenStatus = (FrozenStatusValue)newValue11;
 
-            uint mask12 = 0x400000;
-            byte shift12 = 22;
+            const uint mask12 = 0x400000;
+            const byte shift12 = 22;
             uint newValue12 = (value & mask12) >> shift12;
-            ps.PowerPlantStatus = (SurfacePlatformAppearance.PowerPlantStatusValue)newValue12;
+            ps.PowerPlantStatus = (PowerPlantStatusValue)newValue12;
 
-            uint mask13 = 0x800000;
-            byte shift13 = 23;
+            const uint mask13 = 0x800000;
+            const byte shift13 = 23;
             uint newValue13 = (value & mask13) >> shift13;
-            ps.State = (SurfacePlatformAppearance.StateValue)newValue13;
+            ps.State = (StateValue)newValue13;
 
-            uint mask15 = 0x10000000;
-            byte shift15 = 28;
+            const uint mask15 = 0x10000000;
+            const byte shift15 = 28;
             uint newValue15 = (value & mask15) >> shift15;
-            ps.SpotLights = (SurfacePlatformAppearance.SpotLightsValue)newValue15;
+            ps.SpotLights = (SpotLightsValue)newValue15;
 
-            uint mask16 = 0x20000000;
-            byte shift16 = 29;
+            const uint mask16 = 0x20000000;
+            const byte shift16 = 29;
             uint newValue16 = (value & mask16) >> shift16;
-            ps.InteriorLights = (SurfacePlatformAppearance.InteriorLightsValue)newValue16;
+            ps.InteriorLights = (InteriorLightsValue)newValue16;
 
             return ps;
         }
@@ -479,213 +439,132 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// Gets or sets the paintscheme.
         /// </summary>
         /// <value>The paintscheme.</value>
-        public SurfacePlatformAppearance.PaintSchemeValue PaintScheme
-        {
-            get { return this.paintScheme; }
-            set { this.paintScheme = value; }
-        }
+        public PaintSchemeValue PaintScheme { get; set; }
 
         /// <summary>
         /// Gets or sets the mobility.
         /// </summary>
         /// <value>The mobility.</value>
-        public SurfacePlatformAppearance.MobilityValue Mobility
-        {
-            get { return this.mobility; }
-            set { this.mobility = value; }
-        }
+        public MobilityValue Mobility { get; set; }
 
         /// <summary>
         /// Gets or sets the damage.
         /// </summary>
         /// <value>The damage.</value>
-        public SurfacePlatformAppearance.DamageValue Damage
-        {
-            get { return this.damage; }
-            set { this.damage = value; }
-        }
+        public DamageValue Damage { get; set; }
 
         /// <summary>
         /// Gets or sets the smoke.
         /// </summary>
         /// <value>The smoke.</value>
-        public SurfacePlatformAppearance.SmokeValue Smoke
-        {
-            get { return this.smoke; }
-            set { this.smoke = value; }
-        }
+        public SmokeValue Smoke { get; set; }
 
         /// <summary>
         /// Gets or sets the trailingeffects.
         /// </summary>
         /// <value>The trailingeffects.</value>
-        public SurfacePlatformAppearance.TrailingEffectsValue TrailingEffects
-        {
-            get { return this.trailingEffects; }
-            set { this.trailingEffects = value; }
-        }
+        public TrailingEffectsValue TrailingEffects { get; set; }
 
         /// <summary>
         /// Gets or sets the runninglights.
         /// </summary>
         /// <value>The runninglights.</value>
-        public SurfacePlatformAppearance.RunningLightsValue RunningLights
-        {
-            get { return this.runningLights; }
-            set { this.runningLights = value; }
-        }
+        public RunningLightsValue RunningLights { get; set; }
 
         /// <summary>
         /// Gets or sets the flaming.
         /// </summary>
         /// <value>The flaming.</value>
-        public SurfacePlatformAppearance.FlamingValue Flaming
-        {
-            get { return this.flaming; }
-            set { this.flaming = value; }
-        }
+        public FlamingValue Flaming { get; set; }
 
         /// <summary>
         /// Gets or sets the frozenstatus.
         /// </summary>
         /// <value>The frozenstatus.</value>
-        public SurfacePlatformAppearance.FrozenStatusValue FrozenStatus
-        {
-            get { return this.frozenStatus; }
-            set { this.frozenStatus = value; }
-        }
+        public FrozenStatusValue FrozenStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the powerplantstatus.
         /// </summary>
         /// <value>The powerplantstatus.</value>
-        public SurfacePlatformAppearance.PowerPlantStatusValue PowerPlantStatus
-        {
-            get { return this.powerPlantStatus; }
-            set { this.powerPlantStatus = value; }
-        }
+        public PowerPlantStatusValue PowerPlantStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the state.
         /// </summary>
         /// <value>The state.</value>
-        public SurfacePlatformAppearance.StateValue State
-        {
-            get { return this.state; }
-            set { this.state = value; }
-        }
+        public StateValue State { get; set; }
 
         /// <summary>
         /// Gets or sets the spotlights.
         /// </summary>
         /// <value>The spotlights.</value>
-        public SurfacePlatformAppearance.SpotLightsValue SpotLights
-        {
-            get { return this.spotLights; }
-            set { this.spotLights = value; }
-        }
+        public SpotLightsValue SpotLights { get; set; }
 
         /// <summary>
         /// Gets or sets the interiorlights.
         /// </summary>
         /// <value>The interiorlights.</value>
-        public SurfacePlatformAppearance.InteriorLightsValue InteriorLights
-        {
-            get { return this.interiorLights; }
-            set { this.interiorLights = value; }
-        }
+        public InteriorLightsValue InteriorLights { get; set; }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is SurfacePlatformAppearance other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="SurfacePlatformAppearance"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="SurfacePlatformAppearance"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is SurfacePlatformAppearance))
-            {
-                return false;
-            }
-
-            return this.Equals((SurfacePlatformAppearance)obj);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="SurfacePlatformAppearance"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(SurfacePlatformAppearance other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.PaintScheme == other.PaintScheme &&
-                this.Mobility == other.Mobility &&
-                this.Damage == other.Damage &&
-                this.Smoke == other.Smoke &&
-                this.TrailingEffects == other.TrailingEffects &&
-                this.RunningLights == other.RunningLights &&
-                this.Flaming == other.Flaming &&
-                this.FrozenStatus == other.FrozenStatus &&
-                this.PowerPlantStatus == other.PowerPlantStatus &&
-                this.State == other.State &&
-                this.SpotLights == other.SpotLights &&
-                this.InteriorLights == other.InteriorLights;
+            return PaintScheme == other.PaintScheme &&
+                Mobility == other.Mobility &&
+                Damage == other.Damage &&
+                Smoke == other.Smoke &&
+                TrailingEffects == other.TrailingEffects &&
+                RunningLights == other.RunningLights &&
+                Flaming == other.Flaming &&
+                FrozenStatus == other.FrozenStatus &&
+                PowerPlantStatus == other.PowerPlantStatus &&
+                State == other.State &&
+                SpotLights == other.SpotLights &&
+                InteriorLights == other.InteriorLights;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> to the byte array.
+        /// Converts the instance of <see cref="SurfacePlatformAppearance"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToUInt32());
-        }
+        /// <returns>The byte array representing the current <see cref="SurfacePlatformAppearance"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToUInt32());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> to the uint value.
+        /// Converts the instance of <see cref="SurfacePlatformAppearance"/> to the uint value.
         /// </summary>
-        /// <returns>The uint value representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.SurfacePlatformAppearance"/> instance.</returns>
+        /// <returns>The uint value representing the current <see cref="SurfacePlatformAppearance"/> instance.</returns>
         public uint ToUInt32()
         {
             uint val = 0;
 
-            val |= (uint)((uint)this.PaintScheme << 0);
-            val |= (uint)((uint)this.Mobility << 1);
-            val |= (uint)((uint)this.Damage << 3);
-            val |= (uint)((uint)this.Smoke << 5);
-            val |= (uint)((uint)this.TrailingEffects << 7);
-            val |= (uint)((uint)this.RunningLights << 12);
-            val |= (uint)((uint)this.Flaming << 15);
-            val |= (uint)((uint)this.FrozenStatus << 21);
-            val |= (uint)((uint)this.PowerPlantStatus << 22);
-            val |= (uint)((uint)this.State << 23);
-            val |= (uint)((uint)this.SpotLights << 28);
-            val |= (uint)((uint)this.InteriorLights << 29);
+            val |= (uint)PaintScheme << 0;
+            val |= (uint)Mobility << 1;
+            val |= (uint)Damage << 3;
+            val |= (uint)Smoke << 5;
+            val |= (uint)TrailingEffects << 7;
+            val |= (uint)RunningLights << 12;
+            val |= (uint)Flaming << 15;
+            val |= (uint)FrozenStatus << 21;
+            val |= (uint)PowerPlantStatus << 22;
+            val |= (uint)State << 23;
+            val |= (uint)SpotLights << 28;
+            val |= (uint)InteriorLights << 29;
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -693,18 +572,18 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.PaintScheme.GetHashCode();
-                hash = (hash * 29) + this.Mobility.GetHashCode();
-                hash = (hash * 29) + this.Damage.GetHashCode();
-                hash = (hash * 29) + this.Smoke.GetHashCode();
-                hash = (hash * 29) + this.TrailingEffects.GetHashCode();
-                hash = (hash * 29) + this.RunningLights.GetHashCode();
-                hash = (hash * 29) + this.Flaming.GetHashCode();
-                hash = (hash * 29) + this.FrozenStatus.GetHashCode();
-                hash = (hash * 29) + this.PowerPlantStatus.GetHashCode();
-                hash = (hash * 29) + this.State.GetHashCode();
-                hash = (hash * 29) + this.SpotLights.GetHashCode();
-                hash = (hash * 29) + this.InteriorLights.GetHashCode();
+                hash = (hash * 29) + PaintScheme.GetHashCode();
+                hash = (hash * 29) + Mobility.GetHashCode();
+                hash = (hash * 29) + Damage.GetHashCode();
+                hash = (hash * 29) + Smoke.GetHashCode();
+                hash = (hash * 29) + TrailingEffects.GetHashCode();
+                hash = (hash * 29) + RunningLights.GetHashCode();
+                hash = (hash * 29) + Flaming.GetHashCode();
+                hash = (hash * 29) + FrozenStatus.GetHashCode();
+                hash = (hash * 29) + PowerPlantStatus.GetHashCode();
+                hash = (hash * 29) + State.GetHashCode();
+                hash = (hash * 29) + SpotLights.GetHashCode();
+                hash = (hash * 29) + InteriorLights.GetHashCode();
             }
 
             return hash;

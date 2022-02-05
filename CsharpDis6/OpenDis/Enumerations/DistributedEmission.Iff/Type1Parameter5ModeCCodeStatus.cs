@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.Iff
 {
     /// <summary>
-    /// Enumeration values for Type1Parameter5ModeCCodeStatus (der.iff.type.1.fop.param5, Parameter 5 - Mode C Code/Status, 
+    /// Enumeration values for Type1Parameter5ModeCCodeStatus (der.iff.type.1.fop.param5, Parameter 5 - Mode C Code/Status,
     /// section 8.3.1.2.6)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct Type1Parameter5ModeCCodeStatus
+    public struct Type1Parameter5ModeCCodeStatus : IHashable<Type1Parameter5ModeCCodeStatus>
     {
         /// <summary>
         /// Negative Altitude
@@ -42,7 +41,8 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
             PositiveAltitudeAboveMeanSeaLevelIndicatorIfModeCAltitudeIsContainedInBits111 = 0,
 
             /// <summary>
-            /// Negative altitude below mean sea level Indicator if Mode C altitude is contained in Bits 1-11, or, Alternate Mode 5 if altitude Bits 1-11 = 2047.
+            /// Negative altitude below mean sea level Indicator if Mode C altitude is contained in Bits 1-11, or, Alternate Mode
+            /// 5 if altitude Bits 1-11 = 2047.
             /// </summary>
             NegativeAltitudeBelowMeanSeaLevelIndicatorIfModeCAltitudeIsContainedInBits111OrAlternateMode5IfAltitudeBits1112047 = 1
         }
@@ -58,7 +58,8 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         public enum ModeCAltitudeValue : uint
         {
             /// <summary>
-            /// Actual Mode C altitude in the range 0-126,000 feet in 100-foot increments (Bit 0 - Negative / Positive Indicator must be set appropriately)
+            /// Actual Mode C altitude in the range 0-126,000 feet in 100-foot increments (Bit 0 - Negative / Positive Indicator
+            /// must be set appropriately)
             /// </summary>
             ActualModeCAltitudeInTheRange0126000FeetIn100FootIncrementsBit0NegativePositiveIndicatorMustBeSetAppropriately = 0,
 
@@ -131,24 +132,15 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
             Malfunction = 1
         }
 
-        private Type1Parameter5ModeCCodeStatus.NegativeAltitudeValue negativeAltitude;
-        private Type1Parameter5ModeCCodeStatus.ModeCAltitudeValue modeCAltitude;
-        private Type1Parameter5ModeCCodeStatus.StatusValue status;
-        private Type1Parameter5ModeCCodeStatus.DamageValue damage;
-        private Type1Parameter5ModeCCodeStatus.MalfunctionValue malfunction;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(Type1Parameter5ModeCCodeStatus left, Type1Parameter5ModeCCodeStatus right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(Type1Parameter5ModeCCodeStatus left, Type1Parameter5ModeCCodeStatus right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -156,102 +148,78 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(Type1Parameter5ModeCCodeStatus left, Type1Parameter5ModeCCodeStatus right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> to <see cref="System.UInt16"/>.
+        /// Performs an explicit conversion from <see cref="Type1Parameter5ModeCCodeStatus"/> to <see cref="ushort"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="Type1Parameter5ModeCCodeStatus"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator ushort(Type1Parameter5ModeCCodeStatus obj)
-        {
-            return obj.ToUInt16();
-        }
+        public static explicit operator ushort(Type1Parameter5ModeCCodeStatus obj) => obj.ToUInt16();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt16"/> to <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/>.
+        /// Performs an explicit conversion from <see cref="ushort"/> to <see cref="Type1Parameter5ModeCCodeStatus"/>.
         /// </summary>
         /// <param name="value">The ushort value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator Type1Parameter5ModeCCodeStatus(ushort value)
-        {
-            return Type1Parameter5ModeCCodeStatus.FromUInt16(value);
-        }
+        public static explicit operator Type1Parameter5ModeCCodeStatus(ushort value) => FromUInt16(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance from the byte array.
+        /// Creates the <see cref="Type1Parameter5ModeCCodeStatus"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="Type1Parameter5ModeCCodeStatus"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="Type1Parameter5ModeCCodeStatus"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static Type1Parameter5ModeCCodeStatus FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 2 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromUInt16(BitConverter.ToUInt16(array, index));
+                index + 2 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromUInt16(BitConverter.ToUInt16(array, index));
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance from the ushort value.
+        /// Creates the <see cref="Type1Parameter5ModeCCodeStatus"/> instance from the ushort value.
         /// </summary>
-        /// <param name="value">The ushort value which represents the <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance, represented by the ushort value.</returns>
+        /// <param name="value">The ushort value which represents the <see cref="Type1Parameter5ModeCCodeStatus"/> instance.</param>
+        /// <returns>The <see cref="Type1Parameter5ModeCCodeStatus"/> instance, represented by the ushort value.</returns>
         public static Type1Parameter5ModeCCodeStatus FromUInt16(ushort value)
         {
-            Type1Parameter5ModeCCodeStatus ps = new Type1Parameter5ModeCCodeStatus();
+            var ps = new Type1Parameter5ModeCCodeStatus();
 
-            uint mask0 = 0x0001;
-            byte shift0 = 0;
+            const uint mask0 = 0x0001;
+            const byte shift0 = 0;
             uint newValue0 = (value & mask0) >> shift0;
-            ps.NegativeAltitude = (Type1Parameter5ModeCCodeStatus.NegativeAltitudeValue)newValue0;
+            ps.NegativeAltitude = (NegativeAltitudeValue)newValue0;
 
-            uint mask1 = 0x0ffe;
-            byte shift1 = 1;
+            const uint mask1 = 0x0ffe;
+            const byte shift1 = 1;
             uint newValue1 = (value & mask1) >> shift1;
-            ps.ModeCAltitude = (Type1Parameter5ModeCCodeStatus.ModeCAltitudeValue)newValue1;
+            ps.ModeCAltitude = (ModeCAltitudeValue)newValue1;
 
-            uint mask3 = 0x2000;
-            byte shift3 = 13;
+            const uint mask3 = 0x2000;
+            const byte shift3 = 13;
             uint newValue3 = (value & mask3) >> shift3;
-            ps.Status = (Type1Parameter5ModeCCodeStatus.StatusValue)newValue3;
+            ps.Status = (StatusValue)newValue3;
 
-            uint mask4 = 0x4000;
-            byte shift4 = 14;
+            const uint mask4 = 0x4000;
+            const byte shift4 = 14;
             uint newValue4 = (value & mask4) >> shift4;
-            ps.Damage = (Type1Parameter5ModeCCodeStatus.DamageValue)newValue4;
+            ps.Damage = (DamageValue)newValue4;
 
-            uint mask5 = 0x8000;
-            byte shift5 = 15;
+            const uint mask5 = 0x8000;
+            const byte shift5 = 15;
             uint newValue5 = (value & mask5) >> shift5;
-            ps.Malfunction = (Type1Parameter5ModeCCodeStatus.MalfunctionValue)newValue5;
+            ps.Malfunction = (MalfunctionValue)newValue5;
 
             return ps;
         }
@@ -260,129 +228,77 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
         /// Gets or sets the negativealtitude.
         /// </summary>
         /// <value>The negativealtitude.</value>
-        public Type1Parameter5ModeCCodeStatus.NegativeAltitudeValue NegativeAltitude
-        {
-            get { return this.negativeAltitude; }
-            set { this.negativeAltitude = value; }
-        }
+        public NegativeAltitudeValue NegativeAltitude { get; set; }
 
         /// <summary>
         /// Gets or sets the modecaltitude.
         /// </summary>
         /// <value>The modecaltitude.</value>
-        public Type1Parameter5ModeCCodeStatus.ModeCAltitudeValue ModeCAltitude
-        {
-            get { return this.modeCAltitude; }
-            set { this.modeCAltitude = value; }
-        }
+        public ModeCAltitudeValue ModeCAltitude { get; set; }
 
         /// <summary>
         /// Gets or sets the status.
         /// </summary>
         /// <value>The status.</value>
-        public Type1Parameter5ModeCCodeStatus.StatusValue Status
-        {
-            get { return this.status; }
-            set { this.status = value; }
-        }
+        public StatusValue Status { get; set; }
 
         /// <summary>
         /// Gets or sets the damage.
         /// </summary>
         /// <value>The damage.</value>
-        public Type1Parameter5ModeCCodeStatus.DamageValue Damage
-        {
-            get { return this.damage; }
-            set { this.damage = value; }
-        }
+        public DamageValue Damage { get; set; }
 
         /// <summary>
         /// Gets or sets the malfunction.
         /// </summary>
         /// <value>The malfunction.</value>
-        public Type1Parameter5ModeCCodeStatus.MalfunctionValue Malfunction
-        {
-            get { return this.malfunction; }
-            set { this.malfunction = value; }
-        }
+        public MalfunctionValue Malfunction { get; set; }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is Type1Parameter5ModeCCodeStatus other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="Type1Parameter5ModeCCodeStatus"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="Type1Parameter5ModeCCodeStatus"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is Type1Parameter5ModeCCodeStatus))
-            {
-                return false;
-            }
-
-            return this.Equals((Type1Parameter5ModeCCodeStatus)obj);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="Type1Parameter5ModeCCodeStatus"/> is equal to this instance; otherwise,
+        /// <c>false</c>.
         /// </returns>
         public bool Equals(Type1Parameter5ModeCCodeStatus other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.NegativeAltitude == other.NegativeAltitude &&
-                this.ModeCAltitude == other.ModeCAltitude &&
-                this.Status == other.Status &&
-                this.Damage == other.Damage &&
-                this.Malfunction == other.Malfunction;
+            return NegativeAltitude == other.NegativeAltitude &&
+                ModeCAltitude == other.ModeCAltitude &&
+                Status == other.Status &&
+                Damage == other.Damage &&
+                Malfunction == other.Malfunction;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> to the byte array.
+        /// Converts the instance of <see cref="Type1Parameter5ModeCCodeStatus"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToUInt16());
-        }
+        /// <returns>The byte array representing the current <see cref="Type1Parameter5ModeCCodeStatus"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToUInt16());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> to the ushort value.
+        /// Converts the instance of <see cref="Type1Parameter5ModeCCodeStatus"/> to the ushort value.
         /// </summary>
-        /// <returns>The ushort value representing the current <see cref="OpenDis.Enumerations.DistributedEmission.Iff.Type1Parameter5ModeCCodeStatus"/> instance.</returns>
+        /// <returns>The ushort value representing the current <see cref="Type1Parameter5ModeCCodeStatus"/> instance.</returns>
         public ushort ToUInt16()
         {
             ushort val = 0;
 
-            val |= (ushort)((uint)this.NegativeAltitude << 0);
-            val |= (ushort)((uint)this.ModeCAltitude << 1);
-            val |= (ushort)((uint)this.Status << 13);
-            val |= (ushort)((uint)this.Damage << 14);
-            val |= (ushort)((uint)this.Malfunction << 15);
+            val |= (ushort)((uint)NegativeAltitude << 0);
+            val |= (ushort)((uint)ModeCAltitude << 1);
+            val |= (ushort)((uint)Status << 13);
+            val |= (ushort)((uint)Damage << 14);
+            val |= (ushort)((uint)Malfunction << 15);
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -390,11 +306,11 @@ namespace OpenDis.Enumerations.DistributedEmission.Iff
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.NegativeAltitude.GetHashCode();
-                hash = (hash * 29) + this.ModeCAltitude.GetHashCode();
-                hash = (hash * 29) + this.Status.GetHashCode();
-                hash = (hash * 29) + this.Damage.GetHashCode();
-                hash = (hash * 29) + this.Malfunction.GetHashCode();
+                hash = (hash * 29) + NegativeAltitude.GetHashCode();
+                hash = (hash * 29) + ModeCAltitude.GetHashCode();
+                hash = (hash * 29) + Status.GetHashCode();
+                hash = (hash * 29) + Damage.GetHashCode();
+                hash = (hash * 29) + Malfunction.GetHashCode();
             }
 
             return hash;

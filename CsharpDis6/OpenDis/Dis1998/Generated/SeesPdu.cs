@@ -59,51 +59,11 @@ namespace OpenDis.Dis1998
     public partial class SeesPdu : DistributedEmissionsFamilyPdu, IEquatable<SeesPdu>
     {
         /// <summary>
-        /// Originating entity ID
-        /// </summary>
-        private EntityID _orginatingEntityID = new EntityID();
-
-        /// <summary>
-        /// IR Signature representation index
-        /// </summary>
-        private ushort _infraredSignatureRepresentationIndex;
-
-        /// <summary>
-        /// acoustic Signature representation index
-        /// </summary>
-        private ushort _acousticSignatureRepresentationIndex;
-
-        /// <summary>
-        /// radar cross section representation index
-        /// </summary>
-        private ushort _radarCrossSectionSignatureRepresentationIndex;
-
-        /// <summary>
-        /// how many propulsion systems
-        /// </summary>
-        private ushort _numberOfPropulsionSystems;
-
-        /// <summary>
-        /// how many vectoring nozzle systems
-        /// </summary>
-        private ushort _numberOfVectoringNozzleSystems;
-
-        /// <summary>
-        /// variable length list of propulsion system data
-        /// </summary>
-        private List<PropulsionSystemData> _propulsionSystemData = new List<PropulsionSystemData>();
-
-        /// <summary>
-        /// variable length list of vectoring system data
-        /// </summary>
-        private List<VectoringNozzleSystemData> _vectoringSystemData = new List<VectoringNozzleSystemData>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SeesPdu"/> class.
         /// </summary>
         public SeesPdu()
         {
-            PduType = (byte)30;
+            PduType = 30;
         }
 
         /// <summary>
@@ -112,12 +72,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(SeesPdu left, SeesPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(SeesPdu left, SeesPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -125,43 +82,29 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(SeesPdu left, SeesPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._orginatingEntityID.GetMarshalledSize();  // this._orginatingEntityID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += OrginatingEntityID.GetMarshalledSize();  // this._orginatingEntityID
             marshalSize += 2;  // this._infraredSignatureRepresentationIndex
             marshalSize += 2;  // this._acousticSignatureRepresentationIndex
             marshalSize += 2;  // this._radarCrossSectionSignatureRepresentationIndex
             marshalSize += 2;  // this._numberOfPropulsionSystems
             marshalSize += 2;  // this._numberOfVectoringNozzleSystems
-            for (int idx = 0; idx < this._propulsionSystemData.Count; idx++)
+            for (int idx = 0; idx < PropulsionSystemData.Count; idx++)
             {
-                PropulsionSystemData listElement = (PropulsionSystemData)this._propulsionSystemData[idx];
+                var listElement = PropulsionSystemData[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
-            for (int idx = 0; idx < this._vectoringSystemData.Count; idx++)
+            for (int idx = 0; idx < VectoringSystemData.Count; idx++)
             {
-                VectoringNozzleSystemData listElement = (VectoringNozzleSystemData)this._vectoringSystemData[idx];
+                var listElement = VectoringSystemData[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -172,153 +115,71 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Originating entity ID
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "orginatingEntityID")]
-        public EntityID OrginatingEntityID
-        {
-            get
-            {
-                return this._orginatingEntityID;
-            }
-
-            set
-            {
-                this._orginatingEntityID = value;
-            }
-        }
+        public EntityID OrginatingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the IR Signature representation index
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "infraredSignatureRepresentationIndex")]
-        public ushort InfraredSignatureRepresentationIndex
-        {
-            get
-            {
-                return this._infraredSignatureRepresentationIndex;
-            }
-
-            set
-            {
-                this._infraredSignatureRepresentationIndex = value;
-            }
-        }
+        public ushort InfraredSignatureRepresentationIndex { get; set; }
 
         /// <summary>
         /// Gets or sets the acoustic Signature representation index
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "acousticSignatureRepresentationIndex")]
-        public ushort AcousticSignatureRepresentationIndex
-        {
-            get
-            {
-                return this._acousticSignatureRepresentationIndex;
-            }
-
-            set
-            {
-                this._acousticSignatureRepresentationIndex = value;
-            }
-        }
+        public ushort AcousticSignatureRepresentationIndex { get; set; }
 
         /// <summary>
         /// Gets or sets the radar cross section representation index
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "radarCrossSectionSignatureRepresentationIndex")]
-        public ushort RadarCrossSectionSignatureRepresentationIndex
-        {
-            get
-            {
-                return this._radarCrossSectionSignatureRepresentationIndex;
-            }
-
-            set
-            {
-                this._radarCrossSectionSignatureRepresentationIndex = value;
-            }
-        }
+        public ushort RadarCrossSectionSignatureRepresentationIndex { get; set; }
 
         /// <summary>
         /// Gets or sets the how many propulsion systems
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfPropulsionSystems method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfPropulsionSystems method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfPropulsionSystems")]
-        public ushort NumberOfPropulsionSystems
-        {
-            get
-            {
-                return this._numberOfPropulsionSystems;
-            }
-
-            set
-            {
-                this._numberOfPropulsionSystems = value;
-            }
-        }
+        public ushort NumberOfPropulsionSystems { get; set; }
 
         /// <summary>
         /// Gets or sets the how many vectoring nozzle systems
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfVectoringNozzleSystems method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfVectoringNozzleSystems method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(ushort), ElementName = "numberOfVectoringNozzleSystems")]
-        public ushort NumberOfVectoringNozzleSystems
-        {
-            get
-            {
-                return this._numberOfVectoringNozzleSystems;
-            }
-
-            set
-            {
-                this._numberOfVectoringNozzleSystems = value;
-            }
-        }
+        public ushort NumberOfVectoringNozzleSystems { get; set; }
 
         /// <summary>
         /// Gets the variable length list of propulsion system data
         /// </summary>
         [XmlElement(ElementName = "propulsionSystemDataList", Type = typeof(List<PropulsionSystemData>))]
-        public List<PropulsionSystemData> PropulsionSystemData
-        {
-            get
-            {
-                return this._propulsionSystemData;
-            }
-        }
+        public List<PropulsionSystemData> PropulsionSystemData { get; } = new();
 
         /// <summary>
         /// Gets the variable length list of vectoring system data
         /// </summary>
         [XmlElement(ElementName = "vectoringSystemDataList", Type = typeof(List<VectoringNozzleSystemData>))]
-        public List<VectoringNozzleSystemData> VectoringSystemData
-        {
-            get
-            {
-                return this._vectoringSystemData;
-            }
-        }
+        public List<VectoringNozzleSystemData> VectoringSystemData { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -327,38 +188,38 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._orginatingEntityID.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._infraredSignatureRepresentationIndex);
-                    dos.WriteUnsignedShort((ushort)this._acousticSignatureRepresentationIndex);
-                    dos.WriteUnsignedShort((ushort)this._radarCrossSectionSignatureRepresentationIndex);
-                    dos.WriteUnsignedShort((ushort)this._propulsionSystemData.Count);
-                    dos.WriteUnsignedShort((ushort)this._vectoringSystemData.Count);
+                    OrginatingEntityID.Marshal(dos);
+                    dos.WriteUnsignedShort(InfraredSignatureRepresentationIndex);
+                    dos.WriteUnsignedShort(AcousticSignatureRepresentationIndex);
+                    dos.WriteUnsignedShort(RadarCrossSectionSignatureRepresentationIndex);
+                    dos.WriteUnsignedShort((ushort)PropulsionSystemData.Count);
+                    dos.WriteUnsignedShort((ushort)VectoringSystemData.Count);
 
-                    for (int idx = 0; idx < this._propulsionSystemData.Count; idx++)
+                    for (int idx = 0; idx < PropulsionSystemData.Count; idx++)
                     {
-                        PropulsionSystemData aPropulsionSystemData = (PropulsionSystemData)this._propulsionSystemData[idx];
+                        var aPropulsionSystemData = PropulsionSystemData[idx];
                         aPropulsionSystemData.Marshal(dos);
                     }
 
-                    for (int idx = 0; idx < this._vectoringSystemData.Count; idx++)
+                    for (int idx = 0; idx < VectoringSystemData.Count; idx++)
                     {
-                        VectoringNozzleSystemData aVectoringNozzleSystemData = (VectoringNozzleSystemData)this._vectoringSystemData[idx];
+                        var aVectoringNozzleSystemData = VectoringSystemData[idx];
                         aVectoringNozzleSystemData.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -373,53 +234,46 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._orginatingEntityID.Unmarshal(dis);
-                    this._infraredSignatureRepresentationIndex = dis.ReadUnsignedShort();
-                    this._acousticSignatureRepresentationIndex = dis.ReadUnsignedShort();
-                    this._radarCrossSectionSignatureRepresentationIndex = dis.ReadUnsignedShort();
-                    this._numberOfPropulsionSystems = dis.ReadUnsignedShort();
-                    this._numberOfVectoringNozzleSystems = dis.ReadUnsignedShort();
+                    OrginatingEntityID.Unmarshal(dis);
+                    InfraredSignatureRepresentationIndex = dis.ReadUnsignedShort();
+                    AcousticSignatureRepresentationIndex = dis.ReadUnsignedShort();
+                    RadarCrossSectionSignatureRepresentationIndex = dis.ReadUnsignedShort();
+                    NumberOfPropulsionSystems = dis.ReadUnsignedShort();
+                    NumberOfVectoringNozzleSystems = dis.ReadUnsignedShort();
 
-                    for (int idx = 0; idx < this.NumberOfPropulsionSystems; idx++)
+                    for (int idx = 0; idx < NumberOfPropulsionSystems; idx++)
                     {
-                        PropulsionSystemData anX = new PropulsionSystemData();
+                        var anX = new PropulsionSystemData();
                         anX.Unmarshal(dis);
-                        this._propulsionSystemData.Add(anX);
+                        PropulsionSystemData.Add(anX);
                     }
 
-                    for (int idx = 0; idx < this.NumberOfVectoringNozzleSystems; idx++)
+                    for (int idx = 0; idx < NumberOfVectoringNozzleSystems; idx++)
                     {
-                        VectoringNozzleSystemData anX = new VectoringNozzleSystemData();
+                        var anX = new VectoringNozzleSystemData();
                         anX.Unmarshal(dis);
-                        this._vectoringSystemData.Add(anX);
+                        VectoringSystemData.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -428,25 +282,25 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<orginatingEntityID>");
-                this._orginatingEntityID.Reflection(sb);
+                OrginatingEntityID.Reflection(sb);
                 sb.AppendLine("</orginatingEntityID>");
-                sb.AppendLine("<infraredSignatureRepresentationIndex type=\"ushort\">" + this._infraredSignatureRepresentationIndex.ToString(CultureInfo.InvariantCulture) + "</infraredSignatureRepresentationIndex>");
-                sb.AppendLine("<acousticSignatureRepresentationIndex type=\"ushort\">" + this._acousticSignatureRepresentationIndex.ToString(CultureInfo.InvariantCulture) + "</acousticSignatureRepresentationIndex>");
-                sb.AppendLine("<radarCrossSectionSignatureRepresentationIndex type=\"ushort\">" + this._radarCrossSectionSignatureRepresentationIndex.ToString(CultureInfo.InvariantCulture) + "</radarCrossSectionSignatureRepresentationIndex>");
-                sb.AppendLine("<propulsionSystemData type=\"ushort\">" + this._propulsionSystemData.Count.ToString(CultureInfo.InvariantCulture) + "</propulsionSystemData>");
-                sb.AppendLine("<vectoringSystemData type=\"ushort\">" + this._vectoringSystemData.Count.ToString(CultureInfo.InvariantCulture) + "</vectoringSystemData>");
-                for (int idx = 0; idx < this._propulsionSystemData.Count; idx++)
+                sb.AppendLine("<infraredSignatureRepresentationIndex type=\"ushort\">" + InfraredSignatureRepresentationIndex.ToString(CultureInfo.InvariantCulture) + "</infraredSignatureRepresentationIndex>");
+                sb.AppendLine("<acousticSignatureRepresentationIndex type=\"ushort\">" + AcousticSignatureRepresentationIndex.ToString(CultureInfo.InvariantCulture) + "</acousticSignatureRepresentationIndex>");
+                sb.AppendLine("<radarCrossSectionSignatureRepresentationIndex type=\"ushort\">" + RadarCrossSectionSignatureRepresentationIndex.ToString(CultureInfo.InvariantCulture) + "</radarCrossSectionSignatureRepresentationIndex>");
+                sb.AppendLine("<propulsionSystemData type=\"ushort\">" + PropulsionSystemData.Count.ToString(CultureInfo.InvariantCulture) + "</propulsionSystemData>");
+                sb.AppendLine("<vectoringSystemData type=\"ushort\">" + VectoringSystemData.Count.ToString(CultureInfo.InvariantCulture) + "</vectoringSystemData>");
+                for (int idx = 0; idx < PropulsionSystemData.Count; idx++)
                 {
                     sb.AppendLine("<propulsionSystemData" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"PropulsionSystemData\">");
-                    PropulsionSystemData aPropulsionSystemData = (PropulsionSystemData)this._propulsionSystemData[idx];
+                    var aPropulsionSystemData = PropulsionSystemData[idx];
                     aPropulsionSystemData.Reflection(sb);
                     sb.AppendLine("</propulsionSystemData" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
-                for (int idx = 0; idx < this._vectoringSystemData.Count; idx++)
+                for (int idx = 0; idx < VectoringSystemData.Count; idx++)
                 {
                     sb.AppendLine("<vectoringSystemData" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"VectoringNozzleSystemData\">");
-                    VectoringNozzleSystemData aVectoringNozzleSystemData = (VectoringNozzleSystemData)this._vectoringSystemData[idx];
+                    var aVectoringNozzleSystemData = VectoringSystemData[idx];
                     aVectoringNozzleSystemData.Reflection(sb);
                     sb.AppendLine("</vectoringSystemData" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -455,107 +309,89 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as SeesPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as SeesPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(SeesPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._orginatingEntityID.Equals(obj._orginatingEntityID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!OrginatingEntityID.Equals(obj.OrginatingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._infraredSignatureRepresentationIndex != obj._infraredSignatureRepresentationIndex)
+            if (InfraredSignatureRepresentationIndex != obj.InfraredSignatureRepresentationIndex)
             {
                 ivarsEqual = false;
             }
 
-            if (this._acousticSignatureRepresentationIndex != obj._acousticSignatureRepresentationIndex)
+            if (AcousticSignatureRepresentationIndex != obj.AcousticSignatureRepresentationIndex)
             {
                 ivarsEqual = false;
             }
 
-            if (this._radarCrossSectionSignatureRepresentationIndex != obj._radarCrossSectionSignatureRepresentationIndex)
+            if (RadarCrossSectionSignatureRepresentationIndex != obj.RadarCrossSectionSignatureRepresentationIndex)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfPropulsionSystems != obj._numberOfPropulsionSystems)
+            if (NumberOfPropulsionSystems != obj.NumberOfPropulsionSystems)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfVectoringNozzleSystems != obj._numberOfVectoringNozzleSystems)
+            if (NumberOfVectoringNozzleSystems != obj.NumberOfVectoringNozzleSystems)
             {
                 ivarsEqual = false;
             }
 
-            if (this._propulsionSystemData.Count != obj._propulsionSystemData.Count)
+            if (PropulsionSystemData.Count != obj.PropulsionSystemData.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._propulsionSystemData.Count; idx++)
+                for (int idx = 0; idx < PropulsionSystemData.Count; idx++)
                 {
-                    if (!this._propulsionSystemData[idx].Equals(obj._propulsionSystemData[idx]))
+                    if (!PropulsionSystemData[idx].Equals(obj.PropulsionSystemData[idx]))
                     {
                         ivarsEqual = false;
                     }
                 }
             }
 
-            if (this._vectoringSystemData.Count != obj._vectoringSystemData.Count)
+            if (VectoringSystemData.Count != obj.VectoringSystemData.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._vectoringSystemData.Count; idx++)
+                for (int idx = 0; idx < VectoringSystemData.Count; idx++)
                 {
-                    if (!this._vectoringSystemData[idx].Equals(obj._vectoringSystemData[idx]))
+                    if (!VectoringSystemData[idx].Equals(obj.VectoringSystemData[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -570,42 +406,35 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._orginatingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._infraredSignatureRepresentationIndex.GetHashCode();
-            result = GenerateHash(result) ^ this._acousticSignatureRepresentationIndex.GetHashCode();
-            result = GenerateHash(result) ^ this._radarCrossSectionSignatureRepresentationIndex.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfPropulsionSystems.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfVectoringNozzleSystems.GetHashCode();
+            result = GenerateHash(result) ^ OrginatingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ InfraredSignatureRepresentationIndex.GetHashCode();
+            result = GenerateHash(result) ^ AcousticSignatureRepresentationIndex.GetHashCode();
+            result = GenerateHash(result) ^ RadarCrossSectionSignatureRepresentationIndex.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfPropulsionSystems.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfVectoringNozzleSystems.GetHashCode();
 
-            if (this._propulsionSystemData.Count > 0)
+            if (PropulsionSystemData.Count > 0)
             {
-                for (int idx = 0; idx < this._propulsionSystemData.Count; idx++)
+                for (int idx = 0; idx < PropulsionSystemData.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._propulsionSystemData[idx].GetHashCode();
+                    result = GenerateHash(result) ^ PropulsionSystemData[idx].GetHashCode();
                 }
             }
 
-            if (this._vectoringSystemData.Count > 0)
+            if (VectoringSystemData.Count > 0)
             {
-                for (int idx = 0; idx < this._vectoringSystemData.Count; idx++)
+                for (int idx = 0; idx < VectoringSystemData.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._vectoringSystemData[idx].GetHashCode();
+                    result = GenerateHash(result) ^ VectoringSystemData[idx].GetHashCode();
                 }
             }
 

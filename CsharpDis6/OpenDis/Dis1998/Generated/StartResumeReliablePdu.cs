@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -57,41 +56,11 @@ namespace OpenDis.Dis1998
     public partial class StartResumeReliablePdu : SimulationManagementWithReliabilityFamilyPdu, IEquatable<StartResumeReliablePdu>
     {
         /// <summary>
-        /// time in real world for this operation to happen
-        /// </summary>
-        private ClockTime _realWorldTime = new ClockTime();
-
-        /// <summary>
-        /// time in simulation for the simulation to resume
-        /// </summary>
-        private ClockTime _simulationTime = new ClockTime();
-
-        /// <summary>
-        /// level of reliability service used for this transaction
-        /// </summary>
-        private byte _requiredReliabilityService;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private ushort _pad1;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private byte _pad2;
-
-        /// <summary>
-        /// Request ID
-        /// </summary>
-        private uint _requestID;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="StartResumeReliablePdu"/> class.
         /// </summary>
         public StartResumeReliablePdu()
         {
-            PduType = (byte)53;
+            PduType = 53;
         }
 
         /// <summary>
@@ -100,12 +69,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(StartResumeReliablePdu left, StartResumeReliablePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(StartResumeReliablePdu left, StartResumeReliablePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -113,30 +79,16 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(StartResumeReliablePdu left, StartResumeReliablePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._realWorldTime.GetMarshalledSize();  // this._realWorldTime
-            marshalSize += this._simulationTime.GetMarshalledSize();  // this._simulationTime
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += RealWorldTime.GetMarshalledSize();  // this._realWorldTime
+            marshalSize += SimulationTime.GetMarshalledSize();  // this._simulationTime
             marshalSize += 1;  // this._requiredReliabilityService
             marshalSize += 2;  // this._pad1
             marshalSize += 1;  // this._pad2
@@ -148,119 +100,47 @@ namespace OpenDis.Dis1998
         /// Gets or sets the time in real world for this operation to happen
         /// </summary>
         [XmlElement(Type = typeof(ClockTime), ElementName = "realWorldTime")]
-        public ClockTime RealWorldTime
-        {
-            get
-            {
-                return this._realWorldTime;
-            }
-
-            set
-            {
-                this._realWorldTime = value;
-            }
-        }
+        public ClockTime RealWorldTime { get; set; } = new ClockTime();
 
         /// <summary>
         /// Gets or sets the time in simulation for the simulation to resume
         /// </summary>
         [XmlElement(Type = typeof(ClockTime), ElementName = "simulationTime")]
-        public ClockTime SimulationTime
-        {
-            get
-            {
-                return this._simulationTime;
-            }
-
-            set
-            {
-                this._simulationTime = value;
-            }
-        }
+        public ClockTime SimulationTime { get; set; } = new ClockTime();
 
         /// <summary>
         /// Gets or sets the level of reliability service used for this transaction
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "requiredReliabilityService")]
-        public byte RequiredReliabilityService
-        {
-            get
-            {
-                return this._requiredReliabilityService;
-            }
-
-            set
-            {
-                this._requiredReliabilityService = value;
-            }
-        }
+        public byte RequiredReliabilityService { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "pad1")]
-        public ushort Pad1
-        {
-            get
-            {
-                return this._pad1;
-            }
-
-            set
-            {
-                this._pad1 = value;
-            }
-        }
+        public ushort Pad1 { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad2")]
-        public byte Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
-
-            set
-            {
-                this._pad2 = value;
-            }
-        }
+        public byte Pad2 { get; set; }
 
         /// <summary>
         /// Gets or sets the Request ID
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "requestID")]
-        public uint RequestID
-        {
-            get
-            {
-                return this._requestID;
-            }
+        public uint RequestID { get; set; }
 
-            set
-            {
-                this._requestID = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -269,26 +149,26 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._realWorldTime.Marshal(dos);
-                    this._simulationTime.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._requiredReliabilityService);
-                    dos.WriteUnsignedShort((ushort)this._pad1);
-                    dos.WriteUnsignedByte((byte)this._pad2);
-                    dos.WriteUnsignedInt((uint)this._requestID);
+                    RealWorldTime.Marshal(dos);
+                    SimulationTime.Marshal(dos);
+                    dos.WriteUnsignedByte(RequiredReliabilityService);
+                    dos.WriteUnsignedShort(Pad1);
+                    dos.WriteUnsignedByte(Pad2);
+                    dos.WriteUnsignedInt(RequestID);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -303,39 +183,32 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._realWorldTime.Unmarshal(dis);
-                    this._simulationTime.Unmarshal(dis);
-                    this._requiredReliabilityService = dis.ReadUnsignedByte();
-                    this._pad1 = dis.ReadUnsignedShort();
-                    this._pad2 = dis.ReadUnsignedByte();
-                    this._requestID = dis.ReadUnsignedInt();
+                    RealWorldTime.Unmarshal(dis);
+                    SimulationTime.Unmarshal(dis);
+                    RequiredReliabilityService = dis.ReadUnsignedByte();
+                    Pad1 = dis.ReadUnsignedShort();
+                    Pad2 = dis.ReadUnsignedByte();
+                    RequestID = dis.ReadUnsignedInt();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -344,90 +217,72 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<realWorldTime>");
-                this._realWorldTime.Reflection(sb);
+                RealWorldTime.Reflection(sb);
                 sb.AppendLine("</realWorldTime>");
                 sb.AppendLine("<simulationTime>");
-                this._simulationTime.Reflection(sb);
+                SimulationTime.Reflection(sb);
                 sb.AppendLine("</simulationTime>");
-                sb.AppendLine("<requiredReliabilityService type=\"byte\">" + this._requiredReliabilityService.ToString(CultureInfo.InvariantCulture) + "</requiredReliabilityService>");
-                sb.AppendLine("<pad1 type=\"ushort\">" + this._pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
-                sb.AppendLine("<pad2 type=\"byte\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
-                sb.AppendLine("<requestID type=\"uint\">" + this._requestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
+                sb.AppendLine("<requiredReliabilityService type=\"byte\">" + RequiredReliabilityService.ToString(CultureInfo.InvariantCulture) + "</requiredReliabilityService>");
+                sb.AppendLine("<pad1 type=\"ushort\">" + Pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
+                sb.AppendLine("<pad2 type=\"byte\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                sb.AppendLine("<requestID type=\"uint\">" + RequestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
                 sb.AppendLine("</StartResumeReliablePdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as StartResumeReliablePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as StartResumeReliablePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(StartResumeReliablePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._realWorldTime.Equals(obj._realWorldTime))
+            bool ivarsEqual = base.Equals(obj);
+            if (!RealWorldTime.Equals(obj.RealWorldTime))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._simulationTime.Equals(obj._simulationTime))
+            if (!SimulationTime.Equals(obj.SimulationTime))
             {
                 ivarsEqual = false;
             }
 
-            if (this._requiredReliabilityService != obj._requiredReliabilityService)
+            if (RequiredReliabilityService != obj.RequiredReliabilityService)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad1 != obj._pad1)
+            if (Pad1 != obj.Pad1)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
 
-            if (this._requestID != obj._requestID)
+            if (RequestID != obj.RequestID)
             {
                 ivarsEqual = false;
             }
@@ -440,28 +295,21 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._realWorldTime.GetHashCode();
-            result = GenerateHash(result) ^ this._simulationTime.GetHashCode();
-            result = GenerateHash(result) ^ this._requiredReliabilityService.GetHashCode();
-            result = GenerateHash(result) ^ this._pad1.GetHashCode();
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
-            result = GenerateHash(result) ^ this._requestID.GetHashCode();
+            result = GenerateHash(result) ^ RealWorldTime.GetHashCode();
+            result = GenerateHash(result) ^ SimulationTime.GetHashCode();
+            result = GenerateHash(result) ^ RequiredReliabilityService.GetHashCode();
+            result = GenerateHash(result) ^ Pad1.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
+            result = GenerateHash(result) ^ RequestID.GetHashCode();
 
             return result;
         }

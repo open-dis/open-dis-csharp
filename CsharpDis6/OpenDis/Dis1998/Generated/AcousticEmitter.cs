@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -53,23 +52,8 @@ namespace OpenDis.Dis1998
     /// </summary>
     [Serializable]
     [XmlRoot]
-    public partial class AcousticEmitter
+    public partial class AcousticEmitter : IEquatable<AcousticEmitter>, IReflectable
     {
-        /// <summary>
-        /// the system for a particular UA emitter, and an enumeration
-        /// </summary>
-        private ushort _acousticName;
-
-        /// <summary>
-        /// The function of the acoustic system
-        /// </summary>
-        private byte _function;
-
-        /// <summary>
-        /// The UA emitter identification number relative to a specific system
-        /// </summary>
-        private byte _acousticIdNumber;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AcousticEmitter"/> class.
         /// </summary>
@@ -83,12 +67,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AcousticEmitter left, AcousticEmitter right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AcousticEmitter left, AcousticEmitter right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -96,26 +77,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AcousticEmitter left, AcousticEmitter right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize += 2;  // this._acousticName
             marshalSize += 1;  // this._function
@@ -124,55 +93,22 @@ namespace OpenDis.Dis1998
         }
 
         /// <summary>
-        /// Gets or sets the the system for a particular UA emitter, and an enumeration
+        /// Gets or sets the system for a particular UA emitter, and an enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "acousticName")]
-        public ushort AcousticName
-        {
-            get
-            {
-                return this._acousticName;
-            }
-
-            set
-            {
-                this._acousticName = value;
-            }
-        }
+        public ushort AcousticName { get; set; }
 
         /// <summary>
-        /// Gets or sets the The function of the acoustic system
+        /// Gets or sets the function of the acoustic system
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "function")]
-        public byte Function
-        {
-            get
-            {
-                return this._function;
-            }
-
-            set
-            {
-                this._function = value;
-            }
-        }
+        public byte Function { get; set; }
 
         /// <summary>
-        /// Gets or sets the The UA emitter identification number relative to a specific system
+        /// Gets or sets the UA emitter identification number relative to a specific system
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "acousticIdNumber")]
-        public byte AcousticIdNumber
-        {
-            get
-            {
-                return this._acousticIdNumber;
-            }
-
-            set
-            {
-                this._acousticIdNumber = value;
-            }
-        }
+        public byte AcousticIdNumber { get; set; }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -185,14 +121,14 @@ namespace OpenDis.Dis1998
         /// <param name="e">The exception.</param>
         protected void RaiseExceptionOccured(Exception e)
         {
-            if (Pdu.FireExceptionEvents && this.ExceptionOccured != null)
+            if (PduBase.FireExceptionEvents && ExceptionOccured != null)
             {
-                this.ExceptionOccured(this, new PduExceptionEventArgs(e));
+                ExceptionOccured(this, new PduExceptionEventArgs(e));
             }
         }
 
         /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
+        /// Marshal the data to the DataOutputStream. Note: Length needs to be set before calling this method
         /// </summary>
         /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
@@ -202,9 +138,9 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedShort((ushort)this._acousticName);
-                    dos.WriteUnsignedByte((byte)this._function);
-                    dos.WriteUnsignedByte((byte)this._acousticIdNumber);
+                    dos.WriteUnsignedShort(AcousticName);
+                    dos.WriteUnsignedByte(Function);
+                    dos.WriteUnsignedByte(AcousticIdNumber);
                 }
                 catch (Exception e)
                 {
@@ -214,11 +150,11 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -231,9 +167,9 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._acousticName = dis.ReadUnsignedShort();
-                    this._function = dis.ReadUnsignedByte();
-                    this._acousticIdNumber = dis.ReadUnsignedByte();
+                    AcousticName = dis.ReadUnsignedShort();
+                    Function = dis.ReadUnsignedByte();
+                    AcousticIdNumber = dis.ReadUnsignedByte();
                 }
                 catch (Exception e)
                 {
@@ -243,91 +179,69 @@ namespace OpenDis.Dis1998
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
                     if (PduBase.ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        ///<inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Reflection(StringBuilder sb)
         {
             sb.AppendLine("<AcousticEmitter>");
             try
             {
-                sb.AppendLine("<acousticName type=\"ushort\">" + this._acousticName.ToString(CultureInfo.InvariantCulture) + "</acousticName>");
-                sb.AppendLine("<function type=\"byte\">" + this._function.ToString(CultureInfo.InvariantCulture) + "</function>");
-                sb.AppendLine("<acousticIdNumber type=\"byte\">" + this._acousticIdNumber.ToString(CultureInfo.InvariantCulture) + "</acousticIdNumber>");
+                sb.AppendLine("<acousticName type=\"ushort\">" + AcousticName.ToString(CultureInfo.InvariantCulture) + "</acousticName>");
+                sb.AppendLine("<function type=\"byte\">" + Function.ToString(CultureInfo.InvariantCulture) + "</function>");
+                sb.AppendLine("<acousticIdNumber type=\"byte\">" + AcousticIdNumber.ToString(CultureInfo.InvariantCulture) + "</acousticIdNumber>");
                 sb.AppendLine("</AcousticEmitter>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (PduBase.TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (PduBase.ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as AcousticEmitter;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as AcousticEmitter;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(AcousticEmitter obj)
         {
             bool ivarsEqual = true;
 
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            if (this._acousticName != obj._acousticName)
+            if (AcousticName != obj.AcousticName)
             {
                 ivarsEqual = false;
             }
 
-            if (this._function != obj._function)
+            if (Function != obj.Function)
             {
                 ivarsEqual = false;
             }
 
-            if (this._acousticIdNumber != obj._acousticIdNumber)
+            if (AcousticIdNumber != obj.AcousticIdNumber)
             {
                 ivarsEqual = false;
             }
@@ -340,23 +254,16 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
-            result = GenerateHash(result) ^ this._acousticName.GetHashCode();
-            result = GenerateHash(result) ^ this._function.GetHashCode();
-            result = GenerateHash(result) ^ this._acousticIdNumber.GetHashCode();
+            result = GenerateHash(result) ^ AcousticName.GetHashCode();
+            result = GenerateHash(result) ^ Function.GetHashCode();
+            result = GenerateHash(result) ^ AcousticIdNumber.GetHashCode();
 
             return result;
         }

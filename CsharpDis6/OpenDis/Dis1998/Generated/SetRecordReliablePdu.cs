@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.12.14: Initializing or changing internal parameter info. Needs manual intervention     to fix padding in recrod set PDUs. UNFINISHED
+    /// Section 5.3.12.14: Initializing or changing internal parameter info. Needs manual intervention    to fix padding
+    /// in recrod set PDUs. UNFINISHED
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -57,41 +58,11 @@ namespace OpenDis.Dis1998
     public partial class SetRecordReliablePdu : SimulationManagementWithReliabilityFamilyPdu, IEquatable<SetRecordReliablePdu>
     {
         /// <summary>
-        /// request ID
-        /// </summary>
-        private uint _requestID;
-
-        /// <summary>
-        /// level of reliability service used for this transaction
-        /// </summary>
-        private byte _requiredReliabilityService;
-
-        /// <summary>
-        /// padding. The spec is unclear and contradictory here.
-        /// </summary>
-        private ushort _pad1;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private byte _pad2;
-
-        /// <summary>
-        /// Number of record sets in list
-        /// </summary>
-        private uint _numberOfRecordSets;
-
-        /// <summary>
-        /// record sets
-        /// </summary>
-        private List<RecordSet> _recordSets = new List<RecordSet>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SetRecordReliablePdu"/> class.
         /// </summary>
         public SetRecordReliablePdu()
         {
-            PduType = (byte)64;
+            PduType = 64;
         }
 
         /// <summary>
@@ -100,12 +71,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(SetRecordReliablePdu left, SetRecordReliablePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(SetRecordReliablePdu left, SetRecordReliablePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -113,36 +81,22 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(SetRecordReliablePdu left, SetRecordReliablePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
+            int marshalSize = base.GetMarshalledSize();
             marshalSize += 4;  // this._requestID
             marshalSize += 1;  // this._requiredReliabilityService
             marshalSize += 2;  // this._pad1
             marshalSize += 1;  // this._pad2
             marshalSize += 4;  // this._numberOfRecordSets
-            for (int idx = 0; idx < this._recordSets.Count; idx++)
+            for (int idx = 0; idx < RecordSets.Count; idx++)
             {
-                RecordSet listElement = (RecordSet)this._recordSets[idx];
+                var listElement = RecordSets[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -153,119 +107,53 @@ namespace OpenDis.Dis1998
         /// Gets or sets the request ID
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "requestID")]
-        public uint RequestID
-        {
-            get
-            {
-                return this._requestID;
-            }
-
-            set
-            {
-                this._requestID = value;
-            }
-        }
+        public uint RequestID { get; set; }
 
         /// <summary>
         /// Gets or sets the level of reliability service used for this transaction
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "requiredReliabilityService")]
-        public byte RequiredReliabilityService
-        {
-            get
-            {
-                return this._requiredReliabilityService;
-            }
-
-            set
-            {
-                this._requiredReliabilityService = value;
-            }
-        }
+        public byte RequiredReliabilityService { get; set; }
 
         /// <summary>
         /// Gets or sets the padding. The spec is unclear and contradictory here.
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "pad1")]
-        public ushort Pad1
-        {
-            get
-            {
-                return this._pad1;
-            }
-
-            set
-            {
-                this._pad1 = value;
-            }
-        }
+        public ushort Pad1 { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad2")]
-        public byte Pad2
-        {
-            get
-            {
-                return this._pad2;
-            }
-
-            set
-            {
-                this._pad2 = value;
-            }
-        }
+        public byte Pad2 { get; set; }
 
         /// <summary>
         /// Gets or sets the Number of record sets in list
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfRecordSets method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfRecordSets method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(uint), ElementName = "numberOfRecordSets")]
-        public uint NumberOfRecordSets
-        {
-            get
-            {
-                return this._numberOfRecordSets;
-            }
-
-            set
-            {
-                this._numberOfRecordSets = value;
-            }
-        }
+        public uint NumberOfRecordSets { get; set; }
 
         /// <summary>
         /// Gets the record sets
         /// </summary>
         [XmlElement(ElementName = "recordSetsList", Type = typeof(List<RecordSet>))]
-        public List<RecordSet> RecordSets
-        {
-            get
-            {
-                return this._recordSets;
-            }
-        }
+        public List<RecordSet> RecordSets { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -274,31 +162,31 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedInt((uint)this._requestID);
-                    dos.WriteUnsignedByte((byte)this._requiredReliabilityService);
-                    dos.WriteUnsignedShort((ushort)this._pad1);
-                    dos.WriteUnsignedByte((byte)this._pad2);
-                    dos.WriteUnsignedInt((uint)this._recordSets.Count);
+                    dos.WriteUnsignedInt(RequestID);
+                    dos.WriteUnsignedByte(RequiredReliabilityService);
+                    dos.WriteUnsignedShort(Pad1);
+                    dos.WriteUnsignedByte(Pad2);
+                    dos.WriteUnsignedInt((uint)RecordSets.Count);
 
-                    for (int idx = 0; idx < this._recordSets.Count; idx++)
+                    for (int idx = 0; idx < RecordSets.Count; idx++)
                     {
-                        RecordSet aRecordSet = (RecordSet)this._recordSets[idx];
+                        var aRecordSet = RecordSets[idx];
                         aRecordSet.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -313,45 +201,38 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._requestID = dis.ReadUnsignedInt();
-                    this._requiredReliabilityService = dis.ReadUnsignedByte();
-                    this._pad1 = dis.ReadUnsignedShort();
-                    this._pad2 = dis.ReadUnsignedByte();
-                    this._numberOfRecordSets = dis.ReadUnsignedInt();
+                    RequestID = dis.ReadUnsignedInt();
+                    RequiredReliabilityService = dis.ReadUnsignedByte();
+                    Pad1 = dis.ReadUnsignedShort();
+                    Pad2 = dis.ReadUnsignedByte();
+                    NumberOfRecordSets = dis.ReadUnsignedInt();
 
-                    for (int idx = 0; idx < this.NumberOfRecordSets; idx++)
+                    for (int idx = 0; idx < NumberOfRecordSets; idx++)
                     {
-                        RecordSet anX = new RecordSet();
+                        var anX = new RecordSet();
                         anX.Unmarshal(dis);
-                        this._recordSets.Add(anX);
+                        RecordSets.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -359,15 +240,15 @@ namespace OpenDis.Dis1998
             base.Reflection(sb);
             try
             {
-                sb.AppendLine("<requestID type=\"uint\">" + this._requestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
-                sb.AppendLine("<requiredReliabilityService type=\"byte\">" + this._requiredReliabilityService.ToString(CultureInfo.InvariantCulture) + "</requiredReliabilityService>");
-                sb.AppendLine("<pad1 type=\"ushort\">" + this._pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
-                sb.AppendLine("<pad2 type=\"byte\">" + this._pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
-                sb.AppendLine("<recordSets type=\"uint\">" + this._recordSets.Count.ToString(CultureInfo.InvariantCulture) + "</recordSets>");
-                for (int idx = 0; idx < this._recordSets.Count; idx++)
+                sb.AppendLine("<requestID type=\"uint\">" + RequestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
+                sb.AppendLine("<requiredReliabilityService type=\"byte\">" + RequiredReliabilityService.ToString(CultureInfo.InvariantCulture) + "</requiredReliabilityService>");
+                sb.AppendLine("<pad1 type=\"ushort\">" + Pad1.ToString(CultureInfo.InvariantCulture) + "</pad1>");
+                sb.AppendLine("<pad2 type=\"byte\">" + Pad2.ToString(CultureInfo.InvariantCulture) + "</pad2>");
+                sb.AppendLine("<recordSets type=\"uint\">" + RecordSets.Count.ToString(CultureInfo.InvariantCulture) + "</recordSets>");
+                for (int idx = 0; idx < RecordSets.Count; idx++)
                 {
                     sb.AppendLine("<recordSets" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"RecordSet\">");
-                    RecordSet aRecordSet = (RecordSet)this._recordSets[idx];
+                    var aRecordSet = RecordSets[idx];
                     aRecordSet.Reflection(sb);
                     sb.AppendLine("</recordSets" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -376,86 +257,68 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as SetRecordReliablePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as SetRecordReliablePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(SetRecordReliablePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (this._requestID != obj._requestID)
+            bool ivarsEqual = base.Equals(obj);
+            if (RequestID != obj.RequestID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._requiredReliabilityService != obj._requiredReliabilityService)
+            if (RequiredReliabilityService != obj.RequiredReliabilityService)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad1 != obj._pad1)
+            if (Pad1 != obj.Pad1)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad2 != obj._pad2)
+            if (Pad2 != obj.Pad2)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfRecordSets != obj._numberOfRecordSets)
+            if (NumberOfRecordSets != obj.NumberOfRecordSets)
             {
                 ivarsEqual = false;
             }
 
-            if (this._recordSets.Count != obj._recordSets.Count)
+            if (RecordSets.Count != obj.RecordSets.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._recordSets.Count; idx++)
+                for (int idx = 0; idx < RecordSets.Count; idx++)
                 {
-                    if (!this._recordSets[idx].Equals(obj._recordSets[idx]))
+                    if (!RecordSets[idx].Equals(obj.RecordSets[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -470,33 +333,26 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._requestID.GetHashCode();
-            result = GenerateHash(result) ^ this._requiredReliabilityService.GetHashCode();
-            result = GenerateHash(result) ^ this._pad1.GetHashCode();
-            result = GenerateHash(result) ^ this._pad2.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfRecordSets.GetHashCode();
+            result = GenerateHash(result) ^ RequestID.GetHashCode();
+            result = GenerateHash(result) ^ RequiredReliabilityService.GetHashCode();
+            result = GenerateHash(result) ^ Pad1.GetHashCode();
+            result = GenerateHash(result) ^ Pad2.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfRecordSets.GetHashCode();
 
-            if (this._recordSets.Count > 0)
+            if (RecordSets.Count > 0)
             {
-                for (int idx = 0; idx < this._recordSets.Count; idx++)
+                for (int idx = 0; idx < RecordSets.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._recordSets[idx].GetHashCode();
+                    result = GenerateHash(result) ^ RecordSets[idx].GetHashCode();
                 }
             }
 

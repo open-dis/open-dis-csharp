@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Entity.Information.Minefield
 {
     /// <summary>
-    /// Enumeration values for PaintScheme (entity.mine.paintscheme, Paint Scheme, 
+    /// Enumeration values for PaintScheme (entity.mine.paintscheme, Paint Scheme,
     /// section 10.2.5)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct PaintScheme
+    public struct PaintScheme : IHashable<PaintScheme>
     {
         /// <summary>
         /// Identifies the algae build-up on the mine
@@ -163,21 +162,15 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
             Brown = 18
         }
 
-        private PaintScheme.AlgaeValue algae;
-        private PaintScheme.PaintSchemeValue paintScheme;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(PaintScheme left, PaintScheme right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(PaintScheme left, PaintScheme right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -185,87 +178,63 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(PaintScheme left, PaintScheme right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> to <see cref="System.Byte"/>.
+        /// Performs an explicit conversion from <see cref="PaintScheme"/> to <see cref="byte"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="PaintScheme"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator byte(PaintScheme obj)
-        {
-            return obj.ToByte();
-        }
+        public static explicit operator byte(PaintScheme obj) => obj.ToByte();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.Byte"/> to <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/>.
+        /// Performs an explicit conversion from <see cref="byte"/> to <see cref="PaintScheme"/>.
         /// </summary>
         /// <param name="value">The byte value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator PaintScheme(byte value)
-        {
-            return PaintScheme.FromByte(value);
-        }
+        public static explicit operator PaintScheme(byte value) => FromByte(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance from the byte array.
+        /// Creates the <see cref="PaintScheme"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="PaintScheme"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="PaintScheme"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static PaintScheme FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 1 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromByte(array[index]);
+                index + 1 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromByte(array[index]);
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance from the byte value.
+        /// Creates the <see cref="PaintScheme"/> instance from the byte value.
         /// </summary>
-        /// <param name="value">The byte value which represents the <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance, represented by the byte value.</returns>
+        /// <param name="value">The byte value which represents the <see cref="PaintScheme"/> instance.</param>
+        /// <returns>The <see cref="PaintScheme"/> instance, represented by the byte value.</returns>
         public static PaintScheme FromByte(byte value)
         {
-            PaintScheme ps = new PaintScheme();
+            var ps = new PaintScheme();
 
-            uint mask0 = 0x0003;
-            byte shift0 = 0;
+            const uint mask0 = 0x0003;
+            const byte shift0 = 0;
             uint newValue0 = (value & mask0) >> shift0;
-            ps.Algae = (PaintScheme.AlgaeValue)newValue0;
+            ps.Algae = (AlgaeValue)newValue0;
 
-            uint mask1 = 0x00fc;
-            byte shift1 = 2;
+            const uint mask1 = 0x00fc;
+            const byte shift1 = 2;
             uint newValue1 = (value & mask1) >> shift1;
-            ps.Value = (PaintScheme.PaintSchemeValue)newValue1;
+            ps.Value = (PaintSchemeValue)newValue1;
 
             return ps;
         }
@@ -274,93 +243,52 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
         /// Gets or sets the algae.
         /// </summary>
         /// <value>The algae.</value>
-        public PaintScheme.AlgaeValue Algae
-        {
-            get { return this.algae; }
-            set { this.algae = value; }
-        }
+        public AlgaeValue Algae { get; set; }
 
         /// <summary>
         /// Gets or sets the value.
         /// </summary>
         /// <value>The value.</value>
-        public PaintScheme.PaintSchemeValue Value
-        {
-            get { return this.paintScheme; }
-            set { this.paintScheme = value; }
-        }
+        public PaintSchemeValue Value { get; set; }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is PaintScheme other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="PaintScheme"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="PaintScheme"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is PaintScheme))
-            {
-                return false;
-            }
-
-            return this.Equals((PaintScheme)obj);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="PaintScheme"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(PaintScheme other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.Algae == other.Algae &&
-                this.Value == other.Value;
+            return Algae == other.Algae &&
+                Value == other.Value;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> to the byte array.
+        /// Converts the instance of <see cref="PaintScheme"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToByte());
-        }
+        /// <returns>The byte array representing the current <see cref="PaintScheme"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToByte());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> to the byte value.
+        /// Converts the instance of <see cref="PaintScheme"/> to the byte value.
         /// </summary>
-        /// <returns>The byte value representing the current <see cref="OpenDis.Enumerations.Entity.Information.Minefield.PaintScheme"/> instance.</returns>
+        /// <returns>The byte value representing the current <see cref="PaintScheme"/> instance.</returns>
         public byte ToByte()
         {
             byte val = 0;
 
-            val |= (byte)((uint)this.Algae << 0);
-            val |= (byte)((uint)this.Value << 2);
+            val |= (byte)((uint)Algae << 0);
+            val |= (byte)((uint)Value << 2);
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -368,8 +296,8 @@ namespace OpenDis.Enumerations.Entity.Information.Minefield
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.Algae.GetHashCode();
-                hash = (hash * 29) + this.Value.GetHashCode();
+                hash = (hash * 29) + Algae.GetHashCode();
+                hash = (hash * 29) + Value.GetHashCode();
             }
 
             return hash;

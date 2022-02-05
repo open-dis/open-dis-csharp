@@ -6,7 +6,7 @@ namespace OpenDis.Enumerations.Cet2010
     /// <summary>
     /// Flag to indicate the approval status of the entry.
     /// </summary>
-    [Serializable()]
+    [Serializable]
     [XmlType(AnonymousType = true)]
     public enum GenericEntryStatus
     {

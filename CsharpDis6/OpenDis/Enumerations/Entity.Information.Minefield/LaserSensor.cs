@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Entity.Information.Minefield
 {
     /// <summary>
-    /// Enumeration values for LaserSensor (entity.mine.sensortype.5.subcat, Laser, 
+    /// Enumeration values for LaserSensor (entity.mine.sensortype.5.subcat, Laser,
     /// section 10.2.4)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

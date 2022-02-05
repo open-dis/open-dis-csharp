@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -57,36 +56,11 @@ namespace OpenDis.Dis1995
     public partial class StopFreezePdu : SimulationManagementPdu, IEquatable<StopFreezePdu>
     {
         /// <summary>
-        /// UTC time at which the simulation shall stop or freeze
-        /// </summary>
-        private ClockTime _realWorldTime = new ClockTime();
-
-        /// <summary>
-        /// Reason the simulation was stopped or frozen
-        /// </summary>
-        private byte _reason;
-
-        /// <summary>
-        /// Internal behavior of the simulation and its appearance while frozento the other participants
-        /// </summary>
-        private byte _frozenBehavior;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private short _padding1;
-
-        /// <summary>
-        /// Request ID that is unique
-        /// </summary>
-        private uint _requestID;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="StopFreezePdu"/> class.
         /// </summary>
         public StopFreezePdu()
         {
-            PduType = (byte)14;
+            PduType = 14;
         }
 
         /// <summary>
@@ -95,12 +69,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(StopFreezePdu left, StopFreezePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(StopFreezePdu left, StopFreezePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -108,29 +79,15 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(StopFreezePdu left, StopFreezePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._realWorldTime.GetMarshalledSize();  // this._realWorldTime
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += RealWorldTime.GetMarshalledSize();  // this._realWorldTime
             marshalSize += 1;  // this._reason
             marshalSize += 1;  // this._frozenBehavior
             marshalSize += 2;  // this._padding1
@@ -142,102 +99,41 @@ namespace OpenDis.Dis1995
         /// Gets or sets the UTC time at which the simulation shall stop or freeze
         /// </summary>
         [XmlElement(Type = typeof(ClockTime), ElementName = "realWorldTime")]
-        public ClockTime RealWorldTime
-        {
-            get
-            {
-                return this._realWorldTime;
-            }
-
-            set
-            {
-                this._realWorldTime = value;
-            }
-        }
+        public ClockTime RealWorldTime { get; set; } = new ClockTime();
 
         /// <summary>
         /// Gets or sets the Reason the simulation was stopped or frozen
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "reason")]
-        public byte Reason
-        {
-            get
-            {
-                return this._reason;
-            }
-
-            set
-            {
-                this._reason = value;
-            }
-        }
+        public byte Reason { get; set; }
 
         /// <summary>
         /// Gets or sets the Internal behavior of the simulation and its appearance while frozento the other participants
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "frozenBehavior")]
-        public byte FrozenBehavior
-        {
-            get
-            {
-                return this._frozenBehavior;
-            }
-
-            set
-            {
-                this._frozenBehavior = value;
-            }
-        }
+        public byte FrozenBehavior { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(short), ElementName = "padding1")]
-        public short Padding1
-        {
-            get
-            {
-                return this._padding1;
-            }
-
-            set
-            {
-                this._padding1 = value;
-            }
-        }
+        public short Padding1 { get; set; }
 
         /// <summary>
         /// Gets or sets the Request ID that is unique
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "requestID")]
-        public uint RequestID
-        {
-            get
-            {
-                return this._requestID;
-            }
+        public uint RequestID { get; set; }
 
-            set
-            {
-                this._requestID = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -246,25 +142,25 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._realWorldTime.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._reason);
-                    dos.WriteUnsignedByte((byte)this._frozenBehavior);
-                    dos.WriteShort((short)this._padding1);
-                    dos.WriteUnsignedInt((uint)this._requestID);
+                    RealWorldTime.Marshal(dos);
+                    dos.WriteUnsignedByte(Reason);
+                    dos.WriteUnsignedByte(FrozenBehavior);
+                    dos.WriteShort(Padding1);
+                    dos.WriteUnsignedInt(RequestID);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -279,38 +175,31 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._realWorldTime.Unmarshal(dis);
-                    this._reason = dis.ReadUnsignedByte();
-                    this._frozenBehavior = dis.ReadUnsignedByte();
-                    this._padding1 = dis.ReadShort();
-                    this._requestID = dis.ReadUnsignedInt();
+                    RealWorldTime.Unmarshal(dis);
+                    Reason = dis.ReadUnsignedByte();
+                    FrozenBehavior = dis.ReadUnsignedByte();
+                    Padding1 = dis.ReadShort();
+                    RequestID = dis.ReadUnsignedInt();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -319,82 +208,64 @@ namespace OpenDis.Dis1995
             try
             {
                 sb.AppendLine("<realWorldTime>");
-                this._realWorldTime.Reflection(sb);
+                RealWorldTime.Reflection(sb);
                 sb.AppendLine("</realWorldTime>");
-                sb.AppendLine("<reason type=\"byte\">" + this._reason.ToString(CultureInfo.InvariantCulture) + "</reason>");
-                sb.AppendLine("<frozenBehavior type=\"byte\">" + this._frozenBehavior.ToString(CultureInfo.InvariantCulture) + "</frozenBehavior>");
-                sb.AppendLine("<padding1 type=\"short\">" + this._padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
-                sb.AppendLine("<requestID type=\"uint\">" + this._requestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
+                sb.AppendLine("<reason type=\"byte\">" + Reason.ToString(CultureInfo.InvariantCulture) + "</reason>");
+                sb.AppendLine("<frozenBehavior type=\"byte\">" + FrozenBehavior.ToString(CultureInfo.InvariantCulture) + "</frozenBehavior>");
+                sb.AppendLine("<padding1 type=\"short\">" + Padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
+                sb.AppendLine("<requestID type=\"uint\">" + RequestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
                 sb.AppendLine("</StopFreezePdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as StopFreezePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as StopFreezePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(StopFreezePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._realWorldTime.Equals(obj._realWorldTime))
+            bool ivarsEqual = base.Equals(obj);
+            if (!RealWorldTime.Equals(obj.RealWorldTime))
             {
                 ivarsEqual = false;
             }
 
-            if (this._reason != obj._reason)
+            if (Reason != obj.Reason)
             {
                 ivarsEqual = false;
             }
 
-            if (this._frozenBehavior != obj._frozenBehavior)
+            if (FrozenBehavior != obj.FrozenBehavior)
             {
                 ivarsEqual = false;
             }
 
-            if (this._padding1 != obj._padding1)
+            if (Padding1 != obj.Padding1)
             {
                 ivarsEqual = false;
             }
 
-            if (this._requestID != obj._requestID)
+            if (RequestID != obj.RequestID)
             {
                 ivarsEqual = false;
             }
@@ -407,27 +278,20 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._realWorldTime.GetHashCode();
-            result = GenerateHash(result) ^ this._reason.GetHashCode();
-            result = GenerateHash(result) ^ this._frozenBehavior.GetHashCode();
-            result = GenerateHash(result) ^ this._padding1.GetHashCode();
-            result = GenerateHash(result) ^ this._requestID.GetHashCode();
+            result = GenerateHash(result) ^ RealWorldTime.GetHashCode();
+            result = GenerateHash(result) ^ Reason.GetHashCode();
+            result = GenerateHash(result) ^ FrozenBehavior.GetHashCode();
+            result = GenerateHash(result) ^ Padding1.GetHashCode();
+            result = GenerateHash(result) ^ RequestID.GetHashCode();
 
             return result;
         }

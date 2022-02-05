@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -56,26 +55,11 @@ namespace OpenDis.Dis1998
     public partial class AcknowledgeReliablePdu : SimulationManagementWithReliabilityFamilyPdu, IEquatable<AcknowledgeReliablePdu>
     {
         /// <summary>
-        /// ack flags
-        /// </summary>
-        private ushort _acknowledgeFlag;
-
-        /// <summary>
-        /// response flags
-        /// </summary>
-        private ushort _responseFlag;
-
-        /// <summary>
-        /// Request ID
-        /// </summary>
-        private uint _requestID;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="AcknowledgeReliablePdu"/> class.
         /// </summary>
         public AcknowledgeReliablePdu()
         {
-            PduType = (byte)55;
+            PduType = 55;
         }
 
         /// <summary>
@@ -84,12 +68,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(AcknowledgeReliablePdu left, AcknowledgeReliablePdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(AcknowledgeReliablePdu left, AcknowledgeReliablePdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -97,28 +78,14 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(AcknowledgeReliablePdu left, AcknowledgeReliablePdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
+            int marshalSize = base.GetMarshalledSize();
             marshalSize += 2;  // this._acknowledgeFlag
             marshalSize += 2;  // this._responseFlag
             marshalSize += 4;  // this._requestID
@@ -129,68 +96,29 @@ namespace OpenDis.Dis1998
         /// Gets or sets the ack flags
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "acknowledgeFlag")]
-        public ushort AcknowledgeFlag
-        {
-            get
-            {
-                return this._acknowledgeFlag;
-            }
-
-            set
-            {
-                this._acknowledgeFlag = value;
-            }
-        }
+        public ushort AcknowledgeFlag { get; set; }
 
         /// <summary>
         /// Gets or sets the response flags
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "responseFlag")]
-        public ushort ResponseFlag
-        {
-            get
-            {
-                return this._responseFlag;
-            }
-
-            set
-            {
-                this._responseFlag = value;
-            }
-        }
+        public ushort ResponseFlag { get; set; }
 
         /// <summary>
         /// Gets or sets the Request ID
         /// </summary>
         [XmlElement(Type = typeof(uint), ElementName = "requestID")]
-        public uint RequestID
-        {
-            get
-            {
-                return this._requestID;
-            }
+        public uint RequestID { get; set; }
 
-            set
-            {
-                this._requestID = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -199,23 +127,23 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedShort((ushort)this._acknowledgeFlag);
-                    dos.WriteUnsignedShort((ushort)this._responseFlag);
-                    dos.WriteUnsignedInt((uint)this._requestID);
+                    dos.WriteUnsignedShort(AcknowledgeFlag);
+                    dos.WriteUnsignedShort(ResponseFlag);
+                    dos.WriteUnsignedInt(RequestID);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -230,36 +158,29 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._acknowledgeFlag = dis.ReadUnsignedShort();
-                    this._responseFlag = dis.ReadUnsignedShort();
-                    this._requestID = dis.ReadUnsignedInt();
+                    AcknowledgeFlag = dis.ReadUnsignedShort();
+                    ResponseFlag = dis.ReadUnsignedShort();
+                    RequestID = dis.ReadUnsignedInt();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -267,69 +188,51 @@ namespace OpenDis.Dis1998
             base.Reflection(sb);
             try
             {
-                sb.AppendLine("<acknowledgeFlag type=\"ushort\">" + this._acknowledgeFlag.ToString(CultureInfo.InvariantCulture) + "</acknowledgeFlag>");
-                sb.AppendLine("<responseFlag type=\"ushort\">" + this._responseFlag.ToString(CultureInfo.InvariantCulture) + "</responseFlag>");
-                sb.AppendLine("<requestID type=\"uint\">" + this._requestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
+                sb.AppendLine("<acknowledgeFlag type=\"ushort\">" + AcknowledgeFlag.ToString(CultureInfo.InvariantCulture) + "</acknowledgeFlag>");
+                sb.AppendLine("<responseFlag type=\"ushort\">" + ResponseFlag.ToString(CultureInfo.InvariantCulture) + "</responseFlag>");
+                sb.AppendLine("<requestID type=\"uint\">" + RequestID.ToString(CultureInfo.InvariantCulture) + "</requestID>");
                 sb.AppendLine("</AcknowledgeReliablePdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as AcknowledgeReliablePdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as AcknowledgeReliablePdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(AcknowledgeReliablePdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (this._acknowledgeFlag != obj._acknowledgeFlag)
+            bool ivarsEqual = base.Equals(obj);
+            if (AcknowledgeFlag != obj.AcknowledgeFlag)
             {
                 ivarsEqual = false;
             }
 
-            if (this._responseFlag != obj._responseFlag)
+            if (ResponseFlag != obj.ResponseFlag)
             {
                 ivarsEqual = false;
             }
 
-            if (this._requestID != obj._requestID)
+            if (RequestID != obj.RequestID)
             {
                 ivarsEqual = false;
             }
@@ -342,25 +245,18 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._acknowledgeFlag.GetHashCode();
-            result = GenerateHash(result) ^ this._responseFlag.GetHashCode();
-            result = GenerateHash(result) ^ this._requestID.GetHashCode();
+            result = GenerateHash(result) ^ AcknowledgeFlag.GetHashCode();
+            result = GenerateHash(result) ^ ResponseFlag.GetHashCode();
+            result = GenerateHash(result) ^ RequestID.GetHashCode();
 
             return result;
         }

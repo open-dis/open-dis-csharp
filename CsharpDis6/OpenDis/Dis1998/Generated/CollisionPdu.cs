@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -59,52 +58,12 @@ namespace OpenDis.Dis1998
     public partial class CollisionPdu : EntityInformationFamilyPdu, IEquatable<CollisionPdu>
     {
         /// <summary>
-        /// ID of the entity that issued the collision PDU
-        /// </summary>
-        private EntityID _issuingEntityID = new EntityID();
-
-        /// <summary>
-        /// ID of entity that has collided with the issuing entity ID
-        /// </summary>
-        private EntityID _collidingEntityID = new EntityID();
-
-        /// <summary>
-        /// ID of event
-        /// </summary>
-        private EventID _eventID = new EventID();
-
-        /// <summary>
-        /// ID of event
-        /// </summary>
-        private byte _collisionType;
-
-        /// <summary>
-        /// some padding
-        /// </summary>
-        private byte _pad;
-
-        /// <summary>
-        /// velocity at collision
-        /// </summary>
-        private Vector3Float _velocity = new Vector3Float();
-
-        /// <summary>
-        /// mass of issuing entity
-        /// </summary>
-        private float _mass;
-
-        /// <summary>
-        /// Location with respect to entity the issuing entity collided with
-        /// </summary>
-        private Vector3Float _location = new Vector3Float();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="CollisionPdu"/> class.
         /// </summary>
         public CollisionPdu()
         {
-            PduType = (byte)4;
-            ProtocolFamily = (byte)1;
+            PduType = 4;
+            ProtocolFamily = 1;
         }
 
         /// <summary>
@@ -113,12 +72,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(CollisionPdu left, CollisionPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(CollisionPdu left, CollisionPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -126,36 +82,22 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(CollisionPdu left, CollisionPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._issuingEntityID.GetMarshalledSize();  // this._issuingEntityID
-            marshalSize += this._collidingEntityID.GetMarshalledSize();  // this._collidingEntityID
-            marshalSize += this._eventID.GetMarshalledSize();  // this._eventID
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += IssuingEntityID.GetMarshalledSize();  // this._issuingEntityID
+            marshalSize += CollidingEntityID.GetMarshalledSize();  // this._collidingEntityID
+            marshalSize += EventID.GetMarshalledSize();  // this._eventID
             marshalSize += 1;  // this._collisionType
             marshalSize += 1;  // this._pad
-            marshalSize += this._velocity.GetMarshalledSize();  // this._velocity
+            marshalSize += Velocity.GetMarshalledSize();  // this._velocity
             marshalSize += 4;  // this._mass
-            marshalSize += this._location.GetMarshalledSize();  // this._location
+            marshalSize += Location.GetMarshalledSize();  // this._location
             return marshalSize;
         }
 
@@ -163,153 +105,59 @@ namespace OpenDis.Dis1998
         /// Gets or sets the ID of the entity that issued the collision PDU
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "issuingEntityID")]
-        public EntityID IssuingEntityID
-        {
-            get
-            {
-                return this._issuingEntityID;
-            }
-
-            set
-            {
-                this._issuingEntityID = value;
-            }
-        }
+        public EntityID IssuingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID of entity that has collided with the issuing entity ID
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "collidingEntityID")]
-        public EntityID CollidingEntityID
-        {
-            get
-            {
-                return this._collidingEntityID;
-            }
-
-            set
-            {
-                this._collidingEntityID = value;
-            }
-        }
+        public EntityID CollidingEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID of event
         /// </summary>
         [XmlElement(Type = typeof(EventID), ElementName = "eventID")]
-        public EventID EventID
-        {
-            get
-            {
-                return this._eventID;
-            }
-
-            set
-            {
-                this._eventID = value;
-            }
-        }
+        public EventID EventID { get; set; } = new EventID();
 
         /// <summary>
         /// Gets or sets the ID of event
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "collisionType")]
-        public byte CollisionType
-        {
-            get
-            {
-                return this._collisionType;
-            }
-
-            set
-            {
-                this._collisionType = value;
-            }
-        }
+        public byte CollisionType { get; set; }
 
         /// <summary>
         /// Gets or sets the some padding
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "pad")]
-        public byte Pad
-        {
-            get
-            {
-                return this._pad;
-            }
-
-            set
-            {
-                this._pad = value;
-            }
-        }
+        public byte Pad { get; set; }
 
         /// <summary>
         /// Gets or sets the velocity at collision
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "velocity")]
-        public Vector3Float Velocity
-        {
-            get
-            {
-                return this._velocity;
-            }
-
-            set
-            {
-                this._velocity = value;
-            }
-        }
+        public Vector3Float Velocity { get; set; } = new Vector3Float();
 
         /// <summary>
         /// Gets or sets the mass of issuing entity
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "mass")]
-        public float Mass
-        {
-            get
-            {
-                return this._mass;
-            }
-
-            set
-            {
-                this._mass = value;
-            }
-        }
+        public float Mass { get; set; }
 
         /// <summary>
         /// Gets or sets the Location with respect to entity the issuing entity collided with
         /// </summary>
         [XmlElement(Type = typeof(Vector3Float), ElementName = "location")]
-        public Vector3Float Location
-        {
-            get
-            {
-                return this._location;
-            }
+        public Vector3Float Location { get; set; } = new Vector3Float();
 
-            set
-            {
-                this._location = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -318,28 +166,28 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._issuingEntityID.Marshal(dos);
-                    this._collidingEntityID.Marshal(dos);
-                    this._eventID.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._collisionType);
-                    dos.WriteByte((byte)this._pad);
-                    this._velocity.Marshal(dos);
-                    dos.WriteFloat((float)this._mass);
-                    this._location.Marshal(dos);
+                    IssuingEntityID.Marshal(dos);
+                    CollidingEntityID.Marshal(dos);
+                    EventID.Marshal(dos);
+                    dos.WriteUnsignedByte(CollisionType);
+                    dos.WriteByte(Pad);
+                    Velocity.Marshal(dos);
+                    dos.WriteFloat((float)Mass);
+                    Location.Marshal(dos);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -354,41 +202,34 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._issuingEntityID.Unmarshal(dis);
-                    this._collidingEntityID.Unmarshal(dis);
-                    this._eventID.Unmarshal(dis);
-                    this._collisionType = dis.ReadUnsignedByte();
-                    this._pad = dis.ReadByte();
-                    this._velocity.Unmarshal(dis);
-                    this._mass = dis.ReadFloat();
-                    this._location.Unmarshal(dis);
+                    IssuingEntityID.Unmarshal(dis);
+                    CollidingEntityID.Unmarshal(dis);
+                    EventID.Unmarshal(dis);
+                    CollisionType = dis.ReadUnsignedByte();
+                    Pad = dis.ReadByte();
+                    Velocity.Unmarshal(dis);
+                    Mass = dis.ReadFloat();
+                    Location.Unmarshal(dis);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -397,108 +238,90 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<issuingEntityID>");
-                this._issuingEntityID.Reflection(sb);
+                IssuingEntityID.Reflection(sb);
                 sb.AppendLine("</issuingEntityID>");
                 sb.AppendLine("<collidingEntityID>");
-                this._collidingEntityID.Reflection(sb);
+                CollidingEntityID.Reflection(sb);
                 sb.AppendLine("</collidingEntityID>");
                 sb.AppendLine("<eventID>");
-                this._eventID.Reflection(sb);
+                EventID.Reflection(sb);
                 sb.AppendLine("</eventID>");
-                sb.AppendLine("<collisionType type=\"byte\">" + this._collisionType.ToString(CultureInfo.InvariantCulture) + "</collisionType>");
-                sb.AppendLine("<pad type=\"byte\">" + this._pad.ToString(CultureInfo.InvariantCulture) + "</pad>");
+                sb.AppendLine("<collisionType type=\"byte\">" + CollisionType.ToString(CultureInfo.InvariantCulture) + "</collisionType>");
+                sb.AppendLine("<pad type=\"byte\">" + Pad.ToString(CultureInfo.InvariantCulture) + "</pad>");
                 sb.AppendLine("<velocity>");
-                this._velocity.Reflection(sb);
+                Velocity.Reflection(sb);
                 sb.AppendLine("</velocity>");
-                sb.AppendLine("<mass type=\"float\">" + this._mass.ToString(CultureInfo.InvariantCulture) + "</mass>");
+                sb.AppendLine("<mass type=\"float\">" + Mass.ToString(CultureInfo.InvariantCulture) + "</mass>");
                 sb.AppendLine("<location>");
-                this._location.Reflection(sb);
+                Location.Reflection(sb);
                 sb.AppendLine("</location>");
                 sb.AppendLine("</CollisionPdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as CollisionPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as CollisionPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(CollisionPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._issuingEntityID.Equals(obj._issuingEntityID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!IssuingEntityID.Equals(obj.IssuingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._collidingEntityID.Equals(obj._collidingEntityID))
+            if (!CollidingEntityID.Equals(obj.CollidingEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._eventID.Equals(obj._eventID))
+            if (!EventID.Equals(obj.EventID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._collisionType != obj._collisionType)
+            if (CollisionType != obj.CollisionType)
             {
                 ivarsEqual = false;
             }
 
-            if (this._pad != obj._pad)
+            if (Pad != obj.Pad)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._velocity.Equals(obj._velocity))
+            if (!Velocity.Equals(obj.Velocity))
             {
                 ivarsEqual = false;
             }
 
-            if (this._mass != obj._mass)
+            if (Mass != obj.Mass)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._location.Equals(obj._location))
+            if (!Location.Equals(obj.Location))
             {
                 ivarsEqual = false;
             }
@@ -511,30 +334,23 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._issuingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._collidingEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._eventID.GetHashCode();
-            result = GenerateHash(result) ^ this._collisionType.GetHashCode();
-            result = GenerateHash(result) ^ this._pad.GetHashCode();
-            result = GenerateHash(result) ^ this._velocity.GetHashCode();
-            result = GenerateHash(result) ^ this._mass.GetHashCode();
-            result = GenerateHash(result) ^ this._location.GetHashCode();
+            result = GenerateHash(result) ^ IssuingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ CollidingEntityID.GetHashCode();
+            result = GenerateHash(result) ^ EventID.GetHashCode();
+            result = GenerateHash(result) ^ CollisionType.GetHashCode();
+            result = GenerateHash(result) ^ Pad.GetHashCode();
+            result = GenerateHash(result) ^ Velocity.GetHashCode();
+            result = GenerateHash(result) ^ Mass.GetHashCode();
+            result = GenerateHash(result) ^ Location.GetHashCode();
 
             return result;
         }

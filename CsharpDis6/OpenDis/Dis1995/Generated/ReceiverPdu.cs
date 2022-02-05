@@ -38,7 +38,6 @@
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -57,36 +56,11 @@ namespace OpenDis.Dis1995
     public partial class ReceiverPdu : RadioCommunicationsPdu, IEquatable<ReceiverPdu>
     {
         /// <summary>
-        /// encoding scheme used, and enumeration
-        /// </summary>
-        private ushort _receiverState;
-
-        /// <summary>
-        /// padding
-        /// </summary>
-        private ushort _padding1;
-
-        /// <summary>
-        /// received power
-        /// </summary>
-        private float _receivedPoser;
-
-        /// <summary>
-        /// ID of transmitter
-        /// </summary>
-        private EntityID _transmitterEntityId = new EntityID();
-
-        /// <summary>
-        /// ID of transmitting radio
-        /// </summary>
-        private ushort _transmitterRadioId;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="ReceiverPdu"/> class.
         /// </summary>
         public ReceiverPdu()
         {
-            PduType = (byte)27;
+            PduType = 27;
         }
 
         /// <summary>
@@ -95,12 +69,9 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(ReceiverPdu left, ReceiverPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(ReceiverPdu left, ReceiverPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -108,32 +79,18 @@ namespace OpenDis.Dis1995
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(ReceiverPdu left, ReceiverPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
+            int marshalSize = base.GetMarshalledSize();
             marshalSize += 2;  // this._receiverState
             marshalSize += 2;  // this._padding1
             marshalSize += 4;  // this._receivedPoser
-            marshalSize += this._transmitterEntityId.GetMarshalledSize();  // this._transmitterEntityId
+            marshalSize += TransmitterEntityId.GetMarshalledSize();  // this._transmitterEntityId
             marshalSize += 2;  // this._transmitterRadioId
             return marshalSize;
         }
@@ -142,102 +99,41 @@ namespace OpenDis.Dis1995
         /// Gets or sets the encoding scheme used, and enumeration
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "receiverState")]
-        public ushort ReceiverState
-        {
-            get
-            {
-                return this._receiverState;
-            }
-
-            set
-            {
-                this._receiverState = value;
-            }
-        }
+        public ushort ReceiverState { get; set; }
 
         /// <summary>
         /// Gets or sets the padding
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "padding1")]
-        public ushort Padding1
-        {
-            get
-            {
-                return this._padding1;
-            }
-
-            set
-            {
-                this._padding1 = value;
-            }
-        }
+        public ushort Padding1 { get; set; }
 
         /// <summary>
         /// Gets or sets the received power
         /// </summary>
         [XmlElement(Type = typeof(float), ElementName = "receivedPoser")]
-        public float ReceivedPoser
-        {
-            get
-            {
-                return this._receivedPoser;
-            }
-
-            set
-            {
-                this._receivedPoser = value;
-            }
-        }
+        public float ReceivedPoser { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of transmitter
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "transmitterEntityId")]
-        public EntityID TransmitterEntityId
-        {
-            get
-            {
-                return this._transmitterEntityId;
-            }
-
-            set
-            {
-                this._transmitterEntityId = value;
-            }
-        }
+        public EntityID TransmitterEntityId { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the ID of transmitting radio
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "transmitterRadioId")]
-        public ushort TransmitterRadioId
-        {
-            get
-            {
-                return this._transmitterRadioId;
-            }
+        public ushort TransmitterRadioId { get; set; }
 
-            set
-            {
-                this._transmitterRadioId = value;
-            }
-        }
-
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -246,25 +142,25 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    dos.WriteUnsignedShort((ushort)this._receiverState);
-                    dos.WriteUnsignedShort((ushort)this._padding1);
-                    dos.WriteFloat((float)this._receivedPoser);
-                    this._transmitterEntityId.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._transmitterRadioId);
+                    dos.WriteUnsignedShort(ReceiverState);
+                    dos.WriteUnsignedShort(Padding1);
+                    dos.WriteFloat((float)ReceivedPoser);
+                    TransmitterEntityId.Marshal(dos);
+                    dos.WriteUnsignedShort(TransmitterRadioId);
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -279,38 +175,31 @@ namespace OpenDis.Dis1995
             {
                 try
                 {
-                    this._receiverState = dis.ReadUnsignedShort();
-                    this._padding1 = dis.ReadUnsignedShort();
-                    this._receivedPoser = dis.ReadFloat();
-                    this._transmitterEntityId.Unmarshal(dis);
-                    this._transmitterRadioId = dis.ReadUnsignedShort();
+                    ReceiverState = dis.ReadUnsignedShort();
+                    Padding1 = dis.ReadUnsignedShort();
+                    ReceivedPoser = dis.ReadFloat();
+                    TransmitterEntityId.Unmarshal(dis);
+                    TransmitterRadioId = dis.ReadUnsignedShort();
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -318,83 +207,65 @@ namespace OpenDis.Dis1995
             base.Reflection(sb);
             try
             {
-                sb.AppendLine("<receiverState type=\"ushort\">" + this._receiverState.ToString(CultureInfo.InvariantCulture) + "</receiverState>");
-                sb.AppendLine("<padding1 type=\"ushort\">" + this._padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
-                sb.AppendLine("<receivedPoser type=\"float\">" + this._receivedPoser.ToString(CultureInfo.InvariantCulture) + "</receivedPoser>");
+                sb.AppendLine("<receiverState type=\"ushort\">" + ReceiverState.ToString(CultureInfo.InvariantCulture) + "</receiverState>");
+                sb.AppendLine("<padding1 type=\"ushort\">" + Padding1.ToString(CultureInfo.InvariantCulture) + "</padding1>");
+                sb.AppendLine("<receivedPoser type=\"float\">" + ReceivedPoser.ToString(CultureInfo.InvariantCulture) + "</receivedPoser>");
                 sb.AppendLine("<transmitterEntityId>");
-                this._transmitterEntityId.Reflection(sb);
+                TransmitterEntityId.Reflection(sb);
                 sb.AppendLine("</transmitterEntityId>");
-                sb.AppendLine("<transmitterRadioId type=\"ushort\">" + this._transmitterRadioId.ToString(CultureInfo.InvariantCulture) + "</transmitterRadioId>");
+                sb.AppendLine("<transmitterRadioId type=\"ushort\">" + TransmitterRadioId.ToString(CultureInfo.InvariantCulture) + "</transmitterRadioId>");
                 sb.AppendLine("</ReceiverPdu>");
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as ReceiverPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as ReceiverPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(ReceiverPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (this._receiverState != obj._receiverState)
+            bool ivarsEqual = base.Equals(obj);
+            if (ReceiverState != obj.ReceiverState)
             {
                 ivarsEqual = false;
             }
 
-            if (this._padding1 != obj._padding1)
+            if (Padding1 != obj.Padding1)
             {
                 ivarsEqual = false;
             }
 
-            if (this._receivedPoser != obj._receivedPoser)
+            if (ReceivedPoser != obj.ReceivedPoser)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._transmitterEntityId.Equals(obj._transmitterEntityId))
+            if (!TransmitterEntityId.Equals(obj.TransmitterEntityId))
             {
                 ivarsEqual = false;
             }
 
-            if (this._transmitterRadioId != obj._transmitterRadioId)
+            if (TransmitterRadioId != obj.TransmitterRadioId)
             {
                 ivarsEqual = false;
             }
@@ -407,27 +278,20 @@ namespace OpenDis.Dis1995
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._receiverState.GetHashCode();
-            result = GenerateHash(result) ^ this._padding1.GetHashCode();
-            result = GenerateHash(result) ^ this._receivedPoser.GetHashCode();
-            result = GenerateHash(result) ^ this._transmitterEntityId.GetHashCode();
-            result = GenerateHash(result) ^ this._transmitterRadioId.GetHashCode();
+            result = GenerateHash(result) ^ ReceiverState.GetHashCode();
+            result = GenerateHash(result) ^ Padding1.GetHashCode();
+            result = GenerateHash(result) ^ ReceivedPoser.GetHashCode();
+            result = GenerateHash(result) ^ TransmitterEntityId.GetHashCode();
+            result = GenerateHash(result) ^ TransmitterRadioId.GetHashCode();
 
             return result;
         }

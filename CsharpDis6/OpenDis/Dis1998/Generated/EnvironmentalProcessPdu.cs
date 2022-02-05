@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.11.1: Information about environmental effects and processes. This requires manual cleanup. the environmental        record is variable, as is the padding. UNFINISHED
+    /// Section 5.3.11.1: Information about environmental effects and processes. This requires manual cleanup. the environmental
+    ///       record is variable, as is the padding. UNFINISHED
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -59,46 +60,11 @@ namespace OpenDis.Dis1998
     public partial class EnvironmentalProcessPdu : SyntheticEnvironmentFamilyPdu, IEquatable<EnvironmentalProcessPdu>
     {
         /// <summary>
-        /// Environmental process ID
-        /// </summary>
-        private EntityID _environementalProcessID = new EntityID();
-
-        /// <summary>
-        /// Environment type
-        /// </summary>
-        private EntityType _environmentType = new EntityType();
-
-        /// <summary>
-        /// model type
-        /// </summary>
-        private byte _modelType;
-
-        /// <summary>
-        /// Environment status
-        /// </summary>
-        private byte _environmentStatus;
-
-        /// <summary>
-        /// number of environment records 
-        /// </summary>
-        private byte _numberOfEnvironmentRecords;
-
-        /// <summary>
-        /// PDU sequence number for the environmentla process if pdu sequencing required
-        /// </summary>
-        private ushort _sequenceNumber;
-
-        /// <summary>
-        /// environemt records
-        /// </summary>
-        private List<Environment> _environmentRecords = new List<Environment>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="EnvironmentalProcessPdu"/> class.
         /// </summary>
         public EnvironmentalProcessPdu()
         {
-            PduType = (byte)41;
+            PduType = 41;
         }
 
         /// <summary>
@@ -107,12 +73,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(EnvironmentalProcessPdu left, EnvironmentalProcessPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(EnvironmentalProcessPdu left, EnvironmentalProcessPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -120,37 +83,23 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(EnvironmentalProcessPdu left, EnvironmentalProcessPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
-            marshalSize += this._environementalProcessID.GetMarshalledSize();  // this._environementalProcessID
-            marshalSize += this._environmentType.GetMarshalledSize();  // this._environmentType
+            int marshalSize = base.GetMarshalledSize();
+            marshalSize += EnvironementalProcessID.GetMarshalledSize();  // this._environementalProcessID
+            marshalSize += EnvironmentType.GetMarshalledSize();  // this._environmentType
             marshalSize += 1;  // this._modelType
             marshalSize += 1;  // this._environmentStatus
             marshalSize += 1;  // this._numberOfEnvironmentRecords
             marshalSize += 2;  // this._sequenceNumber
-            for (int idx = 0; idx < this._environmentRecords.Count; idx++)
+            for (int idx = 0; idx < EnvironmentRecords.Count; idx++)
             {
-                Environment listElement = (Environment)this._environmentRecords[idx];
+                var listElement = EnvironmentRecords[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -161,136 +110,59 @@ namespace OpenDis.Dis1998
         /// Gets or sets the Environmental process ID
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "environementalProcessID")]
-        public EntityID EnvironementalProcessID
-        {
-            get
-            {
-                return this._environementalProcessID;
-            }
-
-            set
-            {
-                this._environementalProcessID = value;
-            }
-        }
+        public EntityID EnvironementalProcessID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the Environment type
         /// </summary>
         [XmlElement(Type = typeof(EntityType), ElementName = "environmentType")]
-        public EntityType EnvironmentType
-        {
-            get
-            {
-                return this._environmentType;
-            }
-
-            set
-            {
-                this._environmentType = value;
-            }
-        }
+        public EntityType EnvironmentType { get; set; } = new EntityType();
 
         /// <summary>
         /// Gets or sets the model type
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "modelType")]
-        public byte ModelType
-        {
-            get
-            {
-                return this._modelType;
-            }
-
-            set
-            {
-                this._modelType = value;
-            }
-        }
+        public byte ModelType { get; set; }
 
         /// <summary>
         /// Gets or sets the Environment status
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "environmentStatus")]
-        public byte EnvironmentStatus
-        {
-            get
-            {
-                return this._environmentStatus;
-            }
-
-            set
-            {
-                this._environmentStatus = value;
-            }
-        }
+        public byte EnvironmentStatus { get; set; }
 
         /// <summary>
-        /// Gets or sets the number of environment records 
+        /// Gets or sets the number of environment records
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getnumberOfEnvironmentRecords method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getnumberOfEnvironmentRecords method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(byte), ElementName = "numberOfEnvironmentRecords")]
-        public byte NumberOfEnvironmentRecords
-        {
-            get
-            {
-                return this._numberOfEnvironmentRecords;
-            }
-
-            set
-            {
-                this._numberOfEnvironmentRecords = value;
-            }
-        }
+        public byte NumberOfEnvironmentRecords { get; set; }
 
         /// <summary>
         /// Gets or sets the PDU sequence number for the environmentla process if pdu sequencing required
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "sequenceNumber")]
-        public ushort SequenceNumber
-        {
-            get
-            {
-                return this._sequenceNumber;
-            }
-
-            set
-            {
-                this._sequenceNumber = value;
-            }
-        }
+        public ushort SequenceNumber { get; set; }
 
         /// <summary>
         /// Gets the environemt records
         /// </summary>
         [XmlElement(ElementName = "environmentRecordsList", Type = typeof(List<Environment>))]
-        public List<Environment> EnvironmentRecords
-        {
-            get
-            {
-                return this._environmentRecords;
-            }
-        }
+        public List<Environment> EnvironmentRecords { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -299,32 +171,32 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._environementalProcessID.Marshal(dos);
-                    this._environmentType.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._modelType);
-                    dos.WriteUnsignedByte((byte)this._environmentStatus);
-                    dos.WriteUnsignedByte((byte)this._environmentRecords.Count);
-                    dos.WriteUnsignedShort((ushort)this._sequenceNumber);
+                    EnvironementalProcessID.Marshal(dos);
+                    EnvironmentType.Marshal(dos);
+                    dos.WriteUnsignedByte(ModelType);
+                    dos.WriteUnsignedByte(EnvironmentStatus);
+                    dos.WriteUnsignedByte((byte)EnvironmentRecords.Count);
+                    dos.WriteUnsignedShort(SequenceNumber);
 
-                    for (int idx = 0; idx < this._environmentRecords.Count; idx++)
+                    for (int idx = 0; idx < EnvironmentRecords.Count; idx++)
                     {
-                        Environment aEnvironment = (Environment)this._environmentRecords[idx];
+                        var aEnvironment = EnvironmentRecords[idx];
                         aEnvironment.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -339,46 +211,39 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._environementalProcessID.Unmarshal(dis);
-                    this._environmentType.Unmarshal(dis);
-                    this._modelType = dis.ReadUnsignedByte();
-                    this._environmentStatus = dis.ReadUnsignedByte();
-                    this._numberOfEnvironmentRecords = dis.ReadUnsignedByte();
-                    this._sequenceNumber = dis.ReadUnsignedShort();
+                    EnvironementalProcessID.Unmarshal(dis);
+                    EnvironmentType.Unmarshal(dis);
+                    ModelType = dis.ReadUnsignedByte();
+                    EnvironmentStatus = dis.ReadUnsignedByte();
+                    NumberOfEnvironmentRecords = dis.ReadUnsignedByte();
+                    SequenceNumber = dis.ReadUnsignedShort();
 
-                    for (int idx = 0; idx < this.NumberOfEnvironmentRecords; idx++)
+                    for (int idx = 0; idx < NumberOfEnvironmentRecords; idx++)
                     {
-                        Environment anX = new Environment();
+                        var anX = new Environment();
                         anX.Unmarshal(dis);
-                        this._environmentRecords.Add(anX);
+                        EnvironmentRecords.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -387,19 +252,19 @@ namespace OpenDis.Dis1998
             try
             {
                 sb.AppendLine("<environementalProcessID>");
-                this._environementalProcessID.Reflection(sb);
+                EnvironementalProcessID.Reflection(sb);
                 sb.AppendLine("</environementalProcessID>");
                 sb.AppendLine("<environmentType>");
-                this._environmentType.Reflection(sb);
+                EnvironmentType.Reflection(sb);
                 sb.AppendLine("</environmentType>");
-                sb.AppendLine("<modelType type=\"byte\">" + this._modelType.ToString(CultureInfo.InvariantCulture) + "</modelType>");
-                sb.AppendLine("<environmentStatus type=\"byte\">" + this._environmentStatus.ToString(CultureInfo.InvariantCulture) + "</environmentStatus>");
-                sb.AppendLine("<environmentRecords type=\"byte\">" + this._environmentRecords.Count.ToString(CultureInfo.InvariantCulture) + "</environmentRecords>");
-                sb.AppendLine("<sequenceNumber type=\"ushort\">" + this._sequenceNumber.ToString(CultureInfo.InvariantCulture) + "</sequenceNumber>");
-                for (int idx = 0; idx < this._environmentRecords.Count; idx++)
+                sb.AppendLine("<modelType type=\"byte\">" + ModelType.ToString(CultureInfo.InvariantCulture) + "</modelType>");
+                sb.AppendLine("<environmentStatus type=\"byte\">" + EnvironmentStatus.ToString(CultureInfo.InvariantCulture) + "</environmentStatus>");
+                sb.AppendLine("<environmentRecords type=\"byte\">" + EnvironmentRecords.Count.ToString(CultureInfo.InvariantCulture) + "</environmentRecords>");
+                sb.AppendLine("<sequenceNumber type=\"ushort\">" + SequenceNumber.ToString(CultureInfo.InvariantCulture) + "</sequenceNumber>");
+                for (int idx = 0; idx < EnvironmentRecords.Count; idx++)
                 {
                     sb.AppendLine("<environmentRecords" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"Environment\">");
-                    Environment aEnvironment = (Environment)this._environmentRecords[idx];
+                    var aEnvironment = EnvironmentRecords[idx];
                     aEnvironment.Reflection(sb);
                     sb.AppendLine("</environmentRecords" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -408,91 +273,73 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as EnvironmentalProcessPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as EnvironmentalProcessPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(EnvironmentalProcessPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (!this._environementalProcessID.Equals(obj._environementalProcessID))
+            bool ivarsEqual = base.Equals(obj);
+            if (!EnvironementalProcessID.Equals(obj.EnvironementalProcessID))
             {
                 ivarsEqual = false;
             }
 
-            if (!this._environmentType.Equals(obj._environmentType))
+            if (!EnvironmentType.Equals(obj.EnvironmentType))
             {
                 ivarsEqual = false;
             }
 
-            if (this._modelType != obj._modelType)
+            if (ModelType != obj.ModelType)
             {
                 ivarsEqual = false;
             }
 
-            if (this._environmentStatus != obj._environmentStatus)
+            if (EnvironmentStatus != obj.EnvironmentStatus)
             {
                 ivarsEqual = false;
             }
 
-            if (this._numberOfEnvironmentRecords != obj._numberOfEnvironmentRecords)
+            if (NumberOfEnvironmentRecords != obj.NumberOfEnvironmentRecords)
             {
                 ivarsEqual = false;
             }
 
-            if (this._sequenceNumber != obj._sequenceNumber)
+            if (SequenceNumber != obj.SequenceNumber)
             {
                 ivarsEqual = false;
             }
 
-            if (this._environmentRecords.Count != obj._environmentRecords.Count)
+            if (EnvironmentRecords.Count != obj.EnvironmentRecords.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._environmentRecords.Count; idx++)
+                for (int idx = 0; idx < EnvironmentRecords.Count; idx++)
                 {
-                    if (!this._environmentRecords[idx].Equals(obj._environmentRecords[idx]))
+                    if (!EnvironmentRecords[idx].Equals(obj.EnvironmentRecords[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -507,34 +354,27 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._environementalProcessID.GetHashCode();
-            result = GenerateHash(result) ^ this._environmentType.GetHashCode();
-            result = GenerateHash(result) ^ this._modelType.GetHashCode();
-            result = GenerateHash(result) ^ this._environmentStatus.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfEnvironmentRecords.GetHashCode();
-            result = GenerateHash(result) ^ this._sequenceNumber.GetHashCode();
+            result = GenerateHash(result) ^ EnvironementalProcessID.GetHashCode();
+            result = GenerateHash(result) ^ EnvironmentType.GetHashCode();
+            result = GenerateHash(result) ^ ModelType.GetHashCode();
+            result = GenerateHash(result) ^ EnvironmentStatus.GetHashCode();
+            result = GenerateHash(result) ^ NumberOfEnvironmentRecords.GetHashCode();
+            result = GenerateHash(result) ^ SequenceNumber.GetHashCode();
 
-            if (this._environmentRecords.Count > 0)
+            if (EnvironmentRecords.Count > 0)
             {
-                for (int idx = 0; idx < this._environmentRecords.Count; idx++)
+                for (int idx = 0; idx < EnvironmentRecords.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._environmentRecords[idx].GetHashCode();
+                    result = GenerateHash(result) ^ EnvironmentRecords[idx].GetHashCode();
                 }
             }
 

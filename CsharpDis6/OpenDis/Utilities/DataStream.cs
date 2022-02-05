@@ -36,10 +36,7 @@
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace OpenDis.Core
 {
@@ -48,49 +45,33 @@ namespace OpenDis.Core
     /// </summary>
     public class DataStream : IDisposable
     {
-		#region Fields (1) 
+#region Fields (1) 
+
+        #endregion Fields 
+
+        #region Constructors (1) 
 
         /// <summary>
-        /// The endian type.
-        /// </summary>
-        private Endian endianType;
-
-		#endregion Fields 
-
-		#region Constructors (1) 
-
-        /// <summary>
-        /// Initializes a new instance of the DataStream class.  
+        /// Initializes a new instance of the DataStream class.
         /// This will store all PDU information for either an InputStream or OutputStream.
         /// </summary>
         public DataStream()
         {
             // Test the machine to determine to see what it supports. 
-            this.endianType = (BitConverter.IsLittleEndian ? Endian.Little : Endian.Big);
+            Endian = BitConverter.IsLittleEndian ? Endian.Little : Endian.Big;
 
             // create a new MemoryStream
-            this.Stream = new MemoryStream();
+            Stream = new MemoryStream();
         }
 
-		#endregion Constructors 
+        #endregion Constructors 
 
-		#region Properties (4) 
+        #region Properties (4) 
 
         /// <summary>
         /// Gets or sets the endian type
         /// </summary>
-        public Endian Endian
-        {
-            get
-            {
-                return this.endianType;
-            }
-
-            set
-            {
-                this.endianType = value;
-            }
-        }
+        public Endian Endian { get; set; }
 
         /// <summary>
         /// Gets or sets the MemoryStream that will be used to hold the PDU data.
@@ -119,9 +100,9 @@ namespace OpenDis.Core
             set;
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (6) 
+        #region Methods (6) 
 
         /// <summary>
         /// Appends the byte array data to the MemoryStream
@@ -129,8 +110,8 @@ namespace OpenDis.Core
         /// <param name="data">byte array</param>
         public void Append(byte[] data)
         {
-            this.Stream.Seek(this.Stream.Length, SeekOrigin.Begin);
-            this.Stream.Write(data, 0, data.Length);
+            Stream.Seek(Stream.Length, SeekOrigin.Begin);
+            Stream.Write(data, 0, data.Length);
         }
 
         /// <summary>
@@ -139,8 +120,8 @@ namespace OpenDis.Core
         /// <param name="data"></param>
         public void Append(byte data)
         {
-            this.Stream.Seek(this.Stream.Length, SeekOrigin.Begin);
-            this.Stream.WriteByte(data);
+            Stream.Seek(Stream.Length, SeekOrigin.Begin);
+            Stream.WriteByte(data);
         }
 
         /// <summary>
@@ -148,27 +129,24 @@ namespace OpenDis.Core
         /// </summary>
         public void Clear()
         {
-            this.StreamCounter = 0;
-            this.Stream = new MemoryStream();
+            StreamCounter = 0;
+            Stream = new MemoryStream();
         }
 
         /// <summary>
         /// Convert a MemoryStream to a byte array
         /// </summary>
         /// <returns>byte array</returns>
-        public byte[] ConvertToBytes()
-        {
-            return ReturnByteArray(this.Stream.GetBuffer(), 0, (int)this.Stream.Length);
-        }
+        public byte[] ConvertToBytes() => ReturnByteArray(Stream.GetBuffer(), 0, (int)Stream.Length);
 
         public void Dispose()
         {
-            if (this.Stream != null)
+            if (Stream != null)
             {
                 try
                 {
-                    this.Stream.Close();
-                    this.Stream.Dispose();
+                    Stream.Close();
+                    Stream.Dispose();
                 }
                 catch
                 {
@@ -191,6 +169,6 @@ namespace OpenDis.Core
             return temp;
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

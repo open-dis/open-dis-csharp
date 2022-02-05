@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.Iff
 {
     /// <summary>
-    /// Enumeration values for Type2Parameter6ModeSCodeStatus (der.iff.type.2.fop.param6, Parameter 6 - Mode S Code/Status, 
+    /// Enumeration values for Type2Parameter6ModeSCodeStatus (der.iff.type.2.fop.param6, Parameter 6 - Mode S Code/Status,
     /// section 8.3.2.2.7)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

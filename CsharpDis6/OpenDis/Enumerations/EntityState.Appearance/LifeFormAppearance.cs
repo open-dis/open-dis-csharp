@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Appearance
 {
     /// <summary>
-    /// Enumeration values for LifeFormAppearance (es.appear.lifeform, Life Forms Kind, 
+    /// Enumeration values for LifeFormAppearance (es.appear.lifeform, Life Forms Kind,
     /// section 4.3.3)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -24,7 +23,7 @@ namespace OpenDis.Enumerations.EntityState.Appearance
     [SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", Justification = "Due to SISO standardized naming.")]
     [SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
     [Serializable]
-    public struct LifeFormAppearance
+    public struct LifeFormAppearance : IHashable<LifeFormAppearance>
     {
         /// <summary>
         /// Describes the paint scheme of an entity
@@ -297,7 +296,8 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             NotFrozen = 0,
 
             /// <summary>
-            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
+            /// Frozen (Frozen entities should not be dead-reckoned, i.e. they should be displayed as fixed at the current location
+            /// even if nonzero velocity, acceleration or rotation data is received from the frozen entity)
             /// </summary>
             FrozenFrozenEntitiesShouldNotBeDeadReckonedIETheyShouldBeDisplayedAsFixedAtTheCurrentLocationEvenIfNonzeroVelocityAccelerationOrRotationDataIsReceivedFromTheFrozenEntity = 1
         }
@@ -458,31 +458,15 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             RushesBetweenCoveredPositions = 1
         }
 
-        private LifeFormAppearance.PaintSchemeValue paintScheme;
-        private LifeFormAppearance.HealthValue health;
-        private LifeFormAppearance.ComplianceValue compliance;
-        private LifeFormAppearance.FlashLightsValue flashLights;
-        private LifeFormAppearance.LifeFormStateValue lifeFormState;
-        private LifeFormAppearance.FrozenStatusValue frozenStatus;
-        private LifeFormAppearance.StateValue state;
-        private LifeFormAppearance.Weapon1Value weapon1;
-        private LifeFormAppearance.Weapon2Value weapon2;
-        private LifeFormAppearance.CamouflageTypeValue camouflageType;
-        private LifeFormAppearance.ConcealedStationaryValue concealedStationary;
-        private LifeFormAppearance.ConcealedMovementValue concealedMovement;
-
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(LifeFormAppearance left, LifeFormAppearance right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(LifeFormAppearance left, LifeFormAppearance right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -490,137 +474,113 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(LifeFormAppearance left, LifeFormAppearance right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            // If parameters are null return false (cast to object to prevent recursive loop!)
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || left.Equals(right);
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> to <see cref="System.UInt32"/>.
+        /// Performs an explicit conversion from <see cref="LifeFormAppearance"/> to <see cref="uint"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> scheme instance.</param>
+        /// <param name="obj">The <see cref="LifeFormAppearance"/> scheme instance.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator uint(LifeFormAppearance obj)
-        {
-            return obj.ToUInt32();
-        }
+        public static explicit operator uint(LifeFormAppearance obj) => obj.ToUInt32();
 
         /// <summary>
-        /// Performs an explicit conversion from <see cref="System.UInt32"/> to <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/>.
+        /// Performs an explicit conversion from <see cref="uint"/> to <see cref="LifeFormAppearance"/>.
         /// </summary>
         /// <param name="value">The uint value.</param>
         /// <returns>The result of the conversion.</returns>
-        public static explicit operator LifeFormAppearance(uint value)
-        {
-            return LifeFormAppearance.FromUInt32(value);
-        }
+        public static explicit operator LifeFormAppearance(uint value) => FromUInt32(value);
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance from the byte array.
+        /// Creates the <see cref="LifeFormAppearance"/> instance from the byte array.
         /// </summary>
-        /// <param name="array">The array which holds the values for the <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/>.</param>
+        /// <param name="array">The array which holds the values for the <see cref="LifeFormAppearance"/>.</param>
         /// <param name="index">The starting position within value.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance, represented by a byte array.</returns>
+        /// <returns>The <see cref="LifeFormAppearance"/> instance, represented by a byte array.</returns>
         /// <exception cref="ArgumentNullException">if the <c>array</c> is null.</exception>
-        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number of elements in array.</exception>
+        /// <exception cref="IndexOutOfRangeException">if the <c>index</c> is lower than 0 or greater or equal than number
+        /// of elements in array.</exception>
         public static LifeFormAppearance FromByteArray(byte[] array, int index)
         {
-            if (array == null)
-            {
-                throw new ArgumentNullException("array");
-            }
-
-            if (index < 0 ||
+            return array == null
+                ? throw new ArgumentNullException(nameof(array))
+                : index < 0 ||
                 index > array.Length - 1 ||
-                index + 4 > array.Length - 1)
-            {
-                throw new IndexOutOfRangeException();
-            }
-
-            return FromUInt32(BitConverter.ToUInt32(array, index));
+                index + 4 > array.Length - 1
+                ? throw new IndexOutOfRangeException()
+                : FromUInt32(BitConverter.ToUInt32(array, index));
         }
 
         /// <summary>
-        /// Creates the <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance from the uint value.
+        /// Creates the <see cref="LifeFormAppearance"/> instance from the uint value.
         /// </summary>
-        /// <param name="value">The uint value which represents the <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance.</param>
-        /// <returns>The <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance, represented by the uint value.</returns>
+        /// <param name="value">The uint value which represents the <see cref="LifeFormAppearance"/> instance.</param>
+        /// <returns>The <see cref="LifeFormAppearance"/> instance, represented by the uint value.</returns>
         public static LifeFormAppearance FromUInt32(uint value)
         {
-            LifeFormAppearance ps = new LifeFormAppearance();
+            var ps = new LifeFormAppearance();
 
-            uint mask0 = 0x0001;
-            byte shift0 = 0;
+            const uint mask0 = 0x0001;
+            const byte shift0 = 0;
             uint newValue0 = (value & mask0) >> shift0;
-            ps.PaintScheme = (LifeFormAppearance.PaintSchemeValue)newValue0;
+            ps.PaintScheme = (PaintSchemeValue)newValue0;
 
-            uint mask2 = 0x0018;
-            byte shift2 = 3;
+            const uint mask2 = 0x0018;
+            const byte shift2 = 3;
             uint newValue2 = (value & mask2) >> shift2;
-            ps.Health = (LifeFormAppearance.HealthValue)newValue2;
+            ps.Health = (HealthValue)newValue2;
 
-            uint mask3 = 0x01e0;
-            byte shift3 = 5;
+            const uint mask3 = 0x01e0;
+            const byte shift3 = 5;
             uint newValue3 = (value & mask3) >> shift3;
-            ps.Compliance = (LifeFormAppearance.ComplianceValue)newValue3;
+            ps.Compliance = (ComplianceValue)newValue3;
 
-            uint mask5 = 0x1000;
-            byte shift5 = 12;
+            const uint mask5 = 0x1000;
+            const byte shift5 = 12;
             uint newValue5 = (value & mask5) >> shift5;
-            ps.FlashLights = (LifeFormAppearance.FlashLightsValue)newValue5;
+            ps.FlashLights = (FlashLightsValue)newValue5;
 
-            uint mask7 = 0xf0000;
-            byte shift7 = 16;
+            const uint mask7 = 0xf0000;
+            const byte shift7 = 16;
             uint newValue7 = (value & mask7) >> shift7;
-            ps.LifeFormState = (LifeFormAppearance.LifeFormStateValue)newValue7;
+            ps.LifeFormState = (LifeFormStateValue)newValue7;
 
-            uint mask9 = 0x200000;
-            byte shift9 = 21;
+            const uint mask9 = 0x200000;
+            const byte shift9 = 21;
             uint newValue9 = (value & mask9) >> shift9;
-            ps.FrozenStatus = (LifeFormAppearance.FrozenStatusValue)newValue9;
+            ps.FrozenStatus = (FrozenStatusValue)newValue9;
 
-            uint mask11 = 0x800000;
-            byte shift11 = 23;
+            const uint mask11 = 0x800000;
+            const byte shift11 = 23;
             uint newValue11 = (value & mask11) >> shift11;
-            ps.State = (LifeFormAppearance.StateValue)newValue11;
+            ps.State = (StateValue)newValue11;
 
-            uint mask12 = 0x3000000;
-            byte shift12 = 24;
+            const uint mask12 = 0x3000000;
+            const byte shift12 = 24;
             uint newValue12 = (value & mask12) >> shift12;
-            ps.Weapon1 = (LifeFormAppearance.Weapon1Value)newValue12;
+            ps.Weapon1 = (Weapon1Value)newValue12;
 
-            uint mask13 = 0xc000000;
-            byte shift13 = 26;
+            const uint mask13 = 0xc000000;
+            const byte shift13 = 26;
             uint newValue13 = (value & mask13) >> shift13;
-            ps.Weapon2 = (LifeFormAppearance.Weapon2Value)newValue13;
+            ps.Weapon2 = (Weapon2Value)newValue13;
 
-            uint mask14 = 0x30000000;
-            byte shift14 = 28;
+            const uint mask14 = 0x30000000;
+            const byte shift14 = 28;
             uint newValue14 = (value & mask14) >> shift14;
-            ps.CamouflageType = (LifeFormAppearance.CamouflageTypeValue)newValue14;
+            ps.CamouflageType = (CamouflageTypeValue)newValue14;
 
-            uint mask15 = 0x40000000;
-            byte shift15 = 30;
+            const uint mask15 = 0x40000000;
+            const byte shift15 = 30;
             uint newValue15 = (value & mask15) >> shift15;
-            ps.ConcealedStationary = (LifeFormAppearance.ConcealedStationaryValue)newValue15;
+            ps.ConcealedStationary = (ConcealedStationaryValue)newValue15;
 
-            uint mask16 = 0x80000000;
-            byte shift16 = 31;
+            const uint mask16 = 0x80000000;
+            const byte shift16 = 31;
             uint newValue16 = (value & mask16) >> shift16;
-            ps.ConcealedMovement = (LifeFormAppearance.ConcealedMovementValue)newValue16;
+            ps.ConcealedMovement = (ConcealedMovementValue)newValue16;
 
             return ps;
         }
@@ -629,213 +589,132 @@ namespace OpenDis.Enumerations.EntityState.Appearance
         /// Gets or sets the paintscheme.
         /// </summary>
         /// <value>The paintscheme.</value>
-        public LifeFormAppearance.PaintSchemeValue PaintScheme
-        {
-            get { return this.paintScheme; }
-            set { this.paintScheme = value; }
-        }
+        public PaintSchemeValue PaintScheme { get; set; }
 
         /// <summary>
         /// Gets or sets the health.
         /// </summary>
         /// <value>The health.</value>
-        public LifeFormAppearance.HealthValue Health
-        {
-            get { return this.health; }
-            set { this.health = value; }
-        }
+        public HealthValue Health { get; set; }
 
         /// <summary>
         /// Gets or sets the compliance.
         /// </summary>
         /// <value>The compliance.</value>
-        public LifeFormAppearance.ComplianceValue Compliance
-        {
-            get { return this.compliance; }
-            set { this.compliance = value; }
-        }
+        public ComplianceValue Compliance { get; set; }
 
         /// <summary>
         /// Gets or sets the flashlights.
         /// </summary>
         /// <value>The flashlights.</value>
-        public LifeFormAppearance.FlashLightsValue FlashLights
-        {
-            get { return this.flashLights; }
-            set { this.flashLights = value; }
-        }
+        public FlashLightsValue FlashLights { get; set; }
 
         /// <summary>
         /// Gets or sets the lifeformstate.
         /// </summary>
         /// <value>The lifeformstate.</value>
-        public LifeFormAppearance.LifeFormStateValue LifeFormState
-        {
-            get { return this.lifeFormState; }
-            set { this.lifeFormState = value; }
-        }
+        public LifeFormStateValue LifeFormState { get; set; }
 
         /// <summary>
         /// Gets or sets the frozenstatus.
         /// </summary>
         /// <value>The frozenstatus.</value>
-        public LifeFormAppearance.FrozenStatusValue FrozenStatus
-        {
-            get { return this.frozenStatus; }
-            set { this.frozenStatus = value; }
-        }
+        public FrozenStatusValue FrozenStatus { get; set; }
 
         /// <summary>
         /// Gets or sets the state.
         /// </summary>
         /// <value>The state.</value>
-        public LifeFormAppearance.StateValue State
-        {
-            get { return this.state; }
-            set { this.state = value; }
-        }
+        public StateValue State { get; set; }
 
         /// <summary>
         /// Gets or sets the weapon1.
         /// </summary>
         /// <value>The weapon1.</value>
-        public LifeFormAppearance.Weapon1Value Weapon1
-        {
-            get { return this.weapon1; }
-            set { this.weapon1 = value; }
-        }
+        public Weapon1Value Weapon1 { get; set; }
 
         /// <summary>
         /// Gets or sets the weapon2.
         /// </summary>
         /// <value>The weapon2.</value>
-        public LifeFormAppearance.Weapon2Value Weapon2
-        {
-            get { return this.weapon2; }
-            set { this.weapon2 = value; }
-        }
+        public Weapon2Value Weapon2 { get; set; }
 
         /// <summary>
         /// Gets or sets the camouflagetype.
         /// </summary>
         /// <value>The camouflagetype.</value>
-        public LifeFormAppearance.CamouflageTypeValue CamouflageType
-        {
-            get { return this.camouflageType; }
-            set { this.camouflageType = value; }
-        }
+        public CamouflageTypeValue CamouflageType { get; set; }
 
         /// <summary>
         /// Gets or sets the concealedstationary.
         /// </summary>
         /// <value>The concealedstationary.</value>
-        public LifeFormAppearance.ConcealedStationaryValue ConcealedStationary
-        {
-            get { return this.concealedStationary; }
-            set { this.concealedStationary = value; }
-        }
+        public ConcealedStationaryValue ConcealedStationary { get; set; }
 
         /// <summary>
         /// Gets or sets the concealedmovement.
         /// </summary>
         /// <value>The concealedmovement.</value>
-        public LifeFormAppearance.ConcealedMovementValue ConcealedMovement
-        {
-            get { return this.concealedMovement; }
-            set { this.concealedMovement = value; }
-        }
+        public ConcealedMovementValue ConcealedMovement { get; set; }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => obj is LifeFormAppearance other && Equals(other);
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
+        /// Determines whether the specified <see cref="LifeFormAppearance"/> instance is equal to this instance.
         /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
+        /// <param name="other">The <see cref="LifeFormAppearance"/> instance to compare with this instance.</param>
         /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            if (!(obj is LifeFormAppearance))
-            {
-                return false;
-            }
-
-            return this.Equals((LifeFormAppearance)obj);
-        }
-
-        /// <summary>
-        /// Determines whether the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance is equal to this instance.
-        /// </summary>
-        /// <param name="other">The <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> is equal to this instance; otherwise, <c>false</c>.
+        ///    <c>true</c> if the specified <see cref="LifeFormAppearance"/> is equal to this instance; otherwise, <c>false</c>.
         /// </returns>
         public bool Equals(LifeFormAppearance other)
         {
             // If parameter is null return false (cast to object to prevent recursive loop!)
-            if ((object)other == null)
-            {
-                return false;
-            }
-
-            return
-                this.PaintScheme == other.PaintScheme &&
-                this.Health == other.Health &&
-                this.Compliance == other.Compliance &&
-                this.FlashLights == other.FlashLights &&
-                this.LifeFormState == other.LifeFormState &&
-                this.FrozenStatus == other.FrozenStatus &&
-                this.State == other.State &&
-                this.Weapon1 == other.Weapon1 &&
-                this.Weapon2 == other.Weapon2 &&
-                this.CamouflageType == other.CamouflageType &&
-                this.ConcealedStationary == other.ConcealedStationary &&
-                this.ConcealedMovement == other.ConcealedMovement;
+            return PaintScheme == other.PaintScheme &&
+                Health == other.Health &&
+                Compliance == other.Compliance &&
+                FlashLights == other.FlashLights &&
+                LifeFormState == other.LifeFormState &&
+                FrozenStatus == other.FrozenStatus &&
+                State == other.State &&
+                Weapon1 == other.Weapon1 &&
+                Weapon2 == other.Weapon2 &&
+                CamouflageType == other.CamouflageType &&
+                ConcealedStationary == other.ConcealedStationary &&
+                ConcealedMovement == other.ConcealedMovement;
         }
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> to the byte array.
+        /// Converts the instance of <see cref="LifeFormAppearance"/> to the byte array.
         /// </summary>
-        /// <returns>The byte array representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance.</returns>
-        public byte[] ToByteArray()
-        {
-            return BitConverter.GetBytes(this.ToUInt32());
-        }
+        /// <returns>The byte array representing the current <see cref="LifeFormAppearance"/> instance.</returns>
+        public byte[] ToByteArray() => BitConverter.GetBytes(ToUInt32());
 
         /// <summary>
-        /// Converts the instance of <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> to the uint value.
+        /// Converts the instance of <see cref="LifeFormAppearance"/> to the uint value.
         /// </summary>
-        /// <returns>The uint value representing the current <see cref="OpenDis.Enumerations.EntityState.Appearance.LifeFormAppearance"/> instance.</returns>
+        /// <returns>The uint value representing the current <see cref="LifeFormAppearance"/> instance.</returns>
         public uint ToUInt32()
         {
             uint val = 0;
 
-            val |= (uint)((uint)this.PaintScheme << 0);
-            val |= (uint)((uint)this.Health << 3);
-            val |= (uint)((uint)this.Compliance << 5);
-            val |= (uint)((uint)this.FlashLights << 12);
-            val |= (uint)((uint)this.LifeFormState << 16);
-            val |= (uint)((uint)this.FrozenStatus << 21);
-            val |= (uint)((uint)this.State << 23);
-            val |= (uint)((uint)this.Weapon1 << 24);
-            val |= (uint)((uint)this.Weapon2 << 26);
-            val |= (uint)((uint)this.CamouflageType << 28);
-            val |= (uint)((uint)this.ConcealedStationary << 30);
-            val |= (uint)((uint)this.ConcealedMovement << 31);
+            val |= (uint)PaintScheme << 0;
+            val |= (uint)Health << 3;
+            val |= (uint)Compliance << 5;
+            val |= (uint)FlashLights << 12;
+            val |= (uint)LifeFormState << 16;
+            val |= (uint)FrozenStatus << 21;
+            val |= (uint)State << 23;
+            val |= (uint)Weapon1 << 24;
+            val |= (uint)Weapon2 << 26;
+            val |= (uint)CamouflageType << 28;
+            val |= (uint)ConcealedStationary << 30;
+            val |= (uint)ConcealedMovement << 31;
 
             return val;
         }
 
-        /// <summary>
-        /// Returns a hash code for this instance.
-        /// </summary>
-        /// <returns>
-        /// 	A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
-        /// </returns>
+        ///<inheritdoc/>
         public override int GetHashCode()
         {
             int hash = 17;
@@ -843,18 +722,18 @@ namespace OpenDis.Enumerations.EntityState.Appearance
             // Overflow is fine, just wrap
             unchecked
             {
-                hash = (hash * 29) + this.PaintScheme.GetHashCode();
-                hash = (hash * 29) + this.Health.GetHashCode();
-                hash = (hash * 29) + this.Compliance.GetHashCode();
-                hash = (hash * 29) + this.FlashLights.GetHashCode();
-                hash = (hash * 29) + this.LifeFormState.GetHashCode();
-                hash = (hash * 29) + this.FrozenStatus.GetHashCode();
-                hash = (hash * 29) + this.State.GetHashCode();
-                hash = (hash * 29) + this.Weapon1.GetHashCode();
-                hash = (hash * 29) + this.Weapon2.GetHashCode();
-                hash = (hash * 29) + this.CamouflageType.GetHashCode();
-                hash = (hash * 29) + this.ConcealedStationary.GetHashCode();
-                hash = (hash * 29) + this.ConcealedMovement.GetHashCode();
+                hash = (hash * 29) + PaintScheme.GetHashCode();
+                hash = (hash * 29) + Health.GetHashCode();
+                hash = (hash * 29) + Compliance.GetHashCode();
+                hash = (hash * 29) + FlashLights.GetHashCode();
+                hash = (hash * 29) + LifeFormState.GetHashCode();
+                hash = (hash * 29) + FrozenStatus.GetHashCode();
+                hash = (hash * 29) + State.GetHashCode();
+                hash = (hash * 29) + Weapon1.GetHashCode();
+                hash = (hash * 29) + Weapon2.GetHashCode();
+                hash = (hash * 29) + CamouflageType.GetHashCode();
+                hash = (hash * 29) + ConcealedStationary.GetHashCode();
+                hash = (hash * 29) + ConcealedMovement.GetHashCode();
             }
 
             return hash;

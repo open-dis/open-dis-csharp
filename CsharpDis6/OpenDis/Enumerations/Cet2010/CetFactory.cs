@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
@@ -10,18 +9,15 @@ namespace OpenDis.Enumerations.Cet2010
     /// <summary>
     /// Comprehensive entity types factory.
     /// </summary>
-    public class CetFactory
+    public static class CetFactory
     {
-		#region Static methods (3) 
+        #region Static methods (3) 
 
         /// <summary>
         /// Creates the aggregate types.
         /// </summary>
         /// <returns>Aggregate types</returns>
-        public static Cet CreateAggregateTypes()
-        {
-            return CreateCet("OpenDis.Enumerations.Cet2010.AggregateTypes.xml");
-        }
+        public static Cet CreateAggregateTypes() => CreateCet("OpenDis.Enumerations.Cet2010.AggregateTypes.xml");
 
         /// <summary>
         /// Creates the comprehensive entity-type instance.
@@ -30,17 +26,15 @@ namespace OpenDis.Enumerations.Cet2010
         /// <returns>Comprehensive entity-type instance</returns>
         private static Cet CreateCet(string resource)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Cet));
+            var serializer = new XmlSerializer(typeof(Cet));
 
-            Stream s = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource);
-            Cet et = (Cet)serializer.Deserialize(s);
-
-            return et;
+            var s = Assembly.GetExecutingAssembly().GetManifestResourceStream(resource);
+            return (Cet)serializer.Deserialize(s);
         }
 
         public static List<ICetItem> Transform(Cet c)
         {
-            List<ICetItem> items = new List<ICetItem>();
+            var items = new List<ICetItem>();
 
             IEnumerable<ICetItem> extras =
                 from e in c.Entities
@@ -54,11 +48,11 @@ namespace OpenDis.Enumerations.Cet2010
                     Country = e.Country,
                     Description = m.Description,
                     Domain = e.Domain,
-                    Extra = (m is GenericEntryRange) ? (((GenericEntryRange)m).Min != 0 ? (byte?)((GenericEntryRange)m).Min : null) : (byte)((GenericEntrySingle)m).Value,
-                    Maximum = (m is GenericEntryRange) ? (((GenericEntryRange)m).Max != 0 ? (byte?)((GenericEntryRange)m).Max : null) : null,
+                    Extra = (m is GenericEntryRange range) ? (range.Min != 0 ? (byte?)range.Min : null) : (byte)((GenericEntrySingle)m).Value,
+                    Maximum = (m is GenericEntryRange range1) ? (range1.Max != 0 ? (byte?)range1.Max : null) : null,
                     Kind = e.Kind,
-                    Specific = (l is GenericEntryRange) ? (((GenericEntryRange)l).Min != 0 ? (byte?)((GenericEntryRange)l).Min : null) : (byte)((GenericEntrySingle)l).Value,
-                    Subcategory = (k is GenericEntryRange) ? (((GenericEntryRange)k).Min != 0 ? (byte?)((GenericEntryRange)k).Min : null) : (byte)((GenericEntrySingle)k).Value
+                    Specific = (l is GenericEntryRange range2) ? (range2.Min != 0 ? (byte?)range2.Min : null) : (byte)((GenericEntrySingle)l).Value,
+                    Subcategory = (k is GenericEntryRange range3) ? (range3.Min != 0 ? (byte?)range3.Min : null) : (byte)((GenericEntrySingle)k).Value
                 };
 
             IEnumerable<ICetItem> specifices =
@@ -73,9 +67,9 @@ namespace OpenDis.Enumerations.Cet2010
                     Description = l.Description,
                     Domain = e.Domain,
                     Kind = e.Kind,
-                    Specific = (l is GenericEntryRange) ? (((GenericEntryRange)l).Min != 0 ? (byte?)((GenericEntryRange)l).Min : null) : (byte)((GenericEntrySingle)l).Value,
-                    Maximum = (l is GenericEntryRange) ? (((GenericEntryRange)l).Max != 0 ? (byte?)((GenericEntryRange)l).Max : null) : null,
-                    Subcategory = (k is GenericEntryRange) ? (((GenericEntryRange)k).Min != 0 ? (byte?)((GenericEntryRange)k).Min : null) : (byte)((GenericEntrySingle)k).Value
+                    Specific = (l is GenericEntryRange range) ? (range.Min != 0 ? (byte?)range.Min : null) : (byte)((GenericEntrySingle)l).Value,
+                    Maximum = (l is GenericEntryRange range1) ? (range1.Max != 0 ? (byte?)range1.Max : null) : null,
+                    Subcategory = (k is GenericEntryRange range2) ? (range2.Min != 0 ? (byte?)range2.Min : null) : (byte)((GenericEntrySingle)k).Value
                 };
 
             IEnumerable<ICetItem> subcategories =
@@ -89,8 +83,8 @@ namespace OpenDis.Enumerations.Cet2010
                     Description = k.Description,
                     Domain = e.Domain,
                     Kind = e.Kind,
-                    Subcategory = (k is GenericEntryRange) ? (((GenericEntryRange)k).Min != 0 ? (byte?)((GenericEntryRange)k).Min : null) : (byte)((GenericEntrySingle)k).Value,
-                    Maximum = (k is GenericEntryRange) ? (((GenericEntryRange)k).Max != 0 ? (byte?)((GenericEntryRange)k).Max : null) : null,
+                    Subcategory = (k is GenericEntryRange range) ? (range.Min != 0 ? (byte?)range.Min : null) : (byte)((GenericEntrySingle)k).Value,
+                    Maximum = (k is GenericEntryRange range1) ? (range1.Max != 0 ? (byte?)range1.Max : null) : null,
                 };
 
             IEnumerable<ICetItem> categories =
@@ -105,7 +99,7 @@ namespace OpenDis.Enumerations.Cet2010
                     Kind = e.Kind
                 };
 
-            items = items.Concat<ICetItem>(extras).Concat<ICetItem>(specifices).Concat<ICetItem>(subcategories).Concat<ICetItem>(categories).ToList<ICetItem>();
+            items = items.Concat(extras).Concat(specifices).Concat(subcategories).Concat(categories).ToList();
             items.Sort();
 
             return items;
@@ -115,11 +109,8 @@ namespace OpenDis.Enumerations.Cet2010
         /// Creates the entity types.
         /// </summary>
         /// <returns>Entity types.</returns>
-        public static Cet CreateEntityTypes()
-        {
-            return CreateCet("OpenDis.Enumerations.Cet2010.EntityTypes.xml");
-        }
+        public static Cet CreateEntityTypes() => CreateCet("OpenDis.Enumerations.Cet2010.EntityTypes.xml");
 
-		#endregion Static methods 
+        #endregion Static methods 
     }
 }

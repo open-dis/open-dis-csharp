@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Logistics
 {
     /// <summary>
-    /// Enumeration values for AuxilaryCraftRepairCode (log.repaircomplete.auxilary, Auxiliary craft, 
+    /// Enumeration values for AuxilaryCraftRepairCode (log.repaircomplete.auxilary, Auxiliary craft,
     /// section 6.2.10)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

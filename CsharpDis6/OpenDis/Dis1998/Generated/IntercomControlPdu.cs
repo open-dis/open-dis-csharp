@@ -49,7 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.8.5. Detailed inofrmation about the state of an intercom device and the actions it is requestion         of another intercom device, or the response to a requested action. Required manual intervention to fix the intercom parameters,        which can be of varialbe length. UNFINSISHED
+    /// Section 5.3.8.5. Detailed inofrmation about the state of an intercom device and the actions it is requestion
+    ///      of another intercom device, or the response to a requested action. Required manual intervention to fix the intercom parameters,        which can be of varialbe length. UNFINSISHED
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -58,71 +59,11 @@ namespace OpenDis.Dis1998
     public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu, IEquatable<IntercomControlPdu>
     {
         /// <summary>
-        /// control type
-        /// </summary>
-        private byte _controlType;
-
-        /// <summary>
-        /// control type
-        /// </summary>
-        private byte _communicationsChannelType;
-
-        /// <summary>
-        /// Source entity ID
-        /// </summary>
-        private EntityID _sourceEntityID = new EntityID();
-
-        /// <summary>
-        /// The specific intercom device being simulated within an entity.
-        /// </summary>
-        private byte _sourceCommunicationsDeviceID;
-
-        /// <summary>
-        /// Line number to which the intercom control refers
-        /// </summary>
-        private byte _sourceLineID;
-
-        /// <summary>
-        /// priority of this message relative to transmissons from other intercom devices
-        /// </summary>
-        private byte _transmitPriority;
-
-        /// <summary>
-        /// current transmit state of the line
-        /// </summary>
-        private byte _transmitLineState;
-
-        /// <summary>
-        /// detailed type requested.
-        /// </summary>
-        private byte _command;
-
-        /// <summary>
-        /// eid of the entity that has created this intercom channel.
-        /// </summary>
-        private EntityID _masterEntityID = new EntityID();
-
-        /// <summary>
-        /// specific intercom device that has created this intercom channel
-        /// </summary>
-        private ushort _masterCommunicationsDeviceID;
-
-        /// <summary>
-        /// number of intercom parameters
-        /// </summary>
-        private uint _intercomParametersLength;
-
-        /// <summary>
-        /// ^^^This is wrong--the length of the data field is variable. Using a long for now.
-        /// </summary>
-        private List<IntercomCommunicationsParameters> _intercomParameters = new List<IntercomCommunicationsParameters>();
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="IntercomControlPdu"/> class.
         /// </summary>
         public IntercomControlPdu()
         {
-            PduType = (byte)32;
+            PduType = 32;
         }
 
         /// <summary>
@@ -131,12 +72,9 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if operands are not equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if operands are not equal; otherwise, <c>false</c>.
         /// </returns>
-        public static bool operator !=(IntercomControlPdu left, IntercomControlPdu right)
-        {
-            return !(left == right);
-        }
+        public static bool operator !=(IntercomControlPdu left, IntercomControlPdu right) => !(left == right);
 
         /// <summary>
         /// Implements the operator ==.
@@ -144,42 +82,28 @@ namespace OpenDis.Dis1998
         /// <param name="left">The left operand.</param>
         /// <param name="right">The right operand.</param>
         /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
+        ///    <c>true</c> if both operands are equal; otherwise, <c>false</c>.
         /// </returns>
         public static bool operator ==(IntercomControlPdu left, IntercomControlPdu right)
-        {
-            if (object.ReferenceEquals(left, right))
-            {
-                return true;
-            }
-
-            if (((object)left == null) || ((object)right == null))
-            {
-                return false;
-            }
-
-            return left.Equals(right);
-        }
+            => ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
-
-            marshalSize = base.GetMarshalledSize();
+            int marshalSize = base.GetMarshalledSize();
             marshalSize += 1;  // this._controlType
             marshalSize += 1;  // this._communicationsChannelType
-            marshalSize += this._sourceEntityID.GetMarshalledSize();  // this._sourceEntityID
+            marshalSize += SourceEntityID.GetMarshalledSize();  // this._sourceEntityID
             marshalSize += 1;  // this._sourceCommunicationsDeviceID
             marshalSize += 1;  // this._sourceLineID
             marshalSize += 1;  // this._transmitPriority
             marshalSize += 1;  // this._transmitLineState
             marshalSize += 1;  // this._command
-            marshalSize += this._masterEntityID.GetMarshalledSize();  // this._masterEntityID
+            marshalSize += MasterEntityID.GetMarshalledSize();  // this._masterEntityID
             marshalSize += 2;  // this._masterCommunicationsDeviceID
             marshalSize += 4;  // this._intercomParametersLength
-            for (int idx = 0; idx < this._intercomParameters.Count; idx++)
+            for (int idx = 0; idx < IntercomParameters.Count; idx++)
             {
-                IntercomCommunicationsParameters listElement = (IntercomCommunicationsParameters)this._intercomParameters[idx];
+                var listElement = IntercomParameters[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -190,221 +114,89 @@ namespace OpenDis.Dis1998
         /// Gets or sets the control type
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "controlType")]
-        public byte ControlType
-        {
-            get
-            {
-                return this._controlType;
-            }
-
-            set
-            {
-                this._controlType = value;
-            }
-        }
+        public byte ControlType { get; set; }
 
         /// <summary>
         /// Gets or sets the control type
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "communicationsChannelType")]
-        public byte CommunicationsChannelType
-        {
-            get
-            {
-                return this._communicationsChannelType;
-            }
-
-            set
-            {
-                this._communicationsChannelType = value;
-            }
-        }
+        public byte CommunicationsChannelType { get; set; }
 
         /// <summary>
         /// Gets or sets the Source entity ID
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "sourceEntityID")]
-        public EntityID SourceEntityID
-        {
-            get
-            {
-                return this._sourceEntityID;
-            }
-
-            set
-            {
-                this._sourceEntityID = value;
-            }
-        }
+        public EntityID SourceEntityID { get; set; } = new EntityID();
 
         /// <summary>
-        /// Gets or sets the The specific intercom device being simulated within an entity.
+        /// Gets or sets the specific intercom device being simulated within an entity.
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "sourceCommunicationsDeviceID")]
-        public byte SourceCommunicationsDeviceID
-        {
-            get
-            {
-                return this._sourceCommunicationsDeviceID;
-            }
-
-            set
-            {
-                this._sourceCommunicationsDeviceID = value;
-            }
-        }
+        public byte SourceCommunicationsDeviceID { get; set; }
 
         /// <summary>
         /// Gets or sets the Line number to which the intercom control refers
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "sourceLineID")]
-        public byte SourceLineID
-        {
-            get
-            {
-                return this._sourceLineID;
-            }
-
-            set
-            {
-                this._sourceLineID = value;
-            }
-        }
+        public byte SourceLineID { get; set; }
 
         /// <summary>
         /// Gets or sets the priority of this message relative to transmissons from other intercom devices
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "transmitPriority")]
-        public byte TransmitPriority
-        {
-            get
-            {
-                return this._transmitPriority;
-            }
-
-            set
-            {
-                this._transmitPriority = value;
-            }
-        }
+        public byte TransmitPriority { get; set; }
 
         /// <summary>
         /// Gets or sets the current transmit state of the line
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "transmitLineState")]
-        public byte TransmitLineState
-        {
-            get
-            {
-                return this._transmitLineState;
-            }
-
-            set
-            {
-                this._transmitLineState = value;
-            }
-        }
+        public byte TransmitLineState { get; set; }
 
         /// <summary>
         /// Gets or sets the detailed type requested.
         /// </summary>
         [XmlElement(Type = typeof(byte), ElementName = "command")]
-        public byte Command
-        {
-            get
-            {
-                return this._command;
-            }
-
-            set
-            {
-                this._command = value;
-            }
-        }
+        public byte Command { get; set; }
 
         /// <summary>
         /// Gets or sets the eid of the entity that has created this intercom channel.
         /// </summary>
         [XmlElement(Type = typeof(EntityID), ElementName = "masterEntityID")]
-        public EntityID MasterEntityID
-        {
-            get
-            {
-                return this._masterEntityID;
-            }
-
-            set
-            {
-                this._masterEntityID = value;
-            }
-        }
+        public EntityID MasterEntityID { get; set; } = new EntityID();
 
         /// <summary>
         /// Gets or sets the specific intercom device that has created this intercom channel
         /// </summary>
         [XmlElement(Type = typeof(ushort), ElementName = "masterCommunicationsDeviceID")]
-        public ushort MasterCommunicationsDeviceID
-        {
-            get
-            {
-                return this._masterCommunicationsDeviceID;
-            }
-
-            set
-            {
-                this._masterCommunicationsDeviceID = value;
-            }
-        }
+        public ushort MasterCommunicationsDeviceID { get; set; }
 
         /// <summary>
         /// Gets or sets the number of intercom parameters
         /// </summary>
         /// <remarks>
-        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used for that purpose.
-        /// The getintercomParametersLength method will also be based on the actual list length rather than this value. 
+        /// Note that setting this value will not change the marshalled value. The list whose length this describes is used
+        /// for that purpose.
+        /// The getintercomParametersLength method will also be based on the actual list length rather than this value.
         /// The method is simply here for completeness and should not be used for any computations.
         /// </remarks>
         [XmlElement(Type = typeof(uint), ElementName = "intercomParametersLength")]
-        public uint IntercomParametersLength
-        {
-            get
-            {
-                return this._intercomParametersLength;
-            }
-
-            set
-            {
-                this._intercomParametersLength = value;
-            }
-        }
+        public uint IntercomParametersLength { get; set; }
 
         /// <summary>
         /// Gets the ^^^This is wrong--the length of the data field is variable. Using a long for now.
         /// </summary>
         [XmlElement(ElementName = "intercomParametersList", Type = typeof(List<IntercomCommunicationsParameters>))]
-        public List<IntercomCommunicationsParameters> IntercomParameters
-        {
-            get
-            {
-                return this._intercomParameters;
-            }
-        }
+        public List<IntercomCommunicationsParameters> IntercomParameters { get; } = new();
 
-        /// <summary>
-        /// Automatically sets the length of the marshalled data, then calls the marshal method.
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        ///<inheritdoc/>
         public override void MarshalAutoLengthSet(DataOutputStream dos)
         {
             // Set the length prior to marshalling data
-            this.Length = (ushort)this.GetMarshalledSize();
-            this.Marshal(dos);
+            Length = (ushort)GetMarshalledSize();
+            Marshal(dos);
         }
 
-        /// <summary>
-        /// Marshal the data to the DataOutputStream.  Note: Length needs to be set before calling this method
-        /// </summary>
-        /// <param name="dos">The DataOutputStream instance to which the PDU is marshaled.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Marshal(DataOutputStream dos)
         {
@@ -413,37 +205,37 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    dos.WriteUnsignedByte((byte)this._controlType);
-                    dos.WriteUnsignedByte((byte)this._communicationsChannelType);
-                    this._sourceEntityID.Marshal(dos);
-                    dos.WriteUnsignedByte((byte)this._sourceCommunicationsDeviceID);
-                    dos.WriteUnsignedByte((byte)this._sourceLineID);
-                    dos.WriteUnsignedByte((byte)this._transmitPriority);
-                    dos.WriteUnsignedByte((byte)this._transmitLineState);
-                    dos.WriteUnsignedByte((byte)this._command);
-                    this._masterEntityID.Marshal(dos);
-                    dos.WriteUnsignedShort((ushort)this._masterCommunicationsDeviceID);
-                    dos.WriteUnsignedInt((uint)this._intercomParameters.Count);
+                    dos.WriteUnsignedByte(ControlType);
+                    dos.WriteUnsignedByte(CommunicationsChannelType);
+                    SourceEntityID.Marshal(dos);
+                    dos.WriteUnsignedByte(SourceCommunicationsDeviceID);
+                    dos.WriteUnsignedByte(SourceLineID);
+                    dos.WriteUnsignedByte(TransmitPriority);
+                    dos.WriteUnsignedByte(TransmitLineState);
+                    dos.WriteUnsignedByte(Command);
+                    MasterEntityID.Marshal(dos);
+                    dos.WriteUnsignedShort(MasterCommunicationsDeviceID);
+                    dos.WriteUnsignedInt((uint)IntercomParameters.Count);
 
-                    for (int idx = 0; idx < this._intercomParameters.Count; idx++)
+                    for (int idx = 0; idx < IntercomParameters.Count; idx++)
                     {
-                        IntercomCommunicationsParameters aIntercomCommunicationsParameters = (IntercomCommunicationsParameters)this._intercomParameters[idx];
+                        var aIntercomCommunicationsParameters = IntercomParameters[idx];
                         aIntercomCommunicationsParameters.Marshal(dos);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
@@ -458,51 +250,44 @@ namespace OpenDis.Dis1998
             {
                 try
                 {
-                    this._controlType = dis.ReadUnsignedByte();
-                    this._communicationsChannelType = dis.ReadUnsignedByte();
-                    this._sourceEntityID.Unmarshal(dis);
-                    this._sourceCommunicationsDeviceID = dis.ReadUnsignedByte();
-                    this._sourceLineID = dis.ReadUnsignedByte();
-                    this._transmitPriority = dis.ReadUnsignedByte();
-                    this._transmitLineState = dis.ReadUnsignedByte();
-                    this._command = dis.ReadUnsignedByte();
-                    this._masterEntityID.Unmarshal(dis);
-                    this._masterCommunicationsDeviceID = dis.ReadUnsignedShort();
-                    this._intercomParametersLength = dis.ReadUnsignedInt();
+                    ControlType = dis.ReadUnsignedByte();
+                    CommunicationsChannelType = dis.ReadUnsignedByte();
+                    SourceEntityID.Unmarshal(dis);
+                    SourceCommunicationsDeviceID = dis.ReadUnsignedByte();
+                    SourceLineID = dis.ReadUnsignedByte();
+                    TransmitPriority = dis.ReadUnsignedByte();
+                    TransmitLineState = dis.ReadUnsignedByte();
+                    Command = dis.ReadUnsignedByte();
+                    MasterEntityID.Unmarshal(dis);
+                    MasterCommunicationsDeviceID = dis.ReadUnsignedShort();
+                    IntercomParametersLength = dis.ReadUnsignedInt();
 
-                    for (int idx = 0; idx < this.IntercomParametersLength; idx++)
+                    for (int idx = 0; idx < IntercomParametersLength; idx++)
                     {
-                        IntercomCommunicationsParameters anX = new IntercomCommunicationsParameters();
+                        var anX = new IntercomCommunicationsParameters();
                         anX.Unmarshal(dis);
-                        this._intercomParameters.Add(anX);
+                        IntercomParameters.Add(anX);
                     }
                 }
                 catch (Exception e)
                 {
-                    if (PduBase.TraceExceptions)
+                    if (TraceExceptions)
                     {
                         Trace.WriteLine(e);
                         Trace.Flush();
                     }
 
-                    this.RaiseExceptionOccured(e);
+                    RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
+                    if (ThrowExceptions)
                     {
-                        throw e;
+                        throw;
                     }
                 }
             }
         }
 
-        /// <summary>
-        /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
-        /// This will be modified in the future to provide a better display.  Usage: 
-        /// pdu.GetType().InvokeMember("Reflection", System.Reflection.BindingFlags.InvokeMethod, null, pdu, new object[] { sb });
-        /// where pdu is an object representing a single pdu and sb is a StringBuilder.
-        /// Note: The supplied Utilities folder contains a method called 'DecodePDU' in the PDUProcessor Class that provides this functionality
-        /// </summary>
-        /// <param name="sb">The StringBuilder instance to which the PDU is written to.</param>
+        /// <inheritdoc/>
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public override void Reflection(StringBuilder sb)
         {
@@ -510,25 +295,25 @@ namespace OpenDis.Dis1998
             base.Reflection(sb);
             try
             {
-                sb.AppendLine("<controlType type=\"byte\">" + this._controlType.ToString(CultureInfo.InvariantCulture) + "</controlType>");
-                sb.AppendLine("<communicationsChannelType type=\"byte\">" + this._communicationsChannelType.ToString(CultureInfo.InvariantCulture) + "</communicationsChannelType>");
+                sb.AppendLine("<controlType type=\"byte\">" + ControlType.ToString(CultureInfo.InvariantCulture) + "</controlType>");
+                sb.AppendLine("<communicationsChannelType type=\"byte\">" + CommunicationsChannelType.ToString(CultureInfo.InvariantCulture) + "</communicationsChannelType>");
                 sb.AppendLine("<sourceEntityID>");
-                this._sourceEntityID.Reflection(sb);
+                SourceEntityID.Reflection(sb);
                 sb.AppendLine("</sourceEntityID>");
-                sb.AppendLine("<sourceCommunicationsDeviceID type=\"byte\">" + this._sourceCommunicationsDeviceID.ToString(CultureInfo.InvariantCulture) + "</sourceCommunicationsDeviceID>");
-                sb.AppendLine("<sourceLineID type=\"byte\">" + this._sourceLineID.ToString(CultureInfo.InvariantCulture) + "</sourceLineID>");
-                sb.AppendLine("<transmitPriority type=\"byte\">" + this._transmitPriority.ToString(CultureInfo.InvariantCulture) + "</transmitPriority>");
-                sb.AppendLine("<transmitLineState type=\"byte\">" + this._transmitLineState.ToString(CultureInfo.InvariantCulture) + "</transmitLineState>");
-                sb.AppendLine("<command type=\"byte\">" + this._command.ToString(CultureInfo.InvariantCulture) + "</command>");
+                sb.AppendLine("<sourceCommunicationsDeviceID type=\"byte\">" + SourceCommunicationsDeviceID.ToString(CultureInfo.InvariantCulture) + "</sourceCommunicationsDeviceID>");
+                sb.AppendLine("<sourceLineID type=\"byte\">" + SourceLineID.ToString(CultureInfo.InvariantCulture) + "</sourceLineID>");
+                sb.AppendLine("<transmitPriority type=\"byte\">" + TransmitPriority.ToString(CultureInfo.InvariantCulture) + "</transmitPriority>");
+                sb.AppendLine("<transmitLineState type=\"byte\">" + TransmitLineState.ToString(CultureInfo.InvariantCulture) + "</transmitLineState>");
+                sb.AppendLine("<command type=\"byte\">" + Command.ToString(CultureInfo.InvariantCulture) + "</command>");
                 sb.AppendLine("<masterEntityID>");
-                this._masterEntityID.Reflection(sb);
+                MasterEntityID.Reflection(sb);
                 sb.AppendLine("</masterEntityID>");
-                sb.AppendLine("<masterCommunicationsDeviceID type=\"ushort\">" + this._masterCommunicationsDeviceID.ToString(CultureInfo.InvariantCulture) + "</masterCommunicationsDeviceID>");
-                sb.AppendLine("<intercomParameters type=\"uint\">" + this._intercomParameters.Count.ToString(CultureInfo.InvariantCulture) + "</intercomParameters>");
-                for (int idx = 0; idx < this._intercomParameters.Count; idx++)
+                sb.AppendLine("<masterCommunicationsDeviceID type=\"ushort\">" + MasterCommunicationsDeviceID.ToString(CultureInfo.InvariantCulture) + "</masterCommunicationsDeviceID>");
+                sb.AppendLine("<intercomParameters type=\"uint\">" + IntercomParameters.Count.ToString(CultureInfo.InvariantCulture) + "</intercomParameters>");
+                for (int idx = 0; idx < IntercomParameters.Count; idx++)
                 {
                     sb.AppendLine("<intercomParameters" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"IntercomCommunicationsParameters\">");
-                    IntercomCommunicationsParameters aIntercomCommunicationsParameters = (IntercomCommunicationsParameters)this._intercomParameters[idx];
+                    var aIntercomCommunicationsParameters = IntercomParameters[idx];
                     aIntercomCommunicationsParameters.Reflection(sb);
                     sb.AppendLine("</intercomParameters" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
@@ -537,116 +322,98 @@ namespace OpenDis.Dis1998
             }
             catch (Exception e)
             {
-                    if (PduBase.TraceExceptions)
-                    {
-                        Trace.WriteLine(e);
-                        Trace.Flush();
-                    }
+                if (TraceExceptions)
+                {
+                    Trace.WriteLine(e);
+                    Trace.Flush();
+                }
 
-                    this.RaiseExceptionOccured(e);
+                RaiseExceptionOccured(e);
 
-                    if (PduBase.ThrowExceptions)
-                    {
-                        throw e;
-                    }
+                if (ThrowExceptions)
+                {
+                    throw;
+                }
             }
         }
 
-        /// <summary>
-        /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
-        /// </summary>
-        /// <param name="obj">The <see cref="System.Object"/> to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if the specified <see cref="System.Object"/> is equal to this instance; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            return this == obj as IntercomControlPdu;
-        }
+        /// <inheritdoc/>
+        public override bool Equals(object obj) => this == obj as IntercomControlPdu;
 
-        /// <summary>
-        /// Compares for reference AND value equality.
-        /// </summary>
-        /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns>
-        /// 	<c>true</c> if both operands are equal; otherwise, <c>false</c>.
-        /// </returns>
+        ///<inheritdoc/>
         public bool Equals(IntercomControlPdu obj)
         {
-            bool ivarsEqual = true;
-
-            if (obj.GetType() != this.GetType())
+            if (obj.GetType() != GetType())
             {
                 return false;
             }
 
-            ivarsEqual = base.Equals(obj);
-
-            if (this._controlType != obj._controlType)
+            bool ivarsEqual = base.Equals(obj);
+            if (ControlType != obj.ControlType)
             {
                 ivarsEqual = false;
             }
 
-            if (this._communicationsChannelType != obj._communicationsChannelType)
+            if (CommunicationsChannelType != obj.CommunicationsChannelType)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._sourceEntityID.Equals(obj._sourceEntityID))
+            if (!SourceEntityID.Equals(obj.SourceEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._sourceCommunicationsDeviceID != obj._sourceCommunicationsDeviceID)
+            if (SourceCommunicationsDeviceID != obj.SourceCommunicationsDeviceID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._sourceLineID != obj._sourceLineID)
+            if (SourceLineID != obj.SourceLineID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._transmitPriority != obj._transmitPriority)
+            if (TransmitPriority != obj.TransmitPriority)
             {
                 ivarsEqual = false;
             }
 
-            if (this._transmitLineState != obj._transmitLineState)
+            if (TransmitLineState != obj.TransmitLineState)
             {
                 ivarsEqual = false;
             }
 
-            if (this._command != obj._command)
+            if (Command != obj.Command)
             {
                 ivarsEqual = false;
             }
 
-            if (!this._masterEntityID.Equals(obj._masterEntityID))
+            if (!MasterEntityID.Equals(obj.MasterEntityID))
             {
                 ivarsEqual = false;
             }
 
-            if (this._masterCommunicationsDeviceID != obj._masterCommunicationsDeviceID)
+            if (MasterCommunicationsDeviceID != obj.MasterCommunicationsDeviceID)
             {
                 ivarsEqual = false;
             }
 
-            if (this._intercomParametersLength != obj._intercomParametersLength)
+            if (IntercomParametersLength != obj.IntercomParametersLength)
             {
                 ivarsEqual = false;
             }
 
-            if (this._intercomParameters.Count != obj._intercomParameters.Count)
+            if (IntercomParameters.Count != obj.IntercomParameters.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._intercomParameters.Count; idx++)
+                for (int idx = 0; idx < IntercomParameters.Count; idx++)
                 {
-                    if (!this._intercomParameters[idx].Equals(obj._intercomParameters[idx]))
+                    if (!IntercomParameters[idx].Equals(obj.IntercomParameters[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -661,39 +428,32 @@ namespace OpenDis.Dis1998
         /// </summary>
         /// <param name="hash">The hash value.</param>
         /// <returns>The new hash value.</returns>
-        private static int GenerateHash(int hash)
-        {
-            hash = hash << (5 + hash);
-            return hash;
-        }
+        private static int GenerateHash(int hash) => hash << (5 + hash);
 
-        /// <summary>
-        /// Gets the hash code.
-        /// </summary>
-        /// <returns>The hash code.</returns>
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             int result = 0;
 
             result = GenerateHash(result) ^ base.GetHashCode();
 
-            result = GenerateHash(result) ^ this._controlType.GetHashCode();
-            result = GenerateHash(result) ^ this._communicationsChannelType.GetHashCode();
-            result = GenerateHash(result) ^ this._sourceEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._sourceCommunicationsDeviceID.GetHashCode();
-            result = GenerateHash(result) ^ this._sourceLineID.GetHashCode();
-            result = GenerateHash(result) ^ this._transmitPriority.GetHashCode();
-            result = GenerateHash(result) ^ this._transmitLineState.GetHashCode();
-            result = GenerateHash(result) ^ this._command.GetHashCode();
-            result = GenerateHash(result) ^ this._masterEntityID.GetHashCode();
-            result = GenerateHash(result) ^ this._masterCommunicationsDeviceID.GetHashCode();
-            result = GenerateHash(result) ^ this._intercomParametersLength.GetHashCode();
+            result = GenerateHash(result) ^ ControlType.GetHashCode();
+            result = GenerateHash(result) ^ CommunicationsChannelType.GetHashCode();
+            result = GenerateHash(result) ^ SourceEntityID.GetHashCode();
+            result = GenerateHash(result) ^ SourceCommunicationsDeviceID.GetHashCode();
+            result = GenerateHash(result) ^ SourceLineID.GetHashCode();
+            result = GenerateHash(result) ^ TransmitPriority.GetHashCode();
+            result = GenerateHash(result) ^ TransmitLineState.GetHashCode();
+            result = GenerateHash(result) ^ Command.GetHashCode();
+            result = GenerateHash(result) ^ MasterEntityID.GetHashCode();
+            result = GenerateHash(result) ^ MasterCommunicationsDeviceID.GetHashCode();
+            result = GenerateHash(result) ^ IntercomParametersLength.GetHashCode();
 
-            if (this._intercomParameters.Count > 0)
+            if (IntercomParameters.Count > 0)
             {
-                for (int idx = 0; idx < this._intercomParameters.Count; idx++)
+                for (int idx = 0; idx < IntercomParameters.Count; idx++)
                 {
-                    result = GenerateHash(result) ^ this._intercomParameters[idx].GetHashCode();
+                    result = GenerateHash(result) ^ IntercomParameters[idx].GetHashCode();
                 }
             }
 

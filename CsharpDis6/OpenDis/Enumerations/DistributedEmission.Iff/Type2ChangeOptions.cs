@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.DistributedEmission.Iff
 {
     /// <summary>
-    /// Enumeration values for Type2ChangeOptions (der.iff.type.2.changeoptions, Change/Options, 
+    /// Enumeration values for Type2ChangeOptions (der.iff.type.2.changeoptions, Change/Options,
     /// section 8.3.2.1.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

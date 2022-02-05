@@ -8,11 +8,11 @@ using OpenDis.Core;
 namespace OpenDis.Enumerations.Cet2006
 {
     [XmlInclude(typeof(Cet))]
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class GenericTable : CetBase, INotifyPropertyChanged
     {
-		#region Fields (7) 
+        #region Fields (7) 
 
         private string cnameField;
         private ulong id;
@@ -22,30 +22,27 @@ namespace OpenDis.Enumerations.Cet2006
         private string nameField;
         private string sourceField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Delegates and Events (1) 
+        #region Delegates and Events (1) 
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-		#endregion Delegates and Events 
+        #endregion Delegates and Events 
 
-		#region Properties (7) 
+        #region Properties (7) 
 
         [XmlAttribute(AttributeName = "cname")]
         public string CName
         {
-            get
-            {
-                return this.cnameField;
-            }
+            get => cnameField;
 
             set
             {
-                if (this.cnameField != value)
+                if (cnameField != value)
                 {
-                    this.cnameField = value;
-                    this.RaisePropertyChanged("CName");
+                    cnameField = value;
+                    RaisePropertyChanged(nameof(CName));
                 }
             }
         }
@@ -53,17 +50,14 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlIgnore]
         public ulong Id
         {
-            get
-            {
-                return this.id;
-            }
+            get => id;
 
             set
             {
-                if (this.id != value)
+                if (id != value)
                 {
-                    this.RawId = ((ulong)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Id");
+                    RawId = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Id));
                 }
             }
         }
@@ -71,35 +65,29 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlIgnore]
         public ulong Length
         {
-            get
-            {
-                return this.length;
-            }
+            get => length;
 
             set
             {
-                if (this.length != value)
+                if (length != value)
                 {
-                    this.RawLength = ((ulong)value).ToString(CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("Length");
+                    RawLength = value.ToString(CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(Length));
                 }
             }
         }
 
-        [XmlAttributeAttribute(AttributeName = "name")]
+        [XmlAttribute(AttributeName = "name")]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get => nameField;
 
             set
             {
-                if (this.nameField != value)
+                if (nameField != value)
                 {
-                    this.nameField = value;
-                    this.RaisePropertyChanged("Name");
+                    nameField = value;
+                    RaisePropertyChanged(nameof(Name));
                 }
             }
         }
@@ -107,71 +95,59 @@ namespace OpenDis.Enumerations.Cet2006
         [XmlAttribute(AttributeName = "id", DataType = "positiveInteger")]
         public string RawId
         {
-            get
-            {
-                return this.idField;
-            }
+            get => idField;
 
             set
             {
-                if (this.idField != value)
+                if (idField != value)
                 {
-                    this.idField = value;
-                    this.id = ulong.Parse(value, CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("RawId");
+                    idField = value;
+                    id = ulong.Parse(value, CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(RawId));
                 }
             }
         }
 
-        [XmlAttributeAttribute(AttributeName = "length", DataType = "positiveInteger")]
+        [XmlAttribute(AttributeName = "length", DataType = "positiveInteger")]
         public string RawLength
         {
-            get
-            {
-                return this.lengthField;
-            }
+            get => lengthField;
 
             set
             {
-                if (this.lengthField != value)
+                if (lengthField != value)
                 {
-                    this.lengthField = value;
-                    this.length = ulong.Parse(value, CultureInfo.InvariantCulture);
-                    this.RaisePropertyChanged("RawLength");
+                    lengthField = value;
+                    length = ulong.Parse(value, CultureInfo.InvariantCulture);
+                    RaisePropertyChanged(nameof(RawLength));
                 }
             }
         }
 
-        [XmlAttributeAttribute(AttributeName = "source")]
+        [XmlAttribute(AttributeName = "source")]
         public string Source
         {
-            get
-            {
-                return this.sourceField;
-            }
+            get => sourceField;
 
             set
             {
-                if (this.sourceField != value)
+                if (sourceField != value)
                 {
-                    this.sourceField = value;
-                    this.RaisePropertyChanged("Source");
+                    sourceField = value;
+                    RaisePropertyChanged(nameof(Source));
                 }
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (1) 
+        #region Methods (1) 
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

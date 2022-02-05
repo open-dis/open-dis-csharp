@@ -36,12 +36,6 @@
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 
 namespace OpenDis.Core
 {
@@ -50,36 +44,33 @@ namespace OpenDis.Core
     /// </summary>
     public class DataOutputStream
     {
-		#region Fields (1) 
+        #region Fields (1) 
 
-        DataStream pduDataStream;
+        #endregion Fields 
 
-		#endregion Fields 
-
-		#region Constructors (2) 
+        #region Constructors (2) 
 
         /// <summary>
-        /// Initializes a new instance of the DataOutputStream class from an 
+        /// Initializes a new instance of the DataOutputStream class from an
         /// existing DataStream and sets Endian type to use.
         /// </summary>
         /// <param name="ds">The data stream.</param>
         /// <param name="endian">The endian to be used.</param>
         public DataOutputStream(DataStream ds, Endian endian)
         {
-            this.pduDataStream = ds;
-            this.Endian = endian;
+            DS = ds;
+            Endian = endian;
         }
 
         /// <summary>
         /// Initializes a new instance of the DataOutputStream class and
         /// with Endian set to Little.
         /// </summary>
-        /// <param name="endian">The endian to be used.</param>
         public DataOutputStream()
             : this(Endian.Little)
         {
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the DataOutputStream class and
         /// sets the Endian to use.
@@ -87,71 +78,50 @@ namespace OpenDis.Core
         /// <param name="endian">The endian to be used.</param>
         public DataOutputStream(Endian endian)
         {
-            this.pduDataStream = new DataStream();
-            this.Endian = endian;
+            DS = new DataStream();
+            Endian = endian;
         }
 
-		#endregion Constructors 
+        #endregion Constructors 
 
-		#region Properties (2) 
+        #region Properties (2) 
 
         /// <summary>
         /// Gets the underlining DataStream
         /// </summary>
-        public DataStream DS
-        {
-            get
-            {
-                return this.pduDataStream;
-            }
-        }
+        public DataStream DS { get; }
 
         /// <summary>
         /// Gets or sets the Endian type
         /// </summary>
         public Endian Endian
         {
-            get
-            {
-                return this.DS.Endian;
-            }
+            get => DS.Endian;
 
-            set
-            {
-                this.DS.Endian = value;
-            }
+            set => DS.Endian = value;
         }
 
-		#endregion Properties 
+        #endregion Properties 
 
-		#region Methods (15) 
+        #region Methods (15) 
 
         /// <summary>
         /// Converts the DataStream to a byte array
         /// </summary>
         /// <returns>byte array</returns>
-        public byte[] ConvertToBytes()
-        {
-            return this.DS.ConvertToBytes();
-        }
+        public byte[] ConvertToBytes() => DS.ConvertToBytes();
 
         /// <summary>
         /// Write a byte value to the DataStream
         /// </summary>
         /// <param name="data">byte</param>
-        public void WriteByte(byte data)
-        {
-            this.WriteData(data);
-        }
+        public void WriteByte(byte data) => WriteData(data);
 
         /// <summary>
         /// Write a byte array value to the DataStream
         /// </summary>
         /// <param name="data">byte</param>
-        public void WriteByte(byte[] data)
-        {
-            this.WriteData(data);
-        }
+        public void WriteByte(byte[] data) => WriteData(data);
 
         /// <summary>
         /// Write a double value to the DataStream
@@ -159,14 +129,14 @@ namespace OpenDis.Core
         /// <param name="data">double</param>
         public void WriteDouble(double data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
@@ -175,14 +145,14 @@ namespace OpenDis.Core
         /// <param name="data">float</param>
         public void WriteFloat(float data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
@@ -191,14 +161,14 @@ namespace OpenDis.Core
         /// <param name="data">int32</param>
         public void WriteInt(int data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
@@ -207,14 +177,14 @@ namespace OpenDis.Core
         /// <param name="data">long</param>
         public void WriteLong(long data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
@@ -223,33 +193,27 @@ namespace OpenDis.Core
         /// <param name="data">short value</param>
         public void WriteShort(short data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
         /// Write a byte value to the DataStream
         /// </summary>
         /// <param name="data">byte</param>
-        public void WriteUnsignedByte(byte data)
-        {
-            this.WriteData(data);
-        }
+        public void WriteUnsignedByte(byte data) => WriteData(data);
 
         /// <summary>
         /// Write a byte array value to the DataStream
         /// </summary>
         /// <param name="data">byte</param>
-        public void WriteUnsignedByte(byte[] data)
-        {
-            this.WriteData(data);
-        }
+        public void WriteUnsignedByte(byte[] data) => WriteData(data);
 
         /// <summary>
         /// Write a unsigned int value to the DataStream
@@ -257,14 +221,14 @@ namespace OpenDis.Core
         /// <param name="data">unsigned int</param>
         public void WriteUnsignedInt(uint data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
@@ -273,14 +237,14 @@ namespace OpenDis.Core
         /// <param name="data">long</param>
         public void WriteUnsignedLong(ulong data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
@@ -289,14 +253,14 @@ namespace OpenDis.Core
         /// <param name="data">unsigned short</param>
         public void WriteUnsignedShort(ushort data)
         {
-            byte[] serializedData = System.BitConverter.GetBytes(data);
+            byte[] serializedData = BitConverter.GetBytes(data);
 
-            if (this.Endian == Endian.Big)
+            if (Endian == Endian.Big)
             {
                 Array.Reverse(serializedData);
             }
 
-            this.WriteData(serializedData);
+            WriteData(serializedData);
         }
 
         /// <summary>
@@ -305,8 +269,8 @@ namespace OpenDis.Core
         /// <param name="data">byte</param>
         private void WriteData(byte data)
         {
-            this.pduDataStream.Append(data);
-            this.pduDataStream.StreamCounter += 1;
+            DS.Append(data);
+            DS.StreamCounter += 1;
         }
 
         /// <summary>
@@ -315,10 +279,10 @@ namespace OpenDis.Core
         /// <param name="data">byte array</param>
         private void WriteData(byte[] data)
         {
-            this.pduDataStream.Append(data);
-            this.pduDataStream.StreamCounter += data.Length;
+            DS.Append(data);
+            DS.StreamCounter += data.Length;
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

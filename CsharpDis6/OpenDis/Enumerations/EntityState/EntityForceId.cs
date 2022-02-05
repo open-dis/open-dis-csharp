@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState
 {
     /// <summary>
-    /// Enumeration values for EntityForceId (es.forceid, Force ID, 
+    /// Enumeration values for EntityForceId (es.forceid, Force ID,
     /// section 4.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

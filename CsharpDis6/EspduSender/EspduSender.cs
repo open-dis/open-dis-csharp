@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.IO;
-using System.Threading;
-using OpenDis.Dis1998;
 using OpenDis.Core;
-using OpenDis.Enumerations;
+using OpenDis.Dis1998;
 
 namespace EspduSender
 {
-    class EspduSender
+    internal static class EspduSender
     {
         private static IPAddress mcastAddress;
         private static int mcastPort, broadcastPort;
@@ -37,9 +31,9 @@ namespace EspduSender
                 //Console.Write("Enter the local IP address: ");  //In case multiple NICs
 
                 //IPAddress localIPAddr = IPAddress.Parse(Console.ReadLine());
-                IPAddress localIPAddr = IPAddress.Any;
+                var localIPAddr = IPAddress.Any;
 
-                IPEndPoint localEP = new IPEndPoint(localIPAddr, 0);  //Don't need to fully join, so can use on same computer as port already in use by receive.
+                var localEP = new IPEndPoint(localIPAddr, 0);  //Don't need to fully join, so can use on same computer as port already in use by receive.
 
                 mcastSocket.Bind(localEP);
 
@@ -57,7 +51,6 @@ namespace EspduSender
                 // Display MulticastOption properties.
                 MulticastOptionProperties();
             }
-
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
@@ -75,10 +68,10 @@ namespace EspduSender
                 //Console.Write("Enter the local IP address: ");
 
                 //IPAddress localIPAddr = IPAddress.Parse(Console.ReadLine());
-                IPAddress localIPAddr = IPAddress.Parse("172.19.36.86");
+                var localIPAddr = IPAddress.Parse("172.19.36.86");
 
                 //IPAddress localIP = IPAddress.Any;
-                EndPoint localEP = (EndPoint)new IPEndPoint(localIPAddr, mcastPort);
+                var localEP = (EndPoint)new IPEndPoint(localIPAddr, mcastPort);
 
                 mcastSocket.Bind(localEP);
 
@@ -96,7 +89,6 @@ namespace EspduSender
                 // Display MulticastOption properties.
                 MulticastOptionProperties();
             }
-
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
@@ -109,18 +101,17 @@ namespace EspduSender
             {
                 mcastSocket = new Socket(AddressFamily.InterNetwork,
                                          SocketType.Dgram,
-                                         ProtocolType.Udp);                
+                                         ProtocolType.Udp);
 
                 // Define a BroadcastOption object 
                 mcastSocket.SetSocketOption(SocketOptionLevel.Socket,
                                             SocketOptionName.Broadcast,
                                             1);
-                IPAddress localIPAddr = IPAddress.Parse("172.19.36.255");
+                var localIPAddr = IPAddress.Parse("172.19.36.255");
 
                 endPoint = new IPEndPoint(IPAddress.Broadcast, broadcastPort);
                 //endPoint = new IPEndPoint(localIPAddr, broadcastPort);
             }
-
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
@@ -128,7 +119,7 @@ namespace EspduSender
         }
 
         private static void SendMessages(byte[] buf)
-        {   
+        {
             try
             {
                 //Send multicast packets to the listener.                
@@ -142,16 +133,15 @@ namespace EspduSender
             }
         }
 
-
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             mcastAddress = IPAddress.Parse("239.1.2.3");
             mcastPort = 62040;
             broadcastPort = 62040;  //3000 for DisMapper default
-            OpenDis.Dis1998.EntityStatePdu espdu = new OpenDis.Dis1998.EntityStatePdu();  //Could use factory but easier this way
-            
+            var espdu = new EntityStatePdu();  //Could use factory but easier this way
+
             //Alcatraz
-            double lat = 37.827;
+            const double lat = 37.827;
             double lon = -122.425;
 
             // Configure socket.
@@ -161,7 +151,7 @@ namespace EspduSender
 
             //Setup EntityState PDU 
             espdu.ExerciseID = 1;
-            EntityID eid = espdu.EntityID;
+            var eid = espdu.EntityID;
             eid.Site = 0;
             eid.Application = 1;
             eid.Entity = 2;
@@ -171,7 +161,7 @@ namespace EspduSender
             // separate project elsehwhere in this project that implements DIS 
             // enumerations in C++ and Java, but to keep things simple we just use
             // numbers here.
-            EntityType entityType = espdu.EntityType;
+            var entityType = espdu.EntityType;
             entityType.EntityKind = 1;      // Platform (vs lifeform, munition, sensor, etc.)
             entityType.Country = 255;              // USA
             entityType.Domain = 1;          // Land (vs air, surface, subsurface, space)
@@ -180,24 +170,24 @@ namespace EspduSender
             entityType.Specific = 3;            // M1A2 Abrams
 
             for (int i = 0; i < 100; i++)
-            {  
-                lon = lon + (i / 1000.0);
+            {
+                lon += (i / 1000.0);
 
                 double[] disCoordinates = CoordinateConversions.getXYZfromLatLonDegrees(lat, lon, 0.0);
 
-                Vector3Double location = espdu.EntityLocation;
+                var location = espdu.EntityLocation;
                 location.X = disCoordinates[0];
                 location.Y = disCoordinates[1];
                 location.Z = disCoordinates[2];
                 espdu.Timestamp = DisTime.DisRelativeTimestamp;
 
                 //Prepare output
-                DataOutputStream dos = new DataOutputStream(Endian.Big);
+                var dos = new DataOutputStream(Endian.Big);
                 espdu.MarshalAutoLengthSet(dos);
 
                 // Transmit broadcast messages
                 SendMessages(dos.ConvertToBytes());
-                Console.Write("Message sent with TimeStamp [{0}] Time Of[{1}]", espdu.Timestamp, (espdu.Timestamp >> 1));
+                Console.Write("Message sent with TimeStamp [{0}] Time Of[{1}]", espdu.Timestamp, espdu.Timestamp >> 1);
 
                 //Thread.Sleep(1000);
                 Console.Write("Hit Enter for Next PDU.  Ctrl-C to Exit");

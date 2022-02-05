@@ -9,12 +9,12 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Radio.Transmitter
 {
     /// <summary>
-    /// Enumeration values for JtidsTransmittingTerminalSecondaryMode (radio.tx.param.jtids.mode2, Transmitting Terminal Secondary Mode, 
+    /// Enumeration values for JtidsTransmittingTerminalSecondaryMode (radio.tx.param.jtids.mode2, Transmitting Terminal
+    /// Secondary Mode,
     /// section 9.1.7.2.2)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

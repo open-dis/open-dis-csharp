@@ -9,12 +9,12 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Marking
 {
     /// <summary>
-    /// Enumeration values for ArmyMarkingHighLevelUnitFor1stInfantry (es.markingtext.cctt.1infunit, Byte 3 - High Level Unit (Byte 2 = 2 - 1st Infantry), 
+    /// Enumeration values for ArmyMarkingHighLevelUnitFor1stInfantry (es.markingtext.cctt.1infunit, Byte 3 - High Level
+    /// Unit (Byte 2 = 2 - 1st Infantry),
     /// section 4.5.1)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31
@@ -27,7 +27,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
     public enum ArmyMarkingHighLevelUnitFor1stInfantry : byte
     {
         /// <summary>
-        /// 1-16INF.  unit: 1-16 Infantry.
+        /// 1-16INF. unit: 1-16 Infantry.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -37,7 +37,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _116INFUnit116Infantry = 1,
 
         /// <summary>
-        /// 2-16INF.  unit: 2-16 Infantry.
+        /// 2-16INF. unit: 2-16 Infantry.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -47,7 +47,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _216INFUnit216Infantry = 2,
 
         /// <summary>
-        /// 1-34AR.  unit: 1-34 Armor.
+        /// 1-34AR. unit: 1-34 Armor.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -57,7 +57,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _134ARUnit134Armor = 3,
 
         /// <summary>
-        /// 2-34AR.  unit: 2-34 Armor.
+        /// 2-34AR. unit: 2-34 Armor.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -67,7 +67,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _234ARUnit234Armor = 4,
 
         /// <summary>
-        /// 3-37AR.  unit: 3-37 Armor.
+        /// 3-37AR. unit: 3-37 Armor.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -77,7 +77,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _337ARUnit337Armor = 5,
 
         /// <summary>
-        /// 4-37AR.  unit: 4-37 Armor.
+        /// 4-37AR. unit: 4-37 Armor.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -87,7 +87,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _437ARUnit437Armor = 6,
 
         /// <summary>
-        /// 1-118INF.  unit: 1-118 Infantry.
+        /// 1-118INF. unit: 1-118 Infantry.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -97,7 +97,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _1118INFUnit1118Infantry = 7,
 
         /// <summary>
-        /// 4-118INF.  unit: 4-118 Infantry.
+        /// 4-118INF. unit: 4-118 Infantry.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -107,7 +107,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _4118INFUnit4118Infantry = 8,
 
         /// <summary>
-        /// 2-265AR.  unit: 2-263 Armor.
+        /// 2-265AR. unit: 2-263 Armor.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -117,7 +117,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _2265ARUnit2263Armor = 9,
 
         /// <summary>
-        /// 2-136IF.  unit: 2-136 Infantry.
+        /// 2-136IF. unit: 2-136 Infantry.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -127,7 +127,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _2136IFUnit2136Infantry = 10,
 
         /// <summary>
-        /// 1-5F.  unit: 1-5 Field Art.
+        /// 1-5F. unit: 1-5 Field Art.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -137,7 +137,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _15FUnit15FieldArt = 20,
 
         /// <summary>
-        /// 4-5F.  unit: 4-5 Field Art.
+        /// 4-5F. unit: 4-5 Field Art.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -147,7 +147,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _45FUnit45FieldArt = 21,
 
         /// <summary>
-        /// 1-178F.  unit: 1-178 Field Art.
+        /// 1-178F. unit: 1-178 Field Art.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -157,7 +157,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _1178FUnit1178FieldArt = 22,
 
         /// <summary>
-        /// 6F.  unit: B/6 Field Art.
+        /// 6F. unit: B/6 Field Art.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -167,7 +167,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _6FUnitB6FieldArt = 23,
 
         /// <summary>
-        /// 25F.  unit: D/25 Field Art.
+        /// 25F. unit: D/25 Field Art.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -177,7 +177,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _25FUnitD25FieldArt = 24,
 
         /// <summary>
-        /// 1E.  unit: 1 Engineer.
+        /// 1E. unit: 1 Engineer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -187,7 +187,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _1EUnit1Engineer = 30,
 
         /// <summary>
-        /// 70E.  unit: 70 Engineer.
+        /// 70E. unit: 70 Engineer.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -197,7 +197,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _70EUnit70Engineer = 31,
 
         /// <summary>
-        /// 4-1AVN.  unit: 4-1 Aviation.
+        /// 4-1AVN. unit: 4-1 Aviation.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -207,7 +207,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _41AVNUnit41Aviation = 32,
 
         /// <summary>
-        /// 1-1AVN.  unit: 1-1 Aviation.
+        /// 1-1AVN. unit: 1-1 Aviation.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -217,7 +217,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _11AVNUnit11Aviation = 33,
 
         /// <summary>
-        /// 2-3ADA.  unit: 2-3 Air Def Art.
+        /// 2-3ADA. unit: 2-3 Air Def Art.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -227,7 +227,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _23ADAUnit23AirDefArt = 34,
 
         /// <summary>
-        /// 1-4CAV.  unit: 1-4 Cavalry.
+        /// 1-4CAV. unit: 1-4 Cavalry.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -237,7 +237,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _14CAVUnit14Cavalry = 35,
 
         /// <summary>
-        /// 701MSB.  unit: 701 Main Supp.
+        /// 701MSB. unit: 701 Main Supp.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -247,7 +247,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _701MSBUnit701MainSupp = 40,
 
         /// <summary>
-        /// 101FSB.  unit: 101 Forward Supp.
+        /// 101FSB. unit: 101 Forward Supp.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -257,7 +257,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _101FSBUnit101ForwardSupp = 41,
 
         /// <summary>
-        /// 201FSB.  unit: 201 Forward Supp.
+        /// 201FSB. unit: 201 Forward Supp.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -267,7 +267,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _201FSBUnit201ForwardSupp = 42,
 
         /// <summary>
-        /// 163FSB.  unit: 163 Forward Supp.
+        /// 163FSB. unit: 163 Forward Supp.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -277,7 +277,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _163FSBUnit163ForwardSupp = 43,
 
         /// <summary>
-        /// 101MI.  unit: 101 Mil Intell.
+        /// 101MI. unit: 101 Mil Intell.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -287,7 +287,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _101MIUnit101MilIntell = 45,
 
         /// <summary>
-        /// 121S.  unit: 121 Signal.
+        /// 121S. unit: 121 Signal.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -297,7 +297,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _121SUnit121Signal = 46,
 
         /// <summary>
-        /// 1MP.  unit: 1st Mil Police.
+        /// 1MP. unit: 1st Mil Police.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -307,7 +307,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _1MPUnit1stMilPolice = 47,
 
         /// <summary>
-        /// 12CML.  unit: 12 Chemical.
+        /// 12CML. unit: 12 Chemical.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -317,7 +317,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         _12CMLUnit12Chemical = 48,
 
         /// <summary>
-        /// 1INF.  unit: HHC 1st Infantry.
+        /// 1INF. unit: HHC 1st Infantry.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -367,7 +367,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         HHC_4_BDE = 54,
 
         /// <summary>
-        /// AVNBDE.  unit: HHC AVN BDE.
+        /// AVNBDE. unit: HHC AVN BDE.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -377,7 +377,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         AVNBDEUnitHHCAVNBDE = 55,
 
         /// <summary>
-        /// E.  unit: HHD EN BDE.
+        /// E. unit: HHD EN BDE.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -387,7 +387,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         EUnitHHDENBDE = 56,
 
         /// <summary>
-        /// F.  unit: HHB DIVARTY.
+        /// F. unit: HHB DIVARTY.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]
@@ -397,7 +397,7 @@ namespace OpenDis.Enumerations.EntityState.Marking
         FUnitHHBDIVARTY = 57,
 
         /// <summary>
-        /// DSC.  unit: DISCOM.
+        /// DSC. unit: DISCOM.
         /// </summary>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", Justification = "Due to SISO standardized naming.")]
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", Justification = "Due to SISO standardized naming.")]

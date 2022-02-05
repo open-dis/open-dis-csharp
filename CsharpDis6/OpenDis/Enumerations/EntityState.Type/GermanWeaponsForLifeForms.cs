@@ -9,12 +9,11 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.EntityState.Type
 {
     /// <summary>
-    /// Enumeration values for GermanWeaponsForLifeForms (es.type.78.kind.3.subcat, German Weapons for Life Forms Subcategory, 
+    /// Enumeration values for GermanWeaponsForLifeForms (es.type.78.kind.3.subcat, German Weapons for Life Forms Subcategory,
     /// section 4.2.3.3.5)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

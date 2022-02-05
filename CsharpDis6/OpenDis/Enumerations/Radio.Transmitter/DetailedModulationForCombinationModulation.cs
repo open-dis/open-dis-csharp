@@ -9,12 +9,12 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 
 namespace OpenDis.Enumerations.Radio.Transmitter
 {
     /// <summary>
-    /// Enumeration values for DetailedModulationForCombinationModulation (radio.tx.mod.major.4.detail, Detailed modulation for combination modulation, 
+    /// Enumeration values for DetailedModulationForCombinationModulation (radio.tx.mod.major.4.detail, Detailed modulation
+    /// for combination modulation,
     /// section 9.1.1.3.4)
     /// The enumeration values are generated from the SISO DIS XML EBV document (R35), which was
     /// obtained from http://discussions.sisostds.org/default.asp?action=10&amp;fd=31

@@ -35,20 +35,16 @@
 // Author Peter Smith (Naval Air Warfare Center - Training Systems Division) 01/23/2009
 // Modified by Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OpenDis.Core
 {
     public static class Conversion
     {
-		#region Fields (2) 
+        #region Fields (2) 
 
-         /// <summary>
-         /// The mask that will leave only the type metric from an 
-         /// integer representing the Articulation Parameter's parameter type.
-         /// This mask is based on the IEEE Std 1278.1-1995
+        /// <summary>
+        /// The mask that will leave only the type metric from an
+        /// integer representing the Articulation Parameter's parameter type.
+        /// This mask is based on the IEEE Std 1278.1-1995
         /// </summary>
         public const int ARTICULATION_PARAMETER_TYPE_METRIC_MASK = 0x001F;
 
@@ -59,36 +55,33 @@ namespace OpenDis.Core
         /// </summary>
         public const byte ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS = 5;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Methods (3) 
+        #region Methods (3) 
 
         /// <summary>
         /// Extracts the data for the type class value stored within the parameter type value.
         /// This an inverse to the function <see cref="MakeArticulationParameterType"/>.
         /// </summary>
         /// <param name="parametertype">The value storing the type metric and type class values.</param>
-        /// <returns>The type class value, with ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS bits precision.</returns> 
-        public static int GetArticulationTypeClass(int parametertype)
-        {
+        /// <returns>The type class value, with ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS bits precision.</returns>
+        public static int GetArticulationTypeClass(int parametertype) =>
             // wipe off the typemetric bits and return the typeclass bits
-            return parametertype >> ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS;
-        }
+            parametertype >> ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS;
 
         /// <summary>
         /// Extracts the data for the type metric value stored within the parameter type value.
         /// This an inverse to the function <see cref="MakeArticulationParameterType"/>.
         /// </summary>
-        /// <param name="parametertype">The value storing the type metric and type class values.</param> 
+        /// <param name="parametertype">The value storing the type metric and type class values.</param>
         /// <returns>The type metric value, with ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS bits precision.</returns>
-        public static int GetArticulationTypeMetric(int parametertype)
-        {
+        public static int GetArticulationTypeMetric(int parametertype) =>
             // wipe off the typeclass bits and return the typemetric bits
-            return parametertype & ARTICULATION_PARAMETER_TYPE_METRIC_MASK;
-        }
+            parametertype & ARTICULATION_PARAMETER_TYPE_METRIC_MASK;
 
         /// <summary>
         /// Make the value needed for the ArticulationParameter's Parameter Type.
+        /// </summary>
         /// <param name="typeclass">The enumeration for the articulated part.
         /// This must have less precision than ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS.</param>
         /// <param name="typemetric">The enumeration for the motion description.
@@ -97,14 +90,14 @@ namespace OpenDis.Core
         public static uint MakeArticulationParameterType(uint typeclass, uint typemetric)
         {
             // enforce a ceiling on typemetric
-            typemetric = typemetric & ARTICULATION_PARAMETER_TYPE_METRIC_MASK;
+            typemetric &= ARTICULATION_PARAMETER_TYPE_METRIC_MASK;
 
             // shift the typeclass bits to the left by the precision amount of typemetric
             // and then add the typemetric bits
-            return ((typeclass << ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS)
-                   + typemetric);
+            return (typeclass << ARTICULATION_PARAMETER_TYPE_METRIC_NUMBER_OF_BITS)
+                   + typemetric;
         }
 
-		#endregion Methods 
+        #endregion Methods 
     }
 }

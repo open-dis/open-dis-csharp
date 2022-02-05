@@ -1,5 +1,4 @@
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
 
@@ -12,17 +11,17 @@ namespace OpenDis.Enumerations.Cet2010
     [XmlInclude(typeof(Specific))]
     [XmlInclude(typeof(Subcategory))]
     [XmlInclude(typeof(Category))]
-    [Serializable()]
-    [DebuggerStepThrough()]
+    [Serializable]
+    [DebuggerStepThrough]
     public class GenericEntrySingle : GenericEntryDescription
     {
-		#region Fields (1) 
+        #region Fields (1) 
 
         private int valueField;
 
-		#endregion Fields 
+        #endregion Fields 
 
-		#region Properties (1) 
+        #region Properties (1) 
 
         /// <summary>
         /// Gets or sets the enumerated value.
@@ -30,23 +29,20 @@ namespace OpenDis.Enumerations.Cet2010
         [XmlAttribute(AttributeName = "value")]
         public int Value
         {
-            get
-            {
-                return this.valueField;
-            }
+            get => valueField;
 
             set
             {
-                if (this.valueField == value)
+                if (valueField == value)
                 {
                     return;
                 }
 
-                this.valueField = value;
-                this.RaisePropertyChanged("Value");
+                valueField = value;
+                RaisePropertyChanged(nameof(Value));
             }
         }
 
-		#endregion Properties 
+        #endregion Properties 
     }
 }
