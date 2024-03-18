@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using OpenDis.Core;
@@ -169,6 +169,11 @@ namespace EspduSender
             entityType.Subcategory = 1;     // M1 Abrams
             entityType.Specific = 3;            // M1A2 Abrams
 
+            // Orientation (degrees)
+            double heading = 0.0;
+            double pitch   = 45.0;
+            double roll    = 0.0;
+
             for (int i = 0; i < 100; i++)
             {
                 lon += (i / 1000.0);
@@ -179,6 +184,13 @@ namespace EspduSender
                 location.X = disCoordinates[0];
                 location.Y = disCoordinates[1];
                 location.Z = disCoordinates[2];
+
+                double[] R = CoordinateConversions.headingPitchRollToEuler(heading, pitch, roll, lat, lon);
+                var orientation = espdu.EntityOrientation;
+                orientation.Psi     = (float)R[0];
+                orientation.Theta   = (float)R[1];
+                orientation.Phi     = (float)R[2];
+
                 espdu.Timestamp = DisTime.DisRelativeTimestamp;
 
                 //Prepare output
@@ -187,10 +199,10 @@ namespace EspduSender
 
                 // Transmit broadcast messages
                 SendMessages(dos.ConvertToBytes());
-                Console.Write("Message sent with TimeStamp [{0}] Time Of[{1}]", espdu.Timestamp, espdu.Timestamp >> 1);
+                Console.WriteLine("Message sent with TimeStamp [{0}] Time Of[{1}]", espdu.Timestamp, espdu.Timestamp >> 1);
 
                 //Thread.Sleep(1000);
-                Console.Write("Hit Enter for Next PDU.  Ctrl-C to Exit");
+                Console.WriteLine("Hit Enter for Next PDU.  Ctrl-C to Exit");
                 Console.ReadLine();
             }
 
