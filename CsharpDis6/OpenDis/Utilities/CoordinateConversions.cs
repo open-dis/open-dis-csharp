@@ -1,4 +1,6 @@
-﻿using System;
+using OpenDis.Dis1995;
+using System;
+using System.Diagnostics.SymbolStore;
 
 namespace OpenDis.Core
 {
@@ -114,5 +116,108 @@ namespace OpenDis.Core
         /// <param name="height"> The elevation, in meters </param>
         /// <returns> a double array with the calculated X, Y, and Z values, in that order </returns>
         public static double[] getXYZfromLatLonDegrees(double latitude, double longitude, double height) => getXYZfromLatLonRadians(latitude * DEGREES_TO_RADIANS, longitude * DEGREES_TO_RADIANS, height);
+
+        /// <summary>
+        /// Rotates 3D vector s about axis n, t amount in RADIANS
+        /// <param name="s"> vector to be rotated </param>
+        /// <param name="n"> vector to be rotated around</param>
+        /// <param name="t"> angle of rotation in DEGREES </param>
+        /// <returns> a double[3] array with the rotated vector </returns>
+        public static double[] rotateAboutAxis(double[] s, double[] n, double t)
+        {
+            double st = Math.Sin(t);
+            double ct = Math.Cos(t);
+
+            double d0 = (1.0-ct) * (n[0] * n[0] * s[0] + n[0] * n[1] * s[1] +
+                                    n[0] * n[2] * s[2]) +
+                        ct * s[0] + st * (n[1] * s[2] - n[2] * s[1]);
+            double d1 = (1.0 - ct) * (n[0] * n[1] * s[0] + n[1] * n[1] * s[1] +
+                                      n[1] * n[2] * s[2]) +
+                        ct * s[1] + st * (n[2] * s[0] - n[0] * s[2]);
+            double d2 = (1.0 - ct) * (n[0] * n[2] * s[0] + n[1] * n[2] * s[1] +
+                                      n[2] * n[2] * s[2]) +
+                        ct * s[2] + st * (n[0] * s[1] - n[1] * s[0]);
+
+            return new double[] { d0, d1, d2 };
+        }
+
+        static double[] cross(double[] a, double[] b)
+        {
+            double d0 = a[1] * b[2] - b[1] * a[2];
+            double d1 = b[0] * a[2] - a[0] * b[2];
+            double d2 = a[0] * b[1] - b[0] * a[1];
+
+            return new double[] { d0, d1, d2 };
+        }
+
+        static double dot(double[] a, double[] b)
+        {
+            double x = (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]);
+            return x;
+        }
+
+        /// <summary>
+        /// Converts Heading, Pitch and Roll to Euler for DIS.
+        /// <param name="heading"> heading in DEGREES </param>
+        /// <param name="pitch"> pitch in DEGREES </param>
+        /// <param name="roll"> roll in DEGREES </param>
+        /// <param name="latitude"> latitude in DEGREES </param>
+        /// <param name="longitude"> longitude in DEGREES </param> 
+        /// <returns> a double[3] array with Psi, Theta, Phi </returns>
+        public static double[] headingPitchRollToEuler(double heading, double pitch, double roll, double latitude, double longitude)
+        {
+            //////////     DEG2RAD    ///////////
+            double H    = heading * DEGREES_TO_RADIANS;
+            double P    = pitch * DEGREES_TO_RADIANS;
+            double R    = roll * DEGREES_TO_RADIANS;
+            double lat  = latitude * DEGREES_TO_RADIANS;
+            double lon  = longitude * DEGREES_TO_RADIANS;
+
+            //////////    LOCAL NED    //////////
+            double[] E0 = { 0.0, 1.0, 0.0 };
+            double[] N0 = { 0.0, 0.0, 1.0 };
+            double[] me = new double[3];
+
+            // 'E'
+            double[] Eprime = rotateAboutAxis(E0, N0, lon);
+            me[0] = -Eprime[0];
+            me[1] = -Eprime[1];
+            me[2] = -Eprime[2];
+
+            // 'N'
+            double[] Nprime = rotateAboutAxis(N0, me, lat);
+
+            // 'D'
+            double[] Dprime = cross(Nprime, Eprime);
+
+            /////////   ORIENTATION    /////////
+            // rotate about D by heading
+            double[] N1 = rotateAboutAxis(Nprime, Dprime, H);
+            double[] E1 = rotateAboutAxis(Eprime, Dprime, H);
+            double[] D1 = (double[])Dprime.Clone();
+
+            // rotate about E1 vector by pitch
+            double[] N2 = rotateAboutAxis(N1, E1, P);
+            double[] E2 = (double[])E1.Clone();
+            double[] D2 = rotateAboutAxis(D1, E1, P);
+
+            // rorate about N2 by roll
+            double[] N3 = (double[])N2.Clone();
+            double[] E3 = rotateAboutAxis(E2, N2, R);
+            double[] D3 = rotateAboutAxis(D2, N2, R);
+
+            // calculate angles from vectors
+            double[] x0 = { 1.0, 0.0, 0.0 };
+            double[] y0 = { 0.0, 1.0, 0.0 };
+            double[] z0 = { 0.0, 0.0, 1.0 };
+
+            double Psi = Math.Atan2(dot(N3, y0), dot(N3, x0));
+            double Theta = Math.Atan2((-1 * dot(N3, z0)), Math.Sqrt(Math.Pow(dot(N3, x0), 2) + Math.Pow(dot(N3, y0), 2)));
+            double[] y2 = rotateAboutAxis(y0, z0, Psi);
+            double[] z2 = rotateAboutAxis(z0, y2, Theta);
+            double Phi = Math.Atan2(dot(E3, z2), dot(E3, y2));
+
+            return new double[] { Psi, Theta, Phi };
+        }
     }
 }
