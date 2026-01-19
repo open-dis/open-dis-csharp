@@ -83,25 +83,7 @@ namespace DISnet
         /// </summary>
         private ushort _paddingForEmissionsPdu;
 
-        /// <summary>
-        ///  this field shall specify the length of this emitter system's data in 32-bit words.
-        /// </summary>
-        private byte _systemDataLength;
 
-        /// <summary>
-        /// the number of beams being described in the current PDU for the emitter system being described. 
-        /// </summary>
-        private byte _numberOfBeams;
-
-        /// <summary>
-        ///  information about a particular emitter system and shall be represented by an Emitter System record (see 6.2.23).
-        /// </summary>
-        private EmitterSystem _emitterSystem = new EmitterSystem();
-
-        /// <summary>
-        /// the location of the antenna beam source with respect to the emitting entity's coordinate system. This location shall be the origin of the emitter coordinate system that shall have the same orientation as the entity coordinate system. This field shall be represented by an Entity Coordinate Vector record see 6.2.95 
-        /// </summary>
-        private Vector3Float _location = new Vector3Float();
 
         /// <summary>
         /// Electronic emmissions systems THIS IS WRONG. It has the WRONG class type and will cause problems in any marshalling.
