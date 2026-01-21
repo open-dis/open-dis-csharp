@@ -49,8 +49,8 @@ using OpenDis.Core;
 namespace OpenDis.Dis1998
 {
     /// <summary>
-    /// Section 5.3.9.1 informationa bout aggregating entities anc communicating information about the aggregated entities.
-    ///       requires manual intervention to fix the padding between entityID lists and silent aggregate sysem lists--this padding        is dependent on how many entityIDs there are, and needs to be on a 32 bit word boundary. UNFINISHED
+    /// Section 5.3.9.1 information about aggregating entities and communicating information about the aggregated entities.
+    /// Padding between entityID lists and silent aggregate system lists is dynamically calculated to align to a 32-bit word boundary.
     /// </summary>
     [Serializable]
     [XmlRoot]
@@ -275,6 +275,22 @@ namespace OpenDis.Dis1998
         public byte Pad2 { get; set; }
 
         /// <summary>
+        /// Calculates the number of padding bytes needed to align to a 32-bit boundary
+        /// after the aggregate ID and entity ID lists.
+        /// </summary>
+        /// <param name="numberOfAggregates">Number of aggregate IDs in the list</param>
+        /// <param name="numberOfEntities">Number of entity IDs in the list</param>
+        /// <returns>Number of padding bytes (0-3)</returns>
+        private static int CalculatePaddingBytes(int numberOfAggregates, int numberOfEntities)
+        {
+            // Each AggregateID is 6 bytes, each EntityID is 6 bytes
+            int totalIdBytes = (numberOfAggregates + numberOfEntities) * 6;
+            // Calculate bytes needed to reach next 32-bit (4-byte) boundary
+            int remainder = totalIdBytes % 4;
+            return remainder == 0 ? 0 : 4 - remainder;
+        }
+
+        /// <summary>
         /// Gets the silent entity types
         /// </summary>
         [XmlElement(ElementName = "silentAggregateSystemListList", Type = typeof(List<EntityType>))]
@@ -348,7 +364,12 @@ namespace OpenDis.Dis1998
                         aEntityID.Marshal(dos);
                     }
 
-                    dos.WriteUnsignedByte(Pad2);
+                    // Write padding bytes to align to 32-bit boundary (dynamic based on list sizes)
+                    int paddingBytes = CalculatePaddingBytes(AggregateIDList.Count, EntityIDList.Count);
+                    for (int i = 0; i < paddingBytes; i++)
+                    {
+                        dos.WriteUnsignedByte(0);
+                    }
 
                     for (int idx = 0; idx < SilentAggregateSystemList.Count; idx++)
                     {
@@ -426,7 +447,12 @@ namespace OpenDis.Dis1998
                         EntityIDList.Add(anX);
                     }
 
-                    Pad2 = dis.ReadUnsignedByte();
+                    // Read padding bytes to align to 32-bit boundary (dynamic based on list sizes)
+                    int paddingBytes = CalculatePaddingBytes(NumberOfDisAggregates, NumberOfDisEntities);
+                    for (int i = 0; i < paddingBytes; i++)
+                    {
+                        dis.ReadUnsignedByte();
+                    }
 
                     for (int idx = 0; idx < NumberOfSilentAggregateTypes; idx++)
                     {
