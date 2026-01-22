@@ -48,7 +48,7 @@ using DISnet.DataStreamUtilities;
 namespace DISnet
 {
     /// <summary>
-    /// Section 5.3.7.1. Information about active electronic warfare (EW) emissions and active EW countermeasures shall be communicated using an Electromagnetic Emission PDU. NOT COMPLETE
+    /// Section 5.3.7.1. Information about active electronic warfare (EW) emissions and active EW countermeasures shall be communicated using an Electromagnetic Emission PDU. COMPLETE
     /// </summary>
     [Serializable]
     [XmlRoot]

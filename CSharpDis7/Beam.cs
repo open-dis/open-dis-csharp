@@ -32,10 +32,8 @@
 // rights reserved. This work is licensed under the BSD open source license,
 // available at https://www.movesinstitute.org/licenses/bsd.html
 //
-// Author: DMcG
+// Author: Jan Birkmann (ELT Group Germany)
 // Modified for use with C#:
-//  - Peter Smith (Naval Air Warfare Center - Training Systems Division)
-//  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
 
 using System;
 using System.Collections.Generic;
@@ -46,7 +44,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using OpenDis.Core;
 
-namespace OpenDis.Dis2012
+namespace DISnet
 {
     /// <summary>
     /// Describes the scan volue of an emitter beam. Section 6.2.13.
