@@ -32,18 +32,17 @@
 // rights reserved. This work is licensed under the BSD open source license,
 // available at https://www.movesinstitute.org/licenses/bsd.html
 //
-// Author: DMcG
+// Author: werbaer-bot
 // Modified for use with C#:
-//  - Peter Smith (Naval Air Warfare Center - Training Systems Division)
-//  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
+//  - Jan Birkmann (ELT Group Germany)
 
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
 using System.Xml.Serialization;
-using DISnet.DataStreamUtilities;
 using System.Diagnostics.CodeAnalysis;
+using OpenDis.Core;
 
 namespace DISnet
 {
@@ -52,10 +51,14 @@ namespace DISnet
     /// </summary>
     [Serializable]
     [XmlRoot]
+    [XmlInclude(typeof(EmitterSystem))]
+    [XmlInclude(typeof(Vector3Float))]
+    [XmlInclude(typeof(Beam))]
+
     public partial class EmissionSystem
     {
         /// <summary>
-        ///  this field shall specify the length of this emitter system's data in 32-bit words.
+        /// this field shall specify the length of this emitter system's data in 32-bit words.
         /// </summary>
         private byte _systemDataLength;
 
@@ -63,6 +66,11 @@ namespace DISnet
         /// the number of beams being described in the current PDU for the emitter system being described. 
         /// </summary>
         private byte _numberOfBeams;
+
+        /// <summary>
+        /// padding
+        /// </summary>
+        private ushort _paddingForEmissionSystem1;
 
         /// <summary>
         ///  information about a particular emitter system and shall be represented by an Emitter System record (see 6.2.23).
@@ -75,49 +83,9 @@ namespace DISnet
         private Vector3Float _location = new Vector3Float();
 
         /// <summary>
-        /// this field shall specify the length of this beam's data (including track/jam information) in 32-bit words. The length shall include the Beam Data Length field.
+        /// list of Beams
         /// </summary>
-        private byte _beamDataLength;
-
-        /// <summary>
-        /// this field shall specify a unique emitter database number assigned to differentiate between otherwise similar or identical emitter beams within an emitter system. Once established for an exercise, the Beam ID numbers shall not be changed during that exercise.
-        /// </summary>
-        private byte _beamIdNumber;
-
-        /// <summary>
-        /// this field shall specify a beam parameter index number that shall be used by receiving entities in conjunction with the emitter name field to provide a pointer to the stored database parameters required to regenerate the beam.
-        /// </summary>
-        private ushort _beamParameterIndex;
-
-        /// <summary>
-        /// The Fundamental Parameter Data Record contains Electromagnetic Emission regeneration parameters that are variable throughout a scenario dependent on the actions of the participants in the simulation. This record also provides basic parametric data that may be used to support low-fidelity simulations which may not have the processing capability to model a high-fidelity regeneration of emission beams.
-        /// </summary>
-        private EEFundamentalParameterData _fundamentalParameters = new EEFundamentalParameterData();
-
-        /// <summary>
-        /// this field shall specify the function of a particular beam.
-        /// </summary>
-        private byte _beamFunction;
-
-        /// <summary>
-        /// this field, in conjunction with the following field, provides a mechanism for an emitter to identify targets that are being illuminated by a track beam or target emitters it is attempting to jam.
-        /// </summary>
-        private byte _numberOfTargetsInTrackJam;
-
-        /// <summary>
-        /// this field shall specify the function of a particular beam.
-        /// </summary>
-        private byte _highDensityTrackJam;
-
-        /// <summary>
-        /// this field shall specify the function of a particular beam.
-        /// </summary>
-        private JammingTechnique _jammingMode;
-
-        /// <summary>
-        /// This field shall identify the targets in an emitter track or emitters a system is attempting to jam.
-        /// </summary>
-        private TrackJamData[] _trackJam = new TrackJamData[0];
+        private List<Beam> _beams = new List<Beam>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmissionSystem"/> class.
@@ -164,64 +132,106 @@ namespace DISnet
 
         public virtual int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
-            //marshalSize += 2;  // this._emitterName
-            //marshalSize += 1;  // this._function
-            //marshalSize += 1;  // this._emitterIdNumber
+            marshalSize += 1;  // this._systemDataLength
+            marshalSize += 1;  // this._numberOfBeams
+            marshalSize += 2;  // this._paddingForEmissionSystem1
+            marshalSize += this._emitterSystem.GetMarshalledSize();
+            marshalSize += this._location.GetMarshalledSize();
+
+            for (int idx = 0; idx < this._beams.Count; idx++)
+            {
+                marshalSize += this._beams[idx].GetMarshalledSize();
+            }
+
             return marshalSize;
         }
 
-        ///// <summary>
-        ///// Gets or sets the Name of the emitter, 16 bit enumeration
-        ///// </summary>
-        //[XmlElement(Type = typeof(ushort), ElementName = "emitterName")]
-        //public ushort EmitterName
-        //{
-        //    get
-        //    {
-        //        return this._emitterName;
-        //    }
+        /// <summary>
+        /// this field shall specify the length of this emitter system's data in 32-bit words.
+        /// </summary>
+        [XmlElement(Type = typeof(byte), ElementName = "systemDataLength")]
+        public byte SystemDataLength
+        {
+            get
+            {
+                return this._systemDataLength;
+            }
 
-        //    set
-        //    {
-        //        this._emitterName = value;
-        //    }
-        //}
+            set
+            {
+                this._systemDataLength = value;
+            }
+        }
 
-        ///// <summary>
-        ///// Gets or sets the function of the emitter, 8 bit enumeration
-        ///// </summary>
-        //[XmlElement(Type = typeof(byte), ElementName = "function")]
-        //public byte Function
-        //{
-        //    get
-        //    {
-        //        return this._function;
-        //    }
+        /// <summary>
+        /// this field shall specify the number of beams being described in the current PDU for the system being described.
+        /// </summary>
+        [XmlElement(Type = typeof(byte), ElementName = "numberOfBeams")]
+        public byte NumberOfBeams
+        {
+            get
+            {
+                return this._numberOfBeams;
+            }
 
-        //    set
-        //    {
-        //        this._function = value;
-        //    }
-        //}
+            set
+            {
+                this._numberOfBeams = value;
+            }
+        }
 
-        ///// <summary>
-        ///// Gets or sets the emitter ID, 8 bit enumeration
-        ///// </summary>
-        //[XmlElement(Type = typeof(byte), ElementName = "emitterIdNumber")]
-        //public byte EmitterIdNumber
-        //{
-        //    get
-        //    {
-        //        return this._emitterIdNumber;
-        //    }
+        /// <summary>
+        /// this field shall specify information about a particular emitter system. 
+        /// </summary>
+        [XmlElement(Type = typeof(EmitterSystem), ElementName = "emitterSystem")]
+        public EmitterSystem EmitterSystem
+        {
+            get
+            {
+                return this._emitterSystem;
+            }
 
-        //    set
-        //    {
-        //        this._emitterIdNumber = value;
-        //    }
-        //}
+            set
+            {
+                this._emitterSystem = value;
+            }
+        }
+
+        /// <summary>
+        /// this field shall specify the location of the antenna beam source with respect to the emitting entity's coordinate system. This location shall be the origin of the emitter coordinate system which shall be parallel to the entity coordinate system. 
+        /// </summary>
+        [XmlElement(Type = typeof(Vector3Float), ElementName = "location")]
+        public Vector3Float Location
+        {
+            get
+            {
+                return this._location;
+            }
+
+            set
+            {
+                this._location = value;
+            }
+        }
+
+        /// <summary>
+        /// list of Beams
+        /// </summary>
+        [XmlElement(ElementName = "beams")]
+        public List<Beam> Beams
+        {
+            get 
+            { 
+                return this._beams;
+            }
+
+            set 
+            {
+                this._beams = value;
+            }
+        }
 
         /// <summary>
         /// Occurs when exception when processing PDU is caught.
@@ -247,46 +257,64 @@ namespace DISnet
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Marshal(DataOutputStream dos)
         {
-            if (dos != null)
+            if (dos == null) return;
+
+            try
             {
-                try
+                dos.WriteUnsignedByte(this._systemDataLength);
+                dos.WriteUnsignedByte(this._numberOfBeams);
+                dos.WriteUnsignedShort(this._paddingForEmissionSystem1);
+
+                this._emitterSystem.Marshal(dos);
+                this._location.Marshal(dos);
+
+                for (int i = 0; i < this._beams.Count; i++)
                 {
-                    //dos.WriteUnsignedShort((ushort)this._emitterName);
-                    //dos.WriteUnsignedByte((byte)this._function);
-                    //dos.WriteUnsignedByte((byte)this._emitterIdNumber);
+                    this._beams[i].Marshal(dos);
                 }
-                catch (Exception e)
-                {
+            }
+            catch (Exception e)
+            {
 #if DEBUG
-                    Trace.WriteLine(e);
-                    Trace.Flush();
+        Trace.WriteLine(e);
+        Trace.Flush();
 #endif
-                    this.OnException(e);
-                }
+                this.OnException(e);
             }
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Due to ignoring errors.")]
         public virtual void Unmarshal(DataInputStream dis)
         {
-            if (dis != null)
+            if (dis == null) return;
+
+            try
             {
-                try
+                this._systemDataLength = dis.ReadUnsignedByte();
+                this._numberOfBeams = dis.ReadUnsignedByte();
+                this._paddingForEmissionSystem1 = dis.ReadUnsignedShort();
+
+                this._emitterSystem.Unmarshal(dis);
+                this._location.Unmarshal(dis);
+
+                this._beams.Clear();
+                for (int i = 0; i < this._numberOfBeams; i++)
                 {
-                    //this._emitterName = dis.ReadUnsignedShort();
-                    //this._function = dis.ReadUnsignedByte();
-                    //this._emitterIdNumber = dis.ReadUnsignedByte();
-                }
-                catch (Exception e)
-                {
-#if DEBUG
-                    Trace.WriteLine(e);
-                    Trace.Flush();
-#endif
-                    this.OnException(e);
+                    Beam b = new Beam();
+                    b.Unmarshal(dis);
+                    this._beams.Add(b);
                 }
             }
+            catch (Exception e)
+            {
+#if DEBUG
+        Trace.WriteLine(e);
+        Trace.Flush();
+#endif
+                this.OnException(e);
+            }
         }
+
 
         /// <summary>
         /// This allows for a quick display of PDU data.  The current format is unacceptable and only used for debugging.
@@ -302,20 +330,39 @@ namespace DISnet
             sb.AppendLine("<EmissionSystem>");
             try
             {
-                //sb.AppendLine("<emitterName type=\"ushort\">" + this._emitterName.ToString(CultureInfo.InvariantCulture) + "</emitterName>");
-                //sb.AppendLine("<function type=\"byte\">" + this._function.ToString(CultureInfo.InvariantCulture) + "</function>");
-                //sb.AppendLine("<emitterIdNumber type=\"byte\">" + this._emitterIdNumber.ToString(CultureInfo.InvariantCulture) + "</emitterIdNumber>");
-                sb.AppendLine("</EmissionSystem>");
+                sb.AppendLine("<systemDataLength type=\"byte\">" + this._systemDataLength + "</systemDataLength>");
+                sb.AppendLine("<numberOfBeams type=\"byte\">" + this._numberOfBeams + "</numberOfBeams>");
+                sb.AppendLine("<paddingForEmissionSystem1 type=\"ushort\">" + this._paddingForEmissionSystem1 + "</paddingForEmissionSystem1>");
+
+                sb.AppendLine("<emitterSystem>");
+                this._emitterSystem.Reflection(sb);
+                sb.AppendLine("</emitterSystem>");
+
+                sb.AppendLine("<location>");
+                this._location.Reflection(sb);
+                sb.AppendLine("</location>");
+
+                sb.AppendLine("<beams count=\"" + this._beams.Count + "\">");
+                for (int idx = 0; idx < this._beams.Count; idx++)
+                {
+                    sb.AppendLine("<beam index=\"" + idx + "\">");
+                    this._beams[idx].Reflection(sb);
+                    sb.AppendLine("</beam>");
+                }
+                sb.AppendLine("</beams>");
             }
             catch (Exception e)
             {
 #if DEBUG
-                    Trace.WriteLine(e);
-                    Trace.Flush();
+        Trace.WriteLine(e);
+        Trace.Flush();
 #endif
-                    this.OnException(e);
+                this.OnException(e);
             }
+
+            sb.AppendLine("</EmissionSystem>");
         }
+
 
         /// <summary>
         /// Determines whether the specified <see cref="System.Object"/> is equal to this instance.
@@ -340,28 +387,59 @@ namespace DISnet
         {
             bool ivarsEqual = true;
 
+            if (obj == null)
+            {
+                return false;
+            }
+
             if (obj.GetType() != this.GetType())
             {
                 return false;
             }
 
-            //if (this._emitterName != obj._emitterName)
-            //{
-            //    ivarsEqual = false;
-            //}
+            if (this._systemDataLength != obj._systemDataLength)
+            {
+                ivarsEqual = false;
+            }
 
-            //if (this._function != obj._function)
-            //{
-            //    ivarsEqual = false;
-            //}
+            if (this._numberOfBeams != obj._numberOfBeams)
+            {
+                ivarsEqual = false;
+            }
 
-            //if (this._emitterIdNumber != obj._emitterIdNumber)
-            //{
-            //    ivarsEqual = false;
-            //}
+            if (this._paddingForEmissionSystem1 != obj._paddingForEmissionSystem1)
+            {
+                ivarsEqual = false;
+            }
+
+            if (!this._emitterSystem.Equals(obj._emitterSystem))
+            {
+                ivarsEqual = false;
+            }
+
+            if (!this._location.Equals(obj._location))
+            {
+                ivarsEqual = false;
+            }
+
+            if (this._beams.Count != obj._beams.Count)
+            {
+                ivarsEqual = false;
+            }
+            else
+            {
+                for (int idx = 0; idx < this._beams.Count; idx++)
+                {
+                    if (!this._beams[idx].Equals(obj._beams[idx]))
+                    {
+                        ivarsEqual = false;
+                    }
+                }
+            }
 
             return ivarsEqual;
         }
+
 
         /// <summary>
         /// HashCode Helper
@@ -382,11 +460,30 @@ namespace DISnet
         {
             int result = 0;
 
-            //result = GenerateHash(result) ^ this._emitterName.GetHashCode();
-            //result = GenerateHash(result) ^ this._function.GetHashCode();
-            //result = GenerateHash(result) ^ this._emitterIdNumber.GetHashCode();
+            result = GenerateHash(result) ^ this._systemDataLength.GetHashCode();
+            result = GenerateHash(result) ^ this._numberOfBeams.GetHashCode();
+            result = GenerateHash(result) ^ this._paddingForEmissionSystem1.GetHashCode();
+
+            if (this._emitterSystem != null)
+            {
+                result = GenerateHash(result) ^ this._emitterSystem.GetHashCode();
+            }
+
+            if (this._location != null)
+            {
+                result = GenerateHash(result) ^ this._location.GetHashCode();
+            }
+
+            for (int idx = 0; idx < this._beams.Count; idx++)
+            {
+                if (this._beams[idx] != null)
+                {
+                    result = GenerateHash(result) ^ this._beams[idx].GetHashCode();
+                }
+            }
 
             return result;
         }
+
     }
 }

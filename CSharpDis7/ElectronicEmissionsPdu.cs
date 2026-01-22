@@ -36,6 +36,7 @@
 // Modified for use with C#:
 //  - Peter Smith (Naval Air Warfare Center - Training Systems Division)
 //  - Zvonko Bostjancic (Blubit d.o.o. - zvonko.bostjancic@blubit.si)
+//  - Jan Birkmann (ELT Group Germany)
 
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,7 @@ namespace DISnet
     [XmlInclude(typeof(EmitterSystem))]
     [XmlInclude(typeof(Vector3Float))]
     [XmlInclude(typeof(Vector3Float))]
+    [XmlInclude(typeof(EmissionSystem))]
     public partial class ElectronicEmissionsPdu : DistributedEmissionsFamilyPdu, IEquatable<ElectronicEmissionsPdu>
     {
         /// <summary>
@@ -83,12 +85,10 @@ namespace DISnet
         /// </summary>
         private ushort _paddingForEmissionsPdu;
 
-
-
         /// <summary>
-        /// Electronic emmissions systems THIS IS WRONG. It has the WRONG class type and will cause problems in any marshalling.
+        /// Information about a particular emitter system 
         /// </summary>
-        private List<Vector3Float> _systems = new List<Vector3Float>();
+        private List<EmissionSystem> _emissionSystems = new List<EmissionSystem>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ElectronicEmissionsPdu"/> class.
@@ -136,7 +136,7 @@ namespace DISnet
 
         public override int GetMarshalledSize()
         {
-            int marshalSize = 0; 
+            int marshalSize = 0;
 
             marshalSize = base.GetMarshalledSize();
             marshalSize += this._emittingEntityID.GetMarshalledSize();  // this._emittingEntityID
@@ -144,13 +144,9 @@ namespace DISnet
             marshalSize += 1;  // this._stateUpdateIndicator
             marshalSize += 1;  // this._numberOfSystems
             marshalSize += 2;  // this._paddingForEmissionsPdu
-            marshalSize += 1;  // this._systemDataLength
-            marshalSize += 1;  // this._numberOfBeams
-            marshalSize += this._emitterSystem.GetMarshalledSize();  // this._emitterSystem
-            marshalSize += this._location.GetMarshalledSize();  // this._location
-            for (int idx = 0; idx < this._systems.Count; idx++)
+            for (int idx = 0; idx < this._numberOfSystems; idx++)
             {
-                Vector3Float listElement = (Vector3Float)this._systems[idx];
+                EmissionSystem listElement = this._emissionSystems[idx];
                 marshalSize += listElement.GetMarshalledSize();
             }
 
@@ -245,82 +241,19 @@ namespace DISnet
         }
 
         /// <summary>
-        /// Gets or sets the  this field shall specify the length of this emitter system's data in 32-bit words.
+        /// Gets or sets the Electronic emmissions systems
         /// </summary>
-        [XmlElement(Type = typeof(byte), ElementName = "systemDataLength")]
-        public byte SystemDataLength
+        [XmlElement(ElementName = "emissionSystemList", Type = typeof(List<EmissionSystem>))]
+        public List<EmissionSystem> EmissionSystems
         {
             get
             {
-                return this._systemDataLength;
+                return this._emissionSystems;
             }
 
             set
             {
-                this._systemDataLength = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the the number of beams being described in the current PDU for the emitter system being described. 
-        /// </summary>
-        [XmlElement(Type = typeof(byte), ElementName = "numberOfBeams")]
-        public byte NumberOfBeams
-        {
-            get
-            {
-                return this._numberOfBeams;
-            }
-
-            set
-            {
-                this._numberOfBeams = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the  information about a particular emitter system and shall be represented by an Emitter System record (see 6.2.23).
-        /// </summary>
-        [XmlElement(Type = typeof(EmitterSystem), ElementName = "emitterSystem")]
-        public EmitterSystem EmitterSystem
-        {
-            get
-            {
-                return this._emitterSystem;
-            }
-
-            set
-            {
-                this._emitterSystem = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the the location of the antenna beam source with respect to the emitting entity's coordinate system. This location shall be the origin of the emitter coordinate system that shall have the same orientation as the entity coordinate system. This field shall be represented by an Entity Coordinate Vector record see 6.2.95 
-        /// </summary>
-        [XmlElement(Type = typeof(Vector3Float), ElementName = "location")]
-        public Vector3Float Location
-        {
-            get
-            {
-                return this._location;
-            }
-
-            set
-            {
-                this._location = value;
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the Electronic emmissions systems THIS IS WRONG. It has the WRONG class type and will cause problems in any marshalling.
-        /// </summary>
-        [XmlElement(ElementName = "systemsList", Type = typeof(List<Vector3Float>))]
-        public List<Vector3Float> Systems
-        {
-            get
-            {
-                return this._systems;
+                this._emissionSystems = value;
             }
         }
 
@@ -350,17 +283,13 @@ namespace DISnet
                     this._emittingEntityID.Marshal(dos);
                     this._eventID.Marshal(dos);
                     dos.WriteUnsignedByte((byte)this._stateUpdateIndicator);
-                    dos.WriteUnsignedByte((byte)this._systems.Count);
+                    dos.WriteUnsignedByte((byte)this._numberOfSystems);
                     dos.WriteUnsignedShort((ushort)this._paddingForEmissionsPdu);
-                    dos.WriteUnsignedByte((byte)this._systemDataLength);
-                    dos.WriteUnsignedByte((byte)this._numberOfBeams);
-                    this._emitterSystem.Marshal(dos);
-                    this._location.Marshal(dos);
 
-                    for (int idx = 0; idx < this._systems.Count; idx++)
+                    for (int idx = 0; idx < this._numberOfSystems; idx++)
                     {
-                        Vector3Float aVector3Float = (Vector3Float)this._systems[idx];
-                        aVector3Float.Marshal(dos);
+                        EmissionSystem system = this._emissionSystems[idx];
+                        system.Marshal(dos);
                     }
                 }
                 catch (Exception e)
@@ -388,16 +317,13 @@ namespace DISnet
                     this._stateUpdateIndicator = dis.ReadUnsignedByte();
                     this._numberOfSystems = dis.ReadUnsignedByte();
                     this._paddingForEmissionsPdu = dis.ReadUnsignedShort();
-                    this._systemDataLength = dis.ReadUnsignedByte();
-                    this._numberOfBeams = dis.ReadUnsignedByte();
-                    this._emitterSystem.Unmarshal(dis);
-                    this._location.Unmarshal(dis);
                     for (int idx = 0; idx < this.NumberOfSystems; idx++)
                     {
-                        Vector3Float anX = new Vector3Float();
-                        anX.Unmarshal(dis);
-                        this._systems.Add(anX);
-                    };
+                        EmissionSystem system = new EmissionSystem();
+                        system.Unmarshal(dis);
+                        this._emissionSystems.Add(system);
+                    }
+                    ;
 
                 }
                 catch (Exception e)
@@ -433,22 +359,14 @@ namespace DISnet
                 this._eventID.Reflection(sb);
                 sb.AppendLine("</eventID>");
                 sb.AppendLine("<stateUpdateIndicator type=\"byte\">" + this._stateUpdateIndicator.ToString(CultureInfo.InvariantCulture) + "</stateUpdateIndicator>");
-                sb.AppendLine("<systems type=\"byte\">" + this._systems.Count.ToString(CultureInfo.InvariantCulture) + "</systems>");
+                sb.AppendLine("<numberOfSystems type=\"byte\">" + this._numberOfSystems.ToString(CultureInfo.InvariantCulture) + "</numberOfSystems>");
                 sb.AppendLine("<paddingForEmissionsPdu type=\"ushort\">" + this._paddingForEmissionsPdu.ToString(CultureInfo.InvariantCulture) + "</paddingForEmissionsPdu>");
-                sb.AppendLine("<systemDataLength type=\"byte\">" + this._systemDataLength.ToString(CultureInfo.InvariantCulture) + "</systemDataLength>");
-                sb.AppendLine("<numberOfBeams type=\"byte\">" + this._numberOfBeams.ToString(CultureInfo.InvariantCulture) + "</numberOfBeams>");
-                sb.AppendLine("<emitterSystem>");
-                this._emitterSystem.Reflection(sb);
-                sb.AppendLine("</emitterSystem>");
-                sb.AppendLine("<location>");
-                this._location.Reflection(sb);
-                sb.AppendLine("</location>");
-                for (int idx = 0; idx < this._systems.Count; idx++)
+                for (int idx = 0; idx < this._emissionSystems.Count; idx++)
                 {
-                    sb.AppendLine("<systems" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"Vector3Float\">");
-                    Vector3Float aVector3Float = (Vector3Float)this._systems[idx];
-                    aVector3Float.Reflection(sb);
-                    sb.AppendLine("</systems" + idx.ToString(CultureInfo.InvariantCulture) + ">");
+                    sb.AppendLine("<emissionSystems" + idx.ToString(CultureInfo.InvariantCulture) + " type=\"EmissionSystem\">");
+                    EmissionSystem system = this._emissionSystems[idx];
+                    system.Reflection(sb);
+                    sb.AppendLine("</emissionSystems" + idx.ToString(CultureInfo.InvariantCulture) + ">");
                 }
 
                 sb.AppendLine("</ElectronicEmissionsPdu>");
@@ -459,7 +377,7 @@ namespace DISnet
                     Trace.WriteLine(e);
                     Trace.Flush();
 #endif
-                    this.OnException(e);
+                this.OnException(e);
             }
         }
 
@@ -518,36 +436,16 @@ namespace DISnet
                 ivarsEqual = false;
             }
 
-            if (this._systemDataLength != obj._systemDataLength)
-            {
-                ivarsEqual = false;
-            }
-
-            if (this._numberOfBeams != obj._numberOfBeams)
-            {
-                ivarsEqual = false;
-            }
-
-            if (!this._emitterSystem.Equals(obj._emitterSystem))
-            {
-                ivarsEqual = false;
-            }
-
-            if (!this._location.Equals(obj._location))
-            {
-                ivarsEqual = false;
-            }
-
-            if (this._systems.Count != obj._systems.Count)
+            if (this._emissionSystems.Count != obj._emissionSystems.Count)
             {
                 ivarsEqual = false;
             }
 
             if (ivarsEqual)
             {
-                for (int idx = 0; idx < this._systems.Count; idx++)
+                for (int idx = 0; idx < this._emissionSystems.Count; idx++)
                 {
-                    if (!this._systems[idx].Equals(obj._systems[idx]))
+                    if (!this._emissionSystems[idx].Equals(obj._emissionSystems[idx]))
                     {
                         ivarsEqual = false;
                     }
@@ -583,16 +481,12 @@ namespace DISnet
             result = GenerateHash(result) ^ this._stateUpdateIndicator.GetHashCode();
             result = GenerateHash(result) ^ this._numberOfSystems.GetHashCode();
             result = GenerateHash(result) ^ this._paddingForEmissionsPdu.GetHashCode();
-            result = GenerateHash(result) ^ this._systemDataLength.GetHashCode();
-            result = GenerateHash(result) ^ this._numberOfBeams.GetHashCode();
-            result = GenerateHash(result) ^ this._emitterSystem.GetHashCode();
-            result = GenerateHash(result) ^ this._location.GetHashCode();
 
-            if (this._systems.Count > 0)
+            if (this._numberOfSystems > 0)
             {
-                for (int idx = 0; idx < this._systems.Count; idx++)
+                for (int idx = 0; idx < this._numberOfSystems; idx++)
                 {
-                    result = GenerateHash(result) ^ this._systems[idx].GetHashCode();
+                    result = GenerateHash(result) ^ this._emissionSystems[idx].GetHashCode();
                 }
             }
 
